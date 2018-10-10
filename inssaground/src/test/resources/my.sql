@@ -1,3 +1,4 @@
+alter table ground add(status number default 0);
 --회원테이블
 drop table INSSA_MEMBER;
 create table INSSA_MEMBER(
