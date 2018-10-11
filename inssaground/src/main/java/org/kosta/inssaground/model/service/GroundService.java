@@ -1,20 +1,36 @@
 package org.kosta.inssaground.model.service;
 
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
+import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.NoticeVO;
+import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 
 public interface GroundService {
 	public void applyGround(GroundVO groundVO); // 모임신청
 	public GroundVO enterGround(String groundNo); // 모임 홈
-	public ListVO searchGround(GroundVO groundVO); //모임검색
-	public ListVO groundDetail(); // 모임 상세보기
+	public ListVO<GroundVO> searchGround(GroundVO groundVO); //모임검색
+	public GroundVO groundDetail(GroundVO groundVO); // 모임 상세보기
 	public void groundParticipation(); // 모임참여
-	public ListVO groundBoard(GroundVO groundVO);
+	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
 	public void registerGroundSchedule(ScheduleVO scheduleVO); //모임 일정 등록
-	
-	
-	//지선
-	public ListVO myGroundList(String id); // 내가 참여한 모임 보기
-	public ListVO myScheduleList(String id); // 내가 참여한 모임의 일정 보기
+	public void deleteGroundSchedule(ScheduleVO scheduelVO); // 모임 일정 삭제
+	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
+	public void groundParticipantPermission(GroundVO groundVO);//	 모임 참여 허가
+	//public void masterGroundManagement(GroundVO groundVO);// 모임장 모임 관리
+	public InsiderVO groundParticipantList(GroundVO GroundVO);// 모임 참여 리스트
+	public MemberVO groundParticipantMemberInfo(GroundVO groundVO);// 모임 참여한 회원 정보 
+	public void registerinsider(InsiderVO insiderVO);// 모임 회원 등록
+	public void updateGroundNotice(NoticeVO noticeVO); // 모임 공지 수정
+	public void deleteGroundNotice(String noticeNo);// 모임 공지 삭제
+	public NoticeVO groundNoticeDetail(String noticeNo);// 모임 공지 상세
+	public void updateGroundSchedule(ScheduleVO scheduleVO);// 모임 일정 수정
+	public void groundScheduleParticipation(GroundVO groundVO);// 모임 일정 참여
+	public void registerGroundMember(GroundVO groundVO);// 모임 멤버 등록
+	public PostVO GroundImg(GroundVO groundVO);// 모임 사진 모음
+	public GroundVO GroundActivityInfo(GroundVO groundVO);// 모임 활동 정보  **********************
+	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
 }
+  
