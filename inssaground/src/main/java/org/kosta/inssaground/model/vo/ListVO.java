@@ -2,6 +2,8 @@ package org.kosta.inssaground.model.vo;
 
 import java.util.List;
 
+import org.kosta.inssaground.model.service.PagingBean;
+
 public class ListVO<T> {
 	private PagingBean pagingBean;
 	private List<T> list;
