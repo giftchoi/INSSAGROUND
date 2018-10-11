@@ -33,7 +33,8 @@ body {
 
 /* Rerun */
 .rerun {
-  margin: 0 0 30px;
+  position : absolute;
+  right:10px;
   text-align: center;
 }
 .rerun a {
@@ -55,6 +56,12 @@ body {
 .container {
   position: relative;
   max-width: 460px;
+  width: 100%;
+  margin: 0 auto 100px;
+}
+.container-wide {
+  position: relative;
+  max-width: 550px;
   width: 100%;
   margin: 0 auto 100px;
 }
@@ -163,6 +170,20 @@ body {
   font-size: 24px;
   font-weight: 400;
 }
+
+.card .input-container.narrow input {
+  outline: none;
+  z-index: 1;
+  position: relative;
+  background: none;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  color: #212121;
+  font-size: 24px;
+  font-weight: 400;
+}
+
 .card .input-container input:focus ~ label {
   color: #9d9d9d;
   -webkit-transform: translate(-12%, -50%) scale(0.75);

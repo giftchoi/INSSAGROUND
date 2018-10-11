@@ -8,28 +8,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<div class="container-wide">
   <div class="card"></div>
   <div class="card">
     <h1 class="title">회원가입</h1>
     <form>
-      <div class="input-container">
+      <div class="input-container narrow">
       아이디<input type="text" required="required"/>
         <div class="bar"></div>
       </div>
-      <div class="input-container">
+      <div class="input-container narrow">
      패스워드<input type="text" required="required"/>
         <div class="bar"></div>
       </div>
-      <div class="input-container">
+      <div class="input-container narrow">
         이름<input type="text" required="required"/>
         <div class="bar"></div>
       </div>
-      <div class="input-container">
-        이메일<input type="text" required="required"/>
+      <div class="input-container narrow">
+        이메일<input type="text" required="required"/><span class="rerun"><a href="">Rerun Pen</a></span>
         <div class="bar"></div>
-      </div><div class="rerun"><a href="">Rerun Pen</a></div>
-      <div class="button-container">
+      </div>
+      <div class="button-container narrow">
         <button><span>회원가입</span></button>
       </div>
       <div class="footer"><a href="">이미 회원이신가요?</a></div>
