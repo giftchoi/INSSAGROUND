@@ -43,7 +43,7 @@
 							<div class="single-post row">
 								<div class="col-lg-12">
 									<div class="feature-img">
-										<img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
+										<img class="img-fluid" src="${pageContext.request.contextPath}/resources/image/testImg.jpg	" alt="">
 									</div>									
 								</div>
 								<div class="col-lg-3  col-md-3 meta-details">
@@ -256,7 +256,7 @@
 			                        </form>
 								</div> -->
 								<div class="single-sidebar-widget user-info-widget">
-									<img src="img/blog/user-info.png" alt="">
+									<img src="${pageContext.request.contextPath}/resources/image/testImg3.jpg" alt="">
 									<a href="#"><h4>이름</h4></a>
 									<p>
 										출석,게시글 수
