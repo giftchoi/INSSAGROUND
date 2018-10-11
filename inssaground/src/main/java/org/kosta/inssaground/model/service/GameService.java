@@ -1,7 +1,5 @@
 package org.kosta.inssaground.model.service;
 
-import java.util.List;
-
 import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.OfficialGameVO;
