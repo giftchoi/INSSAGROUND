@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	@RequestMapping("home.do")
 	public String home() {
-		return "home";
+		//return "registerMember-form";
+		return "login";
 	}
 	
 }
