@@ -249,3 +249,4 @@ create table PROGRAM_CUSTOM_GAME()
 
 select * from inssa_member;
 
+alter table insider add(status number default 0);
