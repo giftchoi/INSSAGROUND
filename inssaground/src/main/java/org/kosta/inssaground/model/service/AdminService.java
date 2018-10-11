@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ReportVO;
+import org.springframework.stereotype.Service;
+
 
 public interface AdminService {
 	public List<GroundVO> applyGroundList();
