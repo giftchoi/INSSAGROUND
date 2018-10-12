@@ -12,7 +12,10 @@ public class MemberController {
 	
 	@RequestMapping("loginForm.do")
 	public String loginForm() {
-		
 		return "member/login.tiles";
+	}
+	@RequestMapping("login_fail.do")
+	public String loginFail() {
+		return "member/login_fail";
 	}
 }

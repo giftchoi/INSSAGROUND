@@ -4,6 +4,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.inssaground.model.mapper.MemberMapper">
-
+	<select id="findMemberById" resultType="memberVO">
+		select * from INSSA_MEMBER where id=#{value}
+	</select>
+	<select id="getAuthorityById" resultType="string">
+		select role from MEMBER_AUTHORITY where id=#{value}
+	</select>
 </mapper>
  
