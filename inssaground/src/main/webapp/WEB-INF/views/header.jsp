@@ -2,18 +2,19 @@
     pageEncoding="UTF-8"%>
 
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header/header.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header/bootstrap.css">
+	<link href="${pageContext.request.contextPath}/resources/css/header/header.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/header/responsive.css" rel="stylesheet" type="text/css">
+<%-- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header/bootstrap.css"> --%>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery.1.8.3.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery-scrolltofixed.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery.isotope.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/wow.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/classie.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/magnific-popup.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/contactform.js"></script>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/bootstrap.js"></script> --%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery.easing.1.3.js"></script>--%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/jquery.isotope.js"></script> --%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/wow.js"></script> --%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/classie.js"></script> --%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/magnific-popup.js"></script> --%>
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/css/header/js/contactform.js"></script> --%>
 
 
 <script type="text/javascript">
@@ -42,8 +43,8 @@
 		<!--main-nav-start-->
 		<div class="container">
 
-			<div class="main-nav rightmypage">
-			<ul>
+		
+			<ul class="main-nav rightmypage">
 			<!-- 로그인 이전 링크 -->
 				<li><a href="">LOGIN</a></li>
 				<li><a href="">REGISTER</a></li>
@@ -55,18 +56,18 @@
 				<li><a href="">로그아웃</a></li>
 				 -->
 			</ul>
-			</div>
+		
 
 			<ul class="main-nav">
 			<li>
-			<a href="" style="text-decoration: none;"> 
+			<a href=""> 
 				<%-- <img src="${pageContext.request.contextPath}/resources/img/logo_logoff.png" alt="" 
 				style="width: 15%; height: 15%;" /> --%>
 				<img src="${pageContext.request.contextPath}/resources/img/logo_logoff.png" alt="" />
 			</a>
 			</li>
 				<li><a href="">Home</a></li>
-				<li><a href="">GROUND</a></li>
+				<li><a href="#ground">GROUND</a></li>
 				<li><a href="">GAME</a></li>
 				<li><a href="">ABOUTUS</a></li>
 			</ul>
@@ -82,6 +83,7 @@ f<br>
 asf<br>
 das<br>
 f<br>
+<section class="main-section" id="ground">그라운드 자리입니다</section>
 sa<br>
 f<br>
 dsa<br>
