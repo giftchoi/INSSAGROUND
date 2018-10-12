@@ -19,6 +19,7 @@
 }
 
 .main-content {
+
 	min-height: 500px;
 	padding: 30px;
 }
@@ -45,8 +46,18 @@
 }
 
 /*register form css*/
+.card-container{
+	text-align:center;
+	margin:0 auto;
+	width:500px;	
+}
+.card-container.wide{
+	text-align:center;
+	margin:0 auto;
+	width:700px;	
+}
+
 .form-card {
-	position: relative;
 	background: #ffffff;
 	border-radius: 5px;
 	padding: 60px 0 40px 0;
@@ -66,12 +77,30 @@
 }
 
 .input-container {
+	position:relative;
 	text-align: left;
 	font-size: 20px;
 	font-weight: 200;
 	padding: 10px 40px 10px 40px;
 }
-
+.right-space{
+	position: absolute;
+  	right: 50px; 
+  	background-color:#a4a4a4;
+  	bottom:12px;
+	/* border: 1px solid #a4a4a4; */
+	width: 220px;
+	height:50px;
+}
+#profile-img{
+	display:inline-block;
+	width:220px;
+	height:220px;
+	border: 5px solid white;
+	background-color: #FAFAFA;
+	box-sizing: border-box;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
 .input-container input{
 	outline: none;
 	padding:10px;
@@ -93,7 +122,6 @@
 .input-container input:not([type=button]):focus {
 	border-bottom: 1px solid #ff1a1a;
 }
-
 .c-footer a {
 	padding: 10px;
 	color: #A4A4A4;
@@ -112,4 +140,28 @@ h1.title {
 	color: #ff1a1a;
 	font-size: 32px;
 	font-weight: 600;
+}
+
+
+/*css for game home */
+.category-menu-area{
+
+	padding:50px;
+	
+}
+.game-category-list li{
+	display:inline-block;
+	width: 230px;
+	height:130px;
+	border: 5px solid white; 
+	border-radius:20px; 
+	background-color: #ff1a1a;
+	box-sizing: border-box;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+}
+.game-category-list li h3{
+	margin-top:27px;
+	font-size: 40px;
+	color: white;
 }

@@ -15,4 +15,10 @@ public class MemberController {
 		
 		return "member/login.tiles";
 	}
+	
+	@RequestMapping("registerForm.do")
+	public String joinForm() {
+		
+		return "member/register-form.tiles";
+	}
 }

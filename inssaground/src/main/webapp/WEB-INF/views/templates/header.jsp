@@ -40,7 +40,7 @@ li a:hover{
 <div class="top-header">
 <ul>
 	<li><a  href="loginForm.do">LOGIN</a></li>
-	<li><a href="">JOIN US</a></li>
+	<li><a href="registerForm.do">JOIN US</a></li>
 </ul>
 	
 	
@@ -52,11 +52,7 @@ li a:hover{
 	<li><a href="home.do"> 
 <img src="${pageContext.request.contextPath}/resources/image/logoOff.png" alt="home"  width="200" height="130"/>
 </a></li>
-	<li><a href="">GAME</a></li>
+	<li><a href="gameHome.do">GAME</a></li>
 	<li><a href="">ABOUT US</a></li>
 </ul>
-
-
-
-
 </div>
