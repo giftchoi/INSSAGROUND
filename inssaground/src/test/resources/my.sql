@@ -524,3 +524,10 @@ create table EMAIL_KEY(
    reg_date date default sysdate,
    constraint fk_emailKey_id foreign key(id) references INSSA_MEMBER(id)
 );
+
+alter table sigungu add(sigungu_name varchar2(100) not null);
+----------------------
+select * from game_category;
+select * from official_game;
+insert into game_category values(1,'실내');
+insert into game_category values(2,'실외');
