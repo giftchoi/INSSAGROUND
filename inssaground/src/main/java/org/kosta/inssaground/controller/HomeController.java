@@ -19,8 +19,8 @@ public class HomeController {
 	@RequestMapping("home.do")
 	public String home() {
 
-		//return "home";
-		return "/ground/ground-home";
+		return "home.tiles";
+		//return "/ground/ground-home";
 
 	}
 	
