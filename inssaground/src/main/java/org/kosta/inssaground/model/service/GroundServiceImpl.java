@@ -1,5 +1,10 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
@@ -10,7 +15,8 @@ import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.stereotype.Service;
 @Service
 public class GroundServiceImpl implements GroundService {
-
+	@Resource
+	private GroundMapper groundMapper;
 	@Override
 	public void applyGround(GroundVO groundVO) {
 		// TODO Auto-generated method stub
@@ -23,6 +29,10 @@ public class GroundServiceImpl implements GroundService {
 		return null;
 	}
 
+	public List<GroundVO> searchGroundTest(GroundVO groundVO){
+		return groundMapper.searchGroundTest(groundVO);
+	}
+	
 	@Override
 	public ListVO<GroundVO> searchGround(GroundVO groundVO) {
 		// TODO Auto-generated method stub
@@ -142,5 +152,8 @@ public class GroundServiceImpl implements GroundService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
 
 }

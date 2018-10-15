@@ -1,5 +1,7 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.List;
+
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
@@ -32,5 +34,9 @@ public interface GroundService {
 	public PostVO GroundImg(GroundVO groundVO);// 모임 사진 모음
 	public GroundVO GroundActivityInfo(GroundVO groundVO);// 모임 활동 정보  **********************
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
+	
+	
+	// for Test
+	public List<GroundVO> searchGroundTest(GroundVO groundVO);
 }
   

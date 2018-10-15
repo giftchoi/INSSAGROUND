@@ -48,7 +48,7 @@ li a:hover{
 <div class="bottom-header">
 <ul>
 	<li><a  href="" title="홈">HOME</a></li>
-	<li><a href="" title="모임">GROUND</a></li>
+	<li><a href="groundList.do" title="모임">GROUND</a></li>
 	<li><a href="home.do"> 
 <img src="${pageContext.request.contextPath}/resources/image/logoOff.png" alt="home"  width="200" height="130"/>
 </a></li>
