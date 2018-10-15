@@ -12,4 +12,6 @@ public interface MemberMapper {
 
 	List<String> getAuthorityById(String id);
 
+	int idcheck(String id);
+
 }

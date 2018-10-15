@@ -66,4 +66,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getAuthorityById(id);
 	}
 
+	@Override
+	public String idcheck(String id) {
+			int count = memberMapper.idcheck(id);
+			return (count == 0) ? "ok" : "fail";
+	}
+
 }
