@@ -31,4 +31,9 @@ public class MemberController {
 	public String idcheckAjax(String id) {
 		return memberService.idcheck(id);
 	}
+	@RequestMapping("sendEmailAjax.do")
+	@ResponseBody
+	public void sendEmailAjax(String email) {
+		memberService.sendEmailForRegister(email);
+	}
 }

@@ -27,4 +27,6 @@ public interface MemberService {
 	public List<String> selectAuthorityById(String id);
 
 	public String idcheck(String id);
+
+	public void sendEmailForRegister(String email);
 }
