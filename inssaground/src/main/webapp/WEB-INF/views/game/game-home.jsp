@@ -7,7 +7,7 @@
 		<div>
 			<h1>INSSA GAME</h1>
 		</div>
-		<div class="category-menu-area"">
+		<div class="category-menu-area">
 			<ul class="game-category-list">	
  						<li data-filter=".smallscale" ><h3>#소규모</h3></li>
                         <li data-filter=".largescale" ><h3>#대규모</h3></li>
@@ -16,11 +16,11 @@
 			</ul>
 		</div>
 		<div class="game-post-area">
-							<div class="card game">
+					<div class="card game" onclick="location.href='${pageContext.request.contextPath}/detail.jsp'">
 						<!-- <div class="card-header">Header</div> -->
 						<div class="card-body">
-							<h1>Custom Game</h1>
-						</div>
+							<h1>바꿈</h1>
+						</div>		
 					</div>
 					<div class="card game">
 						<!-- <div class="card-header">Header</div> -->
