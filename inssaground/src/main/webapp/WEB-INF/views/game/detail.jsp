@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!-- Start post-content Area -->
@@ -14,12 +14,12 @@
 			<!-- <div class="col-lg-3  col-md-3 meta-details"> -->
 			<div class="col-lg-3  col-md-3 meta-details">
 
-				<div class="user-details row" style="font-size:2.2rem;">
+				<div class="user-details row" style="font-size: 2.2rem;">
 					<p class="user-name col-lg-12 col-md-12 col-6">
-						<a href="#">작성자</a> <span class="lnr lnr-user"></span>
+						<a href="#">아이유</a> <span class="lnr lnr-user"></span>
 					</p>
 					<p class="date col-lg-12 col-md-12 col-6">
-						<a href="#">인원수</a> <span class="lnr lnr-calendar-full"></span>
+						<a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span>
 					</p>
 					<!-- <p class="view col-lg-12 col-md-12 col-6"><a href="#">1.2M Views</a> <span class="lnr lnr-eye"></span></p> -->
 					<!-- <p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p> -->
@@ -32,12 +32,23 @@
 				</div>
 			</div>
 			<div class="col-lg-9 col-md-9" style="font-size: 1.7rem;">
-				<h1>게임상세 설명</h1><br>
-				<h2>쥐불놀이</h2>
-				<p>글씨가 너무작어!!! MCSE boot camps have its supporters and its
-					detractors. Some people do not understand why you should have to
-					spend money on boot camp when you can get the MCSE study materials
-					yourself at a fraction.</p>
+				<c:choose>
+					<c:when test="${requestScope.ogvo != null }">
+						<h1>${requestScope.ogvo.title }</h1>
+						<br>
+						<pre>${requestScope.ogvo.content}</pre>
+					</c:when>
+					<c:otherwise>
+						<!-- 영진이 글 나올자리 -->
+						<h1>${requestScope.cgvo.title }</h1>
+						<br>
+						<pre>${requestScope.cgvo.content}</pre>
+					</c:otherwise>
+				</c:choose>
+				<!-- <p>글씨가 너무작어!!! MCSE boot camps have its
+					supporters and its detractors. Some people do not understand why
+					you should have to spend money on boot camp when you can get the
+					MCSE study materials yourself at a fraction.</p>
 				<p>Boot camps have its supporters and its detractors. Some
 					people do not understand why you should have to spend money on boot
 					camp when you can get the MCSE study materials yourself at a
@@ -49,7 +60,7 @@
 					camp when you can get the MCSE study materials yourself at a
 					fraction of the camp price. However, who has the willpower to
 					actually sit through a self-imposed MCSE training. who has the
-					willpower to actually sit through a self-imposed</p>
+					willpower to actually sit through a self-imposed</p> -->
 			</div>
 
 		</div>
@@ -77,7 +88,6 @@
 							</div>
 -->
 	</div>
-
 	<!-- </div> -->
 </div>
 <!-- </section> -->
