@@ -1,11 +1,25 @@
+select * from hobby where hobby_category_no=1;
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
+<<<<<<< HEAD
 select count(*) from ground
+=======
+
+create table sigungu(
+   sigungu_no number primary key,
+   sigungu_name varchar2(100) not null,
+   sido_no number,
+   constraint fk_sigungu foreign key(sido_no) references(sido_no)
+)
+
+
+>>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
 /******* 추가**********/
 alter table ground drop column introduction;
 alter table ground add(introduction clob default ' ' not null)
 update ground set introduction='안녕하세요 모임 테스트중입니다. 인싸그라운드 대박입니다. 피날레 화이팅' where ground_no=1;
+>>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
 --회원테이블
 drop table INSSA_MEMBER;
 create table INSSA_MEMBER(

@@ -20,5 +20,7 @@ public interface GroundMapper {
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
 	List<SigunguVO> getSigungu();
-
+	SidoVO findSidoBySidoNo(String sidoNo);
+	SigunguVO findSigunguBySigunguNo(String sigunguNo);
+	void groundApply(GroundVO groundVO);
 }

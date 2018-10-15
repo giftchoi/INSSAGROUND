@@ -3,6 +3,8 @@ package org.kosta.inssaground.model.service;
 import java.util.List;
 
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyCategoryVO;
+import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
@@ -13,7 +15,7 @@ import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 
 public interface GroundService {
-	public void applyGround(GroundVO groundVO); // 모임신청
+	public void applyGround(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO); // 모임신청
 	public List<SidoVO> getAllSido();// 모든 시도
 	public GroundVO enterGround(String groundNo); // 모임 홈
 	public ListVO<GroundVO> searchGround(GroundVO groundVO); //모임검색

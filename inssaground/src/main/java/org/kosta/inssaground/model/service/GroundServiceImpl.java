@@ -7,7 +7,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
+import org.kosta.inssaground.model.mapper.HobbyMapper;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyCategoryVO;
+import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
@@ -16,15 +19,30 @@ import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 @Service
 public class GroundServiceImpl implements GroundService {
 	@Resource
 	private GroundMapper groundMapper;
+	@Resource
+	private HobbyMapper hobbyMapper;
 	@Override
-	public void applyGround(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-
+	public void applyGround(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO) {
+		System.out.println("1");
+		SigunguVO sgvo = groundMapper.findSigunguBySigunguNo(sigunguVO.getSigunguNo());
+		System.out.println("2");
+		HobbyVO hvo = hobbyMapper.findHobbyByHobbyNo(hobbyVO.getHobbyNo());
+		System.out.println("3");
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		System.out.println("4");
+		groundVO.setMaster(mvo.getId());
+		System.out.println("5");
+		groundVO.setHobby(hvo.getHobbyNo());
+		System.out.println("6");
+		groundVO.setArea(sgvo.getSigunguNo());
+		System.out.println(groundVO);
+		groundMapper.groundApply(groundVO);
 	}
 
 	@Override
