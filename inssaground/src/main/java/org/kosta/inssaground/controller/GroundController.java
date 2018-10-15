@@ -23,5 +23,8 @@ public class GroundController {
 		model.addAttribute("groundList",groundList);
 		return "ground/ground-list.tiles";
 	}
-	
+	@RequestMapping("groundApplyForm.do")
+	public String groundApplyForm(Model model) {
+		return "ground/ground-apply.tiles";
+	}
 }

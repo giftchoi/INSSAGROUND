@@ -86,11 +86,12 @@
 .right-space{
 	position: absolute;
   	right: 50px; 
-  	background-color:#a4a4a4;
+  	/* background-color:#a4a4a4; */
   	bottom:12px;
 	/* border: 1px solid #a4a4a4; */
 	width: 220px;
 	height:50px;
+	z-index: 1;
 }
 #profile-img{
 	display:inline-block;
