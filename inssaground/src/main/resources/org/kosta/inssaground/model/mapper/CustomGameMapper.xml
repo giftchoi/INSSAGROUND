@@ -3,35 +3,34 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-   namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
-   <select id="getTotalCustomGameCount" resultType="int">
-      select count(*)
-      from
-      CUSTOM_GAME
-   </select>
-   <resultMap type="CustomGameVO" id="CustomGameRM">
-      <result property="memberVO.id" column="id" />
-      <result property="memberVO.name" column="name" />
-   </resultMap>
-   <select id="getCustomGameList" resultMap="CustomGameRM"
-      parameterType="pagingBean">
-      SELECT
-      c.title,c.min_Personnel,c.max_Personnel,m.id,m.name FROM(
-      SELECT row_number() over(order by c_game_no desc) as rnum,c_game_no,title,
-      min_Personnel,max_Personnel FROM CUSTOM_GAME) c, INSSA_MEMBER m;
-      
-      where c.id=m.id and rnum between
-      #{startRowNumber} and #{endRowNumber}
-      order
-      by no desc
-   </select>
-   <select id="getPostDetail" resultMap="boardRM">
-      select
-      b.no,b.title,to_char(b.time_posted,'YYYY.MM.DD HH24:MI:SS') as
-      time_posted,b.content,
-      b.hits,m.id,m.name from spring_board_inst
-      b,spring_member m where
-      b.id=m.id and no=#{value}
-   </select>
+<mapper namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
+	<select id="getTotalCustomGameCount" resultType="int">
+		select count(*)
+		from
+		CUSTOM_GAME
+	</select>
+	<resultMap type="CustomGameVO" id="CustomGameRM">
+		<result property="memberVO.id" column="id" />
+		<result property="memberVO.name" column="name" />
+	</resultMap>
+	<select id="getCustomGameList" resultMap="CustomGameRM"
+		parameterType="pagingBean">
+		SELECT
+		c.title,c.min_Personnel,c.max_Personnel,m.id,m.name FROM(
+		SELECT
+		row_number() over(order by c_game_no desc) as rnum,c_game_no,title,
+		min_Personnel,max_Personnel,id FROM CUSTOM_GAME) c, INSSA_MEMBER m
+		where c.id=m.id and rnum between
+		#{startRowNumber} and #{endRowNumber}
+		order
+		by c_game_no desc
+	</select>
+	<select id="getCustomGameDetail" resultMap="CustomGameRM">
+		select
+		c.c_game_no,c.title,c.max_Personnel,c.min_Personnel,c.game_Time,
+		c.materials,c.content,c.recommendation,m.id,m.name
+		from CUSTOM_GAME c,
+		INSSA_MEMBER m
+		where c.id=m.id and c_game_no=#{value}
+	</select>
 </mapper>
