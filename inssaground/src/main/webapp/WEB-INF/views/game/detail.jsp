@@ -14,12 +14,12 @@
 			<!-- <div class="col-lg-3  col-md-3 meta-details"> -->
 			<div class="col-lg-3  col-md-3 meta-details">
 
-				<div class="user-details row">
+				<div class="user-details row" style="font-size:2.2rem;">
 					<p class="user-name col-lg-12 col-md-12 col-6">
-						<a href="#">아이유</a> <span class="lnr lnr-user"></span>
+						<a href="#">작성자</a> <span class="lnr lnr-user"></span>
 					</p>
 					<p class="date col-lg-12 col-md-12 col-6">
-						<a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span>
+						<a href="#">인원수</a> <span class="lnr lnr-calendar-full"></span>
 					</p>
 					<!-- <p class="view col-lg-12 col-md-12 col-6"><a href="#">1.2M Views</a> <span class="lnr lnr-eye"></span></p> -->
 					<!-- <p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p> -->
@@ -32,11 +32,12 @@
 				</div>
 			</div>
 			<div class="col-lg-9 col-md-9" style="font-size: 1.7rem;">
-				<h1>Astronomy Binoculars A Great Alternative</h1>
-				<p>글씨가 너무작어!!! MCSE boot camps have its
-					supporters and its detractors. Some people do not understand why
-					you should have to spend money on boot camp when you can get the
-					MCSE study materials yourself at a fraction.</p>
+				<h1>게임상세 설명</h1><br>
+				<h2>쥐불놀이</h2>
+				<p>글씨가 너무작어!!! MCSE boot camps have its supporters and its
+					detractors. Some people do not understand why you should have to
+					spend money on boot camp when you can get the MCSE study materials
+					yourself at a fraction.</p>
 				<p>Boot camps have its supporters and its detractors. Some
 					people do not understand why you should have to spend money on boot
 					camp when you can get the MCSE study materials yourself at a

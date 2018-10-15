@@ -27,7 +27,7 @@
 				<div class="card game">
 					<!-- <div class="card-header">Header</div> -->
 					<div class="card-body">
-						<h1>Custom Game</h1>
+						<h1>시발</h1>
 					</div>
 				</div>
 				<br>
