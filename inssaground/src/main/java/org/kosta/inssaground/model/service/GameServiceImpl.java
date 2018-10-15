@@ -83,7 +83,6 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public CustomGameVO getCustomGameDetail(String cGameNo) {
-		
 		return cgm.getCustomGameDetail(cGameNo);
 	}
 
