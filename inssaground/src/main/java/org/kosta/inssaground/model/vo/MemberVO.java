@@ -6,20 +6,18 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private int status;
-	private String authNo;
 	private String profile;
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MemberVO(String id, String password, String name, String email, int status, String authNo, String profile) {
+	public MemberVO(String id, String password, String name, String email, int status, String profile) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.status = status;
-		this.authNo = authNo;
 		this.profile = profile;
 	}
 	public String getId() {
@@ -52,12 +50,6 @@ public class MemberVO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getAuthNo() {
-		return authNo;
-	}
-	public void setAuthNo(String authNo) {
-		this.authNo = authNo;
-	}
 	public String getProfile() {
 		return profile;
 	}
@@ -67,7 +59,8 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", password=" + password + ", name=" + name + ", email=" + email + ", status="
-				+ status + ", authNo=" + authNo + ", profile=" + profile + "]";
+				+ status + ", profile=" + profile + "]";
 	}
+	
 	
 }
