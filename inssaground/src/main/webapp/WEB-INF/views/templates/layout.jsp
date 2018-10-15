@@ -41,7 +41,7 @@
 	<div class="row footer">
 		<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 	</div>
-
+	
    </div>
 </body>
 </html>
