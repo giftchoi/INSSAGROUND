@@ -19,6 +19,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sigungu
 	</select>
 	
+	<select id="findSidoBySidoNo" resultType="sidoVO">
+		select * from sido where sido_no=#{value}
+	</select>
+	
+	<select id="findSigunguBySigunguNo" resultType="sigunguVO">
+		select * from sigungu where sigungu_no=#{value}
+	</select>
+	
+	<insert id="groundApply" parameterType="groundVO">
+			insert into ground(ground_no,max_personnel,introduction,ground_name,master,hobby_no,sigungu_no,status)
+			values(ground_seq.nextval,#{maxPersonnel},#{introduction},#{groundName},#{master},#{hobby},#{area},0)
+	</insert>
 	
 </mapper>
  

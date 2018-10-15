@@ -12,4 +12,6 @@ public interface HobbyMapper {
 	List<HobbyVO> findHobbyByHobbyCategoryNo(String hobbyCategoryNO);
 
 	List<HobbyCategoryVO> getHobbyCategory();
+
+	HobbyVO findHobbyByHobbyNo(String hobbyNo);
 }

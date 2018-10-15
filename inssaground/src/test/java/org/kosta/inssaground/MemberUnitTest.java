@@ -1,14 +1,12 @@
 package org.kosta.inssaground;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
-import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.SidoVO;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -29,8 +27,16 @@ public class MemberUnitTest {
 		//System.out.println(list);
 		//List<HobbyCategoryVO> list = hm.getHobbyCategory();
 		//System.out.println(list);
-		List<HobbyVO> hvo = hm.findHobbyByHobbyCategoryNo("1");
-		System.out.println(hvo);
+		//List<HobbyVO> hvo = hm.findHobbyByHobbyCategoryNo("1");
+		//System.out.println(hvo);
+		//HobbyVO hvo = hm.findHobbyByHobbyNo("1");
+		//System.out.println(hvo);
+		SidoVO svo = gm.findSidoBySidoNo("1");
+		System.out.println(svo);
+		//SigunguVO svo = gm.findSigunguBySigunguNo("1");
+		//System.out.println(svo);
+		//HobbyVO hvo = hm.findHobbyByHobbyNo("1");
+		//System.out.println(hvo);
 	}
 
 }

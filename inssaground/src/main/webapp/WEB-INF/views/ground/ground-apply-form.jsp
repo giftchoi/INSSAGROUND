@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#sido").change(function() {
@@ -49,6 +50,7 @@
 		<div class="form-card">
 			<h1 class="title">모임 개설 신청</h1>
 			<form action="groundApply.do" method="post">
+				<sec:csrfInput/>
 				<!-- <div class="input-container">
 					<span id="profile-img"></span>
 				</div> -->
@@ -78,7 +80,7 @@
 					</c:forEach>
 					</select>		
 							
-					<select name="hobby" id="hobby">
+					<select name="hobbyNo" id="hobby">
 					
 					</select>
 				</div>
@@ -94,13 +96,13 @@
 				
 				<div class="input-container">
 					해시태그
-					<input type="hashtag" name="" id="ht">
-					<input type="button" value="넣기" id="hash">
-					<sapn id="hashtag" class="hashtag"></sapn>
+					<input type="hashtag"  name="" id="ht">
+					<input type="button"  value="넣기" id="hash">
+					<span id="hashtag"  class="hashtag"></span>
 				</div>
 				
 				<div>
-					<input type="submit" value="개설 신청"><br>
+					<input type="submit"  value="개설 신청"><br>
 				</div>
 			</form>
 		</div>
