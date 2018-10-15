@@ -7,5 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchGroundTest" parameterType="groundVO" resultType="groundVO">
 			select * from ground
 	</select>
+	
+	<select id="getAllSido" resultType="string">
+		select sido from sido
+	</select>
 </mapper>
  
