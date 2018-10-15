@@ -7,9 +7,13 @@ import javax.annotation.Resource;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.SigunguVO;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GroundController {
@@ -27,9 +31,20 @@ public class GroundController {
 	}
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
-		model.addAttribute("",groundService.getAllSido());
-		model.addAttribute("",hobbyService.getAllHobby());
+		model.addAttribute("sido",groundService.getAllSido());
+		model.addAttribute("hobbyCategory",hobbyService.getHobbyCategory());
 		return "ground/ground-apply-form.tiles";
 	}
 	
+	@ResponseBody
+	@RequestMapping("getSigungu.do")
+	public List<SigunguVO> getSigungu(String sido){
+		return groundService.getSigungu();
+	}
+	
+	@ResponseBody
+	@RequestMapping("findHobbyByHobbyCategoryNo.do")
+	public List<HobbyVO> findHobbyByHobbyCategoryNo(String hobbyCategoryNo){	
+		return hobbyService.findHobbyByHobbyCategoryNo(hobbyCategoryNo);
+	}
 }

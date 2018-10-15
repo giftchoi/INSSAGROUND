@@ -11,5 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido
 	</select>
+	
+	<select id="getSigungu" resultType="sigunguVO">
+		select * from sigungu
+	</select>
+	
+	
 </mapper>
  

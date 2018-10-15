@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.mapper.HobbyMapper;
+import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
 import org.springframework.stereotype.Service;
 @Service
@@ -19,8 +20,14 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 
 	@Override
-	public List<HobbyVO> getAllHobby() {		
-		return hobbyMapper.getAllHobby();
+	public List<HobbyVO> findHobbyByHobbyCategoryNo(String hobbyCategoryNO) {		
+		return hobbyMapper.findHobbyByHobbyCategoryNo(hobbyCategoryNO);
 	}
+
+	@Override
+	public List<HobbyCategoryVO> getHobbyCategory() {		
+		return hobbyMapper.getHobbyCategory();
+	}
+
 
 }

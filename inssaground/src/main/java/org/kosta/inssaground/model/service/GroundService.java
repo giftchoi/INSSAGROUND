@@ -10,6 +10,7 @@ import org.kosta.inssaground.model.vo.NoticeVO;
 import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
+import org.kosta.inssaground.model.vo.SigunguVO;
 
 public interface GroundService {
 	public void applyGround(GroundVO groundVO); // 모임신청
@@ -37,6 +38,8 @@ public interface GroundService {
 	public GroundVO GroundActivityInfo(GroundVO groundVO);// 모임 활동 정보  **********************
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
 	
+	
+	public List<SigunguVO> getSigungu();
 	
 	// for Test
 	public List<GroundVO> searchGroundTest(GroundVO groundVO);
