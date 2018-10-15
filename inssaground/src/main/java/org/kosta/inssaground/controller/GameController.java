@@ -11,4 +11,8 @@ public class GameController {
 		return "game/game-home.tiles";
 	}
 	
+	@RequestMapping("customGameDetail.do")
+	public String customGameDetail() {
+		return "game/detail.tiles";
+	}
 }
