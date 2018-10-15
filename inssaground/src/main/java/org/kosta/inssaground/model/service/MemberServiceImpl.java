@@ -5,13 +5,17 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.mapper.MemberMapper;
+import org.kosta.inssaground.model.vo.EmailVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 public class MemberServiceImpl implements MemberService {
+	@Autowired
+	private MailSenderService mailService;
 	@Resource
 	private MemberMapper memberMapper;
 	@Override
@@ -70,6 +74,12 @@ public class MemberServiceImpl implements MemberService {
 	public String idcheck(String id) {
 			int count = memberMapper.idcheck(id);
 			return (count == 0) ? "ok" : "fail";
+	}
+
+	@Override
+	public void sendEmailForRegister(String receiver) {
+		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ");
+		mailService.sendEmail(email);
 	}
 
 }

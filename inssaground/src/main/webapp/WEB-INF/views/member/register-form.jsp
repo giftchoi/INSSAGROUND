@@ -25,11 +25,11 @@
 				alert("아이디 중복확인을 하세요");
 				return false;
 			}		
-		});
+		}); // submit
 		$("#regForm :input[name=id]").keyup(function(){
 			var id=$(this).val().trim();
 			if(id.length<4 || id.length>10){
-				$("#idCheckView").html("아이디는 4자이상 10자 이하여야 함!").css(
+				$("#idCheckView").html("id는 4자이상 10자 이하").css(
 						"color","red");
 				checkResultId="";
 				return;
@@ -54,6 +54,30 @@
 				}//callback			
 			});//ajax
 		});//keyup
+		$("#regForm :input[name=passwordOk]").keyup(function() {
+			var pw=$("#regForm :input[name=password]").val().trim();
+			var pwCheck=$(this).val().trim();
+			if(pw==pwCheck){
+				$("#pwCheckView").html("비밀번호 일치").css("color","blue");
+			}else{
+				$("#pwCheckView").html("비밀번호 불일치").css("color","red");
+			}
+		});//keyup
+		$("#sendEmail").click(function(){
+			if($("#regForm :input[name=email]").val().trim()==""){
+				alert("이메일을 입력하세요");				
+				return false;
+			}	
+			$.ajax({
+				type:"post",
+				url:"${pageContext.request.contextPath}/sendEmail.do",				
+				data:"email="+email,	
+				success:function(){						
+					/* $("#sendEmailKey").html(id+" 사용불가!").css("color","red"); */
+						alert("인증 메일 보냄");
+				}//callback			
+			});
+		}); // click
 	});//ready
 </script>
 <div class="col-sm-12 main-content">
@@ -83,13 +107,14 @@
 				<div class="input-container">
 					패스워드 확인<br>
 					<input type="password"maxlength="30"  required="required" name="passwordOk"/>
-					<span class="right-space" id=""></span>
+					<span class="right-space" id="pwCheckView"></span>
 				</div>
-
 				<div class="input-container">
 					이메일<br>
 					<input type="email" maxlength="30" required="required" name="email"/> 
-					<span class="right-space" id=""></span>
+					<span class="right-space" id="sendEmailKey">
+						<button id="sendEmail" value="인증번호 받기"></button>
+					</span>
 				</div>
 				<div>
 					<input type="submit" value="회원가입"><br>
