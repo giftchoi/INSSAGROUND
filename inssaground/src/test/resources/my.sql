@@ -1,6 +1,13 @@
+select * from hobby where hobby_category_no=1;
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
+create table sigungu(
+   sigungu_no number primary key,
+   sigungu_name varchar2(100) not null,
+   sido_no number,
+   constraint fk_sigungu foreign key(sido_no) references(sido_no)
+)
 --회원테이블
 drop table INSSA_MEMBER;
 create table INSSA_MEMBER(

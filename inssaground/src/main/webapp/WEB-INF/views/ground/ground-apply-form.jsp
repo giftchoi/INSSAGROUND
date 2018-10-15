@@ -66,7 +66,7 @@
 						</c:forEach>
 					</select>		
 							
-					<select id="sigungu">
+					<select name="sigungu" id="sigungu">
 													
 					</select>
 				</div>
@@ -79,7 +79,7 @@
 					</c:forEach>
 					</select>		
 							
-					<select id="hobby">
+					<select name="hobby" id="hobby">
 					
 					</select>
 				</div>
