@@ -3,8 +3,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
+<mapper namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
 	<select id="getTotalCustomGameCount" resultType="int">
 		select count(*)
 		from

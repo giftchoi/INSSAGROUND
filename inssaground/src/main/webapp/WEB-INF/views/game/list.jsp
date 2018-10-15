@@ -1,110 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>home.jsp</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/game/bootstrap.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/game/main.css">
-</head>
-<script type="text/javascript">
-
-</script>
-<body>
-<!-- Start menu-area Area -->
-            <section class="menu-area section-gap" id="menu" style="background-color:white;">
-                <div class="container">
-					<div class="row d-flex justify-content-center">
-						<div class="menu-content pb-70 col-lg-8">
-							<div class="title text-center">
-								<h1 class="mb-19">게임 메인 메뉴</h1>
-							</div>
-						</div>
-					</div>	
-
-                    <ul class="filter-wrap filters col-lg-12 no-padding">
-                        <li data-filter=".smallscale" style="border: 5px solid white; border-radius:20px; background-color: red;">#소규모</li>
-                        <li data-filter=".largescale" style="border: 5px solid white; border-radius:20px; background-color: red;">#대규모</li>
-                        <li data-filter=".inside" style="border: 5px solid white; border-radius:20px; background-color: red;">#실내</li>
-                        <li data-filter=".outside" style="border: 5px solid white; border-radius:20px; background-color: red;">#실외</li>
-                     
-                    </ul>
-                    
-                    <div class="filters-content">
-                        <div class="row grid">
-                            <div class="col-md-6 all smallscale">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>숨바꼭질</h4>
-										<h4 class="price">60분</h4>
-									</div>			
-									<p>
-										돌아가면서 술래를 하며 술래에게 잡힌경우 술래가 된다...
-									</p>									
-								</div>					                               
-                            </div>                           
-                            <div class="col-md-6 all inside">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>수건돌리기</h4>
-										<h4 class="price">60분</h4>
-									</div>			
-									<p>
-										돌아가면서 술래를 하며 수건을 돌리면서 걸린경우 술래가된다.
-									</p>									
-								</div>
-                            </div>
-                            <div class="col-md-6 all outside">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>병뚜껑 차기</h4>
-										<h4 class="price">30분</h4>
-									</div>			
-									<p>
-										번갈아 가면서 병뚜껑을 차서 일정거리 이상 가장 먼 거리를 찬 사람이 승리
-									</p>									
-								</div>
-                            </div>
-                            <div class="col-md-6 all smallscale">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>널뛰기</h4>
-										<h4 class="price">30분</h4>
-									</div>
-									<p>
-										양쪽에 사람이 위치하여 번갈아 가면서 뛰어 위아래로 움직인다.
-									</p>									
-								</div>
-                            </div>
-                            <div class="col-md-6 all largescale">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>제기차기</h4>
-										<h4 class="price">10분</h4>
-									</div>
-									<p>
-										제기를 양발로 번갈아가면서 차면서 연속해서 가장 많이 찬 사람이 이긴다.
-									</p>									
-								</div>
-                            </div>
-                            <div class="col-md-6 all buffet">
-								<div class="single-menu" style="border:1px solid red;">
-									<div class="title-wrap d-flex justify-content-between">
-										<h4>절대음감</h4>
-										<h4 class="price">10분</h4>
-									</div>
-									<p>
-										글자를 정하여 음을 순서대로 높여 마지막 글자까지 발음하면 끝..
-									</p>									
-								</div>
-                            </div>                            
-                        </div>
-                    </div>
-    
-                </div>
-            </section>
-            <!-- End menu-area Area -->			
-</body>
-</html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/game/main.css">
+<div class="col-sm-12">
+<div class="row main-content">
+	<div class="col-sm-12">
+		<div>
+			<h1>INSSA GAME</h1>
+		</div>
+		<div class="category-menu-area">
+			<ul class="game-category-list">	
+ 						<li data-filter=".smallscale" ><h3>#소규모</h3></li>
+                        <li data-filter=".largescale" ><h3>#대규모</h3></li>
+                        <li data-filter=".inside" ><h3>#실내</h3></li>
+                        <li data-filter=".outside" ><h3>#실외</h3></li>                    
+			</ul>
+		</div>
+		<div class="game-post-area">
+		<c:forEach items="${requestScope.officialGameLvo.list }" var="ogvo">
+					<div class="card game" onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
+						<!-- <div class="card-header">Header</div> -->
+						<div class="card-body">
+							<h1>${ogvo.title }</h1>
+						</div>		
+					</div>
+		</c:forEach>
+				<div class="pagingInfo">
+					<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
+					<c:set var="pb" value="${requestScope.lvo.pagingBean}"></c:set>
+					<!-- 
+			step2 1) 이전 페이지 그룹이 있으면 화살표 보여준다
+				   		페이징빈의 previousPageGroup 이용 
+				   2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+				   	    hint)   startPageOfPageGroup-1 하면 됨 		 
+	 -->
+					<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
+				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
+				      현 페이지이면 링크를 처리하지 않는다.  
+				      PagingBean의 nowPage
+				      jstl choose 를 이용  
+				      예) <a href="DispatcherServlet?command=list&pageNo=...">				   
+	 -->
+					<ul class="pagination">
+						<c:if test="${pb.previousPageGroup}">
+							<li><a
+								href="${pageContext.request.contextPath}/gameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
+							end="${pb.endPageOfPageGroup}">
+							<c:choose>
+								<c:when test="${pb.nowPage!=i}">
+									<li><a
+										href="${pageContext.request.contextPath}/gameList.do?pageNo=${i}">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="active"><a href="#">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						&nbsp;
+						</c:forEach>
+						<c:if test="${pb.nextPageGroup}">
+							<li><a
+								href="${pageContext.request.contextPath}/gameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
+				<!-- 
+			step3 1) 다음 페이지 그룹이 있으면 화살표 보여준다. 
+				   		페이징빈의 nextPageGroup 이용 
+				   2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+				   	    hint)   endPageOfPageGroup+1 하면 됨 		 
+	 		--> 
+	 		
+		</div>
+	</div>
+</div>
+</div>
