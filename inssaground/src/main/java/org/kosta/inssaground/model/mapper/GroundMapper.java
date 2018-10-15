@@ -15,5 +15,7 @@ public interface GroundMapper {
 	GroundVO groundDetail(GroundVO groundVO);
 	List<SidoVO> getAllSido();
 	List<SigunguVO> getSigungu();
-
+	SidoVO findSidoBySidoNo(String sidoNo);
+	SigunguVO findSigunguBySigunguNo(String sigunguNo);
+	void groundApply(GroundVO groundVO);
 }

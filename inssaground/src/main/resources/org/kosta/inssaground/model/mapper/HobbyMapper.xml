@@ -11,5 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getHobbyCategory" resultType="hobbyCategoryVO">
 		select * from hobby_category
 	</select>
+	
+	<select id="findHobbyByHobbyNo" resultType="hobbyVO">
+		select * from hobby where hobby_no=#{value}
+	</select>
 </mapper>
  

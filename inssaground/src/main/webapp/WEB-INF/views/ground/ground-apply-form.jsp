@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#sido").change(function() {
@@ -11,7 +12,7 @@
 				success:function(result){
 					var sigungu = "<option>------</option>"
 					for(var i=0;i<result.length;i++){
-						sigungu += "<option>"+result[i].sigunguName+"</option>";
+						sigungu += "<option value="+result[i].sigunguNo+">"+result[i].sigunguName+"</option>";
 					}
 					$("#sigungu").html(sigungu);
 				}
@@ -25,7 +26,7 @@
 				success:function(result){
 					var hobby = "<option>------</option>"
 					for(var i=0;i<result.length;i++){
-						hobby += "<option>"+result[i].name+"</option>";
+						hobby += "<option value="+result[i].hobbyNo+">"+result[i].name+"</option>";
 					}
 					$("#hobby").html(hobby);
 				}
@@ -39,8 +40,7 @@
 			if(hh != ""){
 				$("#hashtag").text(hh+hashtag);
 			}else{
-				$("#hashtag").text(hashtag);
-				
+				$("#hashtag").text(hashtag);				
 			}
 		});//click
 	}); //ready
@@ -49,7 +49,8 @@
 	<div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">모임 개설 신청</h1>
-			<form>
+			<form action="groundApply.do" method="post">
+				<sec:csrfInput/>
 				<!-- <div class="input-container">
 					<span id="profile-img"></span>
 				</div> -->
@@ -66,7 +67,7 @@
 						</c:forEach>
 					</select>		
 							
-					<select id="sigungu">
+					<select name="sigunguNo" id="sigungu">
 													
 					</select>
 				</div>
@@ -79,29 +80,29 @@
 					</c:forEach>
 					</select>		
 							
-					<select id="hobby">
+					<select name="hobbyNo" id="hobby">
 					
 					</select>
 				</div>
 				
 				<div class="input-container">
-					최대인원 <input type="number" name="">
+					최대인원 <input type="number" name="maxPersonnel">
 				</div>
 
 				<div class="input-container">
 					모임 소개<br>
-					<textarea name="" rows="10" cols="70"></textarea>
+					<textarea name="introduction" rows="10" cols="70"></textarea>
 				</div>
 				
 				<div class="input-container">
 					해시태그
-					<input type="" name="" id="ht">
-					<input type="button" value="넣기" id="hash">
-					<sapn id="hashtag" class="hashtag"></sapn>
+					<input type="hashtag"  name="" id="ht">
+					<input type="button"  value="넣기" id="hash">
+					<span id="hashtag"  class="hashtag"></span>
 				</div>
 				
 				<div>
-					<input type="submit" value="개설 신청"><br>
+					<input type="submit"  value="개설 신청"><br>
 				</div>
 			</form>
 		</div>

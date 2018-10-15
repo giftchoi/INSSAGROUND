@@ -1,5 +1,7 @@
 package org.kosta.inssaground.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,12 +9,16 @@ import javax.annotation.Resource;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -53,6 +59,13 @@ public class GroundController {
 	@RequestMapping("findHobbyByHobbyCategoryNo.do")
 	public List<HobbyVO> findHobbyByHobbyCategoryNo(String hobbyCategoryNo){	
 		return hobbyService.findHobbyByHobbyCategoryNo(hobbyCategoryNo);
-
+	}
+	@Secured("ROLE_MEMBER")
+	@PostMapping("groundApply.do")
+	public String groundApply(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO) {
+		System.out.println("controller 1");
+		groundService.applyGround(groundVO,sidoVO,sigunguVO,hobbyVO,hobbyCategoryVO);
+		System.out.println("controller 2");
+		return "redirect:home.do";
 	}
 }
