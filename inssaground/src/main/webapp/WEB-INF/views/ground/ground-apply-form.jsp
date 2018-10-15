@@ -34,8 +34,8 @@
 		});//change
 		$("#hash").click(function() {
 			var hh = $("#hashtag").text();
-			var hashtag = "#";
-			hashtag += $("#ht").val();
+			var hashtag = "<li>#";
+			hashtag += $("#ht").val()+"</li>";
 			$("#ht").val("");
 			if(hh != ""){
 				$("#hashtag").text(hh+hashtag);
@@ -96,9 +96,13 @@
 				
 				<div class="input-container">
 					해시태그
-					<input type="hashtag"  name="" id="ht">
+					<input type="text"  name="hashtag" id="ht">
 					<input type="button"  value="넣기" id="hash">
-					<span id="hashtag"  class="hashtag"></span>
+					<span id="hashtag" >
+					<ul class="hashtag" id="aaaa">
+						<li></li>
+					</ul>
+					</span>
 				</div>
 				
 				<div>
