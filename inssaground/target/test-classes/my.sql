@@ -465,10 +465,9 @@ create table participant(
    id varchar2(100),
    schedule_no number,
    ground_no number,
-   constraint fk_participant_id foreign key(id) references inssa_member(id),
-    constraint fk_participant_schedule_no foreign key(schedule_no) references schedule(schedule_no),
-    constraint fk_participant_ground_no foreign key(ground_no) references ground(ground_no),
-    constraint pk_participant primary key(schedule_no,ground_no)
+   constraint fk_participant_id foreign key(id,ground_no) references insider(id,ground_no),
+   constraint fk_participant_schedule_no foreign key(schedule_no) references schedule(schedule_no),
+   constraint pk_participant primary key(id,schedule_no,ground_no)
 )
 --17
 create table hashtag(
