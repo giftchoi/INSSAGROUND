@@ -17,7 +17,6 @@ public class MemberController {
 	
 	@RequestMapping("registerForm.do")
 	public String joinForm() {
-		
 		return "member/register-form.tiles";
 	}
 	@RequestMapping("login_fail.do")
