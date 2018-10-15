@@ -68,6 +68,7 @@ li a:hover{
 </div>
 <div class="bottom-header">
 <ul>
+	<li><a href="groundApplyForm.do">TEST</a></li>
 	<li><a  href="" title="홈">HOME</a></li>
 	<li><a href="groundList.do" title="모임">GROUND</a></li>
 	<li><a href="home.do"> 
