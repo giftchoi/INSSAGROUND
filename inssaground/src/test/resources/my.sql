@@ -1,6 +1,11 @@
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
+
+/******* 추가**********/
+alter table ground drop column introduction;
+alter table ground add(introduction clob default ' ' not null)
+update ground set introduction='안녕하세요 모임 테스트중입니다. 인싸그라운드 대박입니다. 피날레 화이팅' where ground_no=1;
 --회원테이블
 drop table INSSA_MEMBER;
 create table INSSA_MEMBER(
@@ -79,7 +84,7 @@ create sequence ground_seq nocache;
 create table ground(
    ground_no number primary key,
    max_personnel number default 0,
-   introduction varchar2(100) not null,
+   introduction clob not null,
    ground_name varchar2(100) not null,
    master varchar2(100),
    hobby_no number,

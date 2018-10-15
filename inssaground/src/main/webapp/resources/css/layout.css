@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+html{
+	font-size:15px;
+	
+}
 .header {
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
@@ -35,10 +38,38 @@
 	border-radius: 50%;
 }
 
-.card.game {
+.card.game{
 	display: inline-block;
 	width: 400px;
 	height: 150px;
+}
+
+.card.ground {
+	box-shadow: 0 4px 5px -3px #ececec;
+	border-radius:10px;
+	display: inline-block;
+	width: 300px;
+	height: 200px;
+}
+.card.ground .card-ground-title{
+	height : 40px;
+	padding-top:5px;
+	font-size: 20px;
+}
+.card.ground .card-ground-body{
+	height:150px;
+}
+.master-profile img{
+	margin: 0 10px 0 10px;
+	padding:10px;
+	border-radius:50%;
+	/* background-color: black; */	
+}
+
+
+.ground-info{
+
+	
 }
 
 .carousel-inner img {
@@ -164,4 +195,46 @@ h1.title {
 	margin-top:27px;
 	font-size: 40px;
 	color: white;
+}
+
+.hashtag{
+	margin:3px;
+	padding:5px;
+	border-radius: 7px;
+	border: 0.5px solid rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	font-size:15px;
+	
+}
+.info-span{
+	margin:10px;
+	padding:5px;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+}
+pre{
+	background-color : white;
+}
+
+.btn-red {
+	font-size: 15px;
+	background-color : ff1a1a;
+	
+}
+
+.ground-detail-title{
+	padding:10px;
+	height : 40px;
+	font-size: 23px;
+	font-weight: 100;
+}
+.ground-detail-info {
+	height : 40px;
+}
+
+.ground-detail-hashtag{
+	
+	height : 40px;
 }

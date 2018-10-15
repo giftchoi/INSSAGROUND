@@ -42,7 +42,7 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public GroundVO groundDetail(GroundVO groundVO) {
 		// TODO Auto-generated method stub
-		return null;
+		return groundMapper.groundDetail(groundVO);
 	}
 
 	@Override

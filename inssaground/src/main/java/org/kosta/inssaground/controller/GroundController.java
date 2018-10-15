@@ -24,4 +24,11 @@ public class GroundController {
 		return "ground/ground-list.tiles";
 	}
 	
+	@RequestMapping("groundDetail.do")
+	public String groundDetail(GroundVO paramVO,Model model) {
+		System.out.println(paramVO.getGroundNo());
+		GroundVO groundVO = groundService.groundDetail(paramVO);
+		model.addAttribute("groundVO",groundVO);
+		return "ground/ground-detail";
+	}
 }

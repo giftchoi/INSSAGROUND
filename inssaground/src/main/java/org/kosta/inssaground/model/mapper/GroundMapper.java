@@ -10,4 +10,5 @@ import org.kosta.inssaground.model.vo.ListVO;
 public interface GroundMapper {
 	List<GroundVO> searchGroundTest(GroundVO groundVO);
 	ListVO<GroundVO> searchGround(GroundVO groundVO);
+	GroundVO groundDetail(GroundVO groundVO);
 }

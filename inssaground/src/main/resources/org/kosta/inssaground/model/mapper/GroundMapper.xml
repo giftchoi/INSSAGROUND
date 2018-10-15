@@ -5,7 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.inssaground.model.mapper.GroundMapper">
 	<select id="searchGroundTest" parameterType="groundVO" resultType="groundVO">
-			select * from ground
+			select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby from ground g,sigungu s,hobby h where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no
+	</select>
+	<select id="groundDetail" parameterType="groundVO" resultType="groundVO">
+		select g.*,s.sigungu_name as area from ground g, sigungu s where g.ground_no=#{groundNo} and s.sigungu_no=g.sigungu_no
 	</select>
 </mapper>
  
