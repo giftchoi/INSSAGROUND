@@ -1,8 +1,14 @@
 package org.kosta.inssaground.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.ListVO;
 
 @Mapper
-public class GroundMapper {
-	
+public interface GroundMapper {
+	List<GroundVO> searchGroundTest(GroundVO groundVO);
+	ListVO<GroundVO> searchGround(GroundVO groundVO);
+	List<String> getAllSido();
 }

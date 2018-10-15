@@ -88,6 +88,10 @@ create table ground(
    constraint fk_ground_id foreign key(master)  references inssa_member(id),
    constraint fk_ground_hobby_no foreign key(hobby_no) references hobby(hobby_no)
 )
+insert into INSSA_MEMBER values('thwjddnl','1234','소정','수내',1);
+insert into MEMBER_AUTHORITY values('thwjddnl','ROLE_MEMBER');
+insert into ground values(ground_seq.nextval,20,'첫 모임 개설 테스트중!!!ㅎㅎ 피날레 화이팅!','장소정 걔 모임?','thwjddnl',56,56,1)
+select * from ground;
 -- 일정
 drop table schedule;
 create sequence schedule_seq nocache;
@@ -730,7 +734,7 @@ VALUES (37.0, '5인조 달리기', 10.0, 15.0, 30.0, '비치볼', '두 팀으로
 INSERT INTO OFFICIAL_GAME (O_GAME_NO, TITLE, MIN_PERSONNEL, MAX_PARSONNEL, GAME_TIME, MATERIALS, CONTENT, CG_NO) 
 VALUES (38.0, '태평양 건너기', 40.0, 50.0, 60.0, '없음', '서로 마주보고 손을 잡고 서서 좌우로 밀착하여 선다. 손위로 1명씩 나와 두 손을 앞으로 쭉 뻗어 엎드린다. 시작 신호가 울리면 손을 맞잡은 사람들은 손을 뒤에서 앞으로 흔들어 엎드려 있는 수영선수를 앞으로 보낸다. 
 끝까지 도착하면 전방 5m 까지 수영하여 반환점을 돌아 출발선까지 달려온다. 다음 사람에게 바톤터치하면 다음 사람 역시 같은 요령으로 이동한다. 먼저 끝난 팀이 승리하게 된다', 2.0);
-
+/*
 INSERT INTO OFFICIAL_GAME (O_GAME_NO, TITLE, MIN_PERSONNEL, MAX_PARSONNEL, GAME_TIME, MATERIALS, CONTENT, CG_NO) 
 VALUES (39.0, '수중 장애물', 15.0, 20.0, 60.0, '물안경 2~3개, 타이어튜브 2~3개, 그물 1개, 사다리, 비치볼 2~3개, 반환물 2~3 개', '⑴ 출발선에서 각 팀별 1열로 서서 대기한다.
 ⑵ 출발신호에 맞춰 한 사람씩 출발한다. 첫 번째 코스에서 물안경을 쓴다.
@@ -742,7 +746,7 @@ VALUES (39.0, '수중 장애물', 15.0, 20.0, 60.0, '물안경 2~3개, 타이어
 ⑻ 이때 물안경을 다음 주자에게 바톤대신 넘겨준다.
 ⑼ 최종적으로 먼저 도착한 팀이 승리한다.
 
-', 2.0);
+', 2.0);*/
 
 INSERT INTO OFFICIAL_GAME (O_GAME_NO, TITLE, MIN_PERSONNEL, MAX_PARSONNEL, GAME_TIME, MATERIALS, CONTENT, CG_NO) 
 VALUES (40.0, '수중 농구', 15.0, 20.0, 60.0, '비치볼, 바구니 2개 , 흰 끈', '양팀 골키퍼가 바구니를 들고 자기 팀이 던지는 공을 바구니로 받는 것으로서, 몸을 잡거나 세 걸음 이상 발을 옮기는 것은 허용되지 않는다. 일반적 경기규칙은 농구와 같이 적용된다. 상대편 골키퍼 진영에는 들어갈 수 없다.', 2.0);
@@ -3388,9 +3392,6 @@ VALUES (70.0, 7.0);
 
 INSERT INTO HOBBY_FEATURE (HOBBY_NO, FEATURE_NO) 
 VALUES (70.0, 10.0);
-
-INSERT INTO HOBBY_FEATURE (HOBBY_NO, FEATURE_NO) 
-VALUES (70.0, 13.0);
 
 INSERT INTO HOBBY_FEATURE (HOBBY_NO, FEATURE_NO) 
 VALUES (70.0, 2.0);
