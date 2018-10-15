@@ -2,6 +2,9 @@ select * from hobby where hobby_category_no=1;
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
+<<<<<<< HEAD
+select count(*) from ground
+=======
 
 create table sigungu(
    sigungu_no number primary key,
@@ -11,6 +14,7 @@ create table sigungu(
 )
 
 
+>>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
 /******* 추가**********/
 alter table ground drop column introduction;
 alter table ground add(introduction clob default ' ' not null)
