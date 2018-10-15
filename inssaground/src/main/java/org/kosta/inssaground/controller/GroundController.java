@@ -20,6 +20,7 @@ public class GroundController {
 	public String groundList(Model model) {
 		//ListVO<GroundVO> groundList = groundService.searchGround(null);	// no search condition. getAllList()
 		List<GroundVO> groundList = groundService.searchGroundTest(null);
+		model.addAttribute("groundList",groundList);
 		return "ground/ground-list.tiles";
 	}
 	
