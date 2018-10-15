@@ -11,7 +11,7 @@
 				success:function(result){
 					var sigungu = "<option>------</option>"
 					for(var i=0;i<result.length;i++){
-						sigungu += "<option>"+result[i].sigunguName+"</option>";
+						sigungu += "<option value="+result[i].sigunguNo+">"+result[i].sigunguName+"</option>";
 					}
 					$("#sigungu").html(sigungu);
 				}
@@ -25,7 +25,7 @@
 				success:function(result){
 					var hobby = "<option>------</option>"
 					for(var i=0;i<result.length;i++){
-						hobby += "<option>"+result[i].name+"</option>";
+						hobby += "<option value="+result[i].hobbyNo+">"+result[i].name+"</option>";
 					}
 					$("#hobby").html(hobby);
 				}
@@ -39,8 +39,7 @@
 			if(hh != ""){
 				$("#hashtag").text(hh+hashtag);
 			}else{
-				$("#hashtag").text(hashtag);
-				
+				$("#hashtag").text(hashtag);				
 			}
 		});//click
 	}); //ready
@@ -49,7 +48,7 @@
 	<div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">모임 개설 신청</h1>
-			<form>
+			<form action="groundApply.do" method="post">
 				<!-- <div class="input-container">
 					<span id="profile-img"></span>
 				</div> -->
@@ -66,7 +65,7 @@
 						</c:forEach>
 					</select>		
 							
-					<select name="sigungu" id="sigungu">
+					<select name="sigunguNo" id="sigungu">
 													
 					</select>
 				</div>
@@ -85,17 +84,17 @@
 				</div>
 				
 				<div class="input-container">
-					최대인원 <input type="number" name="">
+					최대인원 <input type="number" name="maxPersonnel">
 				</div>
 
 				<div class="input-container">
 					모임 소개<br>
-					<textarea name="" rows="10" cols="70"></textarea>
+					<textarea name="introduction" rows="10" cols="70"></textarea>
 				</div>
 				
 				<div class="input-container">
 					해시태그
-					<input type="" name="" id="ht">
+					<input type="hashtag" name="" id="ht">
 					<input type="button" value="넣기" id="hash">
 					<sapn id="hashtag" class="hashtag"></sapn>
 				</div>

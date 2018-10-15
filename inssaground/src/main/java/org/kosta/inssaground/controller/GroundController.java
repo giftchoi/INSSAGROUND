@@ -7,11 +7,13 @@ import javax.annotation.Resource;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +38,13 @@ public class GroundController {
 		return "ground/ground-apply-form.tiles";
 	}
 	
+	@RequestMapping("groundDetail.do")
+	public String groundDetail(GroundVO paramVO,Model model) {
+		System.out.println(paramVO.getGroundNo());
+		GroundVO groundVO = groundService.groundDetail(paramVO);
+		model.addAttribute("groundVO",groundVO);
+		return "ground/ground-detail";
+	}
 	@ResponseBody
 	@RequestMapping("getSigungu.do")
 	public List<SigunguVO> getSigungu(String sido){
@@ -46,5 +55,15 @@ public class GroundController {
 	@RequestMapping("findHobbyByHobbyCategoryNo.do")
 	public List<HobbyVO> findHobbyByHobbyCategoryNo(String hobbyCategoryNo){	
 		return hobbyService.findHobbyByHobbyCategoryNo(hobbyCategoryNo);
+	}
+	
+	@PostMapping("groundApply.do")
+	public String groundApply(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO) {
+		System.out.println(groundVO);
+		System.out.println(sidoVO);
+		System.out.println(sigunguVO);
+		System.out.println(hobbyVO);
+		System.out.println(hobbyCategoryVO);
+		return "redirect:home.do";
 	}
 }

@@ -12,6 +12,8 @@ import org.kosta.inssaground.model.vo.SigunguVO;
 public interface GroundMapper {
 	List<GroundVO> searchGroundTest(GroundVO groundVO);
 	ListVO<GroundVO> searchGround(GroundVO groundVO);
+	GroundVO groundDetail(GroundVO groundVO);
 	List<SidoVO> getAllSido();
 	List<SigunguVO> getSigungu();
+
 }
