@@ -12,6 +12,8 @@ import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
 import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
+import org.kosta.inssaground.model.vo.SidoVO;
+import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.stereotype.Service;
 @Service
 public class GroundServiceImpl implements GroundService {
@@ -151,6 +153,16 @@ public class GroundServiceImpl implements GroundService {
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<SidoVO> getAllSido() {		
+		return groundMapper.getAllSido();
+	}
+
+	@Override
+	public List<SigunguVO> getSigungu() {		
+		return groundMapper.getSigungu();
 	}
 
 	
