@@ -13,5 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="idcheck" resultType="int">
 		select count(*) from INSSA_MEMBER where id=#{value}
 	</select>
+	<select id="emailcheck" resultType="int">
+	select count(*) from email_key where email=#{value}
+	</select>
+	<insert id="insertEmailInfo" parameterType="emailKeyVO">
+	 	insert into email_key(email,email_key,reg_date,status) values(#{email},#{emailKey},sysdate,0)
+	</insert>
+	<update id="updateEmailKey" parameterType="emailKeyVO">
+		update email_key set email_key=#{emailKey}, reg_date=sysdate where email=#{email}
+	</update>
 </mapper>
  

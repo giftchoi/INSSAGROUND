@@ -1,10 +1,13 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Random;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.mapper.MemberMapper;
+import org.kosta.inssaground.model.vo.EmailKeyVO;
 import org.kosta.inssaground.model.vo.EmailVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
@@ -78,8 +81,22 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void sendEmailForRegister(String receiver) {
-		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ");
-		mailService.sendEmail(email);
+		
+		String randomKey="";
+		Random r=new Random();
+		for(int i=0;i<8;i++) {
+			randomKey += r.nextInt(9);
+		};
+		EmailKeyVO key = new EmailKeyVO(receiver,randomKey);
+		if(memberMapper.emailcheck(receiver)==0) {
+			memberMapper.insertEmailInfo(key);
+		}else {
+			memberMapper.updateEmailKey(key);
+		}
+		System.out.println(randomKey);
+		System.out.println(key);
+		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
+		//mailService.sendEmail(email);
 	}
 
 }
