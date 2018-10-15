@@ -9,9 +9,11 @@ import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
 import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
+import org.kosta.inssaground.model.vo.SidoVO;
 
 public interface GroundService {
 	public void applyGround(GroundVO groundVO); // 모임신청
+	public List<SidoVO> getAllSido();// 모든 시도
 	public GroundVO enterGround(String groundNo); // 모임 홈
 	public ListVO<GroundVO> searchGround(GroundVO groundVO); //모임검색
 	public GroundVO groundDetail(GroundVO groundVO); // 모임 상세보기

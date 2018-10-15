@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
+import org.kosta.inssaground.model.vo.SidoVO;
 
 @Mapper
 public interface GroundMapper {
 	List<GroundVO> searchGroundTest(GroundVO groundVO);
 	ListVO<GroundVO> searchGround(GroundVO groundVO);
-	List<String> getAllSido();
+	List<SidoVO> getAllSido();
 }

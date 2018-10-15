@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.service.GroundService;
+import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.vo.GroundVO;
-import org.kosta.inssaground.model.vo.ListVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GroundController {
 	@Resource
 	private GroundService groundService;
+	@Resource
+	private HobbyService hobbyService;
 	
 	@RequestMapping("groundList.do")
 	public String groundList(Model model) {
@@ -25,6 +27,9 @@ public class GroundController {
 	}
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
-		return "ground/ground-apply.tiles";
+		model.addAttribute("",groundService.getAllSido());
+		model.addAttribute("",hobbyService.getAllHobby());
+		return "ground/ground-apply-form.tiles";
 	}
+	
 }

@@ -6,4 +6,5 @@ import org.kosta.inssaground.model.vo.HobbyVO;
 
 public interface HobbyService {
 	public List<HobbyVO> getOfferHobby(List<Integer> featureNo);
+	public List<HobbyVO> getAllHobby();
 }
