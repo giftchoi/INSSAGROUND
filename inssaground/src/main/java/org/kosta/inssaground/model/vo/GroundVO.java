@@ -9,6 +9,7 @@ public class GroundVO {
 	private String introduction;
 	private String hobby;
 	private String master;
+	private String area;
 	private List<String> tagList;
 	private List<InsiderVO> InsiderList;
 	private List<ScheduleVO> scheduleList;
@@ -47,6 +48,31 @@ public class GroundVO {
 		this.scheduleList = scheduleList;
 		this.postList = postList;
 		this.noticeList = noticeList;
+	}
+	
+	public GroundVO(String groundNo, String groundName, int maxPersonnel, String introduction, String hobby,
+			String master, String area, List<String> tagList, List<InsiderVO> insiderList,
+			List<ScheduleVO> scheduleList, List<PostVO> postList, List<NoticeVO> noticeList) {
+		super();
+		this.groundNo = groundNo;
+		this.groundName = groundName;
+		this.maxPersonnel = maxPersonnel;
+		this.introduction = introduction;
+		this.hobby = hobby;
+		this.master = master;
+		this.area = area;
+		this.tagList = tagList;
+		InsiderList = insiderList;
+		this.scheduleList = scheduleList;
+		this.postList = postList;
+		this.noticeList = noticeList;
+	}
+	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	public String getGroundNo() {
 		return groundNo;
@@ -117,8 +143,9 @@ public class GroundVO {
 	@Override
 	public String toString() {
 		return "GroundVO [groundNo=" + groundNo + ", groundName=" + groundName + ", maxPersonnel=" + maxPersonnel
-				+ ", introduction=" + introduction + ", hobby=" + hobby + ", master=" + master + ", tagList=" + tagList
-				+ ", InsiderList=" + InsiderList + ", postList=" + postList + "]";
+				+ ", introduction=" + introduction + ", hobby=" + hobby + ", master=" + master + ", area=" + area
+				+ ", tagList=" + tagList + ", InsiderList=" + InsiderList + ", scheduleList=" + scheduleList
+				+ ", postList=" + postList + ", noticeList=" + noticeList + "]";
 	}
 	
 }
