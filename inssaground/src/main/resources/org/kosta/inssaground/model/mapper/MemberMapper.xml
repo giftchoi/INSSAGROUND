@@ -10,5 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAuthorityById" resultType="string">
 		select role from MEMBER_AUTHORITY where id=#{value}
 	</select>
+	<select id="idcheck" resultType="int">
+		select count(*) from INSSA_MEMBER where id=#{value}
+	</select>
 </mapper>
  
