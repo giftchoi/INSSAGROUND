@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div class="game-post-area">
-					<div class="card game" onclick="location.href='${pageContext.request.contextPath}/detail.jsp'">
+					<div class="card game" onclick="location.href='${pageContext.request.contextPath}/customGameDetail.do'">
 						<!-- <div class="card-header">Header</div> -->
 						<div class="card-body">
 							<h1>바꿈</h1>
