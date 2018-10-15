@@ -1,7 +1,7 @@
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
-
+select count(*) from ground
 /******* 추가**********/
 alter table ground drop column introduction;
 alter table ground add(introduction clob default ' ' not null)

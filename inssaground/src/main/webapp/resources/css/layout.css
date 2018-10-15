@@ -1,8 +1,5 @@
 @charset "UTF-8";
-html{
-	font-size:15px;
-	
-}
+
 .header {
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
@@ -51,6 +48,11 @@ html{
 	width: 300px;
 	height: 200px;
 }
+.card.ground:hover {
+	border: 1.5px solid #ff1a1a;
+	cursor:pointer;
+}
+
 .card.ground .card-ground-title{
 	height : 40px;
 	padding-top:5px;
@@ -147,11 +149,11 @@ html{
 	font-weight: 200;
 }
 
-.input-container input:not([type=submit]){
+.input-container input:not([type=submit] || [type=button]){
 	border-bottom: 1px solid black;
 }
 
-.input-container input:not([type=submit]):focus {
+.input-container input:not([type=submit]):focus, .input-containerinput:not([type=submit] || [type=button]):focus {
 	border-bottom: 1px solid #ff1a1a;
 }
 .c-footer a {
@@ -208,23 +210,39 @@ h1.title {
 	font-size:15px;
 	
 }
-.info-span{
-	margin:10px;
+.ground-detail-info .info-span{
+	display:inline-block;
 	padding:5px;
 	font-size: 15px;
 	border-radius: 5px;
 	background-color: #f2f2f2;
 }
+
+.ground-info{
+	margin-top:20px;
+}
+.ground-info .info-span{
+	display:inline-block;
+	padding:5px;
+	font-size: 17px;
+	border-radius: 5px;
+
+}
 pre{
-	background-color : white;
+	background-color : white !important;
+	/* border:none !important; */
 }
 
 .btn-red {
-	font-size: 15px;
-	background-color : ff1a1a;
+	margin-bottom:4px !important;
+	font-size: 18px !important;
+	color:white;
+	background-color : #ff1a1a;
+}
+.ground-detail-content{
+	margin:20px;
 	
 }
-
 .ground-detail-title{
 	padding:10px;
 	height : 40px;
@@ -238,4 +256,54 @@ pre{
 .ground-detail-hashtag{
 	
 	height : 40px;
+}
+.top-header{
+		text-align:right;
+		padding-top:10px;
+		position:relative;
+		height:50px;
+		width:100%;
+		top:0;
+}
+.bottom-header{
+		text-align:center;
+		height:130px;
+		width:100%;
+}
+li{
+	display:inline;
+	/* margin:0 1px; */
+}
+li a{
+	display:inline-block;
+	color:#222222;
+	text-transform:uppercase;
+	font-family: 'Montserrat', sans-serif;
+	font-size:20px;
+	text-decoration: none;
+	/* line-height:20px; */
+	margin: 5px 32px 5px 32px;
+	transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
+	-webkit-transition:all 0.3s ease-in-out;
+}
+
+li a:hover{ 
+	text-decoration:none;
+	color: #ff1a1a;
+}
+
+.pagingInfo li{
+	margin: 0 auto;
+}
+.pagination .active a{
+	background-color:#ff1a1a !important;
+	border-color:#ff1a1a !important;
+}
+
+.search-filter-area{
+	font-size:20px;
+}
+.search-list-area{
+	text-align:center;
 }

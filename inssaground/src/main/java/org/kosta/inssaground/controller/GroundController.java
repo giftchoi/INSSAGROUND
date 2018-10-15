@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
+import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,10 @@ public class GroundController {
 	@RequestMapping("groundList.do")
 	public String groundList(Model model) {
 		//ListVO<GroundVO> groundList = groundService.searchGround(null);	// no search condition. getAllList()
-		List<GroundVO> groundList = groundService.searchGroundTest(null);
-		model.addAttribute("groundList",groundList);
+		int totalCount= groundService.getGroundSearchResultCount(null);
+		System.out.println("totalCount:"+totalCount);
+		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount),null);
+		model.addAttribute("listVO",listVO);
 		return "ground/ground-list.tiles";
 	}
 	@RequestMapping("groundApplyForm.do")

@@ -2,41 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style type="text/css">
-.top-header{
-		text-align:right;
-		padding-top:10px;
-		position:relative;
-		height:50px;
-		width:100%;
-		top:0;
-}
-.bottom-header{
-		text-align:center;
-		height:130px;
-		width:100%;
-}
-li{
-	display:inline;
-	/* margin:0 1px; */
-}
-li a{
-	display:inline-block;
-	color:#222222;
-	text-transform:uppercase;
-	font-family: 'Montserrat', sans-serif;
-	font-size:20px;
-	text-decoration: none;
-	/* line-height:20px; */
-	margin: 5px 32px 5px 32px;
-	transition:all 0.3s ease-in-out;
-	-moz-transition:all 0.3s ease-in-out;
-	-webkit-transition:all 0.3s ease-in-out;
-}
 
-li a:hover{ 
-	text-decoration:none;
-	color: #ff1a1a;
-}
 </style>
 <div class="top-header">
 
@@ -73,10 +39,10 @@ li a:hover{
 	<li><a href="groundList.do" title="모임">GROUND</a></li>
 	<li><a href="home.do"> 
 <sec:authorize access="!hasRole('ROLE_MEMBER')">
-<img src="${pageContext.request.contextPath}/resources/image/logoOff.png" alt="home"  width="200" height="130"/>
+<img src="${pageContext.request.contextPath}/resources/image/logoOff.png" title="discharged! inssaground home "  width="200" height="130"/>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_MEMBER')">
-<img src="${pageContext.request.contextPath}/resources/image/logoOn.png" alt="home"  width="200" height="130"/>
+<img src="${pageContext.request.contextPath}/resources/image/logoOn.png" title="charging.. inssaground home"  width="200" height="130"/>
 </sec:authorize>
 </a></li>
 	<li><a href="gameHome.do">GAME</a></li>

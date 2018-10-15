@@ -40,8 +40,10 @@ public interface GroundService {
 	
 	
 	public List<SigunguVO> getSigungu();
+	public int getGroundSearchResultCount(GroundVO groundVO);
 	
 	// for Test
-	public List<GroundVO> searchGroundTest(GroundVO groundVO);
+	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
+	
 }
   

@@ -1,6 +1,8 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -31,8 +33,11 @@ public class GroundServiceImpl implements GroundService {
 		return null;
 	}
 
-	public List<GroundVO> searchGroundTest(GroundVO groundVO){
-		return groundMapper.searchGroundTest(groundVO);
+	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingBean", pagingBean);
+		map.put("groundVO",groundVO);
+		return new ListVO<GroundVO>(pagingBean,groundMapper.searchGroundTest(map));
 	}
 	
 	@Override
@@ -163,6 +168,12 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public List<SigunguVO> getSigungu() {		
 		return groundMapper.getSigungu();
+	}
+
+	@Override
+	public int getGroundSearchResultCount(GroundVO groundVO) {
+		// TODO Auto-generated method stub
+		return groundMapper.getGroundSearchResultCount(groundVO);
 	}
 
 	

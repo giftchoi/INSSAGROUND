@@ -8,7 +8,7 @@
 				width="100%" height="350">
 		</div>
 	</div>
-	<div class="row">
+	<div class="row ground-detail-content">
 		<div class="col-sm-3">
 			<img
 				src="${pageContext.request.contextPath }/resources/image/testImg.jpg"
