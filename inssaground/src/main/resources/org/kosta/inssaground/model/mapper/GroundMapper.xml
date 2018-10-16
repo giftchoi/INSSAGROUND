@@ -5,7 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.inssaground.model.mapper.GroundMapper">
 	<!-- SOJEONG -->
+	<select id="getAllGroundList" parameterType="pagingBean"   resultType="groundVO">
+		select g.*,s.sigungu_name as area, h.name as hobby
+		from (
+					select row_number() over (order by ground_no) as row_no,g.*
+					from ground g) g, sigungu s, hobby h 
+		where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
 	
+	</select>
 	<select id="searchGroundTest" parameterType="map" resultType="groundVO">
 			<![CDATA[
 				select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby 
@@ -38,9 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and ground_name like '%' || #{groundVO.groundName} || '%'
 		</if>
 	</select>
-	
 	<select id="searchGround" parameterType="map" resultType="groundVO">
-		select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby 
+		select g.*,s.sigungu_name as area, h.name as hobby 
 		from (	select row_number() over (order by ground_no) as row_no,gr.*
 					from ground gr) g, sigungu s, hobby h 
 		where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and g.row_no between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}

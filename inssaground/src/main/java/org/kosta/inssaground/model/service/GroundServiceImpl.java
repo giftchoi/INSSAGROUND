@@ -79,7 +79,16 @@ public class GroundServiceImpl implements GroundService {
 
 		return new ListVO<GroundVO>(pagingBean,groundMapper.searchGround(map));
 	}
+	@Override
+	public ListVO<GroundVO> getAllGroundList() {
+		int resultCount = groundMapper.getGroundSearchResultCount(null);
+		PagingBean pagingBean = new PagingBean(resultCount,1);
+		return new ListVO<GroundVO>(pagingBean,groundMapper.getAllGroundList(pagingBean));
+	}
 
+	
+	
+	
 	@Override
 	public GroundVO groundDetail(GroundVO groundVO) {
 		// TODO Auto-generated method stub
@@ -232,7 +241,7 @@ public class GroundServiceImpl implements GroundService {
 		
 	}
 
-	
+
 
 
 }

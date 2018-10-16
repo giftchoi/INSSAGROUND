@@ -155,7 +155,10 @@
 										<div class="col-sm-6 master-profile">
 											<img
 												src="${pageContext.request.contextPath }/resources/image/testImg.jpg"
-												width="100%" height="100%">
+												width="100%" height="85%">
+												<div class="master-id">
+												<i class="fa fa-flag"></i><span class="info-span"> ${ground.master}</span>
+												</div>
 										</div>
 										<div class="col-sm-6 ground-info">
 											<i class="fa fa-map-marker fa-4x"></i> <span
@@ -181,7 +184,7 @@
 
 				<ul class="pagination pagination-lg pagination-centered">
 					<c:if test="${pb.previousPageGroup}">
-						<li><a href="">&laquo;</a></li>
+						<li><a class="page" href="">&laquo;</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 						<c:choose>
@@ -195,7 +198,7 @@
 	&nbsp;
 	</c:forEach>
 					<c:if test="${pb.nextPageGroup}">
-						<li><a href="">&raquo;</a></li>
+						<li><a class="page" href="">&raquo;</a></li>
 					</c:if>
 				</ul>
 			</div>

@@ -43,11 +43,8 @@ public class GroundController {
 		int page;
 		if(nowPage==null) page = 1;
 		else page = Integer.parseInt(nowPage);
-		// ListVO<GroundVO> groundList = groundService.searchGround(null); // no search
-		// condition. getAllList()
-		int totalCount = groundService.getGroundSearchResultCount(null);
-		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount,page), null);
-		model.addAttribute("listVO", listVO);
+		
+		model.addAttribute("listVO", groundService.getAllGroundList());
 		model.addAttribute("sidoList", groundService.getAllSido());
 		model.addAttribute("hobbyCategoryList", hobbyService.getHobbyCategory());
 		return "ground/ground-list.tiles";
