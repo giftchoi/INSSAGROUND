@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
@@ -31,12 +32,15 @@ public class GroundController {
 	private HobbyService hobbyService;
 
 	@RequestMapping("groundList.do")
-	public String groundList(Model model) {
+	public String groundList(Model model,String nowPage) {
+		int page;
+		if(nowPage==null) page = 1;
+		else page = Integer.parseInt(nowPage);
 		// ListVO<GroundVO> groundList = groundService.searchGround(null); // no search
 		// condition. getAllList()
 		int totalCount = groundService.getGroundSearchResultCount(null);
 		System.out.println("totalCount:" + totalCount);
-		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount), null);
+		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount,page), null);
 		model.addAttribute("listVO", listVO);
 		model.addAttribute("sidoList", groundService.getAllSido());
 		model.addAttribute("hobbyCategoryList", hobbyService.getHobbyCategory());
@@ -73,11 +77,14 @@ public class GroundController {
 
 	@Secured("ROLE_MEMBER")
 	@PostMapping("groundApply.do")
-	public String groundApply(GroundVO groundVO, SidoVO sidoVO, SigunguVO sigunguVO, HobbyVO hobbyVO,
+	public String groundApply(HttpServletRequest request, GroundVO groundVO, SidoVO sidoVO, SigunguVO sigunguVO, HobbyVO hobbyVO,
 			HobbyCategoryVO hobbyCategoryVO) {
+		String tags[] = request.getParameterValues("hashtag");
+		System.out.println(tags[0]+","+tags[1]);
 		System.out.println("controller 1");
-		groundService.applyGround(groundVO, sidoVO, sigunguVO, hobbyVO, hobbyCategoryVO);
+		groundService.applyGround(groundVO, sidoVO, sigunguVO, hobbyVO, hobbyCategoryVO);		
 		System.out.println("controller 2");
+		groundService.groundHashtag(tags,groundVO);
 		return "redirect:home.do";
 	}
 }

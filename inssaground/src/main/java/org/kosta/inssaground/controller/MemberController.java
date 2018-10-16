@@ -1,6 +1,7 @@
 package org.kosta.inssaground.controller;
 
 import org.kosta.inssaground.model.service.MemberService;
+import org.kosta.inssaground.model.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,10 @@ public class MemberController {
 		return "member/register-form.tiles";
 	}
 	@PostMapping("registerMember.do")
+	public String registerMember(MemberVO mvo) {
+		memberService.registerMember(mvo);
+		return "member/register-result.tiles";
+	}
 	@RequestMapping("login_fail.do")
 	public String loginFail() {
 		return "member/login_fail";
@@ -35,5 +40,10 @@ public class MemberController {
 	@ResponseBody
 	public void sendEmailAjax(String email) {
 		memberService.sendEmailForRegister(email);
+	}
+	@RequestMapping("checkEmailKey.do")
+	@ResponseBody
+	public String checkEmailKey(String email, String inputKey) {
+		return memberService.checkEmailKey(email, inputKey);
 	}
 }
