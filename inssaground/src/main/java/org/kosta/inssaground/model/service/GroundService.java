@@ -48,11 +48,9 @@ public interface GroundService {
 	
 	
 	public void groundHashtag(String tags[],GroundVO groundVO);
-<<<<<<< HEAD
+
 	public void registergroundImg(GroundVO groundVO);
-=======
-	
->>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
+
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
 	
