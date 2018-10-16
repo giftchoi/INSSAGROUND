@@ -22,8 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sido
 	</select>
 	
-	<select id="getSigungu" resultType="sigunguVO">
-		select * from sigungu
+	<select id="getSigungu"  parameterType="string" resultType="sigunguVO">
+		select * from sigungu where sido_no=#{value}
 	</select>
 	
 	<select id="findSidoBySidoNo" resultType="sidoVO">
