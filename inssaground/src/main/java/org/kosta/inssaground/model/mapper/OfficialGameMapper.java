@@ -11,6 +11,9 @@ public interface OfficialGameMapper {
 	public int getTotalOfficialGameCount();
 
 	public List<OfficialGameVO> getOfficialGameList(PagingBean pagingBean);
-	
+
 	public OfficialGameVO getOfficialGameDetail(int oGameNo);
+
+	public void writeOfficialGame(OfficialGameVO OfficialGameVO);
+
 }
