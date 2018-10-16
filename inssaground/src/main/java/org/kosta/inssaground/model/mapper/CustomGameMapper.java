@@ -11,5 +11,7 @@ public interface CustomGameMapper {
 	public int getTotalCustomGameCount();
 	public List<CustomGameVO> getCustomGameList(PagingBean pagingBean);
 	public CustomGameVO getCustomGameDetail(String cGameNo);
+	public void writeCustomGame(CustomGameVO customGameVO);
+	
 }
 
