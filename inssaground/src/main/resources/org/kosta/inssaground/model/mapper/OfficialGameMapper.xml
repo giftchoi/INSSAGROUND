@@ -9,12 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		OFFICIAL_GAME
 	</select>
 	<select id="getOfficialGameList" resultType="officialGameVO" parameterType="pagingBean">
-		SELECT row_number() over(order by o_game_no desc) as rownumber, o_game_no,
-			title, min_personnel, max_personnel FROM(
-				SELECT row_number() over(order by o_game_no desc) as rownumber, o_game_no,
-				title, min_personnel, max_personnel
+		SELECT og.* FROM(
+				SELECT row_number() over(order by o_game_no desc) as rownumber,
+				o_game_no, title, min_personnel, max_personnel, game_time, materials, cg_no
 				FROM OFFICIAL_GAME
-		) ogi
+		) og
 		where rownumber between #{startRowNumber} and #{endRowNumber}
 		order by o_game_no desc
 	</select>
@@ -26,4 +25,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		og.cg_no=gc.cg_no and o_game_no=#{value}
 	</select>
+
+	<insert id="writeOfficialGame" parameterType="officialGameVO">
+		<selectKey keyProperty="oGameNo" resultType="String"
+			order="BEFORE">
+			select
+			OFFICIAL_GAME_seq.nextval from dual
+		</selectKey>
+		insert into official_game(o_game_no, title, min_personnel,
+		max_personnel, game_time, materials, content, cg_no)
+		values (#{oGameNo}, #{title}, #{minPersonnel}, #{maxPersonnel}, #{gameTime},
+		#{materials}, #{content}, #{cgNo})
+	</insert>
+	
 </mapper>

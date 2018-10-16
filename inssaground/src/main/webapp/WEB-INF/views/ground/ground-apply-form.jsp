@@ -42,12 +42,12 @@
 <div class="col-sm-12 main-content">
 	<div class="card-container wide">
 		<div class="form-card">
-			<h1 class="title">모임 개설 신청</h1>
-			<form action="groundApply.do" method="post">
-				<sec:csrfInput/>
-				<!-- <div class="input-container">
-					<span id="profile-img"></span>
-				</div> -->
+			<h1 class="title">모임 개설 신청</h1>		
+			<form action="groundApply.do" method="post" enctype="multipart/form-data">
+				<sec:csrfInput/>					
+				<div class="input-container">
+					<input type="file" name="picture">
+				</div>
 				<div class="input-container">
 					모임명<br>
 					<input type="text"  name="groundName" maxlength="30" required="required" />
@@ -90,7 +90,7 @@
 				
 				<div class="input-container">
 					해시태그
-					<input type="text"  name="hashtag" id="ht">
+					<input type="text"  name="hashtag2" id="ht">
 					<input type="button"  value="넣기" id="hashBtn">
 					<div id="hashtag-section"></div>
 				</div>

@@ -307,7 +307,9 @@ li a:hover{
 	color:white !important;
 }
 .pagination a{
+
 	margin:0;
+	cursor:pointer;
 	color:black !important;
 }
 .search-filter-area{
