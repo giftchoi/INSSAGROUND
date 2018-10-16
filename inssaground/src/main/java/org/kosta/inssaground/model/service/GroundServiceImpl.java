@@ -61,9 +61,23 @@ public class GroundServiceImpl implements GroundService {
 	}
 	
 	@Override
-	public ListVO<GroundVO> searchGround(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(sido!=null)
+		map.put("sido", sido);
+		if(sigungu!=null)
+		map.put("sigungu", sigungu);
+		if(category!=null)
+		map.put("category",category);
+		if(hobby!=null)
+		map.put("hobby", hobby);
+		map.put("groundVO", groundVO);
+		int resultCount = groundMapper.getGroundSearchResultCount(map);
+		//System.out.println("resultCount"+resultCount);
+		PagingBean pagingBean = new PagingBean(resultCount,Integer.parseInt(nowPage));
+		map.put("pagingBean",pagingBean);
+
+		return new ListVO<GroundVO>(pagingBean,groundMapper.searchGround(map));
 	}
 
 	@Override
@@ -191,9 +205,9 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public int getGroundSearchResultCount(GroundVO groundVO) {
+	public int getGroundSearchResultCount(Map<String,Object> map) {
 		// TODO Auto-generated method stub
-		return groundMapper.getGroundSearchResultCount(groundVO);
+		return groundMapper.getGroundSearchResultCount(map);
 	}
 
 	@Override

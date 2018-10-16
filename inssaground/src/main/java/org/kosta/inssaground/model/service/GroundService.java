@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -18,7 +19,6 @@ public interface GroundService {
 	public void applyGround(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO); // 모임신청
 	public List<SidoVO> getAllSido();// 모든 시도
 	public GroundVO enterGround(String groundNo); // 모임 홈
-	public ListVO<GroundVO> searchGround(GroundVO groundVO); //모임검색
 	public GroundVO groundDetail(GroundVO groundVO); // 모임 상세보기
 	public void groundParticipation(); // 모임참여
 	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
@@ -40,10 +40,15 @@ public interface GroundService {
 	public GroundVO GroundActivityInfo(GroundVO groundVO);// 모임 활동 정보  **********************
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
 	
-	
+	/*SOJEONG*/
 	public List<SigunguVO> getSigungu(String sido);
-	public int getGroundSearchResultCount(GroundVO groundVO);
+	public int getGroundSearchResultCount(Map<String,Object> map);
+	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage); //모임검색
+	
+	
+	
 	public void groundHashtag(String tags[],GroundVO groundVO);
+	
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
 	

@@ -6,7 +6,7 @@
 <script>
 	$(document)
 			.ready(function() {
-				$(".card.ground").click(function() {
+				$(".search-list-area").on("click",".card.ground",function() {
 					$('div.modal').modal();
 					$('.modal-content').load("groundDetail.do?groundNo="+ $(this).find("input[type=hidden]").val());
 				});//click
@@ -33,46 +33,84 @@
 						}); //ajax
 					});//change
 
-						$("#category")
-								.change(
-										function() {
-											var categoryNo = $(this).val();
-											if (categoryNo == ""
-													|| categoryNo == null) {
-												$("#hobby").prop("disabled",
-														true);
-												$("#hobby").empty();
-												$("#hobby")
-														.append(
-																"<option value=''>----</option>");
-												return;
-											}
-											$
-													.ajax({
-														type : "get",
-														url : "findHobbyByHobbyCategoryNo.do",
-														data : "hobbyCategoryNo="
-																+ categoryNo,
-														success : function(
-																hobbyArr) {
-															$("#hobby").prop(
-																	"disabled",
-																	false);
-															$("#hobby").empty();
-															$("#hobby")
-																	.append(
-																			"<option value=''>----</option>");
-															for (var i = 0; i < hobbyArr.length; i++) {
-																$("#hobby")
-																		.append(
-																				"<option value='"+hobbyArr[i].hobbyNo+"'>"
-																						+ hobbyArr[i].name
-																						+ "</option>");
-															}
-														}
-													});
-										});
+						$("#category").change(function() {
+							var categoryNo = $(this).val();
+							if (categoryNo == ""|| categoryNo == null) {
+								$("#hobby").prop("disabled",true);
+								$("#hobby").empty();
+								$("#hobby").append("<option value=''>----</option>");
+								return;
+							}
+							$.ajax({
+								type : "get",
+								url : "findHobbyByHobbyCategoryNo.do",
+								data : "hobbyCategoryNo="+ categoryNo,
+								success : function(hobbyArr) {
+									$("#hobby").prop("disabled",false);
+									$("#hobby").empty();
+									$("#hobby").append("<option value=''>----</option>");
+									for (var i = 0; i < hobbyArr.length; i++) {
+										$("#hobby").append("<option value='"+hobbyArr[i].hobbyNo+"'>"+ hobbyArr[i].name+ "</option>");
+									}
+								}
+							});
+						});
+						$("#searchBtn").click(function(){
+							var sido = $("#sido").val();
+							var sigungu = $("#sigungu").val();
+							var category = $("#category").val();
+							var hobby = $("#hobby").val();
+							$.ajax({
+								type:"get",
+								url: "searchGround.do",
+								data: $("#searchGroundForm").serialize(),
+								success: searchSuccess
+							});
+						});//click
+
+						$(".pagination").on("click",".page",function(){
+							var sido = $("#sido").val();
+							var sigungu = $("#sigungu").val();
+							var category = $("#category").val();
+							var hobby = $("#hobby").val();
+							$.ajax({
+								type:"get",
+								url: "searchGround.do",
+								data: $("#searchGroundForm").serialize()+"&nowPage="+$(this).text(),
+								success:searchSuccess
+							});
+						});
 					});//ready
+					
+					function searchSuccess(listVO){
+						var groundList = listVO.list;
+						var pb = listVO.pagingBean;
+						$("#resultTable").empty();
+						$("#resultTable").append("<tr>");
+						for(var i=0;i<groundList.length;i++){	
+							if(i==3) $("#resultTable").append("</tr><tr>");
+							var elements = '<td><div class="card ground"><input type="hidden" name="groundNo"value="'+groundList[i].groundNo+'">'
+								+'<div class="card-ground-title">'+groundList[i].groundName+'</div><div class="row card-ground-body">'
+								+	'<div class="col-sm-6 master-profile">'
+								+'<img src="${pageContext.request.contextPath }/resources/image/testImg.jpg" width="100%" height="100%">'
+								+'</div><div class="col-sm-6 ground-info"><i class="fa fa-map-marker fa-4x"></i>'
+								+' <span class="info-span">'+groundList[i].area+'</span><br> <i class="fa fa-users fa-3x"></i>'
+								+' <span class="info-span">'+groundList[i].maxPersonnel+'</span>'
+								+'<br> <i class="fa fa-puzzle-piece fa-4x"></i> <span class="info-span">'+groundList[i].hobby+'</span><br>'
+								+'</div></div></div></td>'
+							$("#resultTable").append(elements);
+						}
+						$("#resultTable").append("</tr>");
+						$(".pagination").empty();
+						for(var i=pb.startPageOfPageGroup;i<=pb.endPageOfPageGroup;i++){
+							if(i==pb.nowPage){
+								$(".pagination").append("<li class='active'><a class='page'>"+i+"</a></li>");
+							}else{
+								$(".pagination").append("<li><a class='page'>"+i+"</a></li>");
+							}
+						}
+					}
+					
 </script>
 
 <div class="col-sm-12">
@@ -83,7 +121,7 @@
 			</div>
 			<div class="search-filter-area">
 				<hr>
-				<form action="" method="get">
+				<form id="searchGroundForm"method="get">
 					지역 <select name="sido" id="sido">
 						<option value="">전체</option>
 						<c:forEach items="${requestScope.sidoList }" var="sido">
@@ -99,13 +137,13 @@
 						</c:forEach>
 					</select> <select name="hobby" id="hobby" disabled="disabled">
 						<option value="">----</option>
-					</select> 모임명 <input type="text" name="keyword"> <input
-						class="btn btn-red" type="button" value="검색">
+					</select> 모임명 <input type="text" name="groundName"> 
+					<input class="btn btn-red" id="searchBtn"type="button" value="검색">
 				</form>
 				<hr>
 			</div>
 			<div class="search-list-area">
-				<table cellpadding="10">
+				<table  id="resultTable"cellpadding="10">
 					<tr>
 						<c:forEach items="${listVO.list }" var="ground" varStatus="info">
 							<td>
@@ -133,8 +171,6 @@
 					</tr>
 					<tr>
 						</c:if>
-
-
 						</c:forEach>
 					</tr>
 				</table>
@@ -147,11 +183,10 @@
 					<c:if test="${pb.previousPageGroup}">
 						<li><a href="">&laquo;</a></li>
 					</c:if>
-					<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
-						end="${pb.endPageOfPageGroup}">
+					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 						<c:choose>
 							<c:when test="${pb.nowPage!=i}">
-								<li><a href="groundList.do?nowPage=${i}">${i}</a></li>
+								<li><a class="page">${i}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="active"><a href="#">${i}</a></li>

@@ -31,6 +31,13 @@ public class GroundController {
 	@Resource
 	private HobbyService hobbyService;
 
+	
+	/**
+	 * 전체 모임 목록을 불러오기 위한 메소드
+	 * @param model
+	 * @param nowPage
+	 * @return
+	 */
 	@RequestMapping("groundList.do")
 	public String groundList(Model model,String nowPage) {
 		int page;
@@ -39,14 +46,28 @@ public class GroundController {
 		// ListVO<GroundVO> groundList = groundService.searchGround(null); // no search
 		// condition. getAllList()
 		int totalCount = groundService.getGroundSearchResultCount(null);
-		System.out.println("totalCount:" + totalCount);
 		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount,page), null);
 		model.addAttribute("listVO", listVO);
 		model.addAttribute("sidoList", groundService.getAllSido());
 		model.addAttribute("hobbyCategoryList", hobbyService.getHobbyCategory());
 		return "ground/ground-list.tiles";
 	}
-
+	/**
+	 * 모임 검색 결과 리스트를 불러오기 위한 메소드
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("searchGround.do")
+	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage) {		
+		if(sido=="") sido = null;
+		if(sigungu=="") sigungu = null;
+		if(category=="") category = null;
+		if(hobby=="") hobby = null;
+		if(nowPage==null) nowPage = "1";
+		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
+	}
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
 		model.addAttribute("sido", groundService.getAllSido());

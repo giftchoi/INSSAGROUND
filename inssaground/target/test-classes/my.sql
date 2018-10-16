@@ -3469,3 +3469,13 @@ delete from sido;
 select * from sigungu;
 --------------------------------------------------
 
+		select count(*) from ground where status=1
+	
+
+
+
+	select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby 
+		from (	select row_number() over (order by gr.ground_no) as row_no,gr.*
+					from ground gr) g, sigungu s, hobby h 
+		where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and g.row_no between 1 and 6
+		
