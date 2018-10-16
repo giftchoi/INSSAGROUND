@@ -15,6 +15,7 @@ import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -22,15 +23,19 @@ public class MemberServiceImpl implements MemberService {
 	@Resource
 	private MemberMapper memberMapper;
 	@Override
-	public boolean checkEmailKey(String id, String emailKey) {
-		// TODO Auto-generated method stub
-		return false;
+	public String checkEmailKey(String email, String emailKey) {
+		if(memberMapper.emailcheck(email)!=0) {
+			EmailKeyVO vo = memberMapper.getEmailKeyInfo(email);
+			if(emailKey.equals(vo.getEmailKey())){
+				return "true";
+			}
+		}return "fail";
 	}
-
+	@Transactional
 	@Override
-	public void registerMember(MemberVO mvo, String path) {
-		// TODO Auto-generated method stub
-
+	public void registerMember(MemberVO mvo) {
+		memberMapper.registerMember(mvo);
+		memberMapper.registerPermission(mvo.getId());
 	}
 
 	@Override
@@ -78,10 +83,9 @@ public class MemberServiceImpl implements MemberService {
 			int count = memberMapper.idcheck(id);
 			return (count == 0) ? "ok" : "fail";
 	}
-
+	
 	@Override
 	public void sendEmailForRegister(String receiver) {
-		
 		String randomKey="";
 		Random r=new Random();
 		for(int i=0;i<8;i++) {
@@ -93,10 +97,36 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			memberMapper.updateEmailKey(key);
 		}
-		System.out.println(randomKey);
-		System.out.println(key);
 		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
-		//mailService.sendEmail(email);
+		mailService.sendEmail(email);
 	}
-
+	@Override
+	public List<String> findMemberId(MemberVO vo) {
+		List<String> idList=memberMapper.findMemberId(vo);
+		for(int i=0;i<idList.size();i++) {
+			int idLength = idList.get(i).length();
+			String starId = idList.get(i).substring(0, 3);
+			for(int j=0;j<idLength-3;j++) {
+				starId += "*";
+			}
+			idList.remove(i);
+			idList.add(starId);
+		}
+		return idList; 
+	}
+	@Transactional
+	@Override
+	public void findPassword(String id) throws Exception {
+		MemberVO vo=findMemberById(id);
+		if(vo==null) throw new Exception("없는 아이디 입니다.");
+		String randomNum="";
+		Random r=new Random();
+		for(int i=0;i<8;i++) {
+			randomNum += r.nextInt(9);
+		};
+		vo.setPassword(randomNum);
+		memberMapper.updateTempPassword(vo);
+		EmailVO email=new EmailVO(vo.getEmail(),"INSSAGROUND 임시 비밀번호입니다.","임시 비밀번호 : ["+randomNum+"]\n새 비밀번호로 변경 바랍니다.");
+		mailService.sendEmail(email);
+	}
 }

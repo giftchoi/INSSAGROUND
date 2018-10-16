@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.GroundHashtagVO;
 import org.kosta.inssaground.model.vo.GroundVO;
-import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 
@@ -14,9 +13,9 @@ import org.kosta.inssaground.model.vo.SigunguVO;
 public interface GroundMapper {
 	/*SOJEONG*/
 	List<GroundVO> searchGroundTest(Map<String,Object> map);
-	ListVO<GroundVO> searchGround(GroundVO groundVO);
+	List<GroundVO> searchGround(Map<String,Object> map);
 	GroundVO groundDetail(GroundVO groundVO);
-	int getGroundSearchResultCount(GroundVO groundVO);
+	int getGroundSearchResultCount(Map<String,Object> map);
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();

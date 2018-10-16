@@ -3,7 +3,8 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var checkResultId="";		
+		var checkResultId="";
+		var checkEmailOK=false;
 		$("#regBtn").submit(function(){			
 			if($("#regForm :input[name=id]").val().trim()==""){
 				alert("아이디를 입력하세요");				
@@ -23,6 +24,10 @@
 			}	
 			if(checkResultId==""){
 				alert("아이디 중복확인을 하세요");
+				return false;
+			}
+			if(checkEmailOK==false){
+				alert("이메일 인증을 완료하세요");
 				return false;
 			}
 		}); // submit
@@ -76,12 +81,29 @@
 					url:"${pageContext.request.contextPath}/sendEmailAjax.do",				
 					data:"email="+email,	
 					success:function(){					
-						var input="<input type='text' name='inputKey'><input type='button' class='btn-red' value='checkKey' id='checkKeyBtn'>";
+						var input="<input type='text' name='inputKey' id='inputKey'><input type='button' class='btn-red' value='checkKey' id='checkKeyBtn'>";
 						$("#sendEmailKey").html(input); 
 					}//callback			
 				});
 			}
 		}); // click
+		$("#sendEmailKey").on("click","#checkKeyBtn",function(){
+			var inputKey =$("#checkKeyBtn").prev().val();
+			$.ajax({
+				type:"get",
+				url:"${pageContext.request.contextPath}/checkEmailKey.do",				
+				data:"inputKey="+inputKey+"&email="+$("#sendEmailKey").prev().val(),	
+				success:function(data){	
+					if(data=="fail"){
+						alert("인증번호가 일치하지 않습니다.");
+						inputKey="";
+						}else{						
+							$("#sendEmailKey").html("인증 완료").css("color","blue");	
+							checkEmailOK=true;
+						}			
+				}//callback			
+			});
+		}); // on
 	});//ready
 </script>
 <div class="col-sm-12 main-content">
@@ -121,7 +143,7 @@
 					</span>
 				</div>
 				<div>
-				<input type="button" class="btn btn-red" value="회원가입" id="regBtn"><br>
+				<input type="submit" class="btn btn-red" value="회원가입" id="regBtn"><br>
 				</div>
 			</form>
 		</div>

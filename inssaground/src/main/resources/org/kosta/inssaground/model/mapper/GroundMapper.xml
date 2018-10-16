@@ -7,14 +7,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- SOJEONG -->
 	
 	<select id="searchGroundTest" parameterType="map" resultType="groundVO">
-			select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby from ground g,sigungu s,hobby h where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no
+			<![CDATA[
+				select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby 
+				from (
+								select row_number() over (order by ground_no) as row_no,g.*
+								from ground g
+								
+								) g, sigungu s, hobby h 
+				where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+		]]>		
 	</select>
 	<select id="groundDetail" parameterType="groundVO" resultType="groundVO">
 		select g.*,s.sigungu_name as area from ground g, sigungu s where g.ground_no=#{groundNo} and s.sigungu_no=g.sigungu_no
 	</select>
-	<select id="getGroundSearchResultCount" parameterType="groundVO" resultType="int">
-		select count(*) from ground
+	<select id="getGroundSearchResultCount" parameterType="map" resultType="int">	
+		select count(*) from ground where status=1
+		<if test="sigungu==null and sido!=null">
+			and sigungu_no in (select sigungu_no from sigungu where sido_no= #{sido})
+		</if>
+		<if test="sigungu!=null">
+			and sigungu_no = #{sigungu}
+		</if>	
+		<if test="hobby==null and category!=null">
+			and hobby_no in (select hobby_no from hobby where hobby_category_no= #{category})
+		</if>
+		<if test="hobby!=null">
+			and hobby_no=#{hobby}
+		</if>
+		<if test="groundVO!=null and groundVO.groundName!=null">
+			and ground_name like '%' || #{groundVO.groundName} || '%'
+		</if>
 	</select>
+	
+	<select id="searchGround" parameterType="map" resultType="groundVO">
+		select g.ground_no,g.ground_name,g.max_personnel,s.sigungu_name as area, h.name as hobby 
+		from (	select row_number() over (order by ground_no) as row_no,gr.*
+					from ground gr) g, sigungu s, hobby h 
+		where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and g.row_no between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+		<if test="sigungu==null and sido!=null">
+			and g.sigungu_no in (select sigungu_no from sigungu where sido_no= #{sido})
+		</if>
+		<if test="sigungu!=null">
+			and g.sigungu_no = #{sigungu}
+		</if>
+			<if test="hobby==null and category!=null">
+			and g.hobby_no in (select hobby_no from hobby where hobby_category_no= #{category})
+		</if>
+		<if test="hobby!=null">
+			and g.hobby_no=#{hobby}
+		</if>
+		<if test="groundVO!=null and groundVO.groundName!=null">
+			and ground_name like '%' || #{groundVO.groundName} || '%'
+		</if>
+		order by g.ground_no asc	
+	</select>
+	
+	
+	
+	
+	
+	
 	
 	
 	<!--DOHYEONG  -->

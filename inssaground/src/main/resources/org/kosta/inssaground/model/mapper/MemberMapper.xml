@@ -22,5 +22,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateEmailKey" parameterType="emailKeyVO">
 		update email_key set email_key=#{emailKey}, reg_date=sysdate where email=#{email}
 	</update>
+	<select id="getEmailKeyInfo" resultType="emailKeyVO">
+		select email_key from email_key where email=#{value}
+	</select>
+	<insert id="registerMember" parameterType="memberVO">
+		insert into inssa_member(id,password,name,email,status) values(#{id},#{password},#{name},#{email},1)
+	</insert>
+	<insert id="registerPermission" parameterType="string">
+		insert into MEMBER_AUTHORITY(id,role) values(#{value},'ROLE_MEMBER')
+	</insert>
+	<select id="findMemberId" parameterType="memberVO" resultType="string">
+		select id from inssa_member where email=#{email} and name=#{name}
+	</select>
+	<update id="updateTempPassword" parameterType="memberVO">
+		update inssa_member set password=#{password} where id=#{id}
+	</update>
 </mapper>
  

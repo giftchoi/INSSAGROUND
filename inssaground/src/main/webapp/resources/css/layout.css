@@ -42,14 +42,16 @@
 }
 
 .card.ground {
-	box-shadow: 0 4px 5px -3px #ececec;
+	margin:10px;
+	box-shadow: 0 5px 6px -5px #ececec;
+	border : 2px solid #f1f1f1;
 	border-radius:10px;
 	display: inline-block;
-	width: 300px;
+	width: 350px;
 	height: 200px;
 }
 .card.ground:hover {
-	border: 1.5px solid #ff1a1a;
+	border: 2.5px solid #ff1a1a;
 	cursor:pointer;
 }
 
@@ -293,17 +295,26 @@ li a:hover{
 	color: #ff1a1a;
 }
 
-.pagingInfo li{
+.pagination {
+   justify-content: center;
+}
+.search-list-area table{
 	margin: 0 auto;
 }
 .pagination .active a{
 	background-color:#ff1a1a !important;
 	border-color:#ff1a1a !important;
+	color:white !important;
 }
+.pagination a{
 
+	margin:0;
+	cursor:pointer;
+	color:black !important;
+}
 .search-filter-area{
 	font-size:20px;
 }
 .search-list-area{
-	text-align:center;
+	
 }

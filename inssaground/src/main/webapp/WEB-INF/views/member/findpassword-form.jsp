@@ -5,25 +5,18 @@
 <div class="col-sm-12 main-content">
 <div class="card-container">
 	<div class="form-card">
-		<h1 class="title"> LOGIN</h1>
-		<sec:authorize access="!hasRole('ROLE_MEMBER')">
+		<h1 class="title">임시 비밀번호 발급</h1>
 	<br>
-	<form action="${pageContext.request.contextPath}/login.do"	method="post" id="loginForm">
+	<form action="${pageContext.request.contextPath}/findPassword.do" method="post">
 	<sec:csrfInput/>
 		<div class="input-container">
 			 아이디<input type="text" required="required" name="id"/>
 		</div>
-		<div class="input-container">
-			 패스워드 <input type="password" required="required" name="password"/>
-		</div>
 		<div >
-			 <input type="submit" value="로그인"><br>
+			 <input type="submit" value="발급"><br>
 			 </div>
 		</form>
-		</sec:authorize>
       <div class="c-footer"><a href="registerForm.do">Join Us</a></div>
-      <div class="c-footer"><a href="findIdForm.do">Forgot your id?</a></div>
-       <div class="c-footer"><a href="findPasswordForm.do">Forgot your password?</a></div>
 	</div>
 	</div>
 </div>
