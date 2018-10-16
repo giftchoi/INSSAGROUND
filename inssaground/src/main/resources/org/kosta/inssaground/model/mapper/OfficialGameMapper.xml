@@ -4,5 +4,26 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.inssaground.model.mapper.OfficialGameMapper">
-
+	<select id="getTotalOfficialGameCount" resultType="int">
+		select count(*) from
+		OFFICIAL_GAME
+	</select>
+	<select id="getOfficialGameList" resultType="officialGameVO" parameterType="pagingBean">
+		SELECT row_number() over(order by o_game_no desc) as rownumber, o_game_no,
+			title, min_personnel, max_personnel FROM(
+				SELECT row_number() over(order by o_game_no desc) as rownumber, o_game_no,
+				title, min_personnel, max_personnel
+				FROM OFFICIAL_GAME
+		) ogi
+		where rownumber between #{startRowNumber} and #{endRowNumber}
+		order by o_game_no desc
+	</select>
+	<select id="getOfficialGameDetail" resultType="officialGameVO">
+		select
+		og.o_game_no, og.title, og.min_personnel, og.max_personnel,
+		og.game_time, og.content, gc.name
+		from OFFICIAL_GAME og, GAME_CATEGORY gc 
+		where
+		og.cg_no=gc.cg_no and o_game_no=#{value}
+	</select>
 </mapper>
