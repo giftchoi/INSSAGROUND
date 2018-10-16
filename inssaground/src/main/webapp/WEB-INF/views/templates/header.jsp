@@ -77,18 +77,15 @@ li.dropdown {
 <img src="${pageContext.request.contextPath}/resources/image/logoOn.png" title="charging.. inssaground home"  width="200" height="130"/>
 </sec:authorize>
 </a></li>
-<<<<<<< HEAD
+
 	<li class="dropdown"><a href="javascript:void(0)" title="게임">GAME</a>
 		    <div class="dropdown-content">
       <a href="gameHome.do">INSSA GAME</a>
       <a href="gameCustom.do">CUSTOM GAME</a>
-      <a href="#">뭐를 넣을 까요</a>
+      <a href="#">나만의 프로그램 만들기</a>
     </div>
 	</li>
-	<li><a href="">ABOUT US</a></li>
-=======
-	<li><a href="gameHome.do">GAME</a></li>
 	<li><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a></li>
->>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
+
 </ul>
 </div>
