@@ -46,6 +46,6 @@
 </sec:authorize>
 </a></li>
 	<li><a href="gameHome.do">GAME</a></li>
-	<li><a href="">ABOUT US</a></li>
+	<li><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a></li>
 </ul>
 </div>

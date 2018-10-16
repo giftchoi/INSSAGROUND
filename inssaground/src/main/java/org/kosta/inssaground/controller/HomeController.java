@@ -12,5 +12,16 @@ public class HomeController {
 	public String home() {
 		return "home.tiles";
 	}
-	
+	@RequestMapping("aboutus.do")
+	public String aboutUs() {
+		return "home/aboutus.tiles";
+	}
+	@RequestMapping("service.do")
+	public String ourservice() {
+		return "home/our-service.tiles";
+	}
+	@RequestMapping("team.do")
+	public String ourTeam() {
+		return "home/team.tiles";
+	}
 }
