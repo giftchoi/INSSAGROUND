@@ -48,8 +48,8 @@ public interface GroundService {
 	
 	
 	public void groundHashtag(String tags[],GroundVO groundVO);
-
 	public void registergroundImg(GroundVO groundVO);
+	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
