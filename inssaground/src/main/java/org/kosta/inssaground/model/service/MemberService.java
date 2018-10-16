@@ -29,4 +29,8 @@ public interface MemberService {
 	public String idcheck(String id);
 
 	public void sendEmailForRegister(String email);
+
+	public List<String> findMemberId(MemberVO vo);
+
+	public void findPassword(String id) throws Exception;
 }

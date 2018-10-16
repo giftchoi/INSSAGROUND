@@ -27,4 +27,8 @@ public interface MemberMapper {
 
 	void registerPermission(String id);
 
+	List<String> findMemberId(MemberVO vo);
+
+	void updateTempPassword(MemberVO vo);
+
 }
