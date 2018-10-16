@@ -59,8 +59,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void writeGame(CustomGameVO customGameVO) {
-		// TODO Auto-generated method stub
-
+		cgm.writeCustomGame(customGameVO);
 	}
 
 	@Override

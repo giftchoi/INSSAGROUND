@@ -31,5 +31,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerPermission" parameterType="string">
 		insert into MEMBER_AUTHORITY(id,role) values(#{value},'ROLE_MEMBER')
 	</insert>
+	<select id="findMemberId" parameterType="memberVO" resultType="string">
+		select id from inssa_member where email=#{email} and name=#{name}
+	</select>
+	<update id="updateTempPassword" parameterType="memberVO">
+		update inssa_member set password=#{password} where id=#{id}
+	</update>
 </mapper>
  

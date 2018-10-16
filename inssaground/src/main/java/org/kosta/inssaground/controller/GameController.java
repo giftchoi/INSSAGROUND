@@ -3,6 +3,7 @@ package org.kosta.inssaground.controller;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.service.GameService;
+import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,10 @@ public class GameController {
 			return new ModelAndView("game/list.tiles","officialGameLvo",gameService.getOfficialGameList(pageNo));
 		else
 			return new ModelAndView("game/list.tiles","officialGameLvo",gameService.getOfficialGameList(pageNo));
+	}
+	@RequestMapping("writeCustomGame.do")
+	public ModelAndView writeCustomGame(CustomGameVO customGameVO) {
+		return new ModelAndView("game/write","cvo",writeCustomGame(customGameVO));
 	}
 	
 }

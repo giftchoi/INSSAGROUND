@@ -1,9 +1,12 @@
 package org.kosta.inssaground.controller;
 
+import java.util.List;
+
 import org.kosta.inssaground.model.service.MemberService;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +48,37 @@ public class MemberController {
 	@ResponseBody
 	public String checkEmailKey(String email, String inputKey) {
 		return memberService.checkEmailKey(email, inputKey);
+	}
+	
+	@RequestMapping("findIdForm.do")
+	public String findIdForm() {
+		return "member/findId-form.tiles";
+	}
+	@RequestMapping("findPasswordForm.do")
+	public String findPasswordForm() {
+		return "member/findpassword-form.tiles";
+	}
+	@PostMapping("findMemberId.do")
+	public String findMemberId(Model model,MemberVO vo) {
+		List<String> idList=memberService.findMemberId(vo);
+		model.addAttribute("idList",idList);
+		return "member/findId-result.tiles";
+	}
+	@PostMapping("findPassword.do")
+	public String findPasswordForm(Model model,String id) {
+		try {
+			memberService.findPassword(id);
+		} catch (Exception e) {
+			return "member/find_fail";
+		}
+		return "member/findpassword-result.tiles";
+	}
+	@RequestMapping("mypage.do")
+	public String mypage() {
+		return "member/mypage.tiles";
+	}
+	@RequestMapping("modifyMemberForm.do")
+	public String modifyMemberForm(Model model) {
+		return "member/modify-member-form.tiles";
 	}
 }

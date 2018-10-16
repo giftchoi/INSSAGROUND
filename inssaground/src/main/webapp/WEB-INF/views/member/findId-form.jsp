@@ -1,28 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%-- <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resources/register.css" > --%>
 <div class="col-sm-12 main-content">
 <div class="card-container">
 	<div class="form-card">
-		<h1 class="title"> LOGIN</h1>
-		<sec:authorize access="!hasRole('ROLE_MEMBER')">
+		<h1 class="title"> 아이디 찾기</h1>
 	<br>
-	<form action="${pageContext.request.contextPath}/login.do"	method="post" id="loginForm">
-	<sec:csrfInput/>
+	<form action="${pageContext.request.contextPath}/findMemberId.do"	method="post">
+		<sec:csrfInput/> 
 		<div class="input-container">
-			 아이디<input type="text" required="required" name="id"/>
+			 이름<input type="text" required="required" name="name"/>
 		</div>
 		<div class="input-container">
-			 패스워드 <input type="password" required="required" name="password"/>
+			 이메일<input type="text" required="required" name="email"/>
 		</div>
 		<div >
-			 <input type="submit" value="로그인"><br>
+			 <input type="submit" value="아이디 찾기"><br>
 			 </div>
 		</form>
-		</sec:authorize>
       <div class="c-footer"><a href="registerForm.do">Join Us</a></div>
-      <div class="c-footer"><a href="findIdForm.do">Forgot your id?</a></div>
        <div class="c-footer"><a href="findPasswordForm.do">Forgot your password?</a></div>
 	</div>
 	</div>

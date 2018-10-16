@@ -83,7 +83,7 @@ public class MemberServiceImpl implements MemberService {
 			int count = memberMapper.idcheck(id);
 			return (count == 0) ? "ok" : "fail";
 	}
-
+	
 	@Override
 	public void sendEmailForRegister(String receiver) {
 		String randomKey="";
@@ -100,5 +100,33 @@ public class MemberServiceImpl implements MemberService {
 		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
 		mailService.sendEmail(email);
 	}
-
+	@Override
+	public List<String> findMemberId(MemberVO vo) {
+		List<String> idList=memberMapper.findMemberId(vo);
+		for(int i=0;i<idList.size();i++) {
+			int idLength = idList.get(i).length();
+			String starId = idList.get(i).substring(0, 3);
+			for(int j=0;j<idLength-3;j++) {
+				starId += "*";
+			}
+			idList.remove(i);
+			idList.add(starId);
+		}
+		return idList; 
+	}
+	@Transactional
+	@Override
+	public void findPassword(String id) throws Exception {
+		MemberVO vo=findMemberById(id);
+		if(vo==null) throw new Exception("없는 아이디 입니다.");
+		String randomNum="";
+		Random r=new Random();
+		for(int i=0;i<8;i++) {
+			randomNum += r.nextInt(9);
+		};
+		vo.setPassword(randomNum);
+		memberMapper.updateTempPassword(vo);
+		EmailVO email=new EmailVO(vo.getEmail(),"INSSAGROUND 임시 비밀번호입니다.","임시 비밀번호 : ["+randomNum+"]\n새 비밀번호로 변경 바랍니다.");
+		mailService.sendEmail(email);
+	}
 }
