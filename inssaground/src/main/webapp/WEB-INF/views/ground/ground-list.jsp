@@ -29,7 +29,11 @@
 				<hr>
 				지역 <select name="sido">
 					<option value="">전체</option>
-				</select> <select name="sigungu">
+					<c:forEach items="${requestScope.sidoList }" var="sido">
+					<option value="${sido.sidoNo }">${sido.sidoName }</option>
+					</c:forEach>
+				</select> 
+				<select name="sigungu" disabled="disabled">
 					<option value="">----</option>
 				</select> 취미 <select name="category">
 					<option value="">전체</option>
@@ -68,7 +72,6 @@
 									</div>
 								</div>
 							</td>
-						
 					<c:if test="${info.count%3==0 }">
 											</tr><tr>
 					</c:if>

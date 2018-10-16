@@ -38,6 +38,8 @@ public class GroundController {
 		System.out.println("totalCount:" + totalCount);
 		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount), null);
 		model.addAttribute("listVO", listVO);
+		model.addAttribute("sidoList", groundService.getAllSido());
+		model.addAttribute("hobbyCategoryList", hobbyService.getHobbyCategory());
 		return "ground/ground-list.tiles";
 	}
 
