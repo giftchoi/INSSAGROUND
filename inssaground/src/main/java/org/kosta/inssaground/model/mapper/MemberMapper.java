@@ -21,4 +21,10 @@ public interface MemberMapper {
 
 	void updateEmailKey(EmailKeyVO key);
 
+	EmailKeyVO getEmailKeyInfo(String email);
+
+	void registerMember(MemberVO mvo);
+
+	void registerPermission(String id);
+
 }

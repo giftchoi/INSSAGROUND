@@ -8,9 +8,9 @@ import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 
 public interface MemberService {
-	public boolean checkEmailKey(String id, String emailKey);
+	public String checkEmailKey(String email, String emailKey);
 
-	public void registerMember(MemberVO mvo, String path);
+	public void registerMember(MemberVO mvo);
 
 	public void login(MemberVO mvo);
 

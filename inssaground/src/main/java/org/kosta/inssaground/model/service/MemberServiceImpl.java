@@ -15,6 +15,7 @@ import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -22,15 +23,19 @@ public class MemberServiceImpl implements MemberService {
 	@Resource
 	private MemberMapper memberMapper;
 	@Override
-	public boolean checkEmailKey(String id, String emailKey) {
-		// TODO Auto-generated method stub
-		return false;
+	public String checkEmailKey(String email, String emailKey) {
+		if(memberMapper.emailcheck(email)!=0) {
+			EmailKeyVO vo = memberMapper.getEmailKeyInfo(email);
+			if(emailKey.equals(vo.getEmailKey())){
+				return "true";
+			}
+		}return "fail";
 	}
-
+	@Transactional
 	@Override
-	public void registerMember(MemberVO mvo, String path) {
-		// TODO Auto-generated method stub
-
+	public void registerMember(MemberVO mvo) {
+		memberMapper.registerMember(mvo);
+		memberMapper.registerPermission(mvo.getId());
 	}
 
 	@Override
@@ -81,7 +86,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void sendEmailForRegister(String receiver) {
-		
 		String randomKey="";
 		Random r=new Random();
 		for(int i=0;i<8;i++) {
@@ -93,10 +97,8 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			memberMapper.updateEmailKey(key);
 		}
-		System.out.println(randomKey);
-		System.out.println(key);
 		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
-		//mailService.sendEmail(email);
+		mailService.sendEmail(email);
 	}
 
 }

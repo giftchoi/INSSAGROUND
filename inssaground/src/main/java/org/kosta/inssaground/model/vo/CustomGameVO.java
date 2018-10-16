@@ -10,11 +10,13 @@ public class CustomGameVO {
   private String content;
   private int recommendation;
   private MemberVO memberVO;
+  private int cgNo;
 public CustomGameVO() {
 	super();
+
 }
 public CustomGameVO(String cGameNo, String title, int minPersonnel, int maxPersonnel, int gameTime, String materials,
-		String content, int recommendation, MemberVO memberVO) {
+		String content, int recommendation, MemberVO memberVO, int cgNo) {
 	super();
 	this.cGameNo = cGameNo;
 	this.title = title;
@@ -25,6 +27,7 @@ public CustomGameVO(String cGameNo, String title, int minPersonnel, int maxPerso
 	this.content = content;
 	this.recommendation = recommendation;
 	this.memberVO = memberVO;
+	this.cgNo = cgNo;
 }
 public String getcGameNo() {
 	return cGameNo;
@@ -80,12 +83,17 @@ public MemberVO getMemberVO() {
 public void setMemberVO(MemberVO memberVO) {
 	this.memberVO = memberVO;
 }
+public int getCgNo() {
+	return cgNo;
+}
+public void setCgNo(int cgNo) {
+	this.cgNo = cgNo;
+}
 @Override
 public String toString() {
 	return "CustomGameVO [cGameNo=" + cGameNo + ", title=" + title + ", minPersonnel=" + minPersonnel
 			+ ", maxPersonnel=" + maxPersonnel + ", gameTime=" + gameTime + ", materials=" + materials + ", content="
-			+ content + ", recommendation=" + recommendation + ", memberVO=" + memberVO + "]";
+			+ content + ", recommendation=" + recommendation + ", memberVO=" + memberVO + ", cgNo=" + cgNo + "]";
 }
 
- 
 }
