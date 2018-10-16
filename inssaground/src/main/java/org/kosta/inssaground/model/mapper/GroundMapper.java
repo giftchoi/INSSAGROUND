@@ -27,4 +27,6 @@ public interface GroundMapper {
 	void registerTag(String tags);
 	void groundHashtag(GroundHashtagVO groundHashtagVO);
 	int hashtagBoolean(String tags);
+	void registergroundImg(GroundVO groundVO);
+	GroundVO findGroundByGroundNo(String groundNo);
 }

@@ -54,5 +54,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from hashtag where content=#{value}
 	</select>
 	
+	<insert id="registergroundImg" parameterType="groundVO">
+		insert into ground_img(ground_img_no,ground_no,img_name)
+		values(ground_img_seq.nextval,#{groundNo},#{groundImgVO.imgName})
+	</insert>
+	
+	<resultMap type="groundVO" id="groundRM">
+		<result column="img_name" property="groundImgVO.imgName" />
+		<result column="sigungu_no" property="sigunguVO.sigunguNo" />
+	</resultMap>
+	<select id="findGroundByGroundNo" parameterType="string" resultMap="groundRM">
+		select g.ground_no,g.max_personnel,g.introduction,g.ground_name,g.master,g.hobby_no as hobby,g.sigungu_no,i.img_name
+		from ground g,ground_img i
+		where g.ground_no=i.ground_no
+		and g.ground_no=#{groundNo}
+	</select> 
 </mapper>
  
