@@ -43,7 +43,7 @@
 							<div class="single-post row">
 								<div class="col-lg-12">
 									<div class="feature-img">
-										<img class="img-fluid" src="${pageContext.request.contextPath}/resources/image/testImg.jpg	" alt="">
+										<img class="img-fluid" src="${pageContext.request.contextPath}/resources/uploadImage/${gvo.groundImgVO.imgName}" alt="">
 									</div>									
 								</div>
 								<div class="col-lg-3  col-md-3 meta-details">
@@ -55,7 +55,7 @@
 									</ul>
 									<div class="user-details row">
 										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">내 모임 달력</a> <span class="lnr lnr-user"></span></p>
-										<p class="date col-lg-12 col-md-12 col-6"><a href="#">게시판</a> <span class="lnr lnr-calendar-full"></span></p>
+										<p class="date col-lg-12 col-md-12 col-6"><a href="groundPost.do">게시판</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">INSSA MEMBER</a> <span class="lnr lnr-eye"></span></p>
 										
 										<!-- <ul class="social-links col-lg-12 col-md-12 col-6">

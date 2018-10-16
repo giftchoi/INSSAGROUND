@@ -247,6 +247,12 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 
+	@Override
+	public GroundVO findGroundByGroundNo(GroundVO groundVO) {		
+		return groundMapper.findGroundByGroundNo(groundVO.getGroundNo());
+	}
+
+	
 
 
 }
