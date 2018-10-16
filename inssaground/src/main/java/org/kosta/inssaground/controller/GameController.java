@@ -68,10 +68,17 @@ public class GameController {
 		model.addAttribute("gvo", gameService.getCustomGameDetail(cGameNo));
 		return "game/detail.tiles";
 	}
-
-	@RequestMapping("writeCustomGame.do")
-	public ModelAndView writeCustomGame(CustomGameVO customGameVO) {
-		return new ModelAndView("game/write","cvo",writeCustomGame(customGameVO));
+	
+	@PostMapping("writeCustomGame.do")
+	public String writeCustomGame(HttpSession session,CustomGameVO customGameVO
+			,RedirectAttributes redirectAttributes) {
+		MemberVO mvo=(MemberVO)session.getAttribute("mvo");
+		if(mvo!=null) {
+			customGameVO.setMemberVO(mvo);
+		}
+		gameService.writeGame(customGameVO);
+		redirectAttributes.addAttribute("c_game_no",+Integer.parseInt(customGameVO.getcGameNo()));
+		return "redirect:customGame-detail.do";
 	}
 	//----------------------------------------
 }
