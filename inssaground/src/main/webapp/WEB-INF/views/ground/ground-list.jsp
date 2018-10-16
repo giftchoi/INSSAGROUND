@@ -15,8 +15,25 @@
 													.find("input[type=hidden]")
 													.val());
 						});//click
-
-			});
+				$("#sido").change(function(){
+					$.ajax({
+						type:"get",
+						url: "getSigungu.do",
+						data:"sidoNo="+$("#sido").val(),
+						success: function(sigunguArr){
+								$("#sigungu").prop("disabled",false);
+								$("#sigungu").empty();
+								$("#sigungu").append("<option value=''>----</option>");
+								for(var i=0;i<sigunguArr.length;i++){
+									$("#sigungu").append("<option value='"+sigunguArr[i].sigunguNo+"'>"+sigunguArr[i].sigunguName+"</option>");
+								}
+						}	
+					});
+				});
+						
+						
+						
+			});//ready
 </script>
 
 <div class="col-sm-12">
@@ -27,13 +44,13 @@
 			</div>
 			<div class="search-filter-area">
 				<hr>
-				지역 <select name="sido">
+				지역 <select name="sido"id="sido">
 					<option value="">전체</option>
 					<c:forEach items="${requestScope.sidoList }" var="sido">
-					<option value="${sido.sidoNo }">${sido.sidoName }</option>
+					<option value="${sido.sidoNo }">${sido.sido }</option>
 					</c:forEach>
 				</select> 
-				<select name="sigungu" disabled="disabled">
+				<select name="sigungu" id="sigungu" disabled="disabled">
 					<option value="">----</option>
 				</select> 취미 <select name="category">
 					<option value="">전체</option>
