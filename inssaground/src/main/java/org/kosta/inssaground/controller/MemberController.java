@@ -73,4 +73,12 @@ public class MemberController {
 		}
 		return "member/findpassword-result.tiles";
 	}
+	@RequestMapping("mypage.do")
+	public String mypage() {
+		return "member/mypage.tiles";
+	}
+	@RequestMapping("modifyMemberForm.do")
+	public String modifyMemberForm(Model model) {
+		return "member/modify-member-form.tiles";
+	}
 }
