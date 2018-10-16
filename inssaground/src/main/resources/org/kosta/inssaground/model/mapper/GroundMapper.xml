@@ -22,8 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sido
 	</select>
 	
-	<select id="getSigungu" resultType="sigunguVO">
-		select * from sigungu
+	<select id="getSigungu"  parameterType="string" resultType="sigunguVO">
+		select * from sigungu where sido_no=#{value}
 	</select>
 	
 	<select id="findSidoBySidoNo" resultType="sidoVO">
@@ -35,9 +35,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="groundApply" parameterType="groundVO">
+	<selectKey keyProperty="groundNo" resultType="string" order="BEFORE">
+		select ground_seq.nextval from dual
+	</selectKey>
 			insert into ground(ground_no,max_personnel,introduction,ground_name,master,hobby_no,sigungu_no,status)
-			values(ground_seq.nextval,#{maxPersonnel},#{introduction},#{groundName},#{master},#{hobby},#{area},0)
+			values(#{groundNo},#{maxPersonnel},#{introduction},#{groundName},#{master},#{hobby},#{area},0)
 	</insert>
+	
+	<insert id="registerTag">
+		insert into hashtag(content) values(#{value})
+	</insert>
+	
+	<insert id="groundHashtag" parameterType="groundHashtagVO">
+		insert into ground_hashtag(ground_no,content) values(#{groundNo},#{content})
+	</insert>
+	
+	<select id="hashtagBoolean" parameterType="string" resultType="int">
+		select count(*) from hashtag where content=#{value}
+	</select>
 	
 </mapper>
  

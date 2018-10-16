@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
+import org.kosta.inssaground.model.vo.GroundHashtagVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
@@ -43,6 +44,7 @@ public class GroundServiceImpl implements GroundService {
 		groundVO.setArea(sgvo.getSigunguNo());
 		System.out.println(groundVO);
 		groundMapper.groundApply(groundVO);
+		System.out.println(groundVO.getGroundNo());
 	}
 
 	@Override
@@ -184,14 +186,36 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public List<SigunguVO> getSigungu() {		
-		return groundMapper.getSigungu();
+	public List<SigunguVO> getSigungu(String sidoNo) {		
+		return groundMapper.getSigungu(sidoNo);
 	}
 
 	@Override
 	public int getGroundSearchResultCount(GroundVO groundVO) {
 		// TODO Auto-generated method stub
 		return groundMapper.getGroundSearchResultCount(groundVO);
+	}
+
+	@Override
+	public void groundHashtag(String[] tags,GroundVO groundVO) {
+		System.out.println(groundVO.getGroundNo());
+		System.out.println("**0**");
+		for(int i=0;i<tags.length;i++ ) {
+			System.out.println("**1**");
+			System.out.println(tags[i]);
+			System.out.println("**2**");
+			if(groundMapper.hashtagBoolean(tags[i]) == 0) {
+				groundMapper.registerTag(tags[i]);				
+			}
+			System.out.println("**3**");
+			GroundHashtagVO groundHashtagVO = new GroundHashtagVO(groundVO.getGroundNo(),tags[i]);
+			System.out.println("**4**");
+			groundMapper.groundHashtag(groundHashtagVO);
+			System.out.println("**5**");
+		}
+		
+		
+		
 	}
 
 	
