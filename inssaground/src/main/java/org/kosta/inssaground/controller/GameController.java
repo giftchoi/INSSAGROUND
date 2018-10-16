@@ -14,7 +14,8 @@ public class GameController {
 	private GameService gameService;
 	
 	@RequestMapping("gameHome.do")
-	public String gameHome() {
+	public String gameHome(Model model) {
+		model.addAttribute("officialGameLvo",gameService.getOfficialGameList());
 		return "game/game-home.tiles";
 	}
 	

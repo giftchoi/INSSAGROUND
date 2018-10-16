@@ -41,7 +41,7 @@ public interface GroundService {
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
 	
 	
-	public List<SigunguVO> getSigungu();
+	public List<SigunguVO> getSigungu(String sido);
 	public int getGroundSearchResultCount(GroundVO groundVO);
 	public void groundHashtag(String tags[],GroundVO groundVO);
 	// for Test

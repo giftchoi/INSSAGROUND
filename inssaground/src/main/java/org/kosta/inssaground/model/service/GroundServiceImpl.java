@@ -186,8 +186,8 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public List<SigunguVO> getSigungu() {		
-		return groundMapper.getSigungu();
+	public List<SigunguVO> getSigungu(String sidoNo) {		
+		return groundMapper.getSigungu(sidoNo);
 	}
 
 	@Override

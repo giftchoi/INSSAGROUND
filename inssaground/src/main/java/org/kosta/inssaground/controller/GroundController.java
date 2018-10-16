@@ -39,6 +39,8 @@ public class GroundController {
 		System.out.println("totalCount:" + totalCount);
 		ListVO<GroundVO> listVO = groundService.searchGroundTest(new PagingBean(totalCount), null);
 		model.addAttribute("listVO", listVO);
+		model.addAttribute("sidoList", groundService.getAllSido());
+		model.addAttribute("hobbyCategoryList", hobbyService.getHobbyCategory());
 		return "ground/ground-list.tiles";
 	}
 
@@ -59,8 +61,9 @@ public class GroundController {
 
 	@ResponseBody
 	@RequestMapping("getSigungu.do")
-	public List<SigunguVO> getSigungu(String sido) {
-		return groundService.getSigungu();
+	public List<SigunguVO> getSigungu(String sidoNo) {
+		System.out.println(sidoNo);
+		return groundService.getSigungu(sidoNo);
 	}
 
 	@ResponseBody
