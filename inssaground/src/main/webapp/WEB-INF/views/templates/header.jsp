@@ -59,7 +59,7 @@ li.dropdown {
 </div>
 <div class="bottom-header">
 <ul>
-	<li><a href="groundApplyForm.do">TEST</a></li>
+	<li><a href="ground-home.do">TEST</a></li>
 	<li><a  href="" title="홈">HOME</a></li>
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
@@ -77,6 +77,7 @@ li.dropdown {
 <img src="${pageContext.request.contextPath}/resources/image/logoOn.png" title="charging.. inssaground home"  width="200" height="130"/>
 </sec:authorize>
 </a></li>
+<<<<<<< HEAD
 	<li class="dropdown"><a href="javascript:void(0)" title="게임">GAME</a>
 		    <div class="dropdown-content">
       <a href="gameHome.do">INSSA GAME</a>
@@ -85,5 +86,9 @@ li.dropdown {
     </div>
 	</li>
 	<li><a href="">ABOUT US</a></li>
+=======
+	<li><a href="gameHome.do">GAME</a></li>
+	<li><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a></li>
+>>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
 </ul>
 </div>

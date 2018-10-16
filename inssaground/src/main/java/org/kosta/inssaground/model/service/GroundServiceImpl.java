@@ -241,6 +241,11 @@ public class GroundServiceImpl implements GroundService {
 		
 	}
 
+	@Override
+	public void registergroundImg(GroundVO groundVO) {
+		groundMapper.registergroundImg(groundVO);
+	}
+
 
 
 

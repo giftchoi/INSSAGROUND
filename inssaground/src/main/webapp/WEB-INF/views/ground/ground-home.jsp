@@ -36,7 +36,7 @@
 </head>
 <body>
 <!-- Start post-content Area -->
-			<section class="post-content-area single-post-area">
+			<section class="post-content-area single-post-area" >
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 posts-list">
