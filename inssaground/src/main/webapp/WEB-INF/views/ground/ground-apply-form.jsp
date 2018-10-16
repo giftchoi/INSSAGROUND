@@ -8,7 +8,7 @@
 			$.ajax({
 				type:"get",
 				url:"getSigungu.do",
-				data:"sido="+$("#sido").val(),
+				data:"sidoNo="+$("#sido").val(),
 				success:function(result){
 					var sigungu = "<option>------</option>"
 					for(var i=0;i<result.length;i++){
@@ -32,16 +32,10 @@
 				}
 			});// ajax
 		});//change
-		$("#hash").click(function() {
-			var hh = $("#hashtag").text();
-			var hashtag = "<li>#";
-			hashtag += $("#ht").val()+"</li>";
-			$("#ht").val("");
-			if(hh != ""){
-				$("#hashtag").text(hh+hashtag);
-			}else{
-				$("#hashtag").text(hashtag);				
-			}
+		$("#hashBtn").click(function() {
+			var hashtag = "<span class='hashtag'>#";
+			hashtag += $("#ht").val()+"</span><input type='hidden' name='hashtag' value='"+$("#ht").val()+"'>";
+			$("#hashtag-section").append(hashtag);			
 		});//click
 	}); //ready
 </script>
@@ -97,12 +91,8 @@
 				<div class="input-container">
 					해시태그
 					<input type="text"  name="hashtag" id="ht">
-					<input type="button"  value="넣기" id="hash">
-					<span id="hashtag" >
-					<ul class="hashtag" id="aaaa">
-						<li></li>
-					</ul>
-					</span>
+					<input type="button"  value="넣기" id="hashBtn">
+					<div id="hashtag-section"></div>
 				</div>
 				
 				<div>

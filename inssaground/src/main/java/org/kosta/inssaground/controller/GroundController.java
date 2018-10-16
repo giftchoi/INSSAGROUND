@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
@@ -70,11 +71,14 @@ public class GroundController {
 
 	@Secured("ROLE_MEMBER")
 	@PostMapping("groundApply.do")
-	public String groundApply(GroundVO groundVO, SidoVO sidoVO, SigunguVO sigunguVO, HobbyVO hobbyVO,
+	public String groundApply(HttpServletRequest request, GroundVO groundVO, SidoVO sidoVO, SigunguVO sigunguVO, HobbyVO hobbyVO,
 			HobbyCategoryVO hobbyCategoryVO) {
+		String tags[] = request.getParameterValues("hashtag");
+		System.out.println(tags[0]+","+tags[1]);
 		System.out.println("controller 1");
-		groundService.applyGround(groundVO, sidoVO, sigunguVO, hobbyVO, hobbyCategoryVO);
+		groundService.applyGround(groundVO, sidoVO, sigunguVO, hobbyVO, hobbyCategoryVO);		
 		System.out.println("controller 2");
+		groundService.groundHashtag(tags,groundVO);
 		return "redirect:home.do";
 	}
 }
