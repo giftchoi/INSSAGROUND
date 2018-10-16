@@ -41,13 +41,14 @@ public interface GroundService {
 	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO);// 모임 일정 상세	
 	
 	/*SOJEONG*/
-	public List<SigunguVO> getSigungu(String sido);
+	public List<SigunguVO> getSigungu(String sido);	
 	public int getGroundSearchResultCount(Map<String,Object> map);
 	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage); //모임검색
-	
+	public ListVO<GroundVO>	getAllGroundList();
 	
 	
 	public void groundHashtag(String tags[],GroundVO groundVO);
+	
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 
