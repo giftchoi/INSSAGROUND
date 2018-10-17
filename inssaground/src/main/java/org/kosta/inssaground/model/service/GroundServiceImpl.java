@@ -252,6 +252,11 @@ public class GroundServiceImpl implements GroundService {
 		return groundMapper.findGroundByGroundNo(groundVO.getGroundNo());
 	}
 
+	@Override
+	public void registergroundschedule(ScheduleVO scheduleVO) {
+		groundMapper.registergroundschedule(scheduleVO);
+	}
+
 	
 
 
