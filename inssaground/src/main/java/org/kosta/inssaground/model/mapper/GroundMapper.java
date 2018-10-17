@@ -33,6 +33,7 @@ public interface GroundMapper {
 	int hashtagBoolean(String tags);
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
+	List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
 
 	void registergroundschedule(ScheduleVO scheduleVO);
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
@@ -62,39 +63,44 @@
 								</div>
 								<div class="col-lg-9 col-md-9">
 									<h3 class="mt-20 mb-20">모임 게시판</h3>	
-									<!-- <!--  --> -->
+									<!--  -->
 									
 			<div class="search-list-area">
 				<table  id="resultTable" cellpadding="10">
 					<tr>
-						<c:forEach items="" var="" varStatus="">
+						<c:forEach items="${sList}" var="list">
 							<td>
 								<div class="card ground">
 									
 									<div class="card-ground-title"></div>
+									
 									<div class="row card-ground-body">
 										<div class="col-sm-6 master-profile">
 											
 												<div align="left">
-												&nbsp;제목: <br>
-												&nbsp;id: <br>
-												&nbsp;시작날짜: <br>
-												&nbsp;종료날짜: <br>
-												&nbsp;위치: <br>
-												&nbsp;최대인원: <br>
-												&nbsp;내용: <br>
+												&nbsp;제목:${list.title} <br>
+												&nbsp;id: ${list.insiderVO.memberVO.id }<br>
+												&nbsp;위치: ${list.loc }<br>
+												&nbsp;최대인원: ${list.maxPersonnel}<br>
 												<!-- <i class="fa fa-flag"></i><span class="info-span"> </span> -->
 												</div>
 										</div>
 										<div class="col-sm-6 ground-info">
 										<form>
 											<input type="button" value="참여"><br>
+											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>
 										<form >
 											<input type="button" value="불참">
+											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
+										</form>
+										<form action="groundScheduleDetail.do">
+											<input type="submit" value="상세보기" >
+											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>
 										</div>
 									</div>
+									
 								</div>
 							</td>
 							<c:if test="${info.count%3==0 }">
