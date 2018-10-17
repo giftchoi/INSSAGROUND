@@ -28,7 +28,7 @@
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">				
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 
-<body>
+<div class="col-sm-12">
 <!-- Start post-content Area -->
 			<section class="post-content-area single-post-area" >
 				<div class="col-sm-12">
@@ -76,21 +76,23 @@
 										<div class="col-sm-6 master-profile">
 											
 												<div align="left">
-												&nbsp;제목:<br>
-												&nbsp;id:<br>
-												&nbsp;시작날짜:<br>
-												&nbsp;종료날짜:<br>
-												&nbsp;위치:<br>
-												&nbsp;최대인원:<br>
+												&nbsp;제목: <br>
+												&nbsp;id: <br>
+												&nbsp;시작날짜: <br>
+												&nbsp;종료날짜: <br>
+												&nbsp;위치: <br>
+												&nbsp;최대인원: <br>
+												&nbsp;내용: <br>
 												<!-- <i class="fa fa-flag"></i><span class="info-span"> </span> -->
 												</div>
 										</div>
 										<div class="col-sm-6 ground-info">
 										<form>
-											<input type="button" value="참여">
+											<input type="button" value="참여"><br>
+										</form>
+										<form >
 											<input type="button" value="불참">
 										</form>
-											
 										</div>
 									</div>
 								</div>
@@ -367,4 +369,4 @@
 				</div>	
 			</section>
 			<!-- End post-content Area -->
-    
+    </div>
