@@ -46,7 +46,7 @@ li.dropdown {
 		<a href="registerForm.do">MY SCHEDULE</a>
 		<a href="registerForm.do">MY GAME PROGRAM</a>
 		<a href="modifyMemberForm.do">EDIT MY INFO</a>
-		<a href="registerForm.do">WITHDRAW</a>
+		<a href="withdrawForm.do">WITHDRAW</a>
 		</div>
 	</li>
 	<li><a href="#" id="logoutAction">LOGOUT</a></li>
@@ -67,10 +67,8 @@ li.dropdown {
 </div>
 <div class="bottom-header">
 <ul>
-
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
 	<li><a href="#">FIND HOBBY</a></li>
-
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
       <a href="groundList.do">모임 찾기</a>

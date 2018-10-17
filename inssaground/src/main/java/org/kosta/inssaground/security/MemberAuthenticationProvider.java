@@ -33,12 +33,13 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 		
 				System.out.println(id);
 				MemberVO member = memberService.findMemberById(id);
-
-				System.out.println(member);
 				if(member == null){
 					throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
 				}
-				
+				String profile = memberService.getProfileIMGName(id);
+				if(profile != null) {
+					member.setProfile(profile);
+				}
 				String password=(String)authentication.getCredentials();//사용자가 입력한 패스워드 반환 
 				//3.패스워드 비교
 				if(!password.equals(member.getPassword())){//패스워드가 틀리면
@@ -64,7 +65,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				 ***************************************/
 				//5. groundNoList 주입
 				member.setGroundNoList(memberService.myGroundNoList(id));
-				
 				Authentication auth = new UsernamePasswordAuthenticationToken(member, password, authorities);
 				System.out.println("로그인 OK~"+auth);
 				return auth;	

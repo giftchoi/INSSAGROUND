@@ -35,4 +35,12 @@ public interface MemberMapper {
 
 	List<String> myGroundNoList(String id);
 
+	String getProfileIMGName(String id);
+
+	void deleteProfileIMG(String id);
+
+	void revokeRole(String id);
+
+	void changeMemberStatus(String id);
+
 }
