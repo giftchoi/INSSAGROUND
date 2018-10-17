@@ -195,24 +195,35 @@ public class GroundController {
 		System.out.println(groundNo);
 		return "ground/ground-schedule-form.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
-	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO) {
+	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
 		System.out.println("1. "+scheduleVO);
 		System.out.println("2. "+groundVO);
 		System.out.println("3. "+insiderVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		System.out.println("**1");
+		GroundVO gvo = (GroundVO)session.getAttribute("ground");
+		System.out.println("**2");
 		insiderVO.setMemberVO(mvo);
-		groundVO.setGroundNo("30");
+		System.out.println("**3");
+		groundVO.setGroundNo(gvo.getGroundNo());
+		System.out.println("**4");
 		scheduleVO.setInsiderVO(insiderVO);
+		System.out.println("**5");
 		scheduleVO.setGroundVO(groundVO);
+		System.out.println("**6");
+		System.out.println(scheduleVO);
 		groundService.registergroundschedule(scheduleVO);
-		return "redirect:home.do";
+		System.out.println("**7");
+		return "redirect:groundScheduleList.do";
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleList(String groundNo) {
-		System.out.println(groundNo);
+	public String groundScheduleList(HttpSession session,Model model) {
+		
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
+		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
 		return "ground/ground-schedule-list.tiles";
 	}
 }

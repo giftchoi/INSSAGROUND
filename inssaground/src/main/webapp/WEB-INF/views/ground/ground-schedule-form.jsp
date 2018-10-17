@@ -28,7 +28,7 @@
 				
 				<div class="input-container">
 					내용<br>
-					<textarea rows="10" cols="70"></textarea> 
+					<textarea rows="10" cols="70" name="content"></textarea> 
 					
 				</div>
 					<input type="text" id="sample5_address" placeholder="주소" name="loc">

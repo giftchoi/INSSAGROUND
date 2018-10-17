@@ -128,6 +128,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
 		values(schedule_seq.nextval,to_date(#{startDate}),to_date(#{endDate}),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
 	</insert>
+	<resultMap type="scheduleVO" id="scheduleRM">
+		<result column="id" property="insiderVO.memberVO.id"/>
+		<result column="ground_no" property="groundVO.groundNo"/>
+	</resultMap>
+	<select id="grouondScheduleList" parameterType="groundVO" resultMap="scheduleRM">
+		select content,end_date,start_date,ground_no,id,loc,max_personnel,schedule_no,title
+		from schedule where ground_no=#{groundNo}
+	</select>
+	
 	
 	
 </mapper>

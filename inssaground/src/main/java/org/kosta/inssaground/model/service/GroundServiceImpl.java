@@ -266,6 +266,11 @@ public class GroundServiceImpl implements GroundService {
 
 	}
 
+	@Override
+	public List<ScheduleVO> grouondScheduleList(GroundVO groundVO) {
+		return groundMapper.grouondScheduleList(groundVO);
+	}
+
 	
 
 
