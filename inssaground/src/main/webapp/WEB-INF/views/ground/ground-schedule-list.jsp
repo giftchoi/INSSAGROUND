@@ -106,7 +106,7 @@
 				</table>
 			</div>	
 									
-								<a href="">모임 등록 하기</a>
+								<a href="groundScheduleForm.do">모임 등록 하기</a>
 								
 									<!-- 게시판 여기다  -->							
 								</div>
