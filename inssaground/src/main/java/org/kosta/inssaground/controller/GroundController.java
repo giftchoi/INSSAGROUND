@@ -143,6 +143,6 @@ public class GroundController {
 	
 	@RequestMapping("groundPost.do")
 	public String groundPost() {
-		return "";
+		return "ground/ground-board.tiles";
 	}
 }
