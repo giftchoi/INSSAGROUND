@@ -33,6 +33,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				String id = authentication.getName();//사용자가 로그인시 입력한 ID 반환 		
 				System.out.println(id);
 				MemberVO member = memberService.findMemberById(id);
+
 				System.out.println(member);
 				if(member == null){
 					throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
@@ -61,6 +62,8 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				/****************************************
 				 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴
 				 ***************************************/
+				//5. groundNoList 주입
+				member.setGroundNoList(memberService.myGroundNoList(id));
 				
 				Authentication auth = new UsernamePasswordAuthenticationToken(member, password, authorities);
 				System.out.println("로그인 OK~"+auth);
