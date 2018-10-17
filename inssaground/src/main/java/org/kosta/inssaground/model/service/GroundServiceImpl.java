@@ -266,6 +266,12 @@ public class GroundServiceImpl implements GroundService {
 
 	}
 
+	@Override
+	public List<MemberVO> getParticipationReadyList(String groundNo) {
+		// TODO Auto-generated method stub
+		return groundMapper.getParticipationReadyList(groundNo);
+	}
+
 	
 
 

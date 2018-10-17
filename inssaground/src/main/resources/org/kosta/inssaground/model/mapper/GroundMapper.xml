@@ -72,7 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="participateGround" parameterType="map" >
 		insert into insider(ground_no,id) values(#{groundNo},#{id})
 	</insert>
-	
+	<select id="getParticipationReadyList" parameterType="string" resultType="memberVO">
+		select m.id,m.name,m.address,m.email from inssa_member m, insider i where i.ground_no=#{value} and i.status=0 and i.id=m.id
+	</select>
 	<!--DOHYEONG  -->
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido
@@ -123,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select g.ground_no,g.max_personnel,g.introduction,g.ground_name,g.master,g.hobby_no as hobby,g.sigungu_no,i.img_name
 		from ground g,ground_img i
 		where g.ground_no=i.ground_no
-		and g.ground_no=#{groundNo}
+		and g.ground_no=#{value}
 	</select> 
 	
 	<insert id="registergroundschedule" parameterType="scheduleVO">

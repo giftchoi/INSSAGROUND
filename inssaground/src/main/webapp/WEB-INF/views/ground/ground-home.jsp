@@ -56,7 +56,7 @@
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">INSSA MEMBER</a> <span class="lnr lnr-eye"></span></p>
 										<sec:authentication var="principal" property="principal" />
 										<c:if test="${gvo.master==principal.id}">
-										<p class="view col-lg-12 col-md-12 col-6"><a href="groundMasterReadyList.do">모임 관리</a> <span class="lnr lnr-eye"></span></p>
+										<p class="view col-lg-12 col-md-12 col-6"><a href="groundMasterReadyList.do?">모임 관리</a> <span class="lnr lnr-eye"></span></p>
 										</c:if>
 										<!-- <ul class="social-links col-lg-12 col-md-12 col-6">
 											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
