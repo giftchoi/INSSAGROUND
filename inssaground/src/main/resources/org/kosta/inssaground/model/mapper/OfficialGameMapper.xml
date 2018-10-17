@@ -19,11 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getOfficialGameDetail" resultType="officialGameVO">
 		select
-		og.o_game_no, og.title, og.min_personnel, og.max_personnel,
-		og.game_time, og.content, gc.name
-		from OFFICIAL_GAME og, GAME_CATEGORY gc 
-		where
-		og.cg_no=gc.cg_no and o_game_no=#{value}
+		o_game_no, title, min_personnel, max_personnel,
+		game_time, materials, content, cg_no
+		from OFFICIAL_GAME 
+		where o_game_no=#{value}
 	</select>
 
 	<insert id="writeOfficialGame" parameterType="officialGameVO">
@@ -40,7 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateOfficialGame" parameterType="officialGameVO">
 		update OFFICIAL_GAME
 		set
-		title=#{title},content=#{content}
+		title=#{title},content=#{content},min_personnel=#{minPersonnel}, max_personnel=#{maxPersonnel}, game_time=#{gameTime},
+		materials=#{materials}, content=#{content}, cg_no=#{cgNo}
 		where o_game_no=#{oGameNo}
 	</update>
 	<delete id="deleteOfficialGame" parameterType="string">

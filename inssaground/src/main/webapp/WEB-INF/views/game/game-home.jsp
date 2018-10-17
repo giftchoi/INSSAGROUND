@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
 
@@ -9,17 +12,6 @@
 		<div class="col-sm-12">
 			<div>
 				<h1>INSSA GAME</h1>
-			</div>
-			
-			<div class="game-post-area">
-			
-			<span class="gameWriteForm"
-				style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-				<button
-					onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">게임
-					등록</button>
-			</span>
-
 			</div>
 
 			<div class="category-menu-area">
@@ -38,16 +30,52 @@
 
 					<div class="game-post-area">
 						<c:forEach items="${requestScope.customGameLvo.list }" var="cgvo">
-							<div class="card game"
-								onclick="location.href='${pageContext.request.contextPath}/customGameDetail.do?cGameNo=${cgvo.cGameNo}'">
-								<!-- <div class="card-header">Header</div> -->
-								<div class="card-body">
-									<h1>${cgvo.title }</h1>
-									<br>
-									<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
-									<br><h3 align="right" style="color: red;">인원수: ${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
+							<%--
+<!-- 로그인 비로그인 구분 문 -->
+<sec:authorize access="isAnonymous()">
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+</sec:authorize>
+ --%>
+							<sec:authorize access="isAuthenticated()">
+								<!-- 로그인 상태 -->
+
+								<span class="gameWriteForm"
+									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+									<button class="btn btn-danger"
+										onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">
+										사용자 게임 등록</button>
+								</span>
+
+								<div class="card game"
+									onclick="location.href='${pageContext.request.contextPath}/customGameDetail.do?cGameNo=${cgvo.cGameNo}'">
+									<!-- <div class="card-header">Header</div> -->
+									<div class="card-body">
+										<h1>${cgvo.title }</h1>
+										<br>
+										<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
+										<br>
+										<h3 align="right" style="color: red;">인원수:
+											${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
+									</div>
 								</div>
-							</div>
+							</sec:authorize>
+							<sec:authorize access="isAnonymous()">
+								<!-- 비로그인 상태 -->
+								<div class="card game">
+									<!-- <div class="card-header">Header</div> -->
+									<div class="card-body">
+										<h1>${cgvo.title }</h1>
+										<br>
+										<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
+										<br>
+										<h3 align="right" style="color: red;">인원수:
+											${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
+									</div>
+								</div>
+							</sec:authorize>
+
 						</c:forEach>
 						<div class="pagingInfo">
 							<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
@@ -105,16 +133,41 @@
 					<div class="game-post-area">
 						<c:forEach items="${requestScope.officialGameLvo.list }"
 							var="ogvo">
-							<div class="card game" 
-								onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
-								<div class="card-body">
-									<h1>${ogvo.title }</h1>
-									<br>
-									<h4 style="font-family:serif;">준비물: ${ogvo.materials }</h4>
-									<br><h3 align="right" style="color: red;">인원수: ${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
-									
+
+							<sec:authorize access="isAuthenticated()">
+
+								<span class="gameWriteForm"
+									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+									<button class="btn btn-danger"
+										onclick="location.href='${pageContext.request.contextPath}/officialGameWriteForm.do'">
+										공식 게임 등록</button>
+								</span>
+
+								<div class="card game"
+									onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
+									<div class="card-body">
+										<h1>${ogvo.title }</h1>
+										<br>
+										<h4 style="font-family: serif;">준비물: ${ogvo.materials }</h4>
+										<br>
+										<h3 align="right" style="color: red;">인원수:
+											${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
+									</div>
 								</div>
-							</div>
+							</sec:authorize>
+							<sec:authorize access="isAnonymous()">
+								<!-- 비로그인 상태 -->
+								<div class="card game">
+									<div class="card-body">
+										<h1>${ogvo.title }</h1>
+										<br>
+										<h4 style="font-family: serif;">준비물: ${ogvo.materials }</h4>
+										<br>
+										<h3 align="right" style="color: red;">인원수:
+											${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
+									</div>
+								</div>
+							</sec:authorize>
 						</c:forEach>
 						<div class="pagingInfo">
 							<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
