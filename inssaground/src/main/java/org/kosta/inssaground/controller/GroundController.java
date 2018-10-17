@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
@@ -175,9 +176,11 @@ public class GroundController {
 	
 	
 	@RequestMapping("ground-home.do")
-	public String groundHome(GroundVO groundVO,Model model,String id) {
-		System.out.println(id);
-		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);
+	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
+		System.out.println("ground-home: "+groundVO.getGroundNo());
+		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
+		System.out.println(gvo);
+		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
 		return "ground/ground-home.tiles";
 	}
@@ -188,7 +191,8 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleForm.do")
-	public String groundScheduleForm() {
+	public String groundScheduleForm(String groundNo) {
+		System.out.println(groundNo);
 		return "ground/ground-schedule-form.tiles";
 	}
 	
@@ -207,7 +211,8 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleView() {
+	public String groundScheduleList(String groundNo) {
+		System.out.println(groundNo);
 		return "ground/ground-schedule-list.tiles";
 	}
 }

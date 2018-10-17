@@ -121,9 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="findGroundByGroundNo" parameterType="string" resultMap="groundRM">
 		select g.ground_no,g.max_personnel,g.introduction,g.ground_name,g.master,g.hobby_no as hobby,g.sigungu_no,i.img_name
-		from ground g,ground_img i
-		where g.ground_no=i.ground_no
-		and g.ground_no=#{groundNo}
+		from ground g left join ground_img i on g.ground_no = i.ground_no where g.ground_no=#{value}
 	</select> 
 	
 	<insert id="registergroundschedule" parameterType="scheduleVO">
