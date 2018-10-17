@@ -72,6 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="participateGround" parameterType="map" >
 		insert into insider(ground_no,id) values(#{groundNo},#{id})
 	</insert>
+	<select id="getParticipationReadyList" parameterType="string" resultType="memberVO">
+		select m.id,m.name,m.email from inssa_member m, insider i where i.ground_no=#{value} and i.status=0 and i.id=m.id
+	</select>
+	<update id="approveParticipation" parameterType="insiderVO">
+		update insider set status=1 where id=#{memberVO.id} and ground_no=#{groundNo}
+	</update>
+	
+	
 	
 	<!--DOHYEONG  -->
 	<select id="getAllSido" resultType="sidoVO">

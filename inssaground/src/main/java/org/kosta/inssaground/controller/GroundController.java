@@ -10,9 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
-
 import org.kosta.inssaground.model.service.MemberService;
-
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -20,9 +18,7 @@ import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
-
 import org.kosta.inssaground.model.vo.ScheduleVO;
-
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
@@ -169,11 +165,29 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
-	@RequestMapping("groundMasterReadyList.do")
-	public String groundMasterReadyList() {
-		return "ground/ground-master-ready-list.tiles";
+	
+	@RequestMapping("groundMasterPage.do")
+	public String groundMasterPage() {
+		return "ground/ground-master-page.tiles";
 	}
 	
+	@RequestMapping("groundMasterReadyList.do")
+	public String groundMasterReadyList(HttpSession session,Model model) {
+		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
+		List<MemberVO> readyList = groundService.getParticipationReadyList(groundNo);
+		System.out.println(groundNo);
+		System.out.println(readyList);
+		model.addAttribute("readyList",readyList);
+		return "ground/ground-master-ready-list.tiles";
+	}
+	@PostMapping("approveParticipation.do")
+	public String approveParticipation(InsiderVO insiderVO) {
+		
+		groundService.approveParticipation(insiderVO);
+		
+		
+		return "home.tiles";
+	}
 	
 	@RequestMapping("ground-home.do")
 	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
