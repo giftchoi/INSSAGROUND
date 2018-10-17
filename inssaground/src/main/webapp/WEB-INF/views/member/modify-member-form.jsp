@@ -9,7 +9,6 @@
 		<li><a href="registerForm.do">MY SCHEDULE</a></li>
 		<li><a href="registerForm.do">MY GAME PROGRAM</a></li>
 		<li><a href="modifyMemberForm.do">EDIT MY INFO</a></li>
-		<li><a href="registerForm.do">WITHDRAW</a></li>
 		</ul>
 	</sec:authorize>
   </div>
@@ -20,15 +19,17 @@
 			<form method="post" action="modifyMember.do">
 				<sec:csrfInput/>
 				<div class="input-container">
-					<span id="profile-img"></span>
+					<span id="profile-img">
+					<img src="${pageContext.request.contextPath}/resources/uploadImage/${member.profile}" width="210" height="210">
+					</span>
 				</div>
 				<div class="input-container">
 					아이디<br>
-					<input type="text"  maxlength="30" required="required" name="id"/>
+					<input type="text"  maxlength="30" required="required" name="id" readonly="readonly" value="${member.id }"/>
 				</div>
 				<div class="input-container">
 					이름<br>
-					<input type="text" maxlength="15" required="required" name="name"/>	
+					<input type="text" maxlength="15" required="required" name="name" value="${member.name}"/>	
 				</div>
 				<div class="input-container">
 					패스워드<br>
@@ -41,7 +42,7 @@
 				</div>
 				<div class="input-container">
 					이메일<br>
-					<input type="email" maxlength="30" required="required" name="email"/> 
+					<input type="email" maxlength="30" required="required" name="email" value="${member.email}"  readonly="readonly"/> 
 				</div>
 				<div>
 				<input type="submit" class="btn btn-red" value="회원정보수정"><br>

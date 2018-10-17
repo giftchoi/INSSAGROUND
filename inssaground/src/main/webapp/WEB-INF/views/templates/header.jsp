@@ -76,7 +76,6 @@ li.dropdown {
       <a href="groundApplyForm.do">모임 개설 신청</a>
       <a href="#">뭐를 넣을 까요</a>
     </div>
-	
 	</li>
 	<li><a href="home.do"> 
 <sec:authorize access="!hasRole('ROLE_MEMBER')">
@@ -86,7 +85,6 @@ li.dropdown {
 <img src="${pageContext.request.contextPath}/resources/image/logoOn.png" title="charging.. inssaground home"  width="200" height="130"/>
 </sec:authorize>
 </a></li>
-
 	<li class="dropdown"><a href="javascript:void(0)" title="게임">GAME</a>
 		    <div class="dropdown-content">
       <a href="gameHome.do">INSSA GAME</a>
@@ -94,7 +92,6 @@ li.dropdown {
       <a href="#">MAKE PROGRAM</a>
     </div>
 	</li>
-
 	<li class="dropdown"><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a>
 	<div class="dropdown-content">
      	 <a  href="service.do">OUR SERVICE</a>
@@ -102,7 +99,5 @@ li.dropdown {
 		<a href="team.do">OUR TEAM</a>
     </div>
 	</li>
-
-
 </ul>
 </div>

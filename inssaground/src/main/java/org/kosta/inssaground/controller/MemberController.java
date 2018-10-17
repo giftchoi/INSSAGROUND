@@ -88,8 +88,15 @@ public class MemberController {
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("modifyMemberForm.do")
 	public String modifyMemberForm(Model model) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("member", mvo);
 		return "member/modify-member-form.tiles";
 	}
+	@PostMapping("modifyMember.do")
+	public String modifyMember(MemberVO vo) {
+		return "";
+	}
+	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("withdrawForm.do")
 	public String withdrawForm() {
