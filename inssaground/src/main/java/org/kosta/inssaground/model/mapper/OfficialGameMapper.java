@@ -12,8 +12,12 @@ public interface OfficialGameMapper {
 
 	public List<OfficialGameVO> getOfficialGameList(PagingBean pagingBean);
 
-	public OfficialGameVO getOfficialGameDetail(int oGameNo);
+	public OfficialGameVO getOfficialGameDetail(String oGameNo);
 
 	public void writeOfficialGame(OfficialGameVO OfficialGameVO);
+
+	public void updateOfficialGame(OfficialGameVO officialGameVO);
+
+	public void deleteOfficialGame(String oGameNo);
 
 }

@@ -37,5 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{oGameNo}, #{title}, #{minPersonnel}, #{maxPersonnel}, #{gameTime},
 		#{materials}, #{content}, #{cgNo})
 	</insert>
-	
+	<update id="updateOfficialGame" parameterType="officialGameVO">
+		update OFFICIAL_GAME
+		set
+		title=#{title},content=#{content}
+		where o_game_no=#{oGameNo}
+	</update>
+	<delete id="deleteOfficialGame" parameterType="string">
+		delete from OFFICIAL_GAME where o_game_no=#{value}
+	</delete>
 </mapper>

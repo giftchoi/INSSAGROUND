@@ -67,8 +67,10 @@ li.dropdown {
 </div>
 <div class="bottom-header">
 <ul>
+
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
 	<li><a href="#">FIND HOBBY</a></li>
+
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
       <a href="groundList.do">모임 찾기</a>
