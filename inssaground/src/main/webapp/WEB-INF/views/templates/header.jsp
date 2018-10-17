@@ -82,10 +82,15 @@ li.dropdown {
 		    <div class="dropdown-content">
       <a href="gameHome.do">INSSA GAME</a>
       <a href="gameCustom.do">CUSTOM GAME</a>
-      <a href="#">뭐를 넣을 까요</a>
+      <a href="#">나만의 프로그램 만들기</a>
     </div>
 	</li>
-	<li><a href="">ABOUT US</a></li>
+
+
+	<li><a href="gameHome.do">GAME</a></li>
+
+	<li><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a></li>
+
 
 </ul>
 </div>
