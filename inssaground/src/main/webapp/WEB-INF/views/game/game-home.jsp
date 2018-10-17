@@ -3,25 +3,23 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-<!-- <style>
-/* 게임 등록 버튼  */
-.gameWriteForm {
-    position: absolute;
-    right: 1em;
-    top: 20em;
-    height: 3em;
-    line-height: 3em;
-  font-size: 14px;
-  color: #333333;
-  background-color: #ffffff;
-}
-</style> -->
 
 <div class="col-sm-12">
 	<div class="row main-content">
 		<div class="col-sm-12">
 			<div>
 				<h1>INSSA GAME</h1>
+			</div>
+			
+			<div class="game-post-area">
+			
+			<span class="gameWriteForm"
+				style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+				<button
+					onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">게임
+					등록</button>
+			</span>
+
 			</div>
 
 			<div class="category-menu-area">
@@ -32,13 +30,6 @@
 					<li data-filter=".outside"><h3>#실외</h3></li>
 				</ul>
 			</div>
-			<span class="gameWriteForm"
-				style="position: absolute; right: 10em; top: 20em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-				<button
-					onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">게임
-					등록</button>
-			</span>
-
 
 
 			<!-- 사용자정의 게임 화면 -->

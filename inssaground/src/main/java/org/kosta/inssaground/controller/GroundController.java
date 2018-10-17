@@ -168,6 +168,10 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
+	@RequestMapping("groundMasterReadyList.do")
+	public String groundMasterReadyList() {
+		return "ground/ground-master-ready-list.tiles";
+	}
 	
 	
 	@RequestMapping("ground-home.do")
