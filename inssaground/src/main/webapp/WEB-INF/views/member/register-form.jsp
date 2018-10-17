@@ -110,10 +110,10 @@
 	<div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">회원가입</h1>
-			<form method="post" action="registerMember.do" id="regForm">
+			<form method="post" action="registerMember.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
 				<div class="input-container">
-					<span id="profile-img"></span>
+					<input type="file" name="picture">
 				</div>
 				<div class="input-container">
 					아이디<br>
