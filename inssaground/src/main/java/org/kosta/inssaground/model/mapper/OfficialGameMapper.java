@@ -16,4 +16,8 @@ public interface OfficialGameMapper {
 
 	public void writeOfficialGame(OfficialGameVO OfficialGameVO);
 
+	public void updateOfficialGame(OfficialGameVO officialGameVO);
+
+	public void deleteOfficialGame(String oGameNo);
+
 }
