@@ -20,6 +20,7 @@ import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 @Service
@@ -91,7 +92,6 @@ public class GroundServiceImpl implements GroundService {
 	
 	@Override
 	public GroundVO groundDetail(GroundVO groundVO) {
-		// TODO Auto-generated method stub
 		return groundMapper.groundDetail(groundVO);
 	}
 
@@ -250,6 +250,20 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public GroundVO findGroundByGroundNo(GroundVO groundVO) {		
 		return groundMapper.findGroundByGroundNo(groundVO.getGroundNo());
+	}
+
+	@Override
+	public void registergroundschedule(ScheduleVO scheduleVO) {
+		groundMapper.registergroundschedule(scheduleVO);
+	}
+	public void participateGround(String groundNo) {
+		Map<String,String> map = new HashMap<String,String>();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		map.put("groundNo", groundNo);
+		map.put("id", ((MemberVO)authentication.getPrincipal()).getId());
+		groundMapper.participateGround(map);	
+		
+
 	}
 
 	

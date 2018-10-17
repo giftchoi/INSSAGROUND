@@ -43,9 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getProfileIMGName" parameterType="string" resultType="string">
 		select path from profile_img where id=#{value}
 	</select>
-	<select id="myGroundNoList" resultType="string">
-		select ground_no from insider where id=#{value}
-	</select>
+	<select id="myGroundNoList" resultType="map">
+			select ground_no as groundNo, status from insider where id=#{value}
+		</select>
 	<delete id="deleteProfileIMG">
 		delete from profile_img where id=#{value}
 	</delete>

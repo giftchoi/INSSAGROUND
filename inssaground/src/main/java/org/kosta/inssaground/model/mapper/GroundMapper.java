@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundHashtagVO;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 
@@ -30,4 +31,9 @@ public interface GroundMapper {
 	int hashtagBoolean(String tags);
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
+
+	void registergroundschedule(ScheduleVO scheduleVO);
+
+	void participateGround(Map<String,String> map);
+
 }

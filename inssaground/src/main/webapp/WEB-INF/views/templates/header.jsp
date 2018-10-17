@@ -66,6 +66,7 @@ li.dropdown {
 </sec:authorize>
 </div>
 <div class="bottom-header">
+
 <ul>
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
 	<li><a href="#">FIND HOBBY</a></li>

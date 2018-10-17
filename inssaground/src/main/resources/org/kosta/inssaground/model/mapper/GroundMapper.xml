@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="groundDetail" parameterType="groundVO" resultType="groundVO">
-		select g.*,s.sigungu_name as area from ground g, sigungu s where g.ground_no=#{groundNo} and s.sigungu_no=g.sigungu_no
+		select g.*,s.sigungu_name as area,  (select count(*) from insider where status=1 and ground_no=#{groundNo}) as participants from ground g, sigungu s where g.ground_no=#{groundNo} and s.sigungu_no=g.sigungu_no
 	</select>
 	
 	<select id="getGroundSearchResultCount" parameterType="map" resultType="int">	
@@ -69,13 +69,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		order by g.ground_no asc	
 	</select>
-	
-	
-	
-	
-	
-	
-	
+	<insert id="participateGround" parameterType="map" >
+		insert into insider(ground_no,id) values(#{groundNo},#{id})
+	</insert>
 	
 	<!--DOHYEONG  -->
 	<select id="getAllSido" resultType="sidoVO">
@@ -129,5 +125,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where g.ground_no=i.ground_no
 		and g.ground_no=#{groundNo}
 	</select> 
+	
+	<insert id="registergroundschedule" parameterType="scheduleVO">
+		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
+		values(schedule_seq.nextval,to_date(#{startDate}),to_date(#{endDate}),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
+	</insert>
+	
+	
 </mapper>
  

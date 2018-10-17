@@ -38,17 +38,6 @@
 					onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">게임
 					등록</button>
 			</span>
-			<ul class="game-category-list">
-				<li data-filter=".smallscale"
-					onclick="location.href='${pageContext.request.contextPath}/gameHome.do'">
-					<h3>공식 게임</h3>
-				</li>
-				<li data-filter=".largescale"
-					onclick="location.href='${pageContext.request.contextPath}/gameCustom.do'">
-					<h3>사용자 게임</h3>
-				</li>
-			</ul>
-
 
 
 
@@ -63,6 +52,9 @@
 								<!-- <div class="card-header">Header</div> -->
 								<div class="card-body">
 									<h1>${cgvo.title }</h1>
+									<br>
+									<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
+									<br><h3 align="right" style="color: red;">인원수: ${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
 								</div>
 							</div>
 						</c:forEach>
@@ -122,10 +114,14 @@
 					<div class="game-post-area">
 						<c:forEach items="${requestScope.officialGameLvo.list }"
 							var="ogvo">
-							<div class="card game"
+							<div class="card game" 
 								onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
 								<div class="card-body">
 									<h1>${ogvo.title }</h1>
+									<br>
+									<h4 style="font-family:serif;">준비물: ${ogvo.materials }</h4>
+									<br><h3 align="right" style="color: red;">인원수: ${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
+									
 								</div>
 							</div>
 						</c:forEach>

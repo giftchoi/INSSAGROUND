@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
+
 <!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
@@ -17,7 +15,7 @@
 		<!-- meta character set -->
 		<meta charset="UTF-8">
 		<!-- Site Title -->
-		<title>Macro</title>
+
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -32,10 +30,9 @@
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">				
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-<title>Insert title here</title>
-</head>
-<body>
+
 <!-- Start post-content Area -->
+<div class="col-sm-12">
 			<section class="post-content-area single-post-area" >
 				<div class="container">
 					<div class="row">
@@ -54,7 +51,7 @@
 										<li><a href="#">Lifestyle</a></li>
 									</ul>
 									<div class="user-details row">
-										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">내 모임 달력</a> <span class="lnr lnr-user"></span></p>
+										<p class="user-name col-lg-12 col-md-12 col-6"><a href="groundScheduleList.do">내 모임 달력</a> <span class="lnr lnr-user"></span></p>
 										<p class="date col-lg-12 col-md-12 col-6"><a href="groundPost.do">게시판</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">INSSA MEMBER</a> <span class="lnr lnr-eye"></span></p>
 										
@@ -407,5 +404,4 @@
 				</div>	
 			</section>
 			<!-- End post-content Area -->
-</body>
-</html>
+</div>
