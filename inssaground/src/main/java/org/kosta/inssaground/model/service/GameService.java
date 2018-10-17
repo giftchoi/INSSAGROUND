@@ -41,7 +41,7 @@ public interface GameService {
 	 * 공식 게임 삭제
 	 * @param oGameNo
 	 */
-	public  void deleteOfficialGame(int oGameNo);
+	public  void deleteOfficialGame(String oGameNo);
 	
 	//사용자 정의 게임 
 	
@@ -77,6 +77,6 @@ public interface GameService {
 	 * 사용자 정의 게임 삭제
 	 * @param cGameNo
 	 */
-	public  void deleteCustomGame(int cGameNo);
+	public  void deleteCustomGame(String cGameNo);
 
 }

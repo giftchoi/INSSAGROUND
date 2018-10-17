@@ -52,7 +52,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void deleteOfficialGame(int oGameNo) {
+	public void deleteOfficialGame(String oGameNo) {
 		// TODO Auto-generated method stub
 
 	}
@@ -87,14 +87,14 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void updateGame(CustomGameVO customGameVO) {
-		// TODO Auto-generated method stub
-
+		
+		cgm.updateCustomGame(customGameVO);
 	}
 
 	@Override
-	public void deleteCustomGame(int cGameNo) {
-		// TODO Auto-generated method stub
-
+	public void deleteCustomGame(String cGameNo) {
+	
+		cgm.deleteCustomGame(cGameNo);
 	}
 
 }
