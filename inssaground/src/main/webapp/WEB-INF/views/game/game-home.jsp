@@ -130,7 +130,7 @@
 								<div class="card-body">
 									<h1>${ogvo.title }</h1>
 									<br>
-									<h4 style="font-family: serif;">준비물: ${ogvo.materials }</h4>
+									<h4 style="font-family:serif;">준비물: ${ogvo.materials }</h4>
 									<br><h3 align="right" style="color: red;">인원수: ${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
 									
 								</div>
