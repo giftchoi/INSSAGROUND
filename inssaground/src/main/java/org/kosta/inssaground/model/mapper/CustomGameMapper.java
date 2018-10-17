@@ -12,6 +12,7 @@ public interface CustomGameMapper {
 	public List<CustomGameVO> getCustomGameList(PagingBean pagingBean);
 	public CustomGameVO getCustomGameDetail(String cGameNo);
 	public void writeCustomGame(CustomGameVO customGameVO);
-	
+	public void deleteCustomGame(String cGameNo);
+	public void updateCustomGame(CustomGameVO customGameVO);
 }
 

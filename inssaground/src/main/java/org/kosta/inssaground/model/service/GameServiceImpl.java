@@ -21,7 +21,7 @@ public class GameServiceImpl implements GameService {
 	
 	@Override
 	public void writeGame(OfficialGameVO officialGameVO) {
-		
+		ogm.writeOfficialGame(officialGameVO);
 	}
 
 	@Override
@@ -42,19 +42,17 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public OfficialGameVO getOfficialGameDetail(String oGameNo) {
-		return ogm.getOfficialGameDetail(Integer.parseInt(oGameNo));
+		return ogm.getOfficialGameDetail(oGameNo);
 	}
 
 	@Override
 	public void updateGame(OfficialGameVO officialGameVO) {
-		// TODO Auto-generated method stub
-
+		ogm.updateOfficialGame(officialGameVO);
 	}
 
 	@Override
-	public void deleteOfficialGame(int oGameNo) {
-		// TODO Auto-generated method stub
-
+	public void deleteOfficialGame(String oGameNo) {
+		ogm.deleteOfficialGame(oGameNo);
 	}
 
 	@Override
@@ -87,14 +85,14 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void updateGame(CustomGameVO customGameVO) {
-		// TODO Auto-generated method stub
-
+		
+		cgm.updateCustomGame(customGameVO);
 	}
 
 	@Override
-	public void deleteCustomGame(int cGameNo) {
-		// TODO Auto-generated method stub
-
+	public void deleteCustomGame(String cGameNo) {
+	
+		cgm.deleteCustomGame(cGameNo);
 	}
 
 }

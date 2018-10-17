@@ -1,5 +1,6 @@
 package org.kosta.inssaground.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -17,12 +18,15 @@ import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MailSenderService mailService;
 	@Resource
 	private MemberMapper memberMapper;
+	@Autowired
+	private FileUploadService fileUploader;
 	@Override
 	public String checkEmailKey(String email, String emailKey) {
 		if(memberMapper.emailcheck(email)!=0) {
@@ -34,9 +38,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Transactional
 	@Override
-	public void registerMember(MemberVO mvo) {
+	public void registerMember(MemberVO mvo,MultipartFile picture) throws IllegalStateException, IOException {
 		memberMapper.registerMember(mvo);
 		memberMapper.registerPermission(mvo.getId());
+		mvo.setProfile(fileUploader.fileUpload(picture));
+		memberMapper.registerProfile(mvo);
 	}
 
 	@Override
@@ -55,11 +61,14 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 
 	}
-
+	@Transactional
 	@Override
 	public void withdrawMember(MemberVO vo) {
-		// TODO Auto-generated method stub
-
+		String id=vo.getId();
+		memberMapper.deleteProfileIMG(id);
+		memberMapper.revokeRole(id);
+		// 인싸이더에서 상태값 변경도 해줘야 댐
+		memberMapper.changeMemberStatus(id);
 	}
 
 	@Override
@@ -134,5 +143,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<Map<String,String>> myGroundNoList(String id) {
 		// TODO Auto-generated method stub
 		return memberMapper.myGroundNoList(id);
+	}
+	@Override
+	public String getProfileIMGName(String id) {
+		return memberMapper.getProfileIMGName(id);
 	}
 }

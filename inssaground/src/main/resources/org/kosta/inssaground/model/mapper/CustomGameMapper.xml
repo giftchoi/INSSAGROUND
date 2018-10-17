@@ -3,7 +3,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
+<mapper
+	namespace="org.kosta.inssaground.model.mapper.CustomGameMapper">
 	<select id="getTotalCustomGameCount" resultType="int">
 		select count(*)
 		from
@@ -32,4 +33,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSSA_MEMBER m
 		where c.id=m.id and c_game_no=#{value}
 	</select>
+	<insert id="writeCustomGame" parameterType="CustomGameVO">
+		<selectKey keyProperty="cGameNo" resultType="string" order="BEFORE">
+			select
+			CUSTOM_GAME_Seq.nextval from dual
+		</selectKey>
+		insert into CUSTOM_GAME(c_game_no,title,min_personnel,max_personnel,
+		game_time,materials,content,recommendation,id,cg_no)
+		values(#{cGameNo},#{title},#{minPersonnel},#{maxPersonnel},
+		#{gameTime},#{materials},#{content},#{recommendation},#{memberVO.id},#{cgNo})
+	</insert>
+ 	<update id="updateCustomGame" parameterType="customGameVO">
+		update CUSTOM_GAME
+		set
+		title=#{title},content=#{content}
+		where c_game_no=#{cGameNo}
+	</update>
+	<delete id="deleteCustomGame" parameterType="string">
+		delete from CUSTOM_GAME where c_game_no=#{value}
+	</delete>
 </mapper>

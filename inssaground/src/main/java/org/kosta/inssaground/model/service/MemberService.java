@@ -1,5 +1,6 @@
 package org.kosta.inssaground.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +8,12 @@ import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface MemberService {
 	public String checkEmailKey(String email, String emailKey);
 
-	public void registerMember(MemberVO mvo);
+	public void registerMember(MemberVO mvo,MultipartFile picture) throws IllegalStateException, IOException;
 
 	public void login(MemberVO mvo);
 
@@ -36,4 +38,6 @@ public interface MemberService {
 	public List<String> findMemberId(MemberVO vo);
 
 	public void findPassword(String id) throws Exception;
+
+	public String getProfileIMGName(String id);
 }

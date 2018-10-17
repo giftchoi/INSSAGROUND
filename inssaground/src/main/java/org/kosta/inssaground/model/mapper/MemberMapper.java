@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
-import org.kosta.inssaground.model.vo.GroundVO;
-import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 
 @Mapper
@@ -36,5 +34,15 @@ public interface MemberMapper {
 
 	List<Map<String,String>> myGroundNoList(String id);
 
+
+	void registerProfile(MemberVO mvo);
+
+	String getProfileIMGName(String id);
+
+	void deleteProfileIMG(String id);
+
+	void revokeRole(String id);
+
+	void changeMemberStatus(String id);
 
 }
