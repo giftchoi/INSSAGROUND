@@ -67,13 +67,10 @@ li.dropdown {
 </div>
 <div class="bottom-header">
 <ul>
-<<<<<<< HEAD
-	<li><a href="groundScheduleForm.do">TEST</a></li>
-	<li><a  href="" title="홈">HOME</a></li>
-=======
+
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
 	<li><a href="#">FIND HOBBY</a></li>
->>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
+
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
       <a href="groundList.do">모임 찾기</a>
