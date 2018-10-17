@@ -16,11 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="getCustomGameList" resultMap="CustomGameRM"
 		parameterType="pagingBean">
+		SELECT c.*, m.id,m.name FROM(
 		SELECT
-		c.title,c.min_Personnel,c.max_Personnel,m.id,m.name FROM(
-		SELECT
-		row_number() over(order by c_game_no desc) as rnum,c_game_no,title,
-		min_Personnel,max_Personnel,id FROM CUSTOM_GAME) c, INSSA_MEMBER m
+		row_number() over(order by c_game_no desc) as rnum, c_game_no, title,
+		min_Personnel, max_Personnel, game_time, materials, recommendation, id, cg_no FROM CUSTOM_GAME) c, INSSA_MEMBER m
 		where c.id=m.id and rnum between
 		#{startRowNumber} and #{endRowNumber}
 		order

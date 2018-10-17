@@ -42,7 +42,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public OfficialGameVO getOfficialGameDetail(String oGameNo) {
-		return ogm.getOfficialGameDetail(Integer.parseInt(oGameNo));
+		return ogm.getOfficialGameDetail(oGameNo);
 	}
 
 	@Override
