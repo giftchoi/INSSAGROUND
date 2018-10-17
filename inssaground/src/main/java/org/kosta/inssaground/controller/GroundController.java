@@ -99,7 +99,7 @@ public class GroundController {
 	 * @return
 	 */
 	@Secured("ROLE_MEMBER")
-	@RequestMapping("participateGround.do")
+	@PostMapping("participateGround.do")
 	public String participateGround(String groundNo) {
 		//1.insider 테이블에 추가
 		groundService.participateGround(groundNo);
@@ -182,9 +182,8 @@ public class GroundController {
 	}
 	@PostMapping("approveParticipation.do")
 	public String approveParticipation(InsiderVO insiderVO) {
-		
+		System.out.println("idididid"+insiderVO.getMemberVO().getId());
 		groundService.approveParticipation(insiderVO);
-		
 		
 		return "home.tiles";
 	}

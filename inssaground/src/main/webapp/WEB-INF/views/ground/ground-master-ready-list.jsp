@@ -26,7 +26,7 @@
 	<form method="post">
 	<sec:csrfInput/>
 		<input type="hidden" name="groundNo" value="${sessionScope.ground.groundNo}">
-		<input type="text" name="id" readonly="readonly"value="${mvo.id }"><br>
+		<input type="text" name="memberVO.id" readonly="readonly"value="${mvo.id }"><br>
 		<input id=""type="button" class="approveBtn btn btn-red" value="참여승인">
 		<input id=""class="rejectBtn btn btn-grey"type="button" value="참여거절">
 	</form>
