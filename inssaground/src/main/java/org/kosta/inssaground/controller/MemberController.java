@@ -1,5 +1,6 @@
 package org.kosta.inssaground.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.kosta.inssaground.model.service.MemberService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MemberController {
@@ -26,8 +28,12 @@ public class MemberController {
 		return "member/register-form.tiles";
 	}
 	@PostMapping("registerMember.do")
-	public String registerMember(MemberVO mvo) {
-		memberService.registerMember(mvo);
+	public String registerMember(MemberVO mvo,MultipartFile picture) {
+		try {
+			memberService.registerMember(mvo,picture);
+		} catch (IllegalStateException | IOException e) {
+			return "member/find_fail";
+		}
 		return "member/register-result.tiles";
 	}
 	@RequestMapping("login_fail.do")

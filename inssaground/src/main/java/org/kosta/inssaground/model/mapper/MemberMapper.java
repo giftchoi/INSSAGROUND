@@ -31,4 +31,6 @@ public interface MemberMapper {
 
 	void updateTempPassword(MemberVO vo);
 
+	void registerProfile(MemberVO mvo);
+
 }
