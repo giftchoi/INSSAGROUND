@@ -43,7 +43,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				String password=(String)authentication.getCredentials();//사용자가 입력한 패스워드 반환 
 				//3.패스워드 비교
 				if(!password.equals(member.getPassword())){//패스워드가 틀리면
-					throw new BadCredentialsException("패스워드가 틀립니다.");
+					throw new BadCredentialsException("입력하신 정보가 올바르지 않습니다.");
 				}
 				/* 비밀번호 암호화를 이용할 경우 
 				 이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다 */
@@ -52,7 +52,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				//4.사용자 권한 조회
 				List<String> list = memberService.selectAuthorityById(id);
 				if(list.size() == 0){
-					throw new UsernameNotFoundException("아무 권한이 없습니다.");
+					throw new UsernameNotFoundException("접근 권한이 없습니다.");
 				}
 				
 				List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();		
