@@ -24,9 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 		]]>		
 	</select>
+	
 	<select id="groundDetail" parameterType="groundVO" resultType="groundVO">
 		select g.*,s.sigungu_name as area from ground g, sigungu s where g.ground_no=#{groundNo} and s.sigungu_no=g.sigungu_no
 	</select>
+	
 	<select id="getGroundSearchResultCount" parameterType="map" resultType="int">	
 		select count(*) from ground where status=1
 		<if test="sigungu==null and sido!=null">

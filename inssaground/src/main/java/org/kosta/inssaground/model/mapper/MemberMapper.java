@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
+import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 
 @Mapper
@@ -32,5 +34,7 @@ public interface MemberMapper {
 	void updateTempPassword(MemberVO vo);
 
 	void registerProfile(MemberVO mvo);
+
+	List<String> myGroundNoList(String id);
 
 }

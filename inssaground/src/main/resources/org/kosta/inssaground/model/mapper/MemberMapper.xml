@@ -40,5 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerProfile" parameterType="memberVO">
 		insert into PROFILE_IMG(id,path) values(#{id},#{profile})
 	</insert>
+		<select id="myGroundNoList" resultType="string">
+			select ground_no from insider where id=#{value}
+		</select>
 </mapper>
  

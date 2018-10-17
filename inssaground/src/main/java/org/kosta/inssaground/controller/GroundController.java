@@ -66,13 +66,16 @@ public class GroundController {
 		if(nowPage==null) nowPage = "1";
 		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
 	}
+	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
 		model.addAttribute("sido", groundService.getAllSido());
 		model.addAttribute("hobbyCategory", hobbyService.getHobbyCategory());
 		return "ground/ground-apply-form.tiles";
 	}
-
+	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundDetail.do")
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
