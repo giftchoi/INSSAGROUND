@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
@@ -20,7 +21,7 @@ public interface MemberService {
 
 	public void withdrawMember(MemberVO vo);
 
-	public List<String> myGroundNoList(String id); //내가 참여한 모임번호 보기
+	public List<Map<String,String>> myGroundNoList(String id); //내가 참여한 모임번호 보기
 	
 	public ListVO<GroundVO> myGroundList(String id); // 내가 참여한 모임 보기
 

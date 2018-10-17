@@ -2,6 +2,7 @@ package org.kosta.inssaground.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -63,7 +64,9 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 				 * 여기까지 왔으면 인증 완료 - Authentication객체 생성해서 리턴
 				 ***************************************/
 				//5. groundNoList 주입
-				member.setGroundNoList(memberService.myGroundNoList(id));
+				List<Map<String,String>> mapList = memberService.myGroundNoList(id);
+				System.out.println(mapList);
+				member.setGroundNoList(mapList);
 				
 				Authentication auth = new UsernamePasswordAuthenticationToken(member, password, authorities);
 				System.out.println("로그인 OK~"+auth);

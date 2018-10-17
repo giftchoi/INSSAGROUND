@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.TreeSet;
 
@@ -130,7 +131,7 @@ public class MemberServiceImpl implements MemberService {
 		mailService.sendEmail(email);
 	}
 	@Override
-	public List<String> myGroundNoList(String id) {
+	public List<Map<String,String>> myGroundNoList(String id) {
 		// TODO Auto-generated method stub
 		return memberMapper.myGroundNoList(id);
 	}

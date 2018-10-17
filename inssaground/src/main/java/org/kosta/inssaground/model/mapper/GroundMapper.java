@@ -30,4 +30,5 @@ public interface GroundMapper {
 	int hashtagBoolean(String tags);
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
+	void participateGround(Map<String,String> map);
 }

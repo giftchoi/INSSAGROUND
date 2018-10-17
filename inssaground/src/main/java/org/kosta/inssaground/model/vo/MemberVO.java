@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.vo;
 
 import java.util.List;
+import java.util.Map;
 
 public class MemberVO {
 	private String id;
@@ -9,14 +10,14 @@ public class MemberVO {
 	private String email;
 	private int status;
 	private String profile;
-	private List<String> groundNoList;
+	private List<Map<String,String>> groundNoList;
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemberVO(String id, String password, String name, String email, int status, String profile,
-			List<String> groundNoList) {
+			List<Map<String,String>> groundNoList) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -64,11 +65,11 @@ public class MemberVO {
 		this.profile = profile;
 	}
 	
-	public List<String> getGroundNoList() {
+	public List<Map<String,String>> getGroundNoList() {
 		return groundNoList;
 	}
 
-	public void setGroundNoList(List<String> groundNoList) {
+	public void setGroundNoList(List<Map<String,String>> groundNoList) {
 		this.groundNoList = groundNoList;
 	}
 

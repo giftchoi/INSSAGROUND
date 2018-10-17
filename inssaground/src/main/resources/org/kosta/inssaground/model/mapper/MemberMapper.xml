@@ -37,11 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateTempPassword" parameterType="memberVO">
 		update inssa_member set password=#{password} where id=#{id}
 	</update>
-	
-	
 		<!--SOJEONG  -->
-		<select id="myGroundNoList" resultType="string">
-			select ground_no from insider where id=#{value}
+		<select id="myGroundNoList" resultType="map">
+			select ground_no as groundNo, status from insider where id=#{value}
 		</select>
 </mapper>
  
