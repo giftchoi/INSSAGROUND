@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +86,12 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage.tiles";
 	}
+	@RequestMapping("viewMemberInfo.do")
+	public String viewMemberInfo(Model model) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("member", mvo);
+		return "member/view-member-info.tiles";
+	}
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("modifyMemberForm.do")
 	public String modifyMemberForm(Model model) {
@@ -92,9 +99,16 @@ public class MemberController {
 		model.addAttribute("member", mvo);
 		return "member/modify-member-form.tiles";
 	}
+	@Transactional
 	@PostMapping("modifyMember.do")
-	public String modifyMember(MemberVO vo) {
-		return "";
+	public String modifyMember(MemberVO newVO) {
+		MemberVO vo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("Spring Security 세션 수정 전 회원정보:" + vo);	
+		vo.setPassword(newVO.getPassword());
+		vo.setName(newVO.getName());
+		memberService.updateMember(vo);
+		System.out.println("Spring Security 세션 수정 후 회원정보:" + vo);
+		return "redirect:viewMemberInfo.do";
 	}
 	
 	@Secured("ROLE_MEMBER")

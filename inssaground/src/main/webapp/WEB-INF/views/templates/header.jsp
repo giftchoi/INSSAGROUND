@@ -45,7 +45,7 @@ li.dropdown {
 	<a  href="loginForm.do">MY GROUND</a>
 		<a href="registerForm.do">MY SCHEDULE</a>
 		<a href="registerForm.do">MY GAME PROGRAM</a>
-		<a href="modifyMemberForm.do">EDIT MY INFO</a>
+		<a href="viewMemberInfo.do">MY INFO</a>
 		<a href="withdrawForm.do">WITHDRAW</a>
 		</div>
 	</li>
