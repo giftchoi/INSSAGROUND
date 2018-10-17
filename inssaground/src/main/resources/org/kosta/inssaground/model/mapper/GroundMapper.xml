@@ -73,8 +73,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into insider(ground_no,id) values(#{groundNo},#{id})
 	</insert>
 	<select id="getParticipationReadyList" parameterType="string" resultType="memberVO">
-		select m.id,m.name,m.address,m.email from inssa_member m, insider i where i.ground_no=#{value} and i.status=0 and i.id=m.id
+		select m.id,m.name,m.email from inssa_member m, insider i where i.ground_no=#{value} and i.status=0 and i.id=m.id
 	</select>
+	<update id="approveParticipation" parameterType="insiderVO">
+		update insider set status=1 where id=#{memberVO.id} and ground_no=#{groundNo}
+	</update>
+	
+	
+	
 	<!--DOHYEONG  -->
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido
@@ -123,9 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="findGroundByGroundNo" parameterType="string" resultMap="groundRM">
 		select g.ground_no,g.max_personnel,g.introduction,g.ground_name,g.master,g.hobby_no as hobby,g.sigungu_no,i.img_name
-		from ground g,ground_img i
-		where g.ground_no=i.ground_no
-		and g.ground_no=#{value}
+		from ground g left join ground_img i on g.ground_no = i.ground_no where g.ground_no=#{value}
 	</select> 
 	
 	<insert id="registergroundschedule" parameterType="scheduleVO">

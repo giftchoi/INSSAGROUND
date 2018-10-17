@@ -44,4 +44,6 @@ public interface MemberMapper {
 
 	void changeMemberStatus(String id);
 
+	void updateMember(MemberVO vo);
+
 }

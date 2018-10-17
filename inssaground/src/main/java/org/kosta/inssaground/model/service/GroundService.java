@@ -47,7 +47,7 @@ public interface GroundService {
 	public ListVO<GroundVO>	getAllGroundList();
 	public void participateGround(String groundNo);	// 모임 참여하기
 	public List<MemberVO> getParticipationReadyList(String groundNo);	//모임장-모임 참여 대기 리스트 가져오기
-	
+	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
 	
 	public void groundHashtag(String tags[],GroundVO groundVO);	
 	public void registergroundImg(GroundVO groundVO);
@@ -55,6 +55,7 @@ public interface GroundService {
 	public void registergroundschedule(ScheduleVO scheduleVO);
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
+	
 	
 	
 	

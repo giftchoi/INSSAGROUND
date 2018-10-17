@@ -272,6 +272,12 @@ public class GroundServiceImpl implements GroundService {
 		return groundMapper.getParticipationReadyList(groundNo);
 	}
 
+	@Override
+	public void approveParticipation(InsiderVO insiderVO) {
+		groundMapper.approveParticipation(insiderVO);
+		
+	}
+
 	
 
 

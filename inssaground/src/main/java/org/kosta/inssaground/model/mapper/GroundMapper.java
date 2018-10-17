@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundHashtagVO;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
@@ -37,5 +38,6 @@ public interface GroundMapper {
 
 	void participateGround(Map<String,String> map);
 	List<MemberVO> getParticipationReadyList(String groundNo);
+	void approveParticipation(InsiderVO insiderVO);
 
 }

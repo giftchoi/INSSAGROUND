@@ -165,19 +165,36 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
+	
+	@RequestMapping("groundMasterPage.do")
+	public String groundMasterPage() {
+		return "ground/ground-master-page.tiles";
+	}
+	
 	@RequestMapping("groundMasterReadyList.do")
 	public String groundMasterReadyList(HttpSession session,Model model) {
 		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
 		List<MemberVO> readyList = groundService.getParticipationReadyList(groundNo);
+		System.out.println(groundNo);
+		System.out.println(readyList);
 		model.addAttribute("readyList",readyList);
 		return "ground/ground-master-ready-list.tiles";
 	}
-	
+	@PostMapping("approveParticipation.do")
+	public String approveParticipation(InsiderVO insiderVO) {
+		
+		groundService.approveParticipation(insiderVO);
+		
+		
+		return "home.tiles";
+	}
 	
 	@RequestMapping("ground-home.do")
-	public String groundHome(GroundVO groundVO,Model model,String id) {
-		System.out.println(id);
-		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);
+	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
+		System.out.println("ground-home: "+groundVO.getGroundNo());
+		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
+		System.out.println(gvo);
+		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
 		return "ground/ground-home.tiles";
 	}
@@ -188,7 +205,8 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleForm.do")
-	public String groundScheduleForm() {
+	public String groundScheduleForm(String groundNo) {
+		System.out.println(groundNo);
 		return "ground/ground-schedule-form.tiles";
 	}
 	
@@ -207,7 +225,8 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleView() {
+	public String groundScheduleList(String groundNo) {
+		System.out.println(groundNo);
 		return "ground/ground-schedule-list.tiles";
 	}
 }
