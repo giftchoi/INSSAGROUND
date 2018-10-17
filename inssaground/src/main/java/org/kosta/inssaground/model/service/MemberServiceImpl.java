@@ -1,5 +1,6 @@
 package org.kosta.inssaground.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
@@ -16,12 +17,15 @@ import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MailSenderService mailService;
 	@Resource
 	private MemberMapper memberMapper;
+	@Autowired
+	private FileUploadService fileUploader;
 	@Override
 	public String checkEmailKey(String email, String emailKey) {
 		if(memberMapper.emailcheck(email)!=0) {
@@ -33,9 +37,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Transactional
 	@Override
-	public void registerMember(MemberVO mvo) {
+	public void registerMember(MemberVO mvo,MultipartFile picture) throws IllegalStateException, IOException {
 		memberMapper.registerMember(mvo);
 		memberMapper.registerPermission(mvo.getId());
+		mvo.setProfile(fileUploader.fileUpload(picture));
+		memberMapper.registerProfile(mvo);
 	}
 
 	@Override
@@ -98,7 +104,8 @@ public class MemberServiceImpl implements MemberService {
 			memberMapper.updateEmailKey(key);
 		}
 		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
-		mailService.sendEmail(email);
+		System.out.println(key);
+		//mailService.sendEmail(email);
 	}
 	@Override
 	public List<String> findMemberId(MemberVO vo) {

@@ -40,7 +40,15 @@ li.dropdown {
 <sec:authorize access="hasRole('ROLE_MEMBER')">
 <ul>
 	<li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
-	<li><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a></li>
+	<li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
+	<div class="dropdown-content">
+	<a  href="loginForm.do">MY GROUND</a>
+		<a href="registerForm.do">MY SCHEDULE</a>
+		<a href="registerForm.do">MY GAME PROGRAM</a>
+		<a href="modifyMemberForm.do">EDIT MY INFO</a>
+		<a href="registerForm.do">WITHDRAW</a>
+		</div>
+	</li>
 	<li><a href="#" id="logoutAction">LOGOUT</a></li>
 </ul>
 	<script type="text/javascript">
@@ -60,7 +68,7 @@ li.dropdown {
 <div class="bottom-header">
 <ul>
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
-	<li><a  href="" title="홈">HOME</a></li>
+	<li><a href="#">FIND HOBBY</a></li>
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
       <a href="groundList.do">모임 찾기</a>
@@ -82,14 +90,17 @@ li.dropdown {
 		    <div class="dropdown-content">
       <a href="gameHome.do">INSSA GAME</a>
       <a href="gameCustom.do">CUSTOM GAME</a>
-      <a href="#">나만의 프로그램 만들기</a>
+      <a href="#">MAKE PROGRAM</a>
     </div>
 	</li>
 
-
-	<li><a href="gameHome.do">GAME</a></li>
-
-	<li><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a></li>
+	<li class="dropdown"><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a>
+	<div class="dropdown-content">
+     	 <a  href="service.do">OUR SERVICE</a>
+		<a href="aboutus.do">ABOUT US</a>
+		<a href="team.do">OUR TEAM</a>
+    </div>
+	</li>
 
 
 </ul>

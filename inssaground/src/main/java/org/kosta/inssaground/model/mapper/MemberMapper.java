@@ -33,7 +33,8 @@ public interface MemberMapper {
 
 	void updateTempPassword(MemberVO vo);
 
-	List<String> myGroundNoList(String id);
+	void registerProfile(MemberVO mvo);
 
+	List<String> myGroundNoList(String id);
 
 }
