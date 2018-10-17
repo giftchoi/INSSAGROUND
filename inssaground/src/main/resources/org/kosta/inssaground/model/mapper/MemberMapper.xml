@@ -40,8 +40,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerProfile" parameterType="memberVO">
 		insert into PROFILE_IMG(id,path) values(#{id},#{profile})
 	</insert>
-		<select id="myGroundNoList" resultType="string">
-			select ground_no from insider where id=#{value}
-		</select>
+	<select id="getProfileIMGName" parameterType="string" resultType="string">
+		select path from profile_img where id=#{value}
+	</select>
+	<select id="myGroundNoList" resultType="string">
+		select ground_no from insider where id=#{value}
+	</select>
+	<delete id="deleteProfileIMG">
+		delete from profile_img where id=#{value}
+	</delete>
+	<delete id="revokeRole">
+		delete from MEMBER_AUTHORITY where id=#{value}
+	</delete>
+	<update id="changeMemberStatus">
+		update inssa_member set status=3 where id=#{value}
+	</update>
 </mapper>
  

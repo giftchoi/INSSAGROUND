@@ -60,11 +60,14 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 
 	}
-
+	@Transactional
 	@Override
 	public void withdrawMember(MemberVO vo) {
-		// TODO Auto-generated method stub
-
+		String id=vo.getId();
+		memberMapper.deleteProfileIMG(id);
+		memberMapper.revokeRole(id);
+		// 인싸이더에서 상태값 변경도 해줘야 댐
+		memberMapper.changeMemberStatus(id);
 	}
 
 	@Override
@@ -104,8 +107,7 @@ public class MemberServiceImpl implements MemberService {
 			memberMapper.updateEmailKey(key);
 		}
 		EmailVO email=new EmailVO(receiver,"INSSAGROUND 회원가입 인증번호 입니다.","인증번호 : ["+randomKey+"]");
-		System.out.println(key);
-		//mailService.sendEmail(email);
+		mailService.sendEmail(email);
 	}
 	@Override
 	public List<String> findMemberId(MemberVO vo) {
@@ -140,5 +142,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> myGroundNoList(String id) {
 		// TODO Auto-generated method stub
 		return memberMapper.myGroundNoList(id);
+	}
+	@Override
+	public String getProfileIMGName(String id) {
+		return memberMapper.getProfileIMGName(id);
 	}
 }

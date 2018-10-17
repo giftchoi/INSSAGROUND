@@ -37,4 +37,6 @@ public interface MemberService {
 	public List<String> findMemberId(MemberVO vo);
 
 	public void findPassword(String id) throws Exception;
+
+	public String getProfileIMGName(String id);
 }
