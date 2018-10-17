@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
@@ -17,7 +13,6 @@
 		<!-- meta character set -->
 		<meta charset="UTF-8">
 		<!-- Site Title -->
-		<title>Macro</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -32,12 +27,11 @@
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">				
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-<title>Insert title here</title>
-</head>
+
 <body>
 <!-- Start post-content Area -->
 			<section class="post-content-area single-post-area" >
-				<div class="container">
+				<div class="col-sm-12">
 					<div class="row">
 						<div class="col-lg-8 posts-list">
 							<div class="single-post row">
@@ -67,16 +61,8 @@
 									</div>
 								</div>
 								<div class="col-lg-9 col-md-9">
-									<h3 class="mt-20 mb-20">모임 소개</h3>
-									<p class="excert">
-										MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.
-									</p>
-									<!-- <p>
-										Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-									</p>
-									<p>
-										Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-									</p> -->
+									<h3 class="mt-20 mb-20">모임 게시판</h3>	
+									<!-- 게시판 여기다  -->							
 								</div>
 								<div class="col-lg-12">
 									<!-- <div class="quotes">
@@ -85,17 +71,13 @@
 									<div class="row mt-30 mb-30">
 										<div class="col-6">
 											<img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
+											
 										</div>
 										<div class="col-6">
 											<img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
 										</div>	
 										<div class="col-lg-12 mt-30">
-											<p>
-												MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-											</p>
-											<p>
-												MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-											</p>											
+																				
 										</div>									
 									</div>
 								</div>
@@ -226,26 +208,7 @@
                                     </div>
                                 </div>	                                             				
 							</div> -->
-							<div class="comment-form">
-								<h4>신고</h4>
-								<form>
-									<div class="form-group form-inline">
-									  <div class="form-group col-lg-6 col-md-12 name">
-									    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-									  </div>
-									  <div class="form-group col-lg-6 col-md-12 email">
-									    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-									  </div>										
-									</div>
-									<div class="form-group">
-										<input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-									</div>
-									<div class="form-group">
-										<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-									</div>
-									<a href="#" class="primary-btn text-uppercase">Post Comment</a>	
-								</form>
-							</div>
+							
 						</div>
 						<div class="col-lg-4 sidebar-widgets">
 							<div class="widget-wrap">
@@ -267,7 +230,7 @@
 										<li><a href="#"><i class="fa fa-github"></i></a></li>
 										<li><a href="#"><i class="fa fa-behance"></i></a></li>
 									</ul> -->
-									<p>
+							 		<p>
 										Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.
 									</p>
 							<!--	</div>
@@ -323,43 +286,7 @@
 												<p>Technology</p>
 												<p>37</p>
 											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Lifestyle</p>
-												<p>24</p>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Fashion</p>
-												<p>59</p>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Art</p>
-												<p>29</p>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Food</p>
-												<p>15</p>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Architecture</p>
-												<p>09</p>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Adventure</p>
-												<p>44</p>
-											</a>
-										</li>															
+										</li>												
 									</ul>
 								</div>	
 								<!-- <div class="single-sidebar-widget newsletter-widget">
@@ -385,20 +312,9 @@
 									</p>								
 								</div> -->
 								<div class="single-sidebar-widget tag-cloud-widget">
-									<h4 class="tagcloud-title">Tag Clouds</h4>
+									<h4 class="tagcloud-title">Hashtag</h4>
 									<ul>
 										<li><a href="#">Technology</a></li>
-										<li><a href="#">Fashion</a></li>
-										<li><a href="#">Architecture</a></li>
-										<li><a href="#">Fashion</a></li>
-										<li><a href="#">Food</a></li>
-										<li><a href="#">Technology</a></li>
-										<li><a href="#">Lifestyle</a></li>
-										<li><a href="#">Art</a></li>
-										<li><a href="#">Adventure</a></li>
-										<li><a href="#">Food</a></li>
-										<li><a href="#">Lifestyle</a></li>
-										<li><a href="#">Adventure</a></li>
 									</ul>
 								</div>								
 							</div>
@@ -407,5 +323,3 @@
 				</div>	
 			</section>
 			<!-- End post-content Area -->
-</body>
-</html>

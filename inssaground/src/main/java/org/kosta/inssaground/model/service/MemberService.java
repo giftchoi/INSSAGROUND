@@ -20,6 +20,8 @@ public interface MemberService {
 
 	public void withdrawMember(MemberVO vo);
 
+	public List<String> myGroundNoList(String id); //내가 참여한 모임번호 보기
+	
 	public ListVO<GroundVO> myGroundList(String id); // 내가 참여한 모임 보기
 
 	public ListVO<ScheduleVO> myScheduleList(String id); // 내가 참여한 모임의 일정 보기

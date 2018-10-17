@@ -129,4 +129,9 @@ public class MemberServiceImpl implements MemberService {
 		EmailVO email=new EmailVO(vo.getEmail(),"INSSAGROUND 임시 비밀번호입니다.","임시 비밀번호 : ["+randomNum+"]\n새 비밀번호로 변경 바랍니다.");
 		mailService.sendEmail(email);
 	}
+	@Override
+	public List<String> myGroundNoList(String id) {
+		// TODO Auto-generated method stub
+		return memberMapper.myGroundNoList(id);
+	}
 }

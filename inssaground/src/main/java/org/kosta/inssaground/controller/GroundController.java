@@ -66,13 +66,16 @@ public class GroundController {
 		if(nowPage==null) nowPage = "1";
 		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
 	}
+	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
 		model.addAttribute("sido", groundService.getAllSido());
 		model.addAttribute("hobbyCategory", hobbyService.getHobbyCategory());
 		return "ground/ground-apply-form.tiles";
 	}
-
+	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundDetail.do")
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
@@ -98,7 +101,7 @@ public class GroundController {
 	@PostMapping("groundApply.do")
 	public String groundApply(HttpServletRequest request, GroundVO groundVO, SidoVO sidoVO, SigunguVO sigunguVO, HobbyVO hobbyVO,
 			HobbyCategoryVO hobbyCategoryVO,MultipartFile picture) {
-		//////////////////////////////////////////////////위는 파일 업로드 아래는 모임 개설 신청
+		//////////////////////////////////////////////////
 		String tags[] = request.getParameterValues("hashtag");
 		System.out.println(tags[0]+","+tags[1]);
 		System.out.println("controller 1");
@@ -134,8 +137,15 @@ public class GroundController {
 	
 	
 	@RequestMapping("ground-home.do")
-	public String groundHome(GroundVO groundVO) {
-		
+	public String groundHome(GroundVO groundVO,Model model,String id) {
+		System.out.println(id);
+		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);
+		model.addAttribute("gvo",gvo);
 		return "ground/ground-home.tiles";
+	}
+	
+	@RequestMapping("groundPost.do")
+	public String groundPost() {
+		return "ground/ground-board.tiles";
 	}
 }
