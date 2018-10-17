@@ -253,6 +253,9 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
+	public void registergroundschedule(ScheduleVO scheduleVO) {
+		groundMapper.registergroundschedule(scheduleVO);
+	}
 	public void participateGround(String groundNo) {
 		Map<String,String> map = new HashMap<String,String>();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -260,6 +263,7 @@ public class GroundServiceImpl implements GroundService {
 		map.put("id", ((MemberVO)authentication.getPrincipal()).getId());
 		groundMapper.participateGround(map);	
 		
+
 	}
 
 	

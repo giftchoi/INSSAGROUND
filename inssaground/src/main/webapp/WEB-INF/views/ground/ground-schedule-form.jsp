@@ -1,151 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-    <script> 
-                  var address = null; 
- 
-                  function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수 
-                    getAddr(); 
-                   // var latVal = ${boardDTO.lat}; // 게시글 DTO에서 위도값을 가져옴 
-                   // var lngVal = ${boardDTO.lon}; // 게시글 DTO에서 경도값을 가져옴 
-                    var mapLocation = {lat: latVal, lng: lngVal}; // 위도, 경도를 가지는 객체를 생성 
-                /*     var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
- 
-                      zoom: 18, // 확대 정도(ZOOM) 
-                      center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함 
-                    });
- 
-                     */
- 
-                    var mapOptions = { 
-                            center: mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수) 
-                            zoom: 18, // 지도 zoom단계
-                             mapTypeId: google.maps.MapTypeId.ROADMAP 
-                          };
- 
-                          var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함 
-                              mapOptions);                      
-                           var size_x = 60; // 마커로 사용할 이미지의 가로 크기 
-                          var size_y = 60; // 마커로 사용할 이미지의 세로 크기                             
- 
-                          // 마커로 사용할 이미지 주소 
-                          var image = new google.maps.MarkerImage( 'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
- 
-                                              new google.maps.Size(size_x, size_y),
- 
-                                              '',
- 
-                                              '',
- 
-                                              new google.maps.Size(size_x, size_y));
- 
-                             
- 
-                          var marker; 
-                          marker = new google.maps.Marker({ 
-                                 position: mapLocation, // 마커가 위치할 위도와 경도(변수) 
-                                 map: map, 
-                                 icon: image, // 마커로 사용할 이미지(변수) 
-                                 title: "(님) 의 거래 희망 위치" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀 
-                          });                      
- 
-                          var content = " 님은 "+address+" 근처에서 거래를 희망합니다."; // 말풍선 안에 들어갈 내용
-                              
- 
-                          // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
- 
-                          var infowindow = new google.maps.InfoWindow({ content: content});
- 
-                     
- 
-                          google.maps.event.addListener(marker, "click", function() {
- 
-                              infowindow.open(map,marker);
- 
-                          });
- 
-                             
- 
-                     
- 
-                    /*
- 
-                     단순한 마커로 default로 표시할 때 쓰는 마커 세팅
- 
-                    var marker = new google.maps.Marker({
- 
-                        position: uluru,
- 
-                        map: map
- 
-                      });
- 
-                      
- 
-                     */
- 
-                  }
- 
-                </script>
- 
-                <!--
- 
-                    아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
- 
-                    key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
- 
-                 -->
-    <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5SdQEpXu8yvoL0BTV_NWd1A2IphazMLg&callback=initMap">
 
-</script>
-    <style type="text/css">
-	#map{
-		width: 100%;
-		height: 400px;
-		background-color: grey;
-	}
-
-</style>
     
 <div class="col-sm-12 main-content">
 	<div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">일정 등록</h1>
-			<form method="post" action="registerMember.do" id="regForm">
+			<form method="post" action="registergroundschedule.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
 				<div class="input-container">
-					<span id="profile-img"></span>
+					제목<br>
+					<input type="text"  maxlength="30" required="required" name="title" />
 				</div>
 				<div class="input-container">
-					아이디<br>
-					<input type="text"  maxlength="30" required="required" name="id" id="memberId"/>
-					<span class="right-space" id="idCheckView"></span>
+					참여 인원 제한<br>
+					<pre><input type="number"  required="required" name="maxPersonnel"/></pre>			
 				</div>
 				<div class="input-container">
-					이름<br>
-					<input type="text" maxlength="15" required="required" name="name"/>
-					<span class="right-space"id=""></span>					
+					시작 날짜<br>
+					<input type="date"  required="required" name="startDate"/>					
 				</div>
 				<div class="input-container">
-					패스워드<br>
-					<input type="password" maxlength="30" required="required" name="password"/>
-					<span class="right-space" id=""></span>
+					종료 날짜<br>
+					<input type="date"  required="required" name="endDate"/>					
 				</div>
-				<div class="input-container">
-					패스워드 확인<br>
-					<input type="password"maxlength="30"  required="required" name="passwordOk"/>
-					<span class="right-space" id="pwCheckView"></span>
-				</div>
-				<div class="input-container">
-					이메일<br>
-					<input type="email" maxlength="30" required="required" name="email"/> 
-					<span class="right-space" id="sendEmailKey">
-						<input type="button" id="sendEmail" class="btn btn-red" value="인증번호 받기">
-					</span>
-				</div>
-				<div id="map">
 				
+				<div class="input-container">
+					내용<br>
+					<textarea rows="10" cols="70"></textarea> 
+					
 				</div>
+					<input type="text" id="sample5_address" placeholder="주소" name="loc">
+					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+
+
+<!--  -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3cc29a99b5ee4b2a2512b8b0c05ea88&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = data.address; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 기본 주소가 도로명 타입일때 조합한다.
+                if(data.addressType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = fullAddr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
+<!--  -->				
+			
+	
 				<div>
 				<input type="submit" class="btn btn-red" value="회원가입" id="regBtn"><br>
 				</div>

@@ -9,13 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
+
 import org.kosta.inssaground.model.service.MemberService;
+
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
+import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+
+import org.kosta.inssaground.model.vo.ScheduleVO;
+
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
@@ -180,5 +186,24 @@ public class GroundController {
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm() {
 		return "ground/ground-schedule-form.tiles";
+	}
+	
+	@PostMapping("registergroundschedule.do")
+	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO) {
+		System.out.println("1. "+scheduleVO);
+		System.out.println("2. "+groundVO);
+		System.out.println("3. "+insiderVO);
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		insiderVO.setMemberVO(mvo);
+		groundVO.setGroundNo("30");
+		scheduleVO.setInsiderVO(insiderVO);
+		scheduleVO.setGroundVO(groundVO);
+		groundService.registergroundschedule(scheduleVO);
+		return "redirect:home.do";
+	}
+	
+	@RequestMapping("groundScheduleList.do")
+	public String groundScheduleView() {
+		return "ground/ground-schedule-list.tiles";
 	}
 }

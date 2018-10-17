@@ -125,5 +125,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where g.ground_no=i.ground_no
 		and g.ground_no=#{groundNo}
 	</select> 
+	
+	<insert id="registergroundschedule" parameterType="scheduleVO">
+		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
+		values(schedule_seq.nextval,to_date(#{startDate}),to_date(#{endDate}),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
+	</insert>
+	
+	
 </mapper>
  

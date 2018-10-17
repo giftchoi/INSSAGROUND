@@ -47,11 +47,10 @@ public interface GroundService {
 	public ListVO<GroundVO>	getAllGroundList();
 	public void participateGround(String groundNo);	// 모임 참여하기
 	
-	public void groundHashtag(String tags[],GroundVO groundVO);
-	
+	public void groundHashtag(String tags[],GroundVO groundVO);	
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
-
+	public void registergroundschedule(ScheduleVO scheduleVO);
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
 	

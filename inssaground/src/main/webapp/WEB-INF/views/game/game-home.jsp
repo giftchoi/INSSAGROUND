@@ -38,17 +38,6 @@
 					onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">게임
 					등록</button>
 			</span>
-			<ul class="game-category-list">
-				<li data-filter=".smallscale"
-					onclick="location.href='${pageContext.request.contextPath}/gameHome.do'">
-					<h3>공식 게임</h3>
-				</li>
-				<li data-filter=".largescale"
-					onclick="location.href='${pageContext.request.contextPath}/gameCustom.do'">
-					<h3>사용자 게임</h3>
-				</li>
-			</ul>
-
 
 
 
