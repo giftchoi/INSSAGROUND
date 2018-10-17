@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
@@ -31,8 +32,17 @@ public interface MemberMapper {
 
 	void updateTempPassword(MemberVO vo);
 
+	List<Map<String,String>> myGroundNoList(String id);
+
+
 	void registerProfile(MemberVO mvo);
 
-	List<String> myGroundNoList(String id);
+	String getProfileIMGName(String id);
+
+	void deleteProfileIMG(String id);
+
+	void revokeRole(String id);
+
+	void changeMemberStatus(String id);
 
 }

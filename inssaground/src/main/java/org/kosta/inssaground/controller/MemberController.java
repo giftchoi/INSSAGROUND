@@ -6,6 +6,8 @@ import java.util.List;
 import org.kosta.inssaground.model.service.MemberService;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +57,6 @@ public class MemberController {
 	public String checkEmailKey(String email, String inputKey) {
 		return memberService.checkEmailKey(email, inputKey);
 	}
-	
 	@RequestMapping("findIdForm.do")
 	public String findIdForm() {
 		return "member/findId-form.tiles";
@@ -79,12 +80,26 @@ public class MemberController {
 		}
 		return "member/findpassword-result.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("mypage.do")
 	public String mypage() {
 		return "member/mypage.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("modifyMemberForm.do")
 	public String modifyMemberForm(Model model) {
 		return "member/modify-member-form.tiles";
+	}
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("withdrawForm.do")
+	public String withdrawForm() {
+		return "member/withdraw";
+	}
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("withdraw.do")
+	public String withdraw() {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		memberService.withdrawMember(mvo);
+		return "member/link-logout";
 	}
 }

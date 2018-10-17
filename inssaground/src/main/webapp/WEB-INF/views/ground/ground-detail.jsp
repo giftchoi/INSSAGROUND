@@ -3,6 +3,20 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+	$(document).ready(function(){	
+		$("#participateBtn").click(function(){
+			//window.close();
+			//window.open("home.do");
+			//window.top.close();
+			window.open('','_self','');
+			window.close();
+			opener.document.location.href="participateGround.do?groundNo="+${groundVO.groundNo};
+			//self.close();
+		});
+
+	});
+</script>
 <div>
 	<div class="row ground-bg-area">
 		<div class="col-sm-12">
@@ -46,19 +60,34 @@
 
 	</div>
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12 btnArea">
 			<sec:authentication var="principal" property="principal" />
 			<c:set var="isInssa" value="false" />
-			<c:forEach items="${principal.groundNoList}" var="groundNo">
+			<c:forEach items="${principal.groundNoList}" var="ground">
 				<c:if test="${not isInssa }">
-					<c:if test="${groundNo eq groundVO.groundNo }">
-						<input class="btn btn-red" type="button" value="모임 홈">
+					<c:if test="${ground.GROUNDNO eq groundVO.groundNo }">
+					<c:choose>
+						<c:when test="${ground.STATUS eq 1}">
+							<input class="btn btn-red" type="button" value="모임 홈">
+						</c:when>
+						<c:otherwise>
+							<input class="btn" type="button" value="참여 대기중">
+						</c:otherwise>
+					</c:choose>
 						<c:set var="isInssa" value="true"/>
 					</c:if>
 				</c:if>
 			</c:forEach>
 			<c:if test="${not isInssa}">
-				<input class="btn btn-red" type="button" value="참여신청">
+				<c:choose>
+					<c:when test="${groundVO.participants< groundVO.maxPersonnel }">
+						<input class="btn btn-red" id="participateBtn" type="button" value="참여신청">
+					</c:when>
+					<c:otherwise>
+						<input class="btn" id="" type="button" value="정원초과">
+					</c:otherwise>
+				</c:choose>
+				
 			</c:if>
 		</div>
 	</div>

@@ -7,8 +7,12 @@
 	$(document)
 			.ready(function() {
 				$(".search-list-area").on("click",".card.ground",function() {
-					$('div.modal').modal();
+					 $('div.modal').modal();
 					$('.modal-content').load("groundDetail.do?groundNo="+ $(this).find("input[type=hidden]").val());
+					//window.showModalDialog("groundDetail.do?groundNo="+ $(this).find("input[type=hidden]").val(), self, "dialogLeft:0px; dialogTop:0px; dialogWidth:200px; dialogHeight:200px");
+				/* 	alert();
+					var modal = window.showModalDialog("ground-detail.jsp",null,"dialogWidth:980px;dialogHeight:600px;status:no;help:no;location:no");
+					 */
 				});//click
 						$("#sido").change(function() {
 							var sido = $(this).val();
@@ -208,7 +212,10 @@
 
 <div class="modal" id="myModal">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
-		<div class="modal-content"></div>
+		<div class="modal-content">
+		<input type="hidden" name="modalParent"  value=self>
+		
+		</div>
 	</div>
 </div>
 

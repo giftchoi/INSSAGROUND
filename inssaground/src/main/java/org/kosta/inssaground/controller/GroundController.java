@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
+
+import org.kosta.inssaground.model.service.MemberService;
+
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -16,7 +19,9 @@ import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+
 import org.kosta.inssaground.model.vo.ScheduleVO;
+
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
@@ -34,7 +39,9 @@ public class GroundController {
 	private GroundService groundService;
 	@Resource
 	private HobbyService hobbyService;
-
+	
+	@Resource
+	private MemberService memberService;
 	
 	/**
 	 * 전체 모임 목록을 불러오기 위한 메소드
@@ -87,7 +94,30 @@ public class GroundController {
 		model.addAttribute("groundVO", groundVO);
 		return "ground/ground-detail";
 	}
+	
+	/**
+	 * 모임 참여 신청하기
+	 * @param paramVO
+	 * @param model
+	 * @return
+	 */
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("participateGround.do")
+	public String participateGround(String groundNo) {
+		//1.insider 테이블에 추가
+		groundService.participateGround(groundNo);
+		//2.세션 리스트 변경
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mvo.setGroundNoList(memberService.myGroundNoList(mvo.getId()));
+		
+		return "redirect:participateGroundResult.do";
+	}
 
+	@RequestMapping("participateGroundResult.do")
+	public String participateGroundResult() {
+		return "ground/ground-participate-result.tiles";
+	}
+	
 	@ResponseBody
 	@RequestMapping("getSigungu.do")
 	public List<SigunguVO> getSigungu(String sidoNo) {

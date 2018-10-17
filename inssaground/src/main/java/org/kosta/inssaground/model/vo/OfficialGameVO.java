@@ -9,11 +9,14 @@ public class OfficialGameVO {
 	private String materials;
 	private String content;
 	private String id;
+	private int cgNo;
+	
 	public OfficialGameVO() {
 		super();
 	}
+
 	public OfficialGameVO(String oGameNo, String title, int minPersonnel, int maxPersonnel, int gameTime,
-			String materials, String content, String id) {
+			String materials, String content, String id, int cgNo) {
 		super();
 		this.oGameNo = oGameNo;
 		this.title = title;
@@ -23,7 +26,9 @@ public class OfficialGameVO {
 		this.materials = materials;
 		this.content = content;
 		this.id = id;
+		this.cgNo = cgNo;
 	}
+
 	public String getoGameNo() {
 		return oGameNo;
 	}
@@ -72,11 +77,21 @@ public class OfficialGameVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public int getCgNo() {
+		return cgNo;
+	}
+
+	public void setCgNo(int cgNo) {
+		this.cgNo = cgNo;
+	}
+
 	@Override
 	public String toString() {
 		return "OfficialGameVO [oGameNo=" + oGameNo + ", title=" + title + ", minPersonnel=" + minPersonnel
 				+ ", maxPersonnel=" + maxPersonnel + ", gameTime=" + gameTime + ", materials=" + materials
-				+ ", content=" + content + ", id=" + id + "]";
+				+ ", content=" + content + ", id=" + id + ", cgNo=" + cgNo + "]";
 	}
+	
 	
 }
