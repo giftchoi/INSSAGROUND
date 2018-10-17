@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
-import org.kosta.inssaground.model.vo.GroundVO;
-import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 
 @Mapper

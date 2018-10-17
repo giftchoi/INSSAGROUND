@@ -66,7 +66,8 @@ public class GroundController {
 		if(nowPage==null) nowPage = "1";
 		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
 	}
-	
+
+
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
@@ -147,5 +148,10 @@ public class GroundController {
 	@RequestMapping("groundPost.do")
 	public String groundPost() {
 		return "ground/ground-board.tiles";
+	}
+	
+	@RequestMapping("groundScheduleForm.do")
+	public String groundScheduleForm() {
+		return "ground/ground-schedule-form.tiles";
 	}
 }
