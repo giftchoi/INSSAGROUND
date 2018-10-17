@@ -14,7 +14,6 @@
 			opener.document.location.href="participateGround.do?groundNo="+${groundVO.groundNo};
 			//self.close();
 		});
-
 	});
 </script>
 <div>
@@ -68,7 +67,7 @@
 					<c:if test="${ground.GROUNDNO eq groundVO.groundNo }">
 					<c:choose>
 						<c:when test="${ground.STATUS eq 1}">
-							<input class="btn btn-red" type="button" value="모임 홈">
+							<a class="btn btn-red"  href="ground-home.do?groundNo=${groundVO.groundNo}">모임 홈페이지</a>
 						</c:when>
 						<c:otherwise>
 							<input class="btn" type="button" value="참여 대기중">
