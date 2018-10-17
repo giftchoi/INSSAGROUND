@@ -33,40 +33,66 @@ li.dropdown {
 
 <sec:authorize access="!hasRole('ROLE_MEMBER')">
 <ul>
-	<li><a  href="loginForm.do">LOGIN</a></li>
-	<li><a href="registerForm.do">JOIN US</a></li>
+   <li><a  href="loginForm.do">LOGIN</a></li>
+   <li><a href="registerForm.do">JOIN US</a></li>
 </ul>
 </sec:authorize>
-<sec:authorize access="hasRole('ROLE_MEMBER')">
+<sec:authorize access="!hasRole('ROLE_ADMIN') and hasRole('ROLE_MEMBER')">
 <ul>
-	<li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
-	<li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
-	<div class="dropdown-content">
-	<a  href="loginForm.do">MY GROUND</a>
-		<a href="registerForm.do">MY SCHEDULE</a>
-		<a href="registerForm.do">MY GAME PROGRAM</a>
-		<a href="viewMemberInfo.do">MY INFO</a>
-		<a href="withdrawForm.do">WITHDRAW</a>
-		</div>
-	</li>
-	<li><a href="#" id="logoutAction">LOGOUT</a></li>
+   <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
+   <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
+   <div class="dropdown-content">
+   <a  href="loginForm.do">MY GROUND</a>
+      <a href="registerForm.do">MY SCHEDULE</a>
+      <a href="registerForm.do">MY GAME PROGRAM</a>
+      <a href="viewMemberInfo.do">MY INFO</a>
+      <a href="withdrawForm.do">WITHDRAW</a>
+      </div>
+   </li>
+   <li><a href="#" id="logoutAction">LOGOUT</a></li>
 </ul>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#logoutAction").click(function() {
-				$("#logoutForm").submit();
-			});
-		});
-	</script>
-	<form id="logoutForm"
-		action="${pageContext.request.contextPath}/logout.do" method="post"
-		style="display: none">
-		<sec:csrfInput />
-	</form>	
+   <script type="text/javascript">
+      $(document).ready(function() {
+         $("#logoutAction").click(function() {
+            $("#logoutForm").submit();
+         });
+      });
+   </script>
+   <form id="logoutForm"
+      action="${pageContext.request.contextPath}/logout.do" method="post"
+      style="display: none">
+      <sec:csrfInput />
+   </form>   
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROLE_MEMBER')">
+<ul>
+   <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
+   <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">ADMIN PAGE</a>
+   <div class="dropdown-content">
+   <a  href="loginForm.do">MY GROUND</a>
+      <a href="registerForm.do">MY SCHEDULE</a>
+      <a href="registerForm.do">MY GAME PROGRAM</a>
+      <a href="viewMemberInfo.do">MY INFO</a>
+      <a href="withdrawForm.do">WITHDRAW</a>
+      </div>
+   </li>
+   <li><a href="#" id="logoutAction">LOGOUT</a></li>
+</ul>
+   <script type="text/javascript">
+      $(document).ready(function() {
+         $("#logoutAction").click(function() {
+            $("#logoutForm").submit();
+         });
+      });
+   </script>
+   <form id="logoutForm"
+      action="${pageContext.request.contextPath}/logout.do" method="post"
+      style="display: none">
+      <sec:csrfInput />
+   </form>   
 </sec:authorize>
 </div>
 <div class="bottom-header">
-
 <ul>
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
 	<li><a href="#">FIND HOBBY</a></li>
