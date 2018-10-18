@@ -239,4 +239,13 @@ public class GroundController {
 		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
 		return "ground/ground-schedule-list.tiles";
 	}
+	
+	@RequestMapping("groundScheduleDetail.do")
+	public String groundScheduleDetail(String scheduleNo,Model model) {
+		System.out.println(scheduleNo);
+		ScheduleVO scheduleVO = new ScheduleVO();
+		scheduleVO.setScheduleNo(scheduleNo);
+		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));		
+		return "ground/ground-schedule-detail.tiles";
+	}
 }
