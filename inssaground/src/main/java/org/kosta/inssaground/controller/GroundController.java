@@ -200,13 +200,13 @@ public class GroundController {
 	
 	@RequestMapping("groundPost.do")
 	public String groundPost() {
-		return "ground/ground-board.tiles";
+		return "ground/home/ground-board.tiles";
 	}
 	
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
 		System.out.println(groundNo);
-		return "ground/ground-schedule-form.tiles";
+		return "ground/home/ground-schedule-form.tiles";
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
@@ -237,7 +237,7 @@ public class GroundController {
 		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
-		return "ground/ground-schedule-list.tiles";
+		return "ground/home/ground-schedule-list.tiles";
 	}
 	
 	@RequestMapping("groundScheduleDetail.do")
@@ -246,6 +246,6 @@ public class GroundController {
 		ScheduleVO scheduleVO = new ScheduleVO();
 		scheduleVO.setScheduleNo(scheduleNo);
 		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));		
-		return "ground/ground-schedule-detail.tiles";
+		return "ground/home/ground-schedule-detail.tiles";
 	}
 }
