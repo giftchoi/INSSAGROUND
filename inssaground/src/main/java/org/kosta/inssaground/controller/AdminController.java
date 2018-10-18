@@ -29,4 +29,11 @@ public class AdminController {
 		model.addAttribute("groundList", gList);
 		return "admin/apply-ground-list.tiles";
 	}
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("applyGroundDetail.do")
+	public String applyGroundDetail(String groundNo,Model model) {
+		GroundVO groundVO = adminService.getGroundDetail(groundNo);
+		model.addAttribute("groundVO", groundVO);
+		return "admin/apply-ground-detail.tiles";
+	}
 }

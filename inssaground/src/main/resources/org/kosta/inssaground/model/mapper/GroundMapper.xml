@@ -163,5 +163,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rnum between #{startRowNumber} and #{endRowNumber}
 		order by ground_no desc
 	</select>
+	<select id="getHashtagList" resultType="string">
+		select content from ground_hashtag where ground_no=#{value}
+	</select>
 </mapper>
  
