@@ -1,9 +1,12 @@
 package org.kosta.inssaground.controller;
 
 import org.kosta.inssaground.model.service.AdminService;
+import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.ListVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,5 +21,12 @@ public class AdminController {
 	public String adminMain() {
 		System.out.println("adminMain");
 		return "admin/main.tiles";
+	}
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("readyApplyGround.do")
+	public String getReadyApplyGround(Model model,String pageNo) {
+		ListVO<GroundVO> gList=adminService.applyGroundList(pageNo);
+		model.addAttribute("groundList", gList);
+		return "admin/apply-ground-list.tiles";
 	}
 }

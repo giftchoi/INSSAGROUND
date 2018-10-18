@@ -35,5 +35,9 @@ public interface GroundMapper {
 	void registergroundschedule(ScheduleVO scheduleVO);
 
 	void participateGround(Map<String,String> map);
+	
+	/*JISUN*/
+	int getTotalApplyGroundList();
+	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
 
 }

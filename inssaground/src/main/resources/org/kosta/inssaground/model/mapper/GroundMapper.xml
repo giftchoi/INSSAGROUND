@@ -129,6 +129,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(schedule_seq.nextval,to_date(#{startDate}),to_date(#{endDate}),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
 	</insert>
 	
-	
+	<!-- JISUN -->
+	<select id="getTotalApplyGroundList" resultType="int">
+		select count(*) from ground where status=0
+	</select>
+	<select id="getApplyGroundList" resultType="groundVO" parameterType="pagingBean">
+	SELECT ag.* FROM(
+				SELECT row_number() over(order by ground_no desc) as rnum,
+				ground_no, ground_name, master
+				FROM ground where status=0
+		) ag
+		where rnum between #{startRowNumber} and #{endRowNumber}
+		order by ground_no desc
+	</select>
 </mapper>
  
