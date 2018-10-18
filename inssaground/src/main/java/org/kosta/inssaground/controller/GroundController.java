@@ -168,7 +168,7 @@ public class GroundController {
 	
 	@RequestMapping("groundMasterPage.do")
 	public String groundMasterPage() {
-		return "ground/ground-master-page.tiles";
+		return "ground/home/ground-master-page.tiles";
 	}
 	
 	@RequestMapping("groundMasterReadyList.do")
@@ -178,7 +178,7 @@ public class GroundController {
 		System.out.println(groundNo);
 		System.out.println(readyList);
 		model.addAttribute("readyList",readyList);
-		return "ground/ground-master-ready-list.tiles";
+		return "ground/home/ground-master-ready-list.tiles";
 	}
 	@PostMapping("approveParticipation.do")
 	public String approveParticipation(InsiderVO insiderVO) {
