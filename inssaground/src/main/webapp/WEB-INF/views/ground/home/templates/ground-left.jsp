@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-=======
-	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
->>>>>>> branch 'master' of https://github.com/giftchoi/INSSAGROUND.git
+
 <div class="col-lg-12  col-md-12 meta-details">
 	<ul class="tags">
 		<li><a href="#">Food,</a></li>
@@ -38,8 +35,6 @@
 					<a href="groundMasterPage.do">모임 관리</a> <span class="lnr lnr-eye"></span>
 				</p>
 			</c:if>
-
-		
 		<!-- <ul class="social-links col-lg-12 col-md-12 col-6">
 											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
