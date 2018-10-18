@@ -87,6 +87,17 @@ public class GroundServiceImpl implements GroundService {
 		return new ListVO<GroundVO>(pagingBean,groundMapper.getAllGroundList(pagingBean));
 	}
 
+	@Override
+	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage) {
+		System.out.println("공지리스트:"+groundNo);
+		int noticeCount = groundMapper.getGroundNoticeCount(groundNo);
+		PagingBean pagingBean = new PagingBean(noticeCount, Integer.parseInt(nowPage));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingBean", pagingBean);
+		map.put("groundNo",groundNo);
+		return new ListVO<NoticeVO>(pagingBean ,groundMapper.getAllGroundNoticeList(map));
+	}
+
 	
 	
 	
@@ -122,6 +133,7 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public void registerGroundNotice(NoticeVO noticeVO) {
 		// TODO Auto-generated method stub
+		groundMapper.registerGroundNotice(noticeVO);
 
 	}
 
@@ -266,10 +278,8 @@ public class GroundServiceImpl implements GroundService {
 
 	}
 
-	@Override
-	public List<ScheduleVO> grouondScheduleList(GroundVO groundVO) {
-		return groundMapper.grouondScheduleList(groundVO);
-	}
+	
+
 	public List<MemberVO> getParticipationReadyList(String groundNo) {
 		// TODO Auto-generated method stub
 		return groundMapper.getParticipationReadyList(groundNo);
@@ -284,6 +294,31 @@ public class GroundServiceImpl implements GroundService {
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {		
 		return groundMapper.findGroundScheduleByScheduleNo(scheduleVO);
 	}
+
+	@Override
+
+	public NoticeVO getNoticeDetailByNo(String noticeNo) {
+		// TODO Auto-generated method stub
+		return groundMapper.getNoticeDetailByNo(noticeNo);
+	}
+
+
+	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo) {
+		int totalCount = groundMapper.groundScheduleTotalCount(groundVO);
+		PagingBean pagingBean = null;
+		if(pageNo == null) {
+			pagingBean = new PagingBean(totalCount);			
+		}else {
+			pagingBean = new PagingBean(totalCount,Integer.parseInt(pageNo));	
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groundVO",groundVO);
+		map.put("pagingBean",pagingBean);
+		List<ScheduleVO> list = groundMapper.grouondScheduleList(map);
+		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
+		return listVO;
+	}
+
 
 	
 

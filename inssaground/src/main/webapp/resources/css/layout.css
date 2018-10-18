@@ -340,3 +340,66 @@ li a:hover{
 .search-list-area{
 	
 }
+
+/* css for flat table */
+table.myTable  {
+  text-align: left;
+  line-height: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid #ff1a1a;
+  width: 700px;
+  margin: 50px auto;
+  border-radius: .25rem;
+  font-size:18px;
+  color:#000;
+}
+.myTable  thead tr:first-child {
+  background: #ff1a1a;
+  color: #fff ;
+  border: none;
+}
+.myTable  th:first-child,
+.myTable  td:first-child {
+	 font-size:22px;
+  padding: 0 15px 0 20px;
+}
+
+.myTable  th {
+  font-weight: 500;
+  font-size:20px;
+  text-align:center;
+}
+
+.myTable  thead tr:last-child th {
+  border-bottom: 3px solid #ddd;
+}
+
+.myTable a{
+	text-decoration: none;
+	color:#000;
+	
+}
+
+.myTable  tbody tr:last-child td {
+  border: none;
+}
+
+.myTable  tbody td {
+	text-align:center;
+	font-size:18pxl
+  border-bottom: 1px solid #ddd;
+}
+
+.myTable  .button {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+.myTable  .edit:hover {
+  color: #0a79df;
+}
+.myTable  .delete:hover {
+  color: #dc2a2a;
+}

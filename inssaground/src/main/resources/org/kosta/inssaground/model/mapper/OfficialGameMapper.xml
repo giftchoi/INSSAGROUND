@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateOfficialGame" parameterType="officialGameVO">
 		update OFFICIAL_GAME
 		set
-		title=#{title},content=#{content},min_personnel=#{minPersonnel}, max_personnel=#{maxPersonnel}, game_time=#{gameTime},
+		title=#{title},min_personnel=#{minPersonnel}, max_personnel=#{maxPersonnel}, game_time=#{gameTime},
 		materials=#{materials}, content=#{content}, cg_no=#{cgNo}
 		where o_game_no=#{oGameNo}
 	</update>
