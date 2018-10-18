@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select g.*,s.sigungu_name as area, h.name as hobby
 		from (
 					select row_number() over (order by ground_no) as row_no,g.*
-					from ground g) g, sigungu s, hobby h 
-					where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
+					from ground g  where g.status=1) g, sigungu s, hobby h 
+					where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
 	
 	</select>
 	<select id="searchGroundTest" parameterType="map" resultType="groundVO">
