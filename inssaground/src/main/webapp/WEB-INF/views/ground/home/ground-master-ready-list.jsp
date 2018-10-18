@@ -3,67 +3,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style>
-table {
-  text-align: left;
-  line-height: 40px;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 2px solid #ff1a1a;
-  width: 700px;
-  margin: 50px auto;
-  border-radius: .25rem;
-  font-size:20px;
-}
 
-thead tr:first-child {
-  background: #ff1a1a;
-  color: #fff;
-  border: none;
-}
-
-th:first-child,
-td:first-child {
-  padding: 0 15px 0 20px;
-}
-
-th {
-  font-weight: 500;
-  text-align:center;
-}
-
-thead tr:last-child th {
-  border-bottom: 3px solid #ddd;
-}
-
-tbody tr:hover {
-  background-color: #f2f2f2;
-  cursor: default;
-}
-
-tbody tr:last-child td {
-  border: none;
-}
-
-tbody td {
-	text-align:center;
-	font-size:18pxl
-  border-bottom: 1px solid #ddd;
-}
-
-.button {
-  color: #aaa;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-top: -4px;
-}
-
-.edit:hover {
-  color: #0a79df;
-}
-
-.delete:hover {
-  color: #dc2a2a;
-}
 </style>
 <script>
 	$(document).ready(function(){
@@ -83,7 +23,7 @@ tbody td {
 	});//ready
 </script>
 
-<table>
+<table class="myTable">
 <thead>
 	<tr>
 		<th colspan="5"> 모임 참여 대기 회원 </th>

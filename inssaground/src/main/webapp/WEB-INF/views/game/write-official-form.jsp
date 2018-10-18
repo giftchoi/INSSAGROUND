@@ -31,9 +31,9 @@
 
 <div class="container-contact100">
    <div class="wrap-contact100">
-      <form class="contact100-form" action="${pageContext.request.contextPath}/writeCustomGame.do" method="post" id="write_form">
+      <form class="contact100-form" action="${pageContext.request.contextPath}/writeOfficialGame.do" method="post" id="write_form">
          <sec:csrfInput/>
-         <span class="contact100-form-title">게임 작성하기</span>
+         <span class="contact100-form-title">공식 게임 작성하기</span>
 
          <div class="wrap-input100 bg1">
             <span class="label-input100">제목</span> <input

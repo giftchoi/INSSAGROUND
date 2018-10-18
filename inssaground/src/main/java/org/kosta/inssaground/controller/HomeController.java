@@ -24,4 +24,8 @@ public class HomeController {
 	public String ourTeam() {
 		return "home/team.tiles";
 	}
+	@RequestMapping("accessDeniedView.do")
+	public String accessDeniedView() {
+		return "home/accessDeniedView";
+	}
 }

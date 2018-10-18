@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.service.MemberService;
+import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -18,6 +19,7 @@ import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.NoticeVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
@@ -165,7 +167,7 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
-	
+	/*Ground Master */
 	@RequestMapping("groundMasterPage.do")
 	public String groundMasterPage() {
 		return "ground/home/ground-master-page.tiles";
@@ -187,7 +189,57 @@ public class GroundController {
 		
 		return "home.tiles";
 	}
+	/**
+	 *  싸장- 모임 공지 등록 폼으로 이동
+	 * @return
+	 */
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("groundNoticeRegisterForm.do")
+	public String registerGroundNoticeForm() {
+		return "ground/home/ground-notice-regist-form.tiles";
+	}
 	
+	/**
+	 *  싸장 - 모임 공지 등록
+	 * @param noticeVO
+	 * @return
+	 */
+	@Secured("ROLE_MEMBER")
+	@PostMapping("groundNoticeRegister.do")
+	public String registerGroundNotice(NoticeVO noticeVO) {
+		System.out.println("groundNoticeRegister:"+noticeVO.getGroundNo()+","+noticeVO.getContent());
+		groundService.registerGroundNotice(noticeVO);
+		return "home.tiles";
+	}
+	/**
+	 *  인싸 - 공지 게시판 보기
+	 * @param groundVO
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("groundNoticeList.do")
+	public String groundNoticeList(Model model,String groundNo,String nowPage) {
+		if(nowPage==null)nowPage="1";
+		ListVO<NoticeVO> noticeList = groundService.getAllGroundNoticeList(groundNo,nowPage);
+
+		model.addAttribute("listVO",noticeList);
+		return "ground/home/ground-notice-list.tiles";
+	}
+	/**
+	 *  인싸 - 공지 상세 보기
+	 * @param groundVO
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("groundNoticeDetail.do")
+	public String groundNoticeDetail(Model model,String noticeNo) {
+		NoticeVO noticeVO = groundService.getNoticeDetailByNo(noticeNo);
+		model.addAttribute("noticeVO",noticeVO);
+		return "ground/home/ground-notice-detail.tiles";
+	}
+
 	@RequestMapping("ground-home.do")
 	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
 		System.out.println("ground-home: "+groundVO.getGroundNo());
@@ -233,10 +285,16 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleList(HttpSession session,Model model) {
-		
+
+	public String groundScheduleList(HttpSession session,Model model,String pageNo) {		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
+		System.out.println("controller1");
+		System.out.println("controller2");
+		ListVO<ScheduleVO> listVO = groundService.groundSchedulePagingBean(groundVO, pageNo);	
+		System.out.println("controller3");
+		System.out.println(listVO);
+		System.out.println("controller4");		
+		model.addAttribute("sList",listVO);
 		return "ground/home/ground-schedule-list.tiles";
 	}
 	

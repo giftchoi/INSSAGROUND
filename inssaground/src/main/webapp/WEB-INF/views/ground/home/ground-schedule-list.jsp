@@ -14,7 +14,7 @@
 									<div class="feature-img">
 										<h3 class="mt-20 mb-20">일정 리스트</h3>	
 						<table>
-										<c:forEach items="${sList}" var="list">
+										<c:forEach items="${sList.list}" var="list">
 							<td>
 								<div class="card ground">
 									
@@ -57,6 +57,34 @@
 					</tr>
 				</table>
 				<a href="groundScheduleForm.do">모임 등록 하기</a>
+				<!-- 페이징 -->
+							<div class="pagingInfo">
+				<c:set var="pb" value="${requestScope.sList.pagingBean}" />
+
+				<ul class="pagination pagination-lg pagination-centered">
+					<c:if test="${pb.previousPageGroup}">
+						<li><a class="page" href="">&laquo;</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=i}">
+								<li><a class="page">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="active"><a href="#">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+	&nbsp;
+	</c:forEach>
+					<c:if test="${pb.nextPageGroup}">
+						<li><a class="page" href="">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</div>
+				
+				
+				
+				<!--  -->
 									</div>								
 								</div>
 								<div class="col-lg-3  col-md-3 meta-details">
