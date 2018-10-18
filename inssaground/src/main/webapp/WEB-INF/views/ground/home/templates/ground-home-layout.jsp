@@ -37,11 +37,20 @@
    		<tiles:insertAttribute name="header"></tiles:insertAttribute>
 	</div>
 	<div class="row main">
+	<div class="col-sm-1">
+		<tiles:insertAttribute name="left"></tiles:insertAttribute>
+	</div>
+	<div class="col-sm-9">
 		<tiles:insertAttribute name="main"></tiles:insertAttribute>
+	</div>
+		<div class="col-sm-2">
+		<tiles:insertAttribute name="right"></tiles:insertAttribute>
+	</div>
 	</div>
 	<div class="row footer">
 		<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 	</div>
+	
    </div>
 </body>
 </html>
