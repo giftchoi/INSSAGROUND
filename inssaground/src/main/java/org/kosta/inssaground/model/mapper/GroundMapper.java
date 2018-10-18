@@ -34,7 +34,7 @@ public interface GroundMapper {
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
 	List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
-
+	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
 
 	void participateGround(Map<String,String> map);

@@ -144,7 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select content,end_date,start_date,ground_no,id,loc,max_personnel,schedule_no,title
 		from schedule where ground_no=#{groundNo}
 	</select>
-	
+
 	<select id="findGroundScheduleByScheduleNo" parameterType="scheduleVO" resultMap="scheduleRM">
 		select content,end_date,start_date,ground_no,id,loc,max_personnel,schedule_no,title
 		from schedule where schedule_no=#{scheduleNo}
