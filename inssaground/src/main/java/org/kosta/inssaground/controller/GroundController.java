@@ -10,9 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
-
 import org.kosta.inssaground.model.service.MemberService;
-
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -20,9 +18,7 @@ import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
-
 import org.kosta.inssaground.model.vo.ScheduleVO;
-
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
@@ -103,7 +99,7 @@ public class GroundController {
 	 * @return
 	 */
 	@Secured("ROLE_MEMBER")
-	@RequestMapping("participateGround.do")
+	@PostMapping("participateGround.do")
 	public String participateGround(String groundNo) {
 		//1.insider 테이블에 추가
 		groundService.participateGround(groundNo);
@@ -169,11 +165,28 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
-	@RequestMapping("groundMasterReadyList.do")
-	public String groundMasterReadyList() {
-		return "ground/ground-master-ready-list.tiles";
+	
+	@RequestMapping("groundMasterPage.do")
+	public String groundMasterPage() {
+		return "ground/home/ground-master-page.tiles";
 	}
 	
+	@RequestMapping("groundMasterReadyList.do")
+	public String groundMasterReadyList(HttpSession session,Model model) {
+		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
+		List<MemberVO> readyList = groundService.getParticipationReadyList(groundNo);
+	/*	System.out.println(groundNo);
+		System.out.println(readyList);*/
+		model.addAttribute("readyList",readyList);
+		return "ground/home/ground-master-ready-list.tiles";
+	}
+	@PostMapping("approveParticipation.do")
+	public String approveParticipation(InsiderVO insiderVO) {
+		System.out.println("groundNo:"+insiderVO.getGroundNo()+",idididid"+insiderVO.getMemberVO().getId());
+		groundService.approveParticipation(insiderVO);
+		
+		return "home.tiles";
+	}
 	
 	@RequestMapping("ground-home.do")
 	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
@@ -182,37 +195,57 @@ public class GroundController {
 		System.out.println(gvo);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
-		return "ground/ground-home.tiles";
+		return "ground/home/ground-home.tiles";
 	}
 	
 	@RequestMapping("groundPost.do")
 	public String groundPost() {
-		return "ground/ground-board.tiles";
+		return "ground/home/ground-board.tiles";
 	}
 	
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
 		System.out.println(groundNo);
-		return "ground/ground-schedule-form.tiles";
+		return "ground/home/ground-schedule-form.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
-	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO) {
+	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
 		System.out.println("1. "+scheduleVO);
 		System.out.println("2. "+groundVO);
 		System.out.println("3. "+insiderVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		System.out.println("**1");
+		GroundVO gvo = (GroundVO)session.getAttribute("ground");
+		System.out.println("**2");
 		insiderVO.setMemberVO(mvo);
-		groundVO.setGroundNo("30");
+		System.out.println("**3");
+		groundVO.setGroundNo(gvo.getGroundNo());
+		System.out.println("**4");
 		scheduleVO.setInsiderVO(insiderVO);
+		System.out.println("**5");
 		scheduleVO.setGroundVO(groundVO);
+		System.out.println("**6");
+		System.out.println(scheduleVO);
 		groundService.registergroundschedule(scheduleVO);
-		return "redirect:home.do";
+		System.out.println("**7");
+		return "redirect:groundScheduleList.do";
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleList(String groundNo) {
-		System.out.println(groundNo);
-		return "ground/ground-schedule-list.tiles";
+	public String groundScheduleList(HttpSession session,Model model) {
+		
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
+		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
+		return "ground/home/ground-schedule-list.tiles";
+	}
+	
+	@RequestMapping("groundScheduleDetail.do")
+	public String groundScheduleDetail(String scheduleNo,Model model) {
+		System.out.println(scheduleNo);
+		ScheduleVO scheduleVO = new ScheduleVO();
+		scheduleVO.setScheduleNo(scheduleNo);
+		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));		
+		return "ground/home/ground-schedule-detail.tiles";
 	}
 }

@@ -1,34 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-    
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-sm-12 main-content">
 	<div class="card-container wide">
 		<div class="form-card">
-			<h1 class="title">일정 등록</h1>
+			<h1 class="title">일정 상세</h1>
 			<form method="post" action="registergroundschedule.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
 				<div class="input-container">
 					제목<br>
-					<input type="text"  maxlength="30" required="required" name="title" />
+					<input type="text"  maxlength="30"  readonly="readonly" name="title" value="${scheduleDetail.title}"/>
 				</div>
 				<div class="input-container">
 					참여 인원 제한<br>
-					<pre><input type="number"  required="required" name="maxPersonnel"/></pre>			
+					<pre><input type="number"  readonly="readonly" name="maxPersonnel" value="${scheduleDetail.maxPersonnel }"/></pre>			
 				</div>
 				<div class="input-container">
 					시작 날짜<br>
-					<input type="date"  required="required" name="startDate"/>					
+					<input type="text"  readonly="readonly" name="startDate" value="${scheduleDetail.startDate}"/>					
 				</div>
 				<div class="input-container">
 					종료 날짜<br>
-					<input type="date"  required="required" name="endDate"/>					
+					<input type="text"  readonly="readonly" name="endDate" value="${scheduleDetail.endDate }"/>					
 				</div>
 				
 				<div class="input-container">
 					내용<br>
-					<textarea rows="10" cols="70"></textarea> 
+					<textarea rows="10" cols="70" name="content" readonly="readonly">${scheduleDetail.content}</textarea> 
 					
 				</div>
 					<input type="text" id="sample5_address" placeholder="주소" name="loc">

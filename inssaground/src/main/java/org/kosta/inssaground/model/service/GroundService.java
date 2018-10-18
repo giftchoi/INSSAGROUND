@@ -46,13 +46,19 @@ public interface GroundService {
 	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage); //모임검색
 	public ListVO<GroundVO>	getAllGroundList();
 	public void participateGround(String groundNo);	// 모임 참여하기
+	public List<MemberVO> getParticipationReadyList(String groundNo);	//모임장-모임 참여 대기 리스트 가져오기
+	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
 	
-	public void groundHashtag(String tags[],GroundVO groundVO);	
+	public void groundHashtag(String tags[],GroundVO groundVO);
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 	public void registergroundschedule(ScheduleVO scheduleVO);
+	public List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
+	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
+	
+	
 	
 	
 }

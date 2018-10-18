@@ -9,12 +9,17 @@
 			//window.close();
 			//window.open("home.do");
 			//window.top.close();
-			window.open('','_self','');
-			window.close();
-			opener.document.location.href="participateGround.do?groundNo="+${groundVO.groundNo};
+/* 			window.open('','_self','');
+			window.close(); */
+			opener.document.location.href="javascript:participate()";
+				//"participateGround.do?groundNo="+${groundVO.groundNo};
 			//self.close();
 		});
 	});
+	
+	function participate(){
+		$("#participateForm").submit();
+	}
 </script>
 <div>
 	<div class="row ground-bg-area">
@@ -70,7 +75,7 @@
 							<a class="btn btn-red"  href="ground-home.do?groundNo=${groundVO.groundNo}">모임 홈페이지</a>
 						</c:when>
 						<c:otherwise>
-							<input class="btn" type="button" value="참여 대기중">
+							<input class="btn btn-grey" type="button" value="참여 대기중">
 						</c:otherwise>
 					</c:choose>
 						<c:set var="isInssa" value="true"/>
@@ -90,5 +95,8 @@
 			</c:if>
 		</div>
 	</div>
-
 </div>
+<form id="participateForm"method="post" action="participateGround.do">
+	<sec:csrfInput/>
+	<input type="hidden" name="groundNo" value="${groundVO.groundNo }">
+</form>
