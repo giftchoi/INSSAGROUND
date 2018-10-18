@@ -176,14 +176,14 @@ public class GroundController {
 	public String groundMasterReadyList(HttpSession session,Model model) {
 		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
 		List<MemberVO> readyList = groundService.getParticipationReadyList(groundNo);
-		System.out.println(groundNo);
-		System.out.println(readyList);
+	/*	System.out.println(groundNo);
+		System.out.println(readyList);*/
 		model.addAttribute("readyList",readyList);
 		return "ground/home/ground-master-ready-list.tiles";
 	}
 	@PostMapping("approveParticipation.do")
 	public String approveParticipation(InsiderVO insiderVO) {
-		System.out.println("idididid"+insiderVO.getMemberVO().getId());
+		System.out.println("groundNo:"+insiderVO.getGroundNo()+",idididid"+insiderVO.getMemberVO().getId());
 		groundService.approveParticipation(insiderVO);
 		
 		return "home.tiles";

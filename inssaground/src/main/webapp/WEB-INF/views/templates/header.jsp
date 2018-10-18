@@ -67,9 +67,9 @@ li.dropdown {
 <sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROLE_MEMBER')">
 <ul>
    <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
-   <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">ADMIN PAGE</a>
+   <li class="dropdown"><a href="${pageContext.request.contextPath}/readyApplyGround.do">ADMIN PAGE</a>
    <div class="dropdown-content">
-   <a  href="loginForm.do">MY GROUND</a>
+   <a  href="readyApplyGround.do">APPLY GROUND</a>
       <a href="registerForm.do">MY SCHEDULE</a>
       <a href="registerForm.do">MY GAME PROGRAM</a>
       <a href="viewMemberInfo.do">MY INFO</a>

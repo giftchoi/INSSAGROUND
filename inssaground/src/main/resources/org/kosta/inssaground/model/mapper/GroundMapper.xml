@@ -155,8 +155,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from schedule where schedule_no=#{scheduleNo}
 	</select>
 	
+
 	<select id="groundScheduleTotalCount" parameterType="groundVO" resultType="int">
 		select count(*) from schedule where ground_no=#{groundNo}
+	</select>
+	<!-- JISUN -->
+	<select id="getTotalApplyGroundList" resultType="int">
+		select count(*) from ground where status=0
+	</select>
+	<select id="getApplyGroundList" resultType="groundVO" parameterType="pagingBean">
+	SELECT ag.* FROM(
+				SELECT row_number() over(order by ground_no desc) as rnum,
+				ground_no, ground_name, master
+				FROM ground where status=0
+		) ag
+		where rnum between #{startRowNumber} and #{endRowNumber}
+		order by ground_no desc
 	</select>
 </mapper>
  

@@ -21,6 +21,8 @@ public interface GroundMapper {
 	List<GroundVO> getAllGroundList(PagingBean pagingBean);
 	GroundVO groundDetail(GroundVO groundVO);
 	int getGroundSearchResultCount(Map<String,Object> map);
+	List<MemberVO> getParticipationReadyList(String groundNo);
+	void approveParticipation(InsiderVO insiderVO);
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -38,8 +40,16 @@ public interface GroundMapper {
 	void registergroundschedule(ScheduleVO scheduleVO);
 
 	void participateGround(Map<String,String> map);
-	List<MemberVO> getParticipationReadyList(String groundNo);
-	void approveParticipation(InsiderVO insiderVO);
+
+
 	int groundScheduleTotalCount(GroundVO groundVO);
+
+
+	
+	/*JISUN*/
+	int getTotalApplyGroundList();
+	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
+
+
 
 }
