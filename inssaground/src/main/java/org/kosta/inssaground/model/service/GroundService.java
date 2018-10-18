@@ -53,8 +53,9 @@ public interface GroundService {
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 	public void registergroundschedule(ScheduleVO scheduleVO);
-	public List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
+	
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
+	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
 	

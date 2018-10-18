@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="col-lg-12  col-md-12 meta-details">
 	<ul class="tags">
 		<li><a href="#">Food,</a></li>
@@ -9,7 +10,7 @@
 	</ul>
 	<div class="user-details row">
 		<p class="user-name col-lg-12 col-md-12 col-6">
-			<a href="groundScheduleList.do?groundNo=${gvo.groundNo}">내 모임 달력</a>
+			<a href="groundScheduleList.do">내 모임 달력</a>
 			<span class="lnr lnr-user"></span>
 		</p>
 		<p class="date col-lg-12 col-md-12 col-6">

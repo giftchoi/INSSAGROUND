@@ -33,12 +33,13 @@ public interface GroundMapper {
 	int hashtagBoolean(String tags);
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
-	List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
+	List<ScheduleVO> grouondScheduleList(Map<String,Object> map);
 	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
 
 	void participateGround(Map<String,String> map);
 	List<MemberVO> getParticipationReadyList(String groundNo);
 	void approveParticipation(InsiderVO insiderVO);
+	int groundScheduleTotalCount(GroundVO groundVO);
 
 }
