@@ -30,7 +30,7 @@
 <div class="container-contact100">
 	<div class="wrap-contact100">
 		<form class="contact100-form">
-			<span class="contact100-form-title"> 게임 작성하기 </span>
+			<span class="contact100-form-title">게임 작성하기</span>
 
 			<div class="wrap-input100 bg1">
 				<span class="label-input100">제목</span> <input

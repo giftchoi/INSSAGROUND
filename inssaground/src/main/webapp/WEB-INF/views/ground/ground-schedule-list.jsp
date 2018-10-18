@@ -62,7 +62,7 @@
 									</div>
 								</div>
 								<div class="col-lg-9 col-md-9">
-									<h3 class="mt-20 mb-20">모임 게시판</h3>	
+									<h3 class="mt-20 mb-20">일정 리스트</h3>	
 									<!--  -->
 									
 			<div class="search-list-area">
@@ -87,11 +87,11 @@
 										</div>
 										<div class="col-sm-6 ground-info">
 										<form>
-											<input type="button" value="참여"><br>
+											<input type="submit" value="참여"><br>
 											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>
 										<form >
-											<input type="button" value="불참">
+											<input type="submit" value="불참">
 											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>
 										<form action="groundScheduleDetail.do">

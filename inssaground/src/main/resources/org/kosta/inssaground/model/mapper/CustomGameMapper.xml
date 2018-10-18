@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCustomGameDetail" resultMap="CustomGameRM">
 		select
 		c.c_game_no,c.title,c.max_Personnel,c.min_Personnel,c.game_Time,
-		c.materials,c.content,c.recommendation,m.id,m.name
+		c.materials,c.content,c.recommendation,c.cg_no,m.id,m.name
 		from CUSTOM_GAME c,
 		INSSA_MEMBER m
 		where c.id=m.id and c_game_no=#{value}
@@ -46,7 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="updateCustomGame" parameterType="customGameVO">
 		update CUSTOM_GAME
 		set
-		title=#{title},content=#{content}
+		title=#{title},content=#{content},min_personnel=#{minPersonnel}, max_personnel=#{maxPersonnel}, game_time=#{gameTime},
+		materials=#{materials}, content=#{content}, cg_no=#{cgNo}
 		where c_game_no=#{cGameNo}
 	</update>
 	<delete id="deleteCustomGame" parameterType="string">
