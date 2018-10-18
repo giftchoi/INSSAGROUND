@@ -195,7 +195,7 @@ public class GroundController {
 		System.out.println(gvo);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
-		return "ground/ground-home.tiles";
+		return "ground/home/ground-home.tiles";
 	}
 	
 	@RequestMapping("groundPost.do")
