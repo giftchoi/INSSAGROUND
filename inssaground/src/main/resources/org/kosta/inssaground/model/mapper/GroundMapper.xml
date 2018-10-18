@@ -188,5 +188,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rnum between #{startRowNumber} and #{endRowNumber}
 		order by ground_no desc
 	</select>
+	<select id="getHashtagList" resultType="string">
+		select content from ground_hashtag where ground_no=#{value}
+	</select>
+	<update id="permitGround" parameterType="string">
+		update ground set status=1 where ground_no=#{value}
+	</update>
+	<update id="rejectGround" parameterType="string">
+		update ground set status=2 where ground_no=#{value}
+	</update>
 </mapper>
  

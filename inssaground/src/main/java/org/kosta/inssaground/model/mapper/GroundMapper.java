@@ -58,6 +58,9 @@ public interface GroundMapper {
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
+	List<String> getHashtagList(String groundNo);
+	void permitGround(String groundNo);
+	void rejectGround(String groundNo);
 
 
 

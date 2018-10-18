@@ -98,5 +98,5 @@
 </div>
 <form id="participateForm"method="post" action="participateGround.do">
 	<sec:csrfInput/>
-	<input type="hidden" name="groundNo" value="${groundVO.groundNo }">
+	<input type="hidden" name="groundNo" value="${groundVO.groundNo}">
 </form>
