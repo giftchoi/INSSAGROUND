@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (
 					select row_number() over (order by ground_no) as row_no,g.*
 					from ground g) g, sigungu s, hobby h 
-		where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
+					where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
 	
 	</select>
 	<select id="searchGroundTest" parameterType="map" resultType="groundVO">
@@ -84,9 +84,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getGroundNoticeCount" resultType="int">
 		select count(*) from notice where ground_no=#{value}
 	</select>
-	<sql id="selectNotice">
-		
-	</sql>
 	<select id="getAllGroundNoticeList" parameterType="map" resultType="noticeVO">
 		select n.notice_no, n.ground_no,n.content,to_char(n.time_posted,'YYYY-MM-DD HH24:MI') as time_posted
 		from (select row_number() over (order by time_posted desc) as rnum, n.*  from notice n where n.ground_no=#{groundNo}) n 
