@@ -22,12 +22,14 @@ public interface GroundMapper {
 	List<GroundVO> getAllGroundList(PagingBean pagingBean);
 	GroundVO groundDetail(GroundVO groundVO);
 	int getGroundSearchResultCount(Map<String,Object> map);
+
 	void participateGround(Map<String,String> map);
 	List<MemberVO> getParticipationReadyList(String groundNo);
 	void approveParticipation(InsiderVO insiderVO);
 	void registerGroundNotice(NoticeVO noticeVO);
 	int getGroundNoticeCount(String groundNo);	//공지 갯수 
 	NoticeVO getNoticeDetailByNo(String noticeNo); //공지 상세 정보 
+
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -40,11 +42,23 @@ public interface GroundMapper {
 	int hashtagBoolean(String tags);
 	void registergroundImg(GroundVO groundVO);
 	GroundVO findGroundByGroundNo(String groundNo);
-	List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
+	List<ScheduleVO> grouondScheduleList(Map<String,Object> map);
 	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
 	List<NoticeVO> getAllGroundNoticeList(Map<String, Object> map);
 	
+
+
+
+
+	int groundScheduleTotalCount(GroundVO groundVO);
+
+
+	
+	/*JISUN*/
+	int getTotalApplyGroundList();
+	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
+
 
 
 

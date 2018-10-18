@@ -278,10 +278,8 @@ public class GroundServiceImpl implements GroundService {
 
 	}
 
-	@Override
-	public List<ScheduleVO> grouondScheduleList(GroundVO groundVO) {
-		return groundMapper.grouondScheduleList(groundVO);
-	}
+	
+
 	public List<MemberVO> getParticipationReadyList(String groundNo) {
 		// TODO Auto-generated method stub
 		return groundMapper.getParticipationReadyList(groundNo);
@@ -298,9 +296,27 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
+
 	public NoticeVO getNoticeDetailByNo(String noticeNo) {
 		// TODO Auto-generated method stub
 		return groundMapper.getNoticeDetailByNo(noticeNo);
+	}
+
+
+	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo) {
+		int totalCount = groundMapper.groundScheduleTotalCount(groundVO);
+		PagingBean pagingBean = null;
+		if(pageNo == null) {
+			pagingBean = new PagingBean(totalCount);			
+		}else {
+			pagingBean = new PagingBean(totalCount,Integer.parseInt(pageNo));	
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groundVO",groundVO);
+		map.put("pagingBean",pagingBean);
+		List<ScheduleVO> list = groundMapper.grouondScheduleList(map);
+		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
+		return listVO;
 	}
 
 

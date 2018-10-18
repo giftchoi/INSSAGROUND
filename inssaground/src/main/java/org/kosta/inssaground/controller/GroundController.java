@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.service.MemberService;
+import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -284,9 +285,16 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-	public String groundScheduleList(HttpSession session,Model model) {		
+
+	public String groundScheduleList(HttpSession session,Model model,String pageNo) {		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
+		System.out.println("controller1");
+		System.out.println("controller2");
+		ListVO<ScheduleVO> listVO = groundService.groundSchedulePagingBean(groundVO, pageNo);	
+		System.out.println("controller3");
+		System.out.println(listVO);
+		System.out.println("controller4");		
+		model.addAttribute("sList",listVO);
 		return "ground/home/ground-schedule-list.tiles";
 	}
 	
