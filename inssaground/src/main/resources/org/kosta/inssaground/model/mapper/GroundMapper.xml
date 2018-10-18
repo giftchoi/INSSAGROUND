@@ -78,9 +78,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="approveParticipation" parameterType="insiderVO">
 		update insider set status=1 where id=#{memberVO.id} and ground_no=#{groundNo}
 	</update>
-	
-	
-	
+	<insert id="registerGroundNotice" parameterType="noticeVO" >
+		insert into notice(notice_no,ground_no,content) values(notice_seq.nextval,#{groundNo},#{content})
+	</insert>
+	<select id="getGroundNoticeCount" resultType="int">
+		select count(*) from notice where ground_no=#{value}
+	</select>
+	<sql id="selectNotice">
+		
+	</sql>
+	<select id="getAllGroundNoticeList" parameterType="map" resultType="noticeVO">
+		select n.notice_no, n.ground_no,n.content,to_char(n.time_posted,'YYYY-MM-DD HH24:MI') as time_posted
+		from (select row_number() over (order by time_posted desc) as rnum, n.*  from notice n where n.ground_no=#{groundNo}) n 
+		where n.rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+		order by time_posted desc
+	</select>
+	<select id="getNoticeDetailByNo" resultType="noticeVO">
+		select n.notice_no, n.ground_no,n.content,to_char(n.time_posted,'YYYY-MM-DD HH24:MI') as time_posted
+		from notice n
+		where notice_no = #{value}
+	</select>
+
+
 	<!--DOHYEONG  -->
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido

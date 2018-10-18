@@ -9,6 +9,7 @@ import org.kosta.inssaground.model.vo.GroundHashtagVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.NoticeVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
@@ -21,6 +22,12 @@ public interface GroundMapper {
 	List<GroundVO> getAllGroundList(PagingBean pagingBean);
 	GroundVO groundDetail(GroundVO groundVO);
 	int getGroundSearchResultCount(Map<String,Object> map);
+	void participateGround(Map<String,String> map);
+	List<MemberVO> getParticipationReadyList(String groundNo);
+	void approveParticipation(InsiderVO insiderVO);
+	void registerGroundNotice(NoticeVO noticeVO);
+	int getGroundNoticeCount(String groundNo);	//공지 갯수 
+	NoticeVO getNoticeDetailByNo(String noticeNo); //공지 상세 정보 
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -36,9 +43,9 @@ public interface GroundMapper {
 	List<ScheduleVO> grouondScheduleList(GroundVO groundVO);
 	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
+	List<NoticeVO> getAllGroundNoticeList(Map<String, Object> map);
+	
 
-	void participateGround(Map<String,String> map);
-	List<MemberVO> getParticipationReadyList(String groundNo);
-	void approveParticipation(InsiderVO insiderVO);
+
 
 }
