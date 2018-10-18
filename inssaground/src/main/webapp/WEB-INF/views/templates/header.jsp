@@ -9,17 +9,19 @@ li.dropdown {
 }
 
 .dropdown-content {
-	font-size:13px;
+	background-color:#fff;
     display: none;
     position: absolute;
-    min-width: 200px;
+    min-width: 230px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
+	font-size:17px;
+	font-weight:100;
+    color: #6E6E6E;
+    padding: 10px 5px 10px 0;
     text-decoration: none;
     display: block;
     text-align: left;
@@ -42,10 +44,10 @@ li.dropdown {
    <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
    <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
    <div class="dropdown-content">
-   <a  href="loginForm.do">MY GROUND</a>
-      <a href="registerForm.do">MY SCHEDULE</a>
-      <a href="registerForm.do">MY GAME PROGRAM</a>
-      <a href="viewMemberInfo.do">MY INFO</a>
+   <a  href="loginForm.do">내 모임</a>
+      <a href="registerForm.do">내 일정</a>
+      <a href="registerForm.do">내 프로그램</a>
+      <a href="viewMemberInfo.do">내 정보</a>
       <a href="withdrawForm.do">WITHDRAW</a>
       </div>
    </li>
@@ -95,12 +97,12 @@ li.dropdown {
 <div class="bottom-header">
 <ul>
 	<li><a href="ground-home.do?groundNo=30">TEST</a></li>
-	<li><a href="#">FIND HOBBY</a></li>
+	<li><a href="#">HOBBY</a></li>
 	<li class="dropdown"><a href="javascript:void(0)" title="모임">GROUND</a>
     <div class="dropdown-content">
       <a href="groundList.do">모임 찾기</a>
       <a href="groundApplyForm.do">모임 개설 신청</a>
-      <a href="#">뭐를 넣을 까요</a>
+  <!--     <a href="#">뭐를 넣을 까요</a> -->
     </div>
 	</li>
 	<li><a href="home.do"> 
@@ -113,8 +115,8 @@ li.dropdown {
 </a></li>
 	<li class="dropdown"><a href="javascript:void(0)" title="게임">GAME</a>
 		    <div class="dropdown-content">
-      <a href="gameHome.do">INSSA GAME</a>
-      <a href="gameCustom.do">CUSTOM GAME</a>
+      <a href="gameHome.do">공식 게임</a>
+      <a href="gameCustom.do">사용자 정의 게임</a>
       <a href="#">MAKE PROGRAM</a>
     </div>
 	</li>

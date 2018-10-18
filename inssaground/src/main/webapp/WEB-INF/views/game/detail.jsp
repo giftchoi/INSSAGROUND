@@ -56,14 +56,35 @@
 						<pre>${requestScope.gvo.content}</pre>
 					</div>
 				</div>
-				<div class="row" style="align: right">
-					<button class="btn btn-danger"
-						onclick="location.href='${pageContext.request.contextPath}/customGameUpdateForm.do'">
-						수정</button>
+					<div class="row" style="align: right">
+					<form action="deleteCustomGame.do" id="deleteCustomGameForm"
+						method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="cGameNo"
+							value="${requestScope.gvo.cGameNo}">
+					</form>
+					<form action="customGameUpdateForm.do" id="customGameUpdateForm"
+						method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="cGameNo"
+							value="${requestScope.gvo.cGameNo}">
+					</form>
+					<button class="btn btn-danger" form="customGameUpdateForm"
+						type="submit">수정</button>
 					&nbsp;
-					<button class="btn btn-danger"
-						onclick="location.href='${pageContext.request.contextPath}/deleteCustomGame.do'">
-						삭제</button>
+					<button class="btn btn-danger" form="deleteCustomGameForm"
+						type="submit">삭제</button>
+
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$("#deleteCustomGameForm").submit(function() {
+								return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
+							});
+							$("#customGameUpdateForm").submit(function() {
+								return confirm("사용자 정의 게임을 수정하시겠습니까?")
+							});
+						});
+					</script>
 				</div>
 			</div>
 		</c:when>
