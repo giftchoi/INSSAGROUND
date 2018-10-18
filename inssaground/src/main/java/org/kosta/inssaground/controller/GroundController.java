@@ -168,21 +168,21 @@ public class GroundController {
 	
 	@RequestMapping("groundMasterPage.do")
 	public String groundMasterPage() {
-		return "ground/ground-master-page.tiles";
+		return "ground/home/ground-master-page.tiles";
 	}
 	
 	@RequestMapping("groundMasterReadyList.do")
 	public String groundMasterReadyList(HttpSession session,Model model) {
 		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
 		List<MemberVO> readyList = groundService.getParticipationReadyList(groundNo);
-		System.out.println(groundNo);
-		System.out.println(readyList);
+	/*	System.out.println(groundNo);
+		System.out.println(readyList);*/
 		model.addAttribute("readyList",readyList);
-		return "ground/ground-master-ready-list.tiles";
+		return "ground/home/ground-master-ready-list.tiles";
 	}
 	@PostMapping("approveParticipation.do")
 	public String approveParticipation(InsiderVO insiderVO) {
-		System.out.println("idididid"+insiderVO.getMemberVO().getId());
+		System.out.println("groundNo:"+insiderVO.getGroundNo()+",idididid"+insiderVO.getMemberVO().getId());
 		groundService.approveParticipation(insiderVO);
 		
 		return "home.tiles";
@@ -195,18 +195,18 @@ public class GroundController {
 		System.out.println(gvo);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
-		return "ground/ground-home.tiles";
+		return "ground/home/ground-home.tiles";
 	}
 	
 	@RequestMapping("groundPost.do")
 	public String groundPost() {
-		return "ground/ground-board.tiles";
+		return "ground/home/ground-board.tiles";
 	}
 	
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
 		System.out.println(groundNo);
-		return "ground/ground-schedule-form.tiles";
+		return "ground/home/ground-schedule-form.tiles";
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
@@ -237,6 +237,15 @@ public class GroundController {
 		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		model.addAttribute("sList",groundService.grouondScheduleList(groundVO));
-		return "ground/ground-schedule-list.tiles";
+		return "ground/home/ground-schedule-list.tiles";
+	}
+	
+	@RequestMapping("groundScheduleDetail.do")
+	public String groundScheduleDetail(String scheduleNo,Model model) {
+		System.out.println(scheduleNo);
+		ScheduleVO scheduleVO = new ScheduleVO();
+		scheduleVO.setScheduleNo(scheduleNo);
+		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));		
+		return "ground/home/ground-schedule-detail.tiles";
 	}
 }

@@ -280,6 +280,11 @@ public class GroundServiceImpl implements GroundService {
 		groundMapper.approveParticipation(insiderVO);
 	}
 
+	@Override
+	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {		
+		return groundMapper.findGroundScheduleByScheduleNo(scheduleVO);
+	}
+
 	
 
 
