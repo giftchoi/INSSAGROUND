@@ -24,7 +24,6 @@ public interface GroundService {
 	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
 	public void registerGroundSchedule(ScheduleVO scheduleVO); //모임 일정 등록
 	public void deleteGroundSchedule(ScheduleVO scheduelVO); // 모임 일정 삭제
-	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
 	public void groundParticipantPermission(GroundVO groundVO);//	 모임 참여 허가
 	//public void masterGroundManagement(GroundVO groundVO);// 모임장 모임 관리
 	public InsiderVO groundParticipantList(GroundVO GroundVO);// 모임 참여 리스트
@@ -48,16 +47,22 @@ public interface GroundService {
 	public void participateGround(String groundNo);	// 모임 참여하기
 	public List<MemberVO> getParticipationReadyList(String groundNo);	//모임장-모임 참여 대기 리스트 가져오기
 	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
+	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
+	public NoticeVO getNoticeDetailByNo(String noticeNo);	//인싸 - 모임 공지 상세보기
+	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage);
 	
 	public void groundHashtag(String tags[],GroundVO groundVO);
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 	public void registergroundschedule(ScheduleVO scheduleVO);
-	
+
+
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
+
 	// for Test
 	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
+	
 	
 	
 	

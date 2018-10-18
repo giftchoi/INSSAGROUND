@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
-   uri="http://www.springframework.org/security/tags"%>
+	uri="http://www.springframework.org/security/tags"%>
+
+
 <!-- Start post-content Area -->
 <!-- <section class="post-content-area single-post-area"> -->
 <div class="container">
@@ -54,14 +56,21 @@
 						<pre>${requestScope.gvo.content}</pre>
 					</div>
 				</div>
-				
-				<div class="row" style="align: right">
-				<form action="deleteCustomGame.do" id="deleteCustomGameForm" method="post">
-				<sec:csrfInput/>
-				<input type="hidden" name="cGameNo" value="${requestScope.gvo.cGameNo}">
-				</form>
-				 <button class="btn btn-danger" form="deleteCustomGameForm" type="button">
-						수정</button>
+					<div class="row" style="align: right">
+					<form action="deleteCustomGame.do" id="deleteCustomGameForm"
+						method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="cGameNo"
+							value="${requestScope.gvo.cGameNo}">
+					</form>
+					<form action="customGameUpdateForm.do" id="customGameUpdateForm"
+						method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="cGameNo"
+							value="${requestScope.gvo.cGameNo}">
+					</form>
+					<button class="btn btn-danger" form="customGameUpdateForm"
+						type="submit">수정</button>
 					&nbsp;
 					<button class="btn btn-danger" form="deleteCustomGameForm"
 						type="submit">삭제</button>
@@ -69,12 +78,13 @@
 					<script type="text/javascript">
 						$(document).ready(function() {
 							$("#deleteCustomGameForm").submit(function() {
-								return confirm("사용자 정의 게임을 삭제하시겠습니까?")
+								return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
+							});
+							$("#customGameUpdateForm").submit(function() {
+								return confirm("사용자 정의 게임을 수정하시겠습니까?")
 							});
 						});
-						
-						</script>
-						
+					</script>
 				</div>
 			</div>
 		</c:when>
@@ -118,28 +128,41 @@
 					</div>
 
 				</div>
-				            <div class="row" style="align: right">
-            <form action="deleteOfficialGame.do" id="deleteOfficialGameForm" method="post">
-            <sec:csrfInput/>
-            <input type="hidden" name="oGameNo" value="${requestScope.gvo.oGameNo }">
-            </form>
-            
-               <button class="btn btn-danger"
-                  onclick="location.href='${pageContext.request.contextPath}/officialGameUpdateForm.do'">
-                  수정</button>
-               &nbsp;
-               <button class="btn btn-danger" form="deleteOfficialGameForm" type="submit">
-                  삭제</button>
-                  
-                  
-                  <script type="text/javascript">
-                  $(document).ready(function() {
-                     $("#deleteOfficialGameForm").submit(function() {
-                        return confirm("공식 게임을 삭제하시겠습니까?");
-                     });
-                  });
-                  </script>
-            </div>
+				<div class="row" style="align: right">
+									
+					<form action="officialGameUpdateForm.do"
+						id="officialGameUpdateForm" method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="oGameNo"
+							value="${requestScope.gvo.oGameNo }">
+					</form>
+					
+					<form action="deleteOfficialGame.do" id="deleteOfficialGameForm"
+						method="post">
+						<sec:csrfInput />
+						<input type="hidden" name="oGameNo"
+							value="${requestScope.gvo.oGameNo }">
+					</form>
+
+					<button class="btn btn-danger" form="officialGameUpdateForm"
+						type="submit">수정</button>
+					&nbsp;
+					<button class="btn btn-danger" form="deleteOfficialGameForm"
+						type="submit">삭제</button>
+
+
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$("#deleteOfficialGameForm").submit(function() {
+								return confirm("공식 게임을 삭제하시겠습니까?");
+							});
+					    	$("#officialGameUpdateForm").submit(function(){  
+					    		return confirm("게시물을 수정하시겠습니까?");
+					    	});
+						});
+					</script>
+				</div>
+
 			</div>
 		</c:otherwise>
 	</c:choose>

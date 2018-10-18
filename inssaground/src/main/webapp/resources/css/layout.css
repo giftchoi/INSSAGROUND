@@ -1,12 +1,18 @@
 @charset "UTF-8";
 
+html{
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+}
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+}
 .header {
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
 	box-shadow: 0 4px 5px -3px #ececec;
 	position: fixed;
 	top: 0;
-	z-index: 2;
+	z-index: 10;
 	width: 100%;
 }
 
@@ -160,7 +166,7 @@
 	border: 0;
 	color: #212121;
 	font-size: 24px;
-	font-weight: 200;
+	font-weight: 100;
 }
 
 .input-container input:not([type=submit] || [type=button]){
@@ -174,7 +180,7 @@
 	padding: 10px;
 	color: #A4A4A4;
 	font-size: 24px;
-	font-weight: 200;
+	font-weight: 100;
 }
 
 .c-footer a:hover {
@@ -244,6 +250,7 @@ h1.title {
 }
 pre{
 	background-color : white !important;
+	font-family: "Poppins",sans-serif !important;
 	/* border:none !important; */
 }
 
@@ -302,7 +309,9 @@ li a{
 	display:inline-block;
 	color:#222222;
 	text-transform:uppercase;
-	font-family: 'Montserrat', sans-serif;
+	font-family:  'Noto Sans KR','Calibri', 'Montserrat', sans-serif !important;
+	font-weight:100;
+	/* font-family: 'Montserrat', sans-serif; */
 	font-size:20px;
 	text-decoration: none;
 	/* line-height:20px; */
@@ -339,4 +348,69 @@ li a:hover{
 }
 .search-list-area{
 	
+}
+
+/* css for flat table */
+table.myTable  {
+  text-align: left;
+  line-height: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid #ff1a1a;
+  width: 700px;
+  margin: 50px auto;
+  border-radius: .25rem;
+  font-size:18px;
+  color:#000;
+}
+.myTable  thead tr:first-child {
+  background: #ff1a1a;
+  color: #fff ;
+  border: none;
+}
+.myTable  th:first-child,
+.myTable  td:first-child {
+	 font-size:22px;
+  padding: 0 15px 0 20px;
+}
+
+.myTable  th {
+  font-weight: 500;
+  font-size:20px;
+  text-align:center;
+}
+
+.myTable  thead tr:last-child th {
+	
+  border-bottom: 3px solid #ddd;
+}
+
+.myTable a{
+	text-decoration: none;
+	color:#000;
+	
+}
+
+.myTable  tbody tr:last-child td {
+
+  border: none;
+}
+
+.myTable  tbody td {
+	text-align:center;
+	font-size:18px;
+  border-bottom: 1px solid #ddd;
+}
+
+.myTable  .button {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+.myTable  .edit:hover {
+  color: #0a79df;
+}
+.myTable  .delete:hover {
+  color: #dc2a2a;
 }
