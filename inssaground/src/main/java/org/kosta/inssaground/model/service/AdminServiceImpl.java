@@ -51,14 +51,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void permitGround(String groundNo) {
-		// TODO Auto-generated method stub
-
+		groundMapper.permitGround(groundNo);
 	}
 
 	@Override
 	public void rejectGround(String groundNo) {
-		// TODO Auto-generated method stub
-
+		groundMapper.rejectGround(groundNo);
 	}
 
 	@Override

@@ -42,8 +42,19 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12 btnArea">
-				<input class="btn btn-red" id="acceptBtn" type="button" value="승인">
-				<input class="btn btn-red" id="rejectBtn" type="button" value="거절">
+		<table><tbody><tr><td>
+		<form action="acceptGroundApply.do" method="post">
+		<sec:csrfInput/>
+		<input type="hidden" name="groundNo" value="${groundVO.groundNo}">
+		<input class="btn btn-red" id="acceptBtn" type="submit" value="승인">
+		</form></td><td>
+		<form action="rejectGroundApply.do" method="post">
+		<sec:csrfInput/>
+		<input type="hidden" name="groundNo" value="${groundVO.groundNo}">
+		<input class="btn btn-red" id="rejectBtn" type="submit" value="거절">
+		</form>
+		</td></tr>
+			</tbody></table>
 		</div>
 	</div>
 </div>
