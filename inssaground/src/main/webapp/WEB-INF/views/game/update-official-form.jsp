@@ -95,8 +95,8 @@ $(document).ready(function() {
 
          <div class="wrap-input100 bg0 rs1-alert-validate">
             <span class="label-input100">게임 내용</span>
-            <textarea class="input100" name="content" required="required"
-               >"${requestScope.officialGameVO.content}"</textarea>
+            <textarea class="input100" name="content" required="required">
+            ${requestScope.officialGameVO.content}</textarea>
          </div>
 
          <div class="container-contact100-form-btn">
