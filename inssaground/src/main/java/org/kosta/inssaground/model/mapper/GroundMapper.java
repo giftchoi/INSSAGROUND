@@ -61,6 +61,7 @@ public interface GroundMapper {
 	List<String> getHashtagList(String groundNo);
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
+	void insertInsider(Map<String,String> map);
 
 
 

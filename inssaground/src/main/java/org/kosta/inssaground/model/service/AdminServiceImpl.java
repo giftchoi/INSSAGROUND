@@ -1,6 +1,8 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.inssaground.model.mapper.CustomGameMapper;
 import org.kosta.inssaground.model.mapper.GroundMapper;
@@ -50,8 +52,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void permitGround(String groundNo) {
+	public void permitGround(String groundNo,String masterId) {
 		groundMapper.permitGround(groundNo);
+		Map<String,String> map=new HashMap<String,String>();
+		map.put("groundNo", groundNo);
+		map.put("id", masterId);
+		groundMapper.insertInsider(map);
 	}
 
 	@Override

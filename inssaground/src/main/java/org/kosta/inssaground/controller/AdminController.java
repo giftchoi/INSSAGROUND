@@ -39,8 +39,8 @@ public class AdminController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("acceptGroundApply.do")
-	public String acceptGroundApply(String groundNo) {
-		adminService.permitGround(groundNo);
+	public String acceptGroundApply(String groundNo,String master) {
+		adminService.permitGround(groundNo,master);
 		return "redirect:readyApplyGround.do";
 	}
 	@Secured("ROLE_ADMIN")
