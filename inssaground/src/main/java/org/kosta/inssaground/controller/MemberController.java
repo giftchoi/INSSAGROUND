@@ -129,6 +129,6 @@ public class MemberController {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Map<String, String>> myGroundList = memberService.myGroundList(mvo.getId());
 		model.addAttribute("myGround", myGroundList);
-		return "member/mypage";
+		return "member/mypage.tiles";
 	}
 }
