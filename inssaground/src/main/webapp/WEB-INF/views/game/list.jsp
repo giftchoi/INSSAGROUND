@@ -7,7 +7,7 @@
 	<div class="col-sm-12">
 		<div>
 			<h1>INSSA GAME</h1>
-		</div>
+		</div> 
 		<div class="category-menu-area">
 			<ul class="game-category-list">	
  						<li data-filter=".smallscale" ><h3>#소규모</h3></li>
