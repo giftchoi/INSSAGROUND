@@ -32,7 +32,7 @@
 	<div class="row ground-bg-area">
 		<div class="col-sm-12">
 			<img
-				src="${pageContext.request.contextPath }/resources/image/testImg2.jpg"
+				src="${pageContext.request.contextPath}/resources/uploadImage/${requestScope.groundVO.groundImgVO.imgName}"
 				width="100%" height="350">
 		</div>
 	</div>
@@ -50,14 +50,16 @@
 			</div>
 			<div class="row ground-detail-info">
 				<div class="col-sm-12">
-					<span class="info-span">${groundVO.area }</span> <span
-						class="info-span">${groundVO.maxPersonnel }</span>
+					<span class="info-span"><i class="fa fa-map-marker "></i>${groundVO.area }</span> <span
+						class="info-span"><i class="fa fa-users"></i>${groundVO.participants}/${groundVO.maxPersonnel }명</span>
+					<span class="info-span"><i class="fa fa-puzzle-piece"></i>${groundVO.hobby}</span>
 				</div>
 			</div>
 			<div class="row ground-detail-hashtag">
 				<div class="col-sm-12">
-					<span class="hashtag">#해시태그1</span> <span class="hashtag">#해시태그2</span>
-					<span class="hashtag">#해시태그3</span>
+				<c:forEach items="${groundVO.tagList}" var="tag">
+					<span class="hashtag">#${tag}</span>
+				</c:forEach>
 				</div>
 			</div>
 		</div>

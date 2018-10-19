@@ -76,7 +76,6 @@ public class GroundController {
 		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
 	}
 
-
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundApplyForm.do")
 	public String groundApplyForm(Model model) {
@@ -90,6 +89,8 @@ public class GroundController {
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
 		GroundVO groundVO = groundService.groundDetail(paramVO);
+		System.out.println("모임 상세:"+groundVO);
+		//GroundVO groundVO = groundService.findGroundByGroundNo(paramVO);
 		model.addAttribute("groundVO", groundVO);
 		return "ground/ground-detail";
 	}
@@ -100,6 +101,7 @@ public class GroundController {
 	 * @param model
 	 * @return
 	 */
+	
 	@Secured("ROLE_MEMBER")
 	@PostMapping("participateGround.do")
 	public String participateGround(String groundNo) {
@@ -216,9 +218,10 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("groundNoticeRegister.do")
 	public String registerGroundNotice(NoticeVO noticeVO) {
-		System.out.println("groundNoticeRegister:"+noticeVO.getGroundNo()+","+noticeVO.getContent());
+		//System.out.println("groundNoticeRegister:"+noticeVO.getGroundNo()+","+noticeVO.getContent());
 		groundService.registerGroundNotice(noticeVO);
-		return "home.tiles";
+		
+		return "redirect:groundNoticeDetail.do?noticeNo="+noticeVO.getNoticeNo();
 	}
 	/**
 	 *  인싸 - 공지 게시판 보기
@@ -248,13 +251,35 @@ public class GroundController {
 		model.addAttribute("noticeVO",noticeVO);
 		return "ground/home/ground-notice-detail.tiles";
 	}
-	
+	/**
+	 *  싸장 - 공지 삭제
+	 * @param noticeVO
+	 * @return
+	 */
 	@Secured("ROLE_MEMBER")
 	@PostMapping("groundNoticeDelete.do")
 	public String deleteGroundNotice(NoticeVO noticeVO) {
 		groundService.deleteGroundNotice(noticeVO.getNoticeNo());
 		return "redirect:groundNoticeList.do?groundNo="+noticeVO.getGroundNo();
 	}
+	
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("groundNoticeUpdateForm.do")
+	public String updateGroundNoticeForm(Model model, String noticeNo) {
+		NoticeVO noticeVO=groundService.getNoticeDetailByNo(noticeNo);
+		model.addAttribute(noticeVO);
+		return "ground/home/ground-notice-update-form.tiles";
+	}
+	
+	@Secured("ROLE_MEMBER")
+	@PostMapping("groundNoticeUpdate.do")
+	public String updateGroundNotice(NoticeVO noticeVO) {
+		//System.out.println("groundNoticeRegister:"+noticeVO.getGroundNo()+","+noticeVO.getContent());
+		groundService.updateGroundNotice(noticeVO);
+		return "redirect:groundNoticeDetail.do?noticeNo="+noticeVO.getNoticeNo();
+	}
+	
+	
 	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
