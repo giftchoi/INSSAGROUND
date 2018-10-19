@@ -262,6 +262,7 @@ public class GroundController {
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
 		System.out.println(gvo);
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
 		return "ground/home/ground-home.tiles";
