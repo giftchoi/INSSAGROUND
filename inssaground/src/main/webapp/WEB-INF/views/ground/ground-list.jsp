@@ -96,7 +96,7 @@
 							var elements = '<td><div class="card ground"><input type="hidden" name="groundNo"value="'+groundList[i].groundNo+'">'
 								+'<div class="card-ground-title">'+groundList[i].groundName+'</div><div class="row card-ground-body">'
 								+	'<div class="col-sm-6 master-profile">'
-								+'<img src="${pageContext.request.contextPath }/resources/image/testImg.jpg" width="100%" height="100%">'
+								+'<img src="${pageContext.request.contextPath}/resources/uploadImage/영진.JPG" width="100%" height="100%">'
 								+'</div><div class="col-sm-6 ground-info"><i class="fa fa-map-marker fa-4x"></i>'
 								+' <span class="info-span">'+groundList[i].area+'</span><br> <i class="fa fa-users fa-3x"></i>'
 								+' <span class="info-span">'+groundList[i].maxPersonnel+'</span>'
@@ -158,7 +158,7 @@
 									<div class="row card-ground-body">
 										<div class="col-sm-6 master-profile">
 											<img
-												src="${pageContext.request.contextPath }/resources/image/testImg.jpg"
+												src="${pageContext.request.contextPath}/resources/uploadImage/${ground.groundImgVO.imgName}"
 												width="100%" height="85%">
 												<div class="master-id">
 												<i class="fa fa-flag"></i><span class="info-span"> ${ground.master}</span>

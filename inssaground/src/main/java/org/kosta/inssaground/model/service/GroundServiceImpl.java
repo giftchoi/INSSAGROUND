@@ -54,12 +54,6 @@ public class GroundServiceImpl implements GroundService {
 		return null;
 	}
 
-	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO){
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("pagingBean", pagingBean);
-		map.put("groundVO",groundVO);
-		return new ListVO<GroundVO>(pagingBean,groundMapper.searchGroundTest(map));
-	}
 	
 	@Override
 	public ListVO<GroundVO> searchGround(String sido, String sigungu, String category, String hobby, GroundVO groundVO,String nowPage) {
@@ -74,11 +68,13 @@ public class GroundServiceImpl implements GroundService {
 		map.put("hobby", hobby);
 		map.put("groundVO", groundVO);
 		int resultCount = groundMapper.getGroundSearchResultCount(map);
-		//System.out.println("resultCount"+resultCount);
+		System.out.println("searchResultCount "+resultCount);
 		PagingBean pagingBean = new PagingBean(resultCount,Integer.parseInt(nowPage));
 		map.put("pagingBean",pagingBean);
+		
+		List<GroundVO>	list = groundMapper.searchGround(map);
 
-		return new ListVO<GroundVO>(pagingBean,groundMapper.searchGround(map));
+		return new ListVO<GroundVO>(pagingBean,list);
 	}
 	@Override
 	public ListVO<GroundVO> getAllGroundList() {
@@ -167,10 +163,11 @@ public class GroundServiceImpl implements GroundService {
 
 	}
 
+
 	@Override
 	public void deleteGroundNotice(String noticeNo) {
 		// TODO Auto-generated method stub
-
+		groundMapper.deleteGroundNotice(noticeNo);
 	}
 
 	@Override
