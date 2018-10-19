@@ -59,7 +59,7 @@ public class GameController {
 
 		gameService.writeGame(officialGameVO);
 		System.out.println("작성글 확인"+officialGameVO);
-		redirectAttributes.addAttribute("oGameNo",+Integer.parseInt(officialGameVO.getoGameNo()));
+		redirectAttributes.addAttribute("oGameNo",Integer.parseInt(officialGameVO.getoGameNo()));
 		return "redirect:officialGameDetail.do";
 	}
 	
@@ -84,7 +84,7 @@ public class GameController {
 	public String updateOfficialGame(Model model, OfficialGameVO officialGameVO, RedirectAttributes redirectAttributes) {
 		gameService.updateGame(officialGameVO);
 		System.out.println("수정글 확인: "+officialGameVO);
-		redirectAttributes.addAttribute("oGameNo",+Integer.parseInt(officialGameVO.getoGameNo()));
+		redirectAttributes.addAttribute("oGameNo",Integer.parseInt(officialGameVO.getoGameNo()));
 		return "redirect:officialGameDetail.do";
 	}
 
@@ -103,7 +103,7 @@ public class GameController {
 		return "game/game-home.tiles";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_MEMBER" })
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("customGameDetail.do")
 	public String customGameDetail(Model model, String cGameNo) {
 		System.out.println("사용자 게임 게시글번호 확인:" + cGameNo);
@@ -112,14 +112,14 @@ public class GameController {
 		return "game/detail.tiles";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_MEMBER" })
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("customGameWriteForm.do")
 	public String customGameWriteForm(Model model) {
 		model.addAttribute("gameType", "custom");
-		return "game/write-form.tiles";
+		return "game/write-custom-form.tiles";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_MEMBER" })
+	@Secured("ROLE_MEMBER")
 	@PostMapping("writeCustomGame.do")
 	public String writeCustomGame(Model model, MemberVO memberVO, CustomGameVO customGameVO,
 			RedirectAttributes redirectAttributes) {
@@ -129,15 +129,32 @@ public class GameController {
 
 		gameService.writeGame(customGameVO);
 		System.out.println("작성글 확인" + customGameVO);
-		redirectAttributes.addAttribute("cGameNo", +Integer.parseInt(customGameVO.getcGameNo()));
+		redirectAttributes.addAttribute("cGameNo", Integer.parseInt(customGameVO.getcGameNo()));
 		return "redirect:customGameDetail.do";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_MEMBER" })
+	@Secured("ROLE_MEMBER")
 	@PostMapping("deleteCustomGame.do")
 	public String deleteCustomGame(Model model, String cGameNo) {
 		gameService.deleteCustomGame(cGameNo);
 		return "redirect:gameCustom.do";
+	}
+
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("customGameUpdateForm.do")
+	public String customGameUpdateForm(Model model, String cGameNo) {
+		CustomGameVO cvo = gameService.getCustomGameDetail(cGameNo);
+		model.addAttribute("customGameVO", cvo);
+		return "game/update-custom-form.tiles";
+	}
+
+	@Secured("ROLE_MEMBER")
+	@PostMapping("updateCustomGame.do")
+	public String updateCustomGame(Model model, CustomGameVO customGameVO, RedirectAttributes redirectAttributes) {
+		gameService.updateGame(customGameVO);
+		System.out.println("수정글 확인:" + customGameVO);
+		redirectAttributes.addAttribute("cGameNo", Integer.parseInt(customGameVO.getcGameNo()));
+		return "redirect:customGameDetail.do";
 	}
 
 	// ----------------------------------------

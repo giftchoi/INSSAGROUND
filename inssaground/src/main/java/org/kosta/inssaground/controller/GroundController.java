@@ -276,9 +276,10 @@ public class GroundController {
 		System.out.println("**4");
 		scheduleVO.setInsiderVO(insiderVO);
 		System.out.println("**5");
-		scheduleVO.setGroundVO(groundVO);
+		scheduleVO.setGroundVO(groundVO);		
 		System.out.println("**6");
 		System.out.println(scheduleVO);
+		
 		groundService.registergroundschedule(scheduleVO);
 		System.out.println("**7");
 		return "redirect:groundScheduleList.do";
@@ -303,7 +304,18 @@ public class GroundController {
 		System.out.println(scheduleNo);
 		ScheduleVO scheduleVO = new ScheduleVO();
 		scheduleVO.setScheduleNo(scheduleNo);
-		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));		
+		ScheduleVO svo = groundService.findGroundScheduleByScheduleNo(scheduleVO);
+		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));	
+		String[] result2 = null;
+		if(svo.getPosition()!=null) {
+			int length = svo.getPosition().length();			
+			String result = svo.getPosition().substring(1,length-1);
+			result2 = result.split(",");
+			for(int i=0;i<result2.length;i++) {
+				result2[i] = result2[i].trim();
+			}
+		}
+		model.addAttribute("position",result2);
 		return "ground/home/ground-schedule-detail.tiles";
 	}
 }

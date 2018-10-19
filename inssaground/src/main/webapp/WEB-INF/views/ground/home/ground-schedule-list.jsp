@@ -25,7 +25,7 @@
 											
 												<div align="center">
 												&nbsp;제목:${list.title} <br>
-												&nbsp;id: ${list.insiderVO.memberVO.id }<br>
+												&nbsp;아이디: ${list.insiderVO.memberVO.id }<br>
 												&nbsp;위치: ${list.loc }<br>
 												&nbsp;최대인원: ${list.maxPersonnel}<br>
 												<!-- <i class="fa fa-flag"></i><span class="info-span"> </span> -->

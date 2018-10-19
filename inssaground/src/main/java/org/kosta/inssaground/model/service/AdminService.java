@@ -13,7 +13,7 @@ public interface AdminService {
 
 	public GroundVO getGroundDetail(String groundNo);
 
-	public void permitGround(String groundNo);
+	public void permitGround(String groundNo,String masterId);
 
 	public void rejectGround(String groundNo);
 

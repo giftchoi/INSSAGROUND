@@ -46,6 +46,7 @@
 		<form action="acceptGroundApply.do" method="post">
 		<sec:csrfInput/>
 		<input type="hidden" name="groundNo" value="${groundVO.groundNo}">
+		<input type="hidden" name="master" value="${groundVO.master}">
 		<input class="btn btn-red" id="acceptBtn" type="submit" value="승인">
 		</form></td><td>
 		<form action="rejectGroundApply.do" method="post">

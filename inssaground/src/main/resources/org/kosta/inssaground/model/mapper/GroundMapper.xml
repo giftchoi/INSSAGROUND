@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select g.*,s.sigungu_name as area, h.name as hobby
 		from (
 					select row_number() over (order by ground_no) as row_no,g.*
-					from ground g) g, sigungu s, hobby h 
-					where g.status=1 and g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
+					from ground g  where g.status=1) g, sigungu s, hobby h 
+					where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and row_no between #{startRowNumber} and #{endRowNumber}
 	
 	</select>
 	<select id="searchGroundTest" parameterType="map" resultType="groundVO">
@@ -149,11 +149,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> 
 	
 	<insert id="registergroundschedule" parameterType="scheduleVO">
-		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
-		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD'),to_date(#{endDate},'YYYY-MM-DD'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
+		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel,position)
+		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD'),to_date(#{endDate},'YYYY-MM-DD'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel},#{position})
 	</insert>
 	
- 	<select id="grouondScheduleList" parameterType="map" resultType="scheduleVO">
+	<resultMap type="scheduleVO" id="scheduleVORM">
+		<result column="id" property="insiderVO.memberVO.id"/>
+	</resultMap>
+ 	<select id="grouondScheduleList" parameterType="map" resultMap="scheduleVORM">
 		select content,ground_no,id,loc,max_personnel,schedule_no,title
 		from ( 
 		select row_number() over(order by schedule_no desc) as rnum,content,ground_no,id,loc,max_personnel,schedule_no,title
@@ -167,7 +170,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ground_no" property="groundVO.groundNo"/>
 	</resultMap>
 	<select id="findGroundScheduleByScheduleNo" parameterType="scheduleVO" resultMap="scheduleRM">
-		select content,to_char(end_date,'YYYY-MM-DD'),to_char(start_date,'YYYY-MM-DD'),ground_no,id,loc,max_personnel,schedule_no,title
+		select content,to_char(end_date,'YYYY-MM-DD') as endDate,to_char(start_date,'YYYY-MM-DD') as startDate,ground_no,id,loc,max_personnel,schedule_no,title,position
 		from schedule where schedule_no=#{scheduleNo}
 	</select>
 	
@@ -197,5 +200,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="rejectGround" parameterType="string">
 		update ground set status=2 where ground_no=#{value}
 	</update>
+	<insert id="insertInsider" parameterType="map" >
+		insert into insider(ground_no,id,attendance,status) values(#{groundNo},#{id},0,1)
+	</insert>
 </mapper>
  
