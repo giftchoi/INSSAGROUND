@@ -23,7 +23,7 @@ public interface GroundService {
 	public void groundParticipation(); // 모임참여
 	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
 	public void registerGroundSchedule(ScheduleVO scheduleVO); //모임 일정 등록
-	public void deleteGroundSchedule(ScheduleVO scheduelVO); // 모임 일정 삭제
+	public void deleteGroundSchedule(ScheduleVO scheduleVO); // 모임 일정 삭제
 	public void groundParticipantPermission(GroundVO groundVO);//	 모임 참여 허가
 	//public void masterGroundManagement(GroundVO groundVO);// 모임장 모임 관리
 	public InsiderVO groundParticipantList(GroundVO GroundVO);// 모임 참여 리스트
@@ -55,10 +55,17 @@ public interface GroundService {
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 	public void registergroundschedule(ScheduleVO scheduleVO);
-
+	
 
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
+
+	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
+	
+	
+	
+
+
 
 	
 	

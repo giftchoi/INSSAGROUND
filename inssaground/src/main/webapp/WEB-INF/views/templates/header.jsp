@@ -42,13 +42,13 @@ li.dropdown {
 <sec:authorize access="!hasRole('ROLE_ADMIN') and hasRole('ROLE_MEMBER')">
 <ul>
    <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
-   <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
+   <li class="dropdown"><a href="${pageContext.request.contextPath}/myGround.do">MYPAGE</a>
    <div class="dropdown-content">
    <a  href="myGround.do">내 모임</a>
       <a href="registerForm.do">내 일정</a>
       <a href="registerForm.do">내 프로그램</a>
-      <a href="viewMemberInfo.do">내 정보</a>
-      <a href="withdrawForm.do">WITHDRAW</a>
+      <a href="viewMemberInfo.do">나의 정보</a>
+      <a href="withdrawForm.do">탈퇴</a>
       </div>
    </li>
    <li><a href="#" id="logoutAction">LOGOUT</a></li>
@@ -71,11 +71,10 @@ li.dropdown {
    <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
    <li class="dropdown"><a href="${pageContext.request.contextPath}/readyApplyGround.do">ADMIN PAGE</a>
    <div class="dropdown-content">
-   <a  href="readyApplyGround.do">APPLY GROUND</a>
-      <a href="registerForm.do">MY SCHEDULE</a>
-      <a href="registerForm.do">MY GAME PROGRAM</a>
-      <a href="viewMemberInfo.do">MY INFO</a>
-      <a href="withdrawForm.do">WITHDRAW</a>
+   <a  href="readyApplyGround.do">모임 신청 접수</a>
+      <a href="registerForm.do">문의 접수</a>
+      <a href="registerForm.do">게임 등업</a>
+      <a href="viewMemberInfo.do">나의 정보</a> 
       </div>
    </li>
    <li><a href="#" id="logoutAction">LOGOUT</a></li>
@@ -117,14 +116,15 @@ li.dropdown {
 		    <div class="dropdown-content">
       <a href="gameHome.do">공식 게임</a>
       <a href="gameCustom.do">사용자 정의 게임</a>
-      <a href="#">MAKE PROGRAM</a>
+      <a href="#">프로그램 만들기</a>
     </div>
 	</li>
 	<li class="dropdown"><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a>
 	<div class="dropdown-content">
-     	 <a  href="service.do">OUR SERVICE</a>
-		<a href="aboutus.do">ABOUT US</a>
-		<a href="team.do">OUR TEAM</a>
+     	 <a  href="service.do">서비스 소개</a>
+		<a href="aboutus.do">인싸그라운드 소개</a>
+		<a href="team.do">팀 소개</a>
+		<a href="reportForm.do">불량모임 신고</a>
     </div>
 	</li>
 </ul>

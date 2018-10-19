@@ -7,6 +7,7 @@ import java.util.Map;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,4 +39,6 @@ public interface MemberService {
 	public void findPassword(String id) throws Exception;
 
 	public String getProfileIMGName(String id);
+
+	public void reportGround(ReportVO reportVO);
 }

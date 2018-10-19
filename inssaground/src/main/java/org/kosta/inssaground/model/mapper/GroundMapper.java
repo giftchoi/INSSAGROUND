@@ -46,9 +46,9 @@ public interface GroundMapper {
 	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
 	List<NoticeVO> getAllGroundNoticeList(Map<String, Object> map);
-	
-
-
+	void deleteGroundSchedule(ScheduleVO scheduleVO);
+	void updateGroundSchedule(ScheduleVO scheduleVO);
+	List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 
 
 	int groundScheduleTotalCount(GroundVO groundVO);

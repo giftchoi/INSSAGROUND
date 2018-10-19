@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 
 @Mapper
 public interface MemberMapper {
@@ -45,5 +46,7 @@ public interface MemberMapper {
 	void changeMemberStatus(String id);
 
 	void updateMember(MemberVO vo);
+
+	void reportGround(ReportVO reportVO);
 
 }

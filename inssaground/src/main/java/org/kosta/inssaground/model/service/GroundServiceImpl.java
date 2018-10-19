@@ -123,9 +123,8 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public void deleteGroundSchedule(ScheduleVO scheduelVO) {
-		// TODO Auto-generated method stub
-
+	public void deleteGroundSchedule(ScheduleVO scheduleVO) {
+		groundMapper.deleteGroundSchedule(scheduleVO);
 	}
 
 	@Override
@@ -180,8 +179,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void updateGroundSchedule(ScheduleVO scheduleVO) {
-		// TODO Auto-generated method stub
-
+		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
 	@Override
@@ -317,6 +315,13 @@ public class GroundServiceImpl implements GroundService {
 		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
 		return listVO;
 	}
+
+	@Override
+	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO) {		
+		return groundMapper.findGroundMemberListByGroundNo(groundVO);
+	}
+
+	
 
 
 	

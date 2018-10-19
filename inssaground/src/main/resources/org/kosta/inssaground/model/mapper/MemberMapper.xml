@@ -58,5 +58,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMember" parameterType="memberVO">
 		update inssa_member set password=#{password}, name=#{name} where id=#{id}
 	</update>
+	<insert id="reportGround" parameterType="reportVO">
+		insert into badground_report(report_no,content,title,time_posted,id,ground_no)
+		 values(badground_report_seq.nextval,#{content},#{title},sysdate,#{id},#{groundNo})
+	</insert>
 </mapper>
  
