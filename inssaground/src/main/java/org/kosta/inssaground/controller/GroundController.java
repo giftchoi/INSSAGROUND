@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.service.MemberService;
-import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -73,6 +72,7 @@ public class GroundController {
 		if(category=="") category = null;
 		if(hobby=="") hobby = null;
 		if(nowPage==null) nowPage = "1";
+		System.out.println("searchGround.... nowPage="+nowPage);
 		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
 	}
 
@@ -85,7 +85,7 @@ public class GroundController {
 		return "ground/ground-apply-form.tiles";
 	}
 	
-	@Secured("ROLE_MEMBER")
+
 	@RequestMapping("groundDetail.do")
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
@@ -136,7 +136,6 @@ public class GroundController {
 			HobbyCategoryVO hobbyCategoryVO,MultipartFile picture) {
 		//////////////////////////////////////////////////
 		String tags[] = request.getParameterValues("hashtag");
-		System.out.println(tags[0]+","+tags[1]);
 		System.out.println("controller 1");
 		groundService.applyGround(groundVO, sidoVO, sigunguVO, hobbyVO, hobbyCategoryVO);		
 		System.out.println("controller 2");
@@ -167,12 +166,22 @@ public class GroundController {
 		
 		return "redirect:home.do";
 	}
+	/**
+	 * 	싸장 - 모임 관리 페이지로 이동
+	 * @return
+	 */
 	/*Ground Master */
 	@RequestMapping("groundMasterPage.do")
 	public String groundMasterPage() {
 		return "ground/home/ground-master-page.tiles";
 	}
 	
+	/**
+	 * 	싸장 - 모임 참여 대기 승인, 거절
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("groundMasterReadyList.do")
 	public String groundMasterReadyList(HttpSession session,Model model) {
 		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
@@ -239,7 +248,15 @@ public class GroundController {
 		model.addAttribute("noticeVO",noticeVO);
 		return "ground/home/ground-notice-detail.tiles";
 	}
-
+	
+	@Secured("ROLE_MEMBER")
+	@PostMapping("groundNoticeDelete.do")
+	public String deleteGroundNotice(NoticeVO noticeVO) {
+		groundService.deleteGroundNotice(noticeVO.getNoticeNo());
+		return "redirect:groundNoticeList.do?groundNo="+noticeVO.getGroundNo();
+	}
+	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
 	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
 		System.out.println("ground-home: "+groundVO.getGroundNo());

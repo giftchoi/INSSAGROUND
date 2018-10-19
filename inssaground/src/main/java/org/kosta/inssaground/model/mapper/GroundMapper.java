@@ -17,7 +17,6 @@ import org.kosta.inssaground.model.vo.SigunguVO;
 @Mapper
 public interface GroundMapper {
 	/*SOJEONG*/
-	List<GroundVO> searchGroundTest(Map<String,Object> map);
 	List<GroundVO> searchGround(Map<String,Object> map);
 	List<GroundVO> getAllGroundList(PagingBean pagingBean);
 	GroundVO groundDetail(GroundVO groundVO);
@@ -62,6 +61,7 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
+	void deleteGroundNotice(String noticeNo);
 
 
 

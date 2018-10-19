@@ -5,11 +5,6 @@
 <form method="post" action="groundNoticeRegister.do">
 	<table class="myTable">
 		<sec:csrfInput/>	<!--post방식을 위한 security token -->
-		<thead>
-			<tr>
-				<th colspan="3">공지 내용</th>
-			</tr>
-		</thead>
 		<tbody>
 			<tr>
 			<td colspan="3"><textarea name="content" rows="10"cols="70"></textarea></td>
