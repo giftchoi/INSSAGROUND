@@ -196,7 +196,7 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundNoticeRegisterForm.do")
 	public String registerGroundNoticeForm() {
-		return "ground/home/ground-notice-regist-form.tiles";
+		return "ground/home/ground-notice-register-form.tiles";
 	}
 	
 	/**
