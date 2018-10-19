@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
- <div class="row">
-  <div class="col-sm-4">
-  	<sec:authorize access="hasRole('ROLE_MEMBER')">
-	<ul>
-		<li><a  href="loginForm.do">MY GROUND</a></li>
-		<li><a href="registerForm.do">MY SCHEDULE</a></li>
-		<li><a href="registerForm.do">MY GAME PROGRAM</a></li>
-		<li><a href="modifyMemberForm.do">EDIT MY INFO</a></li>
-		<li><a href="registerForm.do">WITHDRAW</a></li>
-		</ul>
-	</sec:authorize>
-  </div>
-  <div class="col-*-*"></div>
-</div>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  <table class="myTable">
+  <thead>
+    <tr>
+      <th colspan="3">MY GROUND</th>
+    </tr>
+    <tr>
+      <th>HOBBY</th>
+      <th>GROUND NAME</th>
+      <th>STATUS</th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${myGround}" var="ground">
+      <tr>
+      <td>${ground.hobby}</td>
+      <c:choose>
+      <c:when test="${ground.STATUS==0}">
+      <td>${ground.groundName}</td>
+      <td>참여 대기중</td></c:when>
+      <c:otherwise> <td><a href="applyGroundDetail.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
+      <td></td></c:otherwise>
+      </c:choose>
+    </tr>
+  </c:forEach>
+  </tbody>
+</table>

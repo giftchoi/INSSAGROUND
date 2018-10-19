@@ -15,8 +15,6 @@ public interface MemberService {
 
 	public void registerMember(MemberVO mvo,MultipartFile picture) throws IllegalStateException, IOException;
 
-	public void login(MemberVO mvo);
-
 	public MemberVO findMemberById(String id);
 
 	public void updateMember(MemberVO vo);
@@ -25,7 +23,7 @@ public interface MemberService {
 
 	public List<Map<String,String>> myGroundNoList(String id); //내가 참여한 모임번호 보기
 	
-	public ListVO<GroundVO> myGroundList(String id); // 내가 참여한 모임 보기
+	public List<Map<String, String>> myGroundList(String id); // 내가 참여한 모임 보기
 
 	public ListVO<ScheduleVO> myScheduleList(String id); // 내가 참여한 모임의 일정 보기
 
