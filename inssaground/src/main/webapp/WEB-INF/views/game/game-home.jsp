@@ -6,7 +6,14 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-
+<style>
+.rowgamefooter{
+    position : absolute;
+    width: inherit;
+    bottom: 0;
+    margin-left: 0;
+}
+</style>
 <div class="col-sm-12">
 	<div class="row main-content">
 		<div class="col-sm-12">
@@ -27,7 +34,12 @@
 			<!-- 사용자정의 게임 화면 -->
 			<c:choose>
 				<c:when test="${requestScope.gameType eq 'custom'}">
-
+					<span class="gameWriteForm"
+						style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+						<button class="btn btn-danger"
+							onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">
+							사용자 게임 등록</button>
+					</span>
 					<div class="game-post-area">
 						<c:forEach items="${requestScope.customGameLvo.list }" var="cgvo">
 							<%--
@@ -40,38 +52,46 @@
  --%>
 							<sec:authorize access="isAuthenticated()">
 								<!-- 로그인 상태 -->
-
-								<span class="gameWriteForm"
-									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-									<button class="btn btn-danger"
-										onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">
-										사용자 게임 등록</button>
-								</span>
-
 								<div class="card game"
 									onclick="location.href='${pageContext.request.contextPath}/customGameDetail.do?cGameNo=${cgvo.cGameNo}'">
-									<!-- <div class="card-header">Header</div> -->
+									<div class="card-header">
+										<h3>${cgvo.title }</h3>
+									</div>
 									<div class="card-body">
-										<h1>${cgvo.title }</h1>
-										<br>
-										<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
-										<br>
-										<h3 align="right" style="color: red;">인원수:
-											${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
+										<h5 style="font-family: serif; text-align: center;">준비물:
+											${cgvo.materials }</h5>
+									</div>
+									<div class="row rowgamefooter">
+										<div class="col-sm-6" align="left">
+											<h5 style="font-family: serif; text-align: left;">${cgvo.gameTime}
+												분</h5>
+										</div>
+										<div class="col-sm-6" align="right">
+											<h5 align="right" style="color: red;">
+												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h5>
+										</div>
 									</div>
 								</div>
 							</sec:authorize>
 							<sec:authorize access="isAnonymous()">
 								<!-- 비로그인 상태 -->
 								<div class="card game">
-									<!-- <div class="card-header">Header</div> -->
+									<div class="card-header">
+										<h3>${cgvo.title }</h3>
+									</div>
 									<div class="card-body">
-										<h1>${cgvo.title }</h1>
-										<br>
-										<h4 style="font-family: serif;">준비물: ${cgvo.materials }</h4>
-										<br>
-										<h3 align="right" style="color: red;">인원수:
-											${cgvo.minPersonnel}~${cgvo.maxPersonnel}</h3>
+										<h5 style="font-family: serif; text-align: center;">준비물:
+											${cgvo.materials }</h5>
+									</div>
+									<div class="row rowgamefooter">
+										<div class="col-sm-6" align="left">
+											<h5 style="font-family: serif; text-align: left;">${cgvo.gameTime}
+												분</h5>
+										</div>
+										<div class="col-sm-6" align="right">
+											<h5 align="right" style="color: red;">
+												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h5>
+										</div>
 									</div>
 								</div>
 							</sec:authorize>
@@ -145,26 +165,42 @@
 
 								<div class="card game"
 									onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
+									<div class="card-header">
+										<h3>${ogvo.title }</h3>
+									</div>
 									<div class="card-body">
-										<h1>${ogvo.title }</h1>
-										<br>
-										<h4 style="font-family: serif;">준비물: ${ogvo.materials }</h4>
-										<br>
-										<h3 align="right" style="color: red;">인원수:
-											${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
+										<h5 style="font-family: serif; text-align: center;">준비물: ${ogvo.materials }</h5>
+									</div>
+									<div class="row rowgamefooter">
+										<div class="col-sm-6" align="left">
+											<h5 style="font-family: serif; text-align: left;">${ogvo.gameTime}
+												분</h5>
+										</div>
+										<div class="col-sm-6" align="right">
+											<h5 align="right" style="color: red;">
+												${ogvo.minPersonnel} ~ ${ogvo.maxPersonnel} 명</h5>
+										</div>
 									</div>
 								</div>
 							</sec:authorize>
 							<sec:authorize access="isAnonymous()">
 								<!-- 비로그인 상태 -->
 								<div class="card game">
+									<div class="card-header">
+										<h3>${ogvo.title }</h3>
+									</div>
 									<div class="card-body">
-										<h1>${ogvo.title }</h1>
-										<br>
-										<h4 style="font-family: serif;">준비물: ${ogvo.materials }</h4>
-										<br>
-										<h3 align="right" style="color: red;">인원수:
-											${ogvo.minPersonnel}~${ogvo.maxPersonnel}</h3>
+										<h5 style="font-family: serif; text-align: center;">준비물: ${ogvo.materials }</h5>
+									</div>
+									<div class="row rowgamefooter">
+										<div class="col-sm-6" align="left">
+											<h5 style="font-family: serif; text-align: left;">${ogvo.gameTime}
+												분</h5>
+										</div>
+										<div class="col-sm-6" align="right">
+											<h5 align="right" style="color: red;">
+												${ogvo.minPersonnel} ~ ${ogvo.maxPersonnel} 명</h5>
+										</div>
 									</div>
 								</div>
 							</sec:authorize>
