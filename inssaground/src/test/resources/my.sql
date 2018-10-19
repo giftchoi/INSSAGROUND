@@ -3,6 +3,7 @@ alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
 
+
 select count(*) from ground
 
 create table sigungu(
@@ -244,7 +245,7 @@ create sequence CUSTOM_GAME_Seq nocache;
 
 drop table CUSTOM_GAME;
 create table CUSTOM_GAME(
-   c_game_no varchar2(100) primary key,
+   c_game_no number(100) primary key,
    title varchar2(50) not null,
    min_personnel number default 0,
    max_personnel number default 1000,
@@ -467,7 +468,7 @@ create table PROGRAM_OFFICIAL_GAME(
 );
 --15
 create table CUSTOM_GAME(
-   c_game_no varchar2(100) primary key,
+   c_game_no number primary key,
    title varchar2(50) not null,
    min_personnel number default 0,
    max_personnel number default 1000,
