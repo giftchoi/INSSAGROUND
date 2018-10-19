@@ -11,9 +11,16 @@
 			//window.top.close();
 /* 			window.open('','_self','');
 			window.close(); */
-			opener.document.location.href="javascript:participate()";
+			if(confirm("해당 모임에 참여 신청하시겠습니까?")){
+				location.href="javascript:participate()";
+			}
+
 				//"participateGround.do?groundNo="+${groundVO.groundNo};
 			//self.close();
+		});//click
+		$("#anonyPartBtn").click(function(){
+			alert("로그인 후 이용가능합니다.");
+			location.href="loginForm.do";
 		});
 	});
 	
@@ -65,6 +72,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12 btnArea">
+			<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="principal" property="principal" />
 			<c:set var="isInssa" value="false" />
 			<c:forEach items="${principal.groundNoList}" var="ground">
@@ -91,8 +99,12 @@
 						<input class="btn" id="" type="button" value="정원초과">
 					</c:otherwise>
 				</c:choose>
-				
+
 			</c:if>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<input class="btn btn-red" id="anonyPartBtn"type="button" value="참여신청">
+			</sec:authorize>
 		</div>
 	</div>
 </div>

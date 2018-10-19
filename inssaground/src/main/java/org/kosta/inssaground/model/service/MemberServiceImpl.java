@@ -1,19 +1,23 @@
 package org.kosta.inssaground.model.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
+import org.kosta.inssaground.model.mapper.GroundMapper;
+import org.kosta.inssaground.model.mapper.HobbyMapper;
 import org.kosta.inssaground.model.mapper.MemberMapper;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
 import org.kosta.inssaground.model.vo.EmailVO;
 import org.kosta.inssaground.model.vo.GroundVO;
+import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +31,10 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper memberMapper;
 	@Autowired
 	private FileUploadService fileUploader;
+	@Autowired
+	private GroundMapper groundMapper;
+	@Autowired
+	private HobbyMapper hobbyMapper;
 	@Override
 	public String checkEmailKey(String email, String emailKey) {
 		if(memberMapper.emailcheck(email)!=0) {
@@ -43,12 +51,6 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.registerPermission(mvo.getId());
 		mvo.setProfile(fileUploader.fileUpload(picture));
 		memberMapper.registerProfile(mvo);
-	}
-
-	@Override
-	public void login(MemberVO mvo) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -71,9 +73,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ListVO<GroundVO> myGroundList(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, String>> myGroundList(String id) {
+		List<Map<String, String>> list = memberMapper.myGroundNoList(id);
+		for(int i=0;i<list.size();i++) {
+			String groundNo=String.valueOf(list.get(i).get("GROUNDNO"));
+			GroundVO groundVO=groundMapper.findGroundByGroundNo(groundNo);
+			list.get(i).put("groundName", groundVO.getGroundName());
+			HobbyVO hobby=hobbyMapper.findHobbyByHobbyNo(groundVO.getHobby());
+			list.get(i).put("hobby",hobby.getName());
+		}
+		return list;
 	}
 
 	@Override
@@ -140,11 +149,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public List<Map<String,String>> myGroundNoList(String id) {
-		// TODO Auto-generated method stub
 		return memberMapper.myGroundNoList(id);
 	}
 	@Override
 	public String getProfileIMGName(String id) {
 		return memberMapper.getProfileIMGName(id);
+	}
+	@Override
+	public void reportGround(ReportVO reportVO) {
+		//System.out.println(reportVO);
+		memberMapper.reportGround(reportVO);
 	}
 }

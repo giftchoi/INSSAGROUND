@@ -59,12 +59,14 @@ public interface GroundService {
 
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
-	
+
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
-	// for Test
-	public ListVO<GroundVO> searchGroundTest(PagingBean pagingBean,GroundVO groundVO);
 	
 	
+	
+
+
+
 	
 	
 	

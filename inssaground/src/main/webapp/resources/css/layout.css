@@ -251,7 +251,7 @@ h1.title {
 pre{
 	background-color : white !important;
 	font-family: "Poppins",sans-serif !important;
-	/* border:none !important; */
+	/*  border:none !important;  */
 }
 
 .btn-red {
@@ -359,6 +359,7 @@ table.myTable  {
   border: 2px solid #ff1a1a;
   width: 700px;
   margin: 50px auto;
+  padding:10px;
   border-radius: .25rem;
   font-size:18px;
   color:#000;
