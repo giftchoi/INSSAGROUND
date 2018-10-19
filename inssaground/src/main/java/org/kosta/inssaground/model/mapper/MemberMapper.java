@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ReportVO;
@@ -48,5 +49,9 @@ public interface MemberMapper {
 	void updateMember(MemberVO vo);
 
 	void reportGround(ReportVO reportVO);
+
+	List<ReportVO> getReportList(PagingBean pagingBean);
+
+	ReportVO getReportDetail(String reportNo);
 
 }
