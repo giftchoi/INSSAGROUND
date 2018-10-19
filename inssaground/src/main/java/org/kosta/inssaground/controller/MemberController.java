@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.kosta.inssaground.model.service.MemberService;
-import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -130,5 +130,21 @@ public class MemberController {
 		List<Map<String, String>> myGroundList = memberService.myGroundList(mvo.getId());
 		model.addAttribute("myGround", myGroundList);
 		return "member/mypage.tiles";
+	}
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("reportForm.do")
+	public String reportForm(Model model) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Map<String, String>> myGroundList = memberService.myGroundList(mvo.getId()); 
+		model.addAttribute("groundList", myGroundList);
+		return "home/report-form.tiles";
+	}
+	@Secured("ROLE_MEMBER")
+	@PostMapping("reportGround.do")
+	public String reportGround(ReportVO reportVO) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		reportVO.setId(mvo.getId());
+		memberService.reportGround(reportVO);
+		return "home/report-result";
 	}
 }

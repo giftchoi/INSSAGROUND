@@ -5,12 +5,13 @@
   <table class="myTable">
   <thead>
     <tr>
-      <th colspan="3">MY GROUND</th>
+      <th colspan="4">MY GROUND</th>
     </tr>
     <tr>
       <th>HOBBY</th>
       <th>GROUND NAME</th>
       <th>STATUS</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +23,7 @@
       <td>${ground.groundName}</td>
       <td>참여 대기중</td></c:when>
       <c:otherwise> <td><a href="applyGroundDetail.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
-      <td></td></c:otherwise>
+      <td>참여 중</td></c:otherwise>
       </c:choose>
     </tr>
   </c:forEach>

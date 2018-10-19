@@ -17,6 +17,7 @@ import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,11 +149,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public List<Map<String,String>> myGroundNoList(String id) {
-		// TODO Auto-generated method stub
 		return memberMapper.myGroundNoList(id);
 	}
 	@Override
 	public String getProfileIMGName(String id) {
 		return memberMapper.getProfileIMGName(id);
+	}
+	@Override
+	public void reportGround(ReportVO reportVO) {
+		//System.out.println(reportVO);
+		memberMapper.reportGround(reportVO);
 	}
 }
