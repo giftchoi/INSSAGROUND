@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.service.MemberService;
-import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.GroundImgVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
@@ -264,6 +263,12 @@ public class GroundController {
 	@PostMapping("registergroundschedule.do")
 	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
 		System.out.println("1. "+scheduleVO);
+		String date = scheduleVO.getStartDate().replace("T"," ");
+		String date2 = scheduleVO.getEndDate().replace("T"," ");
+		System.out.println(date);
+		System.out.println(date2);
+		scheduleVO.setStartDate(date);
+		scheduleVO.setEndDate(date2);
 		System.out.println("2. "+groundVO);
 		System.out.println("3. "+insiderVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
@@ -286,7 +291,6 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundScheduleList.do")
-
 	public String groundScheduleList(HttpSession session,Model model,String pageNo) {		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		System.out.println("controller1");
@@ -317,5 +321,36 @@ public class GroundController {
 		}
 		model.addAttribute("position",result2);
 		return "ground/home/ground-schedule-detail.tiles";
+	}
+	@RequestMapping("updateGroundScheduleForm.do")
+	public String updateGroundScheduleForm(ScheduleVO scheduleVO,Model model) {
+		groundService.findGroundScheduleByScheduleNo(scheduleVO);
+		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));
+		return "ground/home/ground-schedule-update.tiles";
+	}
+	@PostMapping("updateGroundSchedule.do")
+	public String updateGroundSchedule(ScheduleVO scheduleVO) {
+		System.out.println("************"+scheduleVO);
+		String date = scheduleVO.getStartDate().replace("T"," ");
+		String date2 = scheduleVO.getEndDate().replace("T"," ");
+		scheduleVO.setStartDate(date);
+		scheduleVO.setEndDate(date2);
+		groundService.updateGroundSchedule(scheduleVO);
+		return "redirect:groundScheduleDetail.do";
+	}
+	
+	@PostMapping("deleteGroundSchedule.do")
+	public String deleteGroundSchedule(ScheduleVO scheduleVO) {
+		System.out.println(scheduleVO);
+		groundService.deleteGroundSchedule(scheduleVO);		
+		return "redirect:groundScheduleList.do";
+	}
+	
+	@RequestMapping("groundMemberList.do")
+	public String groundMemberList(Model model,HttpSession session) {
+		GroundVO gvo = (GroundVO)session.getAttribute("ground");
+		System.out.println(gvo);
+		model.addAttribute("memberList",groundService.findGroundMemberListByGroundNo(gvo));
+		return "ground/home/ground-member-list.tiles";
 	}
 }

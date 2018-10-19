@@ -39,11 +39,28 @@
 
 <div id="map" style="width:100%;height:350px;"></div>
 <sec:authentication property="principal" var="principal"/>
-<c:if test="${scheduleDetail.insiderVO.memberVO.id==principal.id}">
-<button id="delete">삭제</button>
-<button id="update">수정</button>
+deleteGroundSchedule.do
+updateGroundSchedule.do
+<c:if test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
+<table>
+	<tr>
+		<td>
+	<form action="deleteGroundSchedule.do" method="post">
+		<sec:csrfInput/>
+		<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+		<input type="submit" value="삭제">
+	</form>
+		</td>
+		<td>
+<form action="updateGroundScheduleForm.do">
+	<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+	<input type="submit" value="수정">
+</form>
+		</td>
+</tr>
+</table>
 </c:if>
-<c:if test="${${scheduleDetail.insiderVO.memberVO.id!=principal.id} }">
+<c:if test="${scheduleDetail.insiderVO.memberVO.id != principal.id}">
 <button>참가</button>
 <button>불참</button>
 </c:if>

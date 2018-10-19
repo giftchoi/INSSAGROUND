@@ -1,38 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-    
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+      <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="col-sm-12 main-content">
 	<div class="card-container wide">
 		<div class="form-card">
-			<h1 class="title">일정 등록</h1>
-			<form method="post" action="registergroundschedule.do" id="regForm" enctype="multipart/form-data">
+			<h1 class="title">일정 상세</h1>
+			<form method="post" action="updateGroundSchedule.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
+				<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo }">
 				<div class="input-container">
 					제목<br>
-					<input type="text"  maxlength="30" required="required" name="title" />
+					<input type="text"  maxlength="30"  name="title" value="${scheduleDetail.title}"/>
 				</div>
 				<div class="input-container">
 					참여 인원 제한<br>
-					<pre><input type="number"  required="required" name="maxPersonnel"/></pre>			
+					<input type="number"   name="maxPersonnel" value="${scheduleDetail.maxPersonnel }"/>		
 				</div>
 				<div class="input-container">
 					시작 날짜<br>
-					<input type="datetime-local"  min="" required="required" name="startDate"/>					
+					<input type="datetime-local"   name="startDate" />					
 				</div>
 				<div class="input-container">
 					종료 날짜<br>
-					<input type="datetime-local"  required="required" name="endDate"/>					
+					<input type="datetime-local"   name="endDate" />					
 				</div>
+				
 				
 				<div class="input-container">
 					내용<br>
-					<textarea rows="10" cols="70" name="content"></textarea> 
+					<textarea rows="10" cols="70" name="content">${scheduleDetail.content}</textarea> 
 					
 				</div>
-					<input type="text" id="sample5_address" placeholder="주소" name="loc">
-					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+		
+
+
+				<input type="text" id="sample5_address" placeholder="주소" name="loc">
+				<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
 
@@ -104,13 +108,16 @@
         }).open();
     }
 </script>
-<!--  -->				
-			<input type="hidden" name="position" id="address" >
-	
 				<div>
-				<input type="submit" class="btn btn-red" value="회원가입" id="regBtn"><br>
+
 				</div>
-			</form>
+				<input type="submit" value="확인">
+			 </form>
+				 <form action="groundScheduleList.do" method="post">
+					<sec:csrfInput/>
+					<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+					<input type="submit" value="취소">
+				</form>
 		</div>
 	</div>
 </div>
