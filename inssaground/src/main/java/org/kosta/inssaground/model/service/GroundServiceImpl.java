@@ -73,7 +73,7 @@ public class GroundServiceImpl implements GroundService {
 		map.put("pagingBean",pagingBean);
 		
 		List<GroundVO>	list = groundMapper.searchGround(map);
-
+		//System.out.println(list.get(1));
 		return new ListVO<GroundVO>(pagingBean,list);
 	}
 	@Override
@@ -99,7 +99,9 @@ public class GroundServiceImpl implements GroundService {
 	
 	@Override
 	public GroundVO groundDetail(GroundVO groundVO) {
-		return groundMapper.groundDetail(groundVO);
+		GroundVO gvo = groundMapper.groundDetail(groundVO);
+		gvo.setTagList(groundMapper.getHashtagList(groundVO.getGroundNo()));
+		return gvo;
 	}
 
 	@Override
@@ -159,7 +161,7 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public void updateGroundNotice(NoticeVO noticeVO) {
 		// TODO Auto-generated method stub
-
+		groundMapper.updateGroundNotice(noticeVO);
 	}
 
 

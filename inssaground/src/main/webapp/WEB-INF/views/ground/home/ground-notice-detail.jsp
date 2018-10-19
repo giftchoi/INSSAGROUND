@@ -8,7 +8,13 @@
 			if(confirm("해당 공지를 삭제하시겠습니까?")){
 				$("#delNoticeForm").submit();
 			}
-		});
+		});//click
+		
+		$("#editBtn").click(function(){
+			if(confirm("해당 공지를 수정하시겠습니까?")){
+					location.href = "groundNoticeUpdateForm.do?noticeNo="+${noticeVO.noticeNo};
+			}
+		});//click
 		
 	});
 </script>
