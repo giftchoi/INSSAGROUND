@@ -2,8 +2,10 @@ package org.kosta.inssaground.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.inssaground.model.service.MemberService;
+import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -103,11 +105,9 @@ public class MemberController {
 	@PostMapping("modifyMember.do")
 	public String modifyMember(MemberVO newVO) {
 		MemberVO vo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("Spring Security 세션 수정 전 회원정보:" + vo);	
 		vo.setPassword(newVO.getPassword());
 		vo.setName(newVO.getName());
 		memberService.updateMember(vo);
-		System.out.println("Spring Security 세션 수정 후 회원정보:" + vo);
 		return "redirect:viewMemberInfo.do";
 	}
 	
@@ -122,5 +122,13 @@ public class MemberController {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		memberService.withdrawMember(mvo);
 		return "member/link-logout";
+	}
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("myGround.do")
+	public String myGroundList(Model model) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Map<String, String>> myGroundList = memberService.myGroundList(mvo.getId());
+		model.addAttribute("myGround", myGroundList);
+		return "member/mypage";
 	}
 }

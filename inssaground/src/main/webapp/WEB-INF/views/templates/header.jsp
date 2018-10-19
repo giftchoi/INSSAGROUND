@@ -44,7 +44,7 @@ li.dropdown {
    <li><a  href="#"><sec:authentication property="principal.name" />님</a></li>
    <li class="dropdown"><a href="${pageContext.request.contextPath}/mypage.do">MYPAGE</a>
    <div class="dropdown-content">
-   <a  href="loginForm.do">내 모임</a>
+   <a  href="myGround.do">내 모임</a>
       <a href="registerForm.do">내 일정</a>
       <a href="registerForm.do">내 프로그램</a>
       <a href="viewMemberInfo.do">내 정보</a>
