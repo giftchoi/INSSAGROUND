@@ -25,10 +25,11 @@ public interface GroundMapper {
 	void participateGround(Map<String,String> map);
 	List<MemberVO> getParticipationReadyList(String groundNo);
 	void approveParticipation(InsiderVO insiderVO);
-	void registerGroundNotice(NoticeVO noticeVO);
+	void registerGroundNotice(NoticeVO noticeVO);// 공지 등록
 	int getGroundNoticeCount(String groundNo);	//공지 갯수 
 	NoticeVO getNoticeDetailByNo(String noticeNo); //공지 상세 정보 
-
+	void deleteGroundNotice(String noticeNo);	//공지 삭제
+	void updateGroundNotice(NoticeVO noticeVO);	//공지 수정
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -45,9 +46,9 @@ public interface GroundMapper {
 	ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	void registergroundschedule(ScheduleVO scheduleVO);
 	List<NoticeVO> getAllGroundNoticeList(Map<String, Object> map);
-	
-
-
+	void deleteGroundSchedule(ScheduleVO scheduleVO);
+	void updateGroundSchedule(ScheduleVO scheduleVO);
+	List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 
 
 	int groundScheduleTotalCount(GroundVO groundVO);
@@ -61,7 +62,7 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-	void deleteGroundNotice(String noticeNo);
+
 
 
 

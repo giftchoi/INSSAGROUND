@@ -73,7 +73,7 @@ public class GroundServiceImpl implements GroundService {
 		map.put("pagingBean",pagingBean);
 		
 		List<GroundVO>	list = groundMapper.searchGround(map);
-
+		//System.out.println(list.get(1));
 		return new ListVO<GroundVO>(pagingBean,list);
 	}
 	@Override
@@ -99,7 +99,9 @@ public class GroundServiceImpl implements GroundService {
 	
 	@Override
 	public GroundVO groundDetail(GroundVO groundVO) {
-		return groundMapper.groundDetail(groundVO);
+		GroundVO gvo = groundMapper.groundDetail(groundVO);
+		gvo.setTagList(groundMapper.getHashtagList(groundVO.getGroundNo()));
+		return gvo;
 	}
 
 	@Override
@@ -121,9 +123,8 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public void deleteGroundSchedule(ScheduleVO scheduelVO) {
-		// TODO Auto-generated method stub
-
+	public void deleteGroundSchedule(ScheduleVO scheduleVO) {
+		groundMapper.deleteGroundSchedule(scheduleVO);
 	}
 
 	@Override
@@ -160,7 +161,7 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public void updateGroundNotice(NoticeVO noticeVO) {
 		// TODO Auto-generated method stub
-
+		groundMapper.updateGroundNotice(noticeVO);
 	}
 
 
@@ -178,8 +179,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void updateGroundSchedule(ScheduleVO scheduleVO) {
-		// TODO Auto-generated method stub
-
+		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
 	@Override
@@ -315,6 +315,13 @@ public class GroundServiceImpl implements GroundService {
 		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
 		return listVO;
 	}
+
+	@Override
+	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO) {		
+		return groundMapper.findGroundMemberListByGroundNo(groundVO);
+	}
+
+	
 
 
 	

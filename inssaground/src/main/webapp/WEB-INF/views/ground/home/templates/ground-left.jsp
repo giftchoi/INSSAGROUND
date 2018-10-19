@@ -27,7 +27,7 @@
 			<a href="groundPost.do">자유게시판</a> <span class="lnr lnr-calendar-full"></span>
 		</p>
 		<p class="view col-lg-12 col-md-12 col-6">
-			<a href="#">INSSA MEMBER</a> <span class="lnr lnr-eye"></span>
+			<a href="groundMemberList.do">INSSA MEMBER</a> <span class="lnr lnr-eye"></span>
 		</p>
 		<sec:authentication var="principal" property="principal" />
 			<c:if test="${sessionScope.ground.master eq principal.id}">
