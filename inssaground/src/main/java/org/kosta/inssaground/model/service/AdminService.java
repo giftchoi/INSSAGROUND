@@ -2,6 +2,7 @@ package org.kosta.inssaground.model.service;
 
 import java.util.List;
 
+import org.kosta.inssaground.model.vo.EmailVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.ReportVO;
@@ -17,7 +18,9 @@ public interface AdminService {
 
 	public void rejectGround(String groundNo);
 
-	public List<ReportVO> getReportList();
+	public ListVO<ReportVO> getReportList(String pageNo);
 
 	public ReportVO getReportDetail(String reportNo);
+
+	public void reportAnswer(EmailVO email);
 }

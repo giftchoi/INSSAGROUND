@@ -62,5 +62,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into badground_report(report_no,content,title,time_posted,id,ground_no)
 		 values(badground_report_seq.nextval,#{content},#{title},sysdate,#{id},#{groundNo})
 	</insert>
+	<select id="getReportList" resultType="reportVO">
+	SELECT report.* FROM(
+				SELECT row_number() over(order by report_no desc) as rnum,
+				report_no, title, id,to_char(time_posted,'YYYY.MM.DD') as timePosted
+				FROM badground_report
+		) report
+		where rnum between #{startRowNumber} and #{endRowNumber}
+		order by report_no desc
+	</select>
+	<select id="getReportDetail" resultType="reportVO">
+		select report_no,content,title,to_char(time_posted,'YYYY.MM.DD HH24:MI:SS') as timePosted,id,ground_no
+		from badground_report
+		where report_no=#{value}
+	</select>
 </mapper>
  
