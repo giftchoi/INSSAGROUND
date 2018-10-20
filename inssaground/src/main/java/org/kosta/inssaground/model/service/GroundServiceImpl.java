@@ -321,6 +321,33 @@ public class GroundServiceImpl implements GroundService {
 		return groundMapper.findGroundMemberListByGroundNo(groundVO);
 	}
 
+	@Override
+	public MemberVO groundHomeMember(String id) {		
+		return groundMapper.groundHomeMember(id);
+	}
+
+	@Override
+	public String groundHomeProfile(String id) {		
+		return groundMapper.groundHomeProfile(id);
+	}
+
+	@Override
+	public InsiderVO groundHomeInsider(String id,String groundNo) {	
+		InsiderVO insiderVO = new InsiderVO();
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		insiderVO.setMemberVO(vo);
+		insiderVO.setGroundNo(groundNo);
+		return groundMapper.groundHomeInsider(insiderVO);
+	}
+
+	@Override
+	public GroundVO groundHashtag2(GroundVO groundVO) {		
+		List<String> list = groundMapper.getHashtagList(groundVO.getGroundNo());
+		groundVO.setTagList(list);
+		return groundVO;
+	}
+
 	
 
 

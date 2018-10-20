@@ -49,9 +49,11 @@ public interface GroundMapper {
 	void deleteGroundSchedule(ScheduleVO scheduleVO);
 	void updateGroundSchedule(ScheduleVO scheduleVO);
 	List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
-
-
 	int groundScheduleTotalCount(GroundVO groundVO);
+	
+	MemberVO groundHomeMember(String id);
+	String groundHomeProfile(String id);
+	InsiderVO groundHomeInsider(InsiderVO insiderVO);
 
 
 	

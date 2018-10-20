@@ -35,9 +35,9 @@
 <!-- Start post-content Area -->
 <div class="col-sm-12">
 			<section class="post-content-area single-post-area" >
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 posts-list">
+				<div class="container" >
+					<div class="row" align="center">
+						<div class="">
 							<div class="single-post row">
 								<div class="col-lg-12">
 									<div class="feature-img">
@@ -45,8 +45,8 @@
 									</div>									
 								</div>
 
-								<div class="col-lg-9 col-md-9">
-									<h3 class="mt-20 mb-20">모임 소개</h3>
+								<div class="col-lg-9 col-md-9" align="center">
+									<h3 class="mt-20 mb-20" >모임 소개</h3>
 									<p class="excert">
 										MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.
 									</p>

@@ -267,6 +267,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	
+	
+	<select id="groundHomeInsider"  parameterType="insiderVO" resultType="insiderVO">
+		select attendance from insider where id=#{memberVO.id} and ground_no=#{groundNo}
+	</select>
+	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">
 		select count(*)

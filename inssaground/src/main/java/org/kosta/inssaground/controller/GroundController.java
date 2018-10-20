@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class GroundController {
@@ -286,8 +287,21 @@ public class GroundController {
 	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
+		GroundVO vo = groundService.groundHashtag2(gvo);
+		for(int i=0;i<vo.getTagList().size();i++) {
+			System.out.println(vo.getTagList().get(i));
+		}
+		gvo.setTagList(vo.getTagList());
 		System.out.println(gvo);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		System.out.println(mvo);
+		InsiderVO insiderVO = groundService.groundHomeInsider(mvo.getId(),groundVO.getGroundNo());// 출석수
+		/*System.out.println(memberVO);
+		System.out.println(path);
+		System.out.println(insiderVO);*/
+		
+		model.addAttribute("mvo",mvo);
+		model.addAttribute("insiderVO",insiderVO);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
 		return "ground/home/ground-home.tiles";
@@ -394,6 +408,8 @@ public class GroundController {
 	public String groundMemberList(Model model,HttpSession session) {
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");
 		System.out.println(gvo);
+		List<InsiderVO> mvo = groundService.findGroundMemberListByGroundNo(gvo);
+		System.out.println(mvo);
 		model.addAttribute("memberList",groundService.findGroundMemberListByGroundNo(gvo));
 		return "ground/home/ground-member-list.tiles";
 	}
