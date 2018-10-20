@@ -264,13 +264,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.id,m.email,m.name,i.attendance
 		from insider i,inssa_member m
 		where i.id=m.id and i.status=1 and i.ground_no=#{groundNo}
-	</select>
-	
-	
-	
+	</select>	
 	
 	<select id="groundHomeInsider"  parameterType="insiderVO" resultType="insiderVO">
 		select attendance from insider where id=#{memberVO.id} and ground_no=#{groundNo}
+	</select>
+	
+	<insert id="scheduleParticipation" parameterType="map">
+		insert into participant(id,schedule_no,ground_no) values(#{memberVO.id},#{scheduleNo},#{groundVO.groundNo})
+	</insert>
+	
+	<select id="scheduleParticipationMember" parameterType="map" resultType="memberVO">
+		select id from participant where ground_no=#{groundVO.groundNo} and schedule_no=#{scheduleNo}
 	</select>
 	
 	<!-- JISUN -->

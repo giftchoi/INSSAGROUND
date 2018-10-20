@@ -54,8 +54,8 @@ public interface GroundMapper {
 	MemberVO groundHomeMember(String id);
 	String groundHomeProfile(String id);
 	InsiderVO groundHomeInsider(InsiderVO insiderVO);
-
-
+	void scheduleParticipation(Map<String,Object> map);
+	List<MemberVO> scheduleParticipationMember(Map<String,Object> map);
 	
 	/*JISUN*/
 	int getTotalApplyGroundList();

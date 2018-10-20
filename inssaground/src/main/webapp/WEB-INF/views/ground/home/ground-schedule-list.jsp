@@ -32,7 +32,7 @@
 												</div>
 										</div>
 										<div class="col-sm-6 ground-info">
-										<form>
+										<form action="scheduleParticipation.do">
 											<input type="submit" value="참여"><br>
 											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>

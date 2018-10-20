@@ -348,6 +348,23 @@ public class GroundServiceImpl implements GroundService {
 		return groundVO;
 	}
 
+	@Override
+	public void scheduleParticipation(String scheduleNo, MemberVO memberVO, GroundVO groundVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberVO",memberVO);
+		map.put("scheduleNo",scheduleNo);
+		map.put("groundVO",groundVO);		
+		groundMapper.scheduleParticipation(map);
+	}
+
+	@Override
+	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO, String scheduleNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groundVO",groundVO);
+		map.put("scheduleNo",scheduleNo);		
+		return groundMapper.scheduleParticipationMember(map);
+	}
+
 	
 
 

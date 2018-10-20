@@ -46,7 +46,7 @@
 			<form action="groundApply.do" method="post" enctype="multipart/form-data">
 				<sec:csrfInput/>					
 				<div class="input-container">
-					<input type="file" name="picture">
+					<input type="file" name="picture" readonly="readonly">
 				</div>
 				<div class="input-container">
 					모임명<br>
@@ -54,38 +54,38 @@
 				</div>
 				<div class="input-container">
 					지역 
-					<select name="sido"  id="sido">
+					<select name="sido"  id="sido" required="required">
 						<option>-------</option>
 						<c:forEach items="${sido}" var="sido">
 						<option value="${sido.sidoNo}">${sido.sido}</option>
 						</c:forEach>
 					</select>		
 							
-					<select name="sigunguNo" id="sigungu">
+					<select name="sigunguNo" id="sigungu" required="required"> 
 													
 					</select>
 				</div>
 				<div class="input-container">
 						주요 취미
-					<select name="hobbyCategoryNo" id="hobbyCategoryNo" >
+					<select name="hobbyCategoryNo" id="hobbyCategoryNo" required="required">
 							<option>-------</option>
 					<c:forEach items="${hobbyCategory}" var="hobbyCategory">
 						<option value="${hobbyCategory.hobbyCategoryNo}">${hobbyCategory.category}</option>
 					</c:forEach>
 					</select>		
 							
-					<select name="hobbyNo" id="hobby">
+					<select name="hobbyNo" id="hobby" required="required">
 					
 					</select>
 				</div>
 				
 				<div class="input-container">
-					최대인원 <input type="number" name="maxPersonnel">
+					최대인원 <input type="number" name="maxPersonnel" readonly="readonly">
 				</div>
 
 				<div class="input-container">
 					모임 소개<br>
-					<textarea name="introduction" rows="10" cols="70"></textarea>
+					<textarea name="introduction" rows="10" cols="70" readonly="readonly"></textarea>
 				</div>
 				
 				<div class="input-container">
