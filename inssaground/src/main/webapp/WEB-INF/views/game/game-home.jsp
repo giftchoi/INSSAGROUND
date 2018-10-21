@@ -6,14 +6,7 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-<style>
-.rowgamefooter{
-    position : absolute;
-    width: inherit;
-    bottom: 0;
-    margin-left: 0;
-}
-</style>
+
 <div class="col-sm-12">
 	<div class="row main-content">
 		<div class="col-sm-12">
