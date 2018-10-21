@@ -45,10 +45,10 @@
 									</div>									
 								</div>
 
-								<div class="col-lg-9 col-md-9" align="center">
-									<h3 class="mt-20 mb-20" >모임 소개</h3>
+								<div class="col-lg-12 col-md-12" >
+									<h3 class="mt-20 mb-20" >${gvo.groundName }</h3>
 									<p class="excert">
-										MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.
+										${gvo.introduction}
 									</p>
 									<!-- <p>
 										Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
@@ -61,7 +61,7 @@
 									<!-- <div class="quotes">
 										MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.										
 									</div> -->
-									<div class="row mt-30 mb-30">
+									<div class="row mt-30 mb-30" style = " font-size:1.5em">
 										<div class="col-6">
 											<img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
 										</div>
@@ -69,12 +69,51 @@
 											<img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
 										</div>	
 										<div class="col-lg-12 mt-30">
-											<p>
+											<table class="myTable">
+												<thead>
+													<tr>
+														<td>NOTICE</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															${notice.noticeNo}        ${notice.content} 
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											
+											<table class="myTable">
+											  <thead>
+											    <tr>
+											      <th colspan="4">Board</th>
+											    </tr>
+											    <tr>
+											      <th>No</th>
+											      <th>TITLE</th>
+											      <th>id</th>
+											      <th>TIME</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											  <c:forEach items="${post}" var="post">
+											      <tr>
+											      <td>${post.postNo}</td>
+											      <td><a href="#">${report.title}</a></td>
+											      <td>${post.id}</td>
+											      <td>${post.timePosted}</td>
+											    </tr>
+											  </c:forEach>
+											  </tbody>
+											</table>
+											
+											<!-- <p>
 												MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
 											</p>
 											<p>
 												MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-											</p>											
+											</p>		 -->									
 										</div>									
 									</div>
 								</div>
