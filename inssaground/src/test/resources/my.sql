@@ -5,6 +5,10 @@ alter table insider add(status number default 0);
 -------------------------------------------------추가(10/21 이전)
 alter table OFFICIAL_GAME rename column max_parsonnel to max_personnel;
 
+alter table CUSTOM_GAME drop column recommendation;
+alter table custom_game alter modify column c_game_no number;
+alter table custom_game rename column id to writer_id;
+----위의 alter문 수행 안됬을경우 CUSTOM_GAME 테이블 drop하고 다시 create 해야함
 drop table CUSTOM_GAME;
 create table CUSTOM_GAME(
    c_game_no number primary key,
