@@ -116,7 +116,7 @@ li.dropdown {
 		    <div class="dropdown-content">
       <a href="gameHome.do">공식 게임</a>
       <a href="gameCustom.do">사용자 정의 게임</a>
-      <a href="#">프로그램 만들기</a>
+      <a href="makeGameProgramForm.do">프로그램 만들기</a>
     </div>
 	</li>
 	<li class="dropdown"><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a>
