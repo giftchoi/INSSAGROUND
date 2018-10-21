@@ -179,6 +179,11 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void updateGroundSchedule(ScheduleVO scheduleVO) {
+		String date = scheduleVO.getStartDate().replace("T"," ");
+		String date2 = scheduleVO.getEndDate().replace("T"," ");
+		scheduleVO.setStartDate(date);
+		scheduleVO.setEndDate(date2);
+		System.out.println("*********"+scheduleVO+"*****************");
 		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
@@ -288,7 +293,7 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {		
+	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {
 		return groundMapper.findGroundScheduleByScheduleNo(scheduleVO);
 	}
 
@@ -363,6 +368,16 @@ public class GroundServiceImpl implements GroundService {
 		map.put("groundVO",groundVO);
 		map.put("scheduleNo",scheduleNo);		
 		return groundMapper.scheduleParticipationMember(map);
+	}
+
+	@Override
+	public NoticeVO newNotice(GroundVO groundVO) {		
+		return groundMapper.newNotice(groundVO);
+	}
+
+	@Override
+	public List<PostVO> newPost(String groundNo) {		
+		return groundMapper.newPost(groundNo);
 	}
 
 	

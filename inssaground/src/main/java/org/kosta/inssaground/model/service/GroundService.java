@@ -63,6 +63,8 @@ public interface GroundService {
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
 	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO,String scheduleNo);
+	public NoticeVO newNotice(GroundVO groundVO);
+	public List<PostVO> newPost(String groundNo);
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 	
