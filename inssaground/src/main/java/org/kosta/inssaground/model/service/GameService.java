@@ -1,5 +1,7 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.List;
+
 import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.OfficialGameVO;
@@ -78,5 +80,10 @@ public interface GameService {
 	 * @param cGameNo
 	 */
 	public  void deleteCustomGame(String cGameNo);
+	/**
+	 * 추천수 별로 게임 가져오기
+	 * @return 
+	 */
+	List<CustomGameVO> getCustomGameOrderByRecommendation();
 
 }

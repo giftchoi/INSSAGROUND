@@ -1,5 +1,7 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 
@@ -95,4 +97,8 @@ public class GameServiceImpl implements GameService {
 		cgm.deleteCustomGame(cGameNo);
 	}
 
+	@Override
+	public List<CustomGameVO> getCustomGameOrderByRecommendation() {
+		return cgm.getCustomGameOrderByRecommendation();
+	}
 }
