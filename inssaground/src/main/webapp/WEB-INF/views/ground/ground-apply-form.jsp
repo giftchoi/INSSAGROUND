@@ -80,7 +80,7 @@
 				</div>
 				
 				<div class="input-container">
-					최대인원 <input type="number" name="maxPersonnel" readonly="readonly">
+					최대인원 <input type="number" name="maxPersonnel" >
 				</div>
 
 				<div class="input-container">
