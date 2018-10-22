@@ -134,7 +134,7 @@
 											      <tr>
 											      <td>${post.postNo}</td>
 											      <td><a href="#">${report.title}</a></td>
-											      <td>${post.id}</td>
+											      <td>${post.insiderVO.memberVO.id}</td>
 											      <td>${post.timePosted}</td>
 											    </tr>
 											  </c:forEach>

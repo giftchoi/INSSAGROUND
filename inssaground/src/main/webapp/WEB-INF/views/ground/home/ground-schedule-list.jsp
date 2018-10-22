@@ -12,7 +12,7 @@
 								<div class="col-lg-12">
 								
 									<div class="">
-										<h3 class="mt-20 mb-20">일정 리스트</h3>	
+										<!-- <h3 class="mt-20 mb-20">일정 리스트</h3>	 -->
 										
 										<table class="myTable">
 										  <thead>

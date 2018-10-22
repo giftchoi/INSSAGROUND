@@ -116,11 +116,7 @@ public class GroundServiceImpl implements GroundService {
 		return null;
 	}
 
-	@Override
-	public void registerGroundSchedule(ScheduleVO scheduleVO) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void deleteGroundSchedule(ScheduleVO scheduleVO) {
