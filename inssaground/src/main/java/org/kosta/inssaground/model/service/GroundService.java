@@ -70,6 +70,7 @@ public interface GroundService {
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
+	public void registerGroundPost(PostVO postVO);
 	
 	
 	

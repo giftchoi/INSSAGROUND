@@ -396,6 +396,20 @@ public class GroundServiceImpl implements GroundService {
 
 	
 
+	public void registerGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		groundMapper.insertGroundPost(postVO);
+		List<String> picList = postVO.getPictureList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("postNo", postVO.getPostNo());
+		for(int i=0;i<picList.size();i++) {			
+			map.put("imgName", picList.get(i));
+			groundMapper.insertPostImg(map);
+		}
+			
+	}
+
+
 	
 
 

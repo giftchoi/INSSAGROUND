@@ -69,6 +69,8 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
+	void insertPostImg(Map<String,String> map);
+	void insertGroundPost(PostVO postVO);
 
 
 

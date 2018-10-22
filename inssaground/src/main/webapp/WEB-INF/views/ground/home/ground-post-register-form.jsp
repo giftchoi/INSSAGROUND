@@ -95,4 +95,5 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="content" required="required">
+	<input type="hidden"	name = "insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
 </form>

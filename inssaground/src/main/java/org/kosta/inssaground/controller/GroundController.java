@@ -314,8 +314,10 @@ public class GroundController {
 	@Transactional
 	@PostMapping("groundPostRegister.do")
 	public String registerGroundPost(PostVO postVO) {
-
-		//groundService.registerGroundPost(postVO);
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		postVO.getInsiderVO().setMemberVO(mvo);
+		groundService.registerGroundPost(postVO);
+		
 		System.out.println(postVO);
 		return "home.tiles";
 	}
