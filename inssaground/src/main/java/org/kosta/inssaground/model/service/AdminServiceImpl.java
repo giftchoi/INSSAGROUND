@@ -71,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ListVO<ReportVO> getReportList(String pageNo) {
-		int totalCount=groundMapper.getTotalApplyGroundList();
+		int totalCount=memberMapper.getTotalReportList();
 		PagingBean pagingBean=null;
 		if(pageNo==null) {
 			pagingBean=new PagingBean(totalCount);
@@ -86,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	@Transactional
 	@Override
-	public void reportAnswer(EmailVO email) {
+	public void reportAnswer(EmailVO email, String reportNo) {
 		MemberVO member=memberMapper.findMemberById(email.getReceiver());
 		email.setReceiver(member.getEmail());
 		String content="안녕하세요 INSSAGROUND 관리자 입니다.\n "
@@ -94,6 +94,6 @@ public class AdminServiceImpl implements AdminService {
 		email.setContent(content);
 		email.setSubject("RE : [INSSAGROUND 모임 신고]");
 		mailService.sendEmail(email);
+		memberMapper.changeReportStatus(reportNo);
 	}
-
 }

@@ -3,6 +3,8 @@ package org.kosta.inssaground.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
@@ -68,6 +70,9 @@ public interface GroundService {
 	public NoticeVO newNotice(GroundVO groundVO);
 	public List<PostVO> newPost(String groundNo);
 	public List<PostVO> groundPicture(GroundVO groundVO);
+	public int ParticipationBoolean(MemberVO memberVO,String scheduleNo);
+	public void addAttendance(String groundNo,String id,List<String> attendance);
+
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 	public void registerGroundPost(PostVO postVO);

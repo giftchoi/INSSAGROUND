@@ -1,10 +1,12 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
@@ -315,6 +317,10 @@ public class GroundServiceImpl implements GroundService {
 		map.put("pagingBean",pagingBean);
 		List<ScheduleVO> list = groundMapper.grouondScheduleList(map);
 		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
+		for(int i=0;i<listVO.getList().size();i++) {
+			listVO.getList().get(i).setCurrPersonnel(groundMapper.scheduleCurrPersonnel(listVO.getList().get(i).getScheduleNo()));
+		}
+		System.out.println(listVO);
 		return listVO;
 	}
 
@@ -383,6 +389,15 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
+	public int ParticipationBoolean(MemberVO memberVO, String scheduleNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberVO",memberVO);
+		map.put("scheduleNo",scheduleNo);
+		return groundMapper.ParticipationBoolean(map);
+	}
+
+	
+
 	public void registerGroundPost(PostVO postVO) {
 		// TODO Auto-generated method stub
 		groundMapper.insertGroundPost(postVO);
@@ -395,6 +410,7 @@ public class GroundServiceImpl implements GroundService {
 		}
 			
 	}
+
 
 	@Override
 	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage) {
@@ -425,6 +441,22 @@ public class GroundServiceImpl implements GroundService {
 			map.put("imgName", picList.get(i));
 			groundMapper.insertPostImg(map);
 		}
+	}
+
+
+	public void addAttendance(String groundNo,String id,List<String> attendance) {
+		if(attendance.contains(groundNo)) {
+			
+		}else {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("groundNo",groundNo);
+			map.put("id",id);
+			attendance.add(groundNo);		
+			groundMapper.addAttendance(map);					
+		}
+		
+		
+		
 	}
 
 

@@ -125,7 +125,7 @@
 											    <tr>
 											      <th>No</th>
 											      <th>TITLE</th>
-											      <th>id</th>
+											      <th>ID</th>
 											      <th>TIME</th>
 											    </tr>
 											  </thead>
@@ -133,7 +133,7 @@
 											  <c:forEach items="${post}" var="post">
 											      <tr>
 											      <td>${post.postNo}</td>
-											      <td><a href="#">${report.title}</a></td>
+											      <td><a href="#">${post.title}</a></td>
 											      <td>${post.insiderVO.memberVO.id}</td>
 											      <td>${post.timePosted}</td>
 											    </tr>
@@ -277,7 +277,43 @@
                                     </div>
                                 </div>	                                             				
 							</div> -->
-							<div class="comment-form">
+							
+							<table>
+								<c:forEach items="${picture}" var="list">
+								<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${list.pictureList}"></td>
+								</c:forEach>
+							</table>
+							
+								<%-- <table class="myTable">
+								  <thead>
+								    <tr>
+								      <th colspan="4">사진 모음</th>
+								    </tr>
+								    <tr>
+								      <th>No</th>
+								      <th>PICTURE</th>
+								      <th>ID</th>
+								      <th>TIME</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								  <c:forEach items="${picture}" var="list">
+								      <tr>
+								      <td>${list.postNo}</td>
+								      <td><img src="${pageContext.request.contextPath}/resources/uploadImage/${list.pictureList}"></td>
+								      <td>${list.insiderVO.memberVO.id}</td>
+								      <td>${list.timePosted}</td>
+								    </tr>
+								  </c:forEach>
+								  </tbody>
+								</table> --%>
+
+							
+							
+							
+							
+							
+						<!-- 	<div class="comment-form">
 								<h4>신고</h4>
 								<form>
 									<div class="form-group form-inline">
@@ -296,7 +332,7 @@
 									</div>
 									<a href="#" class="primary-btn text-uppercase">Post Comment</a>	
 								</form>
-							</div>
+							</div> -->
 						</div>
 
 				</div>	

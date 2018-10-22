@@ -147,4 +147,9 @@ public class MemberController {
 		memberService.reportGround(reportVO);
 		return "home/report-result";
 	}
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("mySchedule.do")
+	public String mySchedule() {
+		return "member/mySchedule-list.tiles";
+	}
 }

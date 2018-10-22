@@ -1,4 +1,4 @@
-package org.kosta.inssaground.model.service;
+ package org.kosta.inssaground.model.service;
 
 import java.io.IOException;
 import java.util.List;
