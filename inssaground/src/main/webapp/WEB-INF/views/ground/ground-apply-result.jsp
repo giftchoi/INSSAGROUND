@@ -32,7 +32,9 @@
 				<div>
 					<h1>모임 개설 신청 완료</h1>
 					<span class="fa fa-check-square fa-5x"></span><br><br><br><br><br>
-					<input class="btn btn-danger"type="button" value="어디로 가기">
+					<form action="${pageContext.request.contextPath}/home.do">
+					<input class="btn btn-red" type="submit" value="홈으로 이동">
+					</form>
 				</div>
 			</div>
 		</div>

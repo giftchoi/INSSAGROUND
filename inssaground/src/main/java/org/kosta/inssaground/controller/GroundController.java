@@ -19,6 +19,7 @@ import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
+import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class GroundController {
@@ -167,7 +167,7 @@ public class GroundController {
 					}
 				}		
 		
-		return "redirect:home.do";
+		return "ground/ground-apply-result.tiles";
 	}
 	/**
 	 * 	싸장 - 모임 관리 페이지로 이동
@@ -298,7 +298,7 @@ public class GroundController {
 		InsiderVO insiderVO = groundService.groundHomeInsider(mvo.getId(),groundVO.getGroundNo());// 출석수
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
 		model.addAttribute("notice",groundService.newNotice(groundVO));
-		model.addAttribute("mvo",mvo);
+		session.setAttribute("mvo",mvo);
 		model.addAttribute("insiderVO",insiderVO);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
@@ -371,9 +371,10 @@ public class GroundController {
 	}
 	@PostMapping("updateGroundSchedule.do")
 	public String updateGroundSchedule(ScheduleVO scheduleVO) {
-		System.out.println("************"+scheduleVO);
+		System.out.println("ct1.************"+scheduleVO);
 		groundService.updateGroundSchedule(scheduleVO);
-		return "redirect:groundScheduleDetail.do";
+		System.out.println("ct2.********");
+		return "redirect:groundScheduleList.do";
 	}
 	
 	@PostMapping("deleteGroundSchedule.do")
@@ -398,6 +399,14 @@ public class GroundController {
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		groundService.scheduleParticipation(scheduleNo, memberVO, groundVO);
 		return "redirect:groundScheduleList.do";
+	}
+	
+	@RequestMapping("groundPicture.do")
+	public String groundPicture(HttpSession session,Model model) {
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
+		List<PostVO> postList = groundService.groundPicture(groundVO);
+		model.addAttribute("postList",postList);
+		return "ground/home/ground-picture.tiles";
 	}
  
 }

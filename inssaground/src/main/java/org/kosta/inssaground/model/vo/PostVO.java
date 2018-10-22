@@ -8,6 +8,7 @@ public class PostVO {
 	private String content;
 	private int hits;
 	private String timePosted;
+	private InsiderVO insiderVO;
 	private List<String> pictureList;
 	public PostVO() {
 		super();
@@ -27,6 +28,18 @@ public class PostVO {
 		this.content = content;
 		this.hits = hits;
 		this.timePosted = timePosted;
+		this.pictureList = pictureList;
+	}
+	
+	public PostVO(String postNo, String title, String content, int hits, String timePosted, InsiderVO insiderVO,
+			List<String> pictureList) {
+		super();
+		this.postNo = postNo;
+		this.title = title;
+		this.content = content;
+		this.hits = hits;
+		this.timePosted = timePosted;
+		this.insiderVO = insiderVO;
 		this.pictureList = pictureList;
 	}
 	public String getPostNo() {
@@ -65,10 +78,20 @@ public class PostVO {
 	public void setPictureList(List<String> pictureList) {
 		this.pictureList = pictureList;
 	}
+	
+	public InsiderVO getInsiderVO() {
+		return insiderVO;
+	}
+	public void setInsiderVO(InsiderVO insiderVO) {
+		this.insiderVO = insiderVO;
+	}
 	@Override
 	public String toString() {
 		return "PostVO [postNo=" + postNo + ", title=" + title + ", content=" + content + ", hits=" + hits
-				+ ", timePosted=" + timePosted + ", pictureList=" + pictureList + "]";
+				+ ", timePosted=" + timePosted + ", insiderVO=" + insiderVO + ", pictureList=" + pictureList + "]";
 	}
+	
+	
+
 	
 }

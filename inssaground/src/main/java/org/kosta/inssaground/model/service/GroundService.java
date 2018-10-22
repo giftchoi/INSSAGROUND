@@ -65,6 +65,7 @@ public interface GroundService {
 	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO,String scheduleNo);
 	public NoticeVO newNotice(GroundVO groundVO);
 	public List<PostVO> newPost(String groundNo);
+	public List<PostVO> groundPicture(GroundVO groundVO);
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 	

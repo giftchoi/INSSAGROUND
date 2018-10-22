@@ -59,6 +59,7 @@ public interface GroundMapper {
 	List<MemberVO> scheduleParticipationMember(Map<String,Object> map);
 	NoticeVO newNotice(GroundVO groundVO);
 	List<PostVO> newPost(String groundNo);
+	List<PostVO> groundPicture(GroundVO groundVO);
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);

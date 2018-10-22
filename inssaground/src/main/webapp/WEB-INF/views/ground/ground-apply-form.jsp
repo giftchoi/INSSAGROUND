@@ -85,7 +85,7 @@
 
 				<div class="input-container">
 					모임 소개<br>
-					<textarea name="introduction" rows="10" cols="70" readonly="readonly"></textarea>
+					<textarea name="introduction" rows="10" cols="70" required="required"></textarea>
 				</div>
 				
 				<div class="input-container">

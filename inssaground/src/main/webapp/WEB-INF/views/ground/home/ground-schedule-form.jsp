@@ -32,7 +32,7 @@
 					
 				</div>
 					<input type="text" id="sample5_address" placeholder="주소" name="loc">
-					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+					<input type="button" onclick="sample5_execDaumPostcode()" value="장소 검색"><br>
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
 
@@ -108,7 +108,7 @@
 			<input type="hidden" name="position" id="address" >
 	
 				<div>
-				<input type="submit" class="btn btn-red" value="회원가입" id="regBtn"><br>
+				<input type="submit" class="btn btn-red" value="등록하기" id="regBtn"><br>
 				</div>
 			</form>
 		</div>
