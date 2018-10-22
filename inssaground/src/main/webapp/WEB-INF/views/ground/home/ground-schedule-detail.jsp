@@ -53,7 +53,9 @@
 	</tbody>
 </table>
 <sec:authentication property="principal" var="principal"/>
-<c:if test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
+<c:choose>
+<c:when test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
+
 <div class="col-sm-12" align="center">
 <table>
 	<tr>
@@ -73,11 +75,67 @@
 </tr>
 </table>
 </div>
-</c:if>
-<c:if test="${scheduleDetail.insiderVO.memberVO.id != principal.id}">
+
+</c:when>
+
+<c:otherwise>
+
+			<c:choose>
+			<c:when test="${participation==0}">
+			
+			<div class="col-sm-12" align="center">
+			<table>
+				<tr>
+					<td>
+						<form action="scheduleParticipation.do" >
+							<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+							<input type="submit" value="참여">
+						</form>
+					</td>	
+			</tr>
+			</table>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="col-sm-12" align="center">
+			<table>
+				<tr>
+					<td>
+						이미 참여한 스케줄
+					</td>	
+			</tr>
+			</table>
+			</div>
+			</c:otherwise>
+			</c:choose>
+</c:otherwise>
+</c:choose>
+
+<%-- <c:if test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
+<div class="col-sm-12" align="center">
+<table>
+	<tr>
+		<td>
+	<form action="deleteGroundSchedule.do" method="post">
+		<sec:csrfInput/>
+		<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+		<input type="submit" value="삭제">
+	</form>
+		</td>
+		<td>
+<form action="updateGroundScheduleForm.do">
+	<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
+	<input type="submit" value="수정">
+</form>
+		</td>
+</tr>
+</table>
+</div>
+</c:if> --%>
+<%-- <c:if test="${scheduleDetail.insiderVO.memberVO.id != principal.id}">
 <button>참가</button>
 <button>불참</button>
-</c:if>
+</c:if> --%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3cc29a99b5ee4b2a2512b8b0c05ea88&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

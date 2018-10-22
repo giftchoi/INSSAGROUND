@@ -125,7 +125,7 @@
 											    <tr>
 											      <th>No</th>
 											      <th>TITLE</th>
-											      <th>id</th>
+											      <th>ID</th>
 											      <th>TIME</th>
 											    </tr>
 											  </thead>
@@ -133,7 +133,7 @@
 											  <c:forEach items="${post}" var="post">
 											      <tr>
 											      <td>${post.postNo}</td>
-											      <td><a href="#">${report.title}</a></td>
+											      <td><a href="#">${post.title}</a></td>
 											      <td>${post.insiderVO.memberVO.id}</td>
 											      <td>${post.timePosted}</td>
 											    </tr>

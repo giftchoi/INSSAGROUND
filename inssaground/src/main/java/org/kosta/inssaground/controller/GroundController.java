@@ -326,9 +326,6 @@ public class GroundController {
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
 		GroundVO vo = groundService.groundHashtag2(gvo);
-		for(int i=0;i<vo.getTagList().size();i++) {
-			System.out.println(vo.getTagList().get(i));
-		}
 		gvo.setTagList(vo.getTagList());
 		System.out.println(gvo);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
@@ -383,6 +380,7 @@ public class GroundController {
 		System.out.println("controller1");
 		System.out.println("controller2");
 		ListVO<ScheduleVO> listVO = groundService.groundSchedulePagingBean(groundVO, pageNo);	
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		System.out.println("controller3");
 		System.out.println(listVO);
 		System.out.println("controller4");		
@@ -393,11 +391,11 @@ public class GroundController {
 	@RequestMapping("groundScheduleDetail.do")
 	public String groundScheduleDetail(String scheduleNo,Model model,HttpSession session) {
 		System.out.println(scheduleNo);
-		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");		
 		ScheduleVO scheduleVO = new ScheduleVO();
 		scheduleVO.setScheduleNo(scheduleNo);
-		ScheduleVO svo = groundService.findGroundScheduleByScheduleNo(scheduleVO);
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		model.addAttribute("participation",groundService.ParticipationBoolean(memberVO, scheduleNo));
 		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));	
 		model.addAttribute("scheduleParticipationMember",groundService.scheduleParticipationMember(groundVO,scheduleNo));
 		return "ground/home/ground-schedule-detail.tiles";

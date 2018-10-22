@@ -309,6 +309,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and ground_no=#{groundNo};
 	</select>
 	
+	<select id="ParticipationBoolean" parameterType="map" resultType="int"> 
+		select count(*) from participant where id=#{memberVO.id} and schedule_no=#{scheduleNo}
+	</select>
+	
+	<select id="scheduleCurrPersonnel" resultType="int">
+		select count(*) from PARTICIPANT where schedule_no=#{value}
+	</select>
+	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">
 		select count(*)

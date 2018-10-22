@@ -315,6 +315,10 @@ public class GroundServiceImpl implements GroundService {
 		map.put("pagingBean",pagingBean);
 		List<ScheduleVO> list = groundMapper.grouondScheduleList(map);
 		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
+		for(int i=0;i<listVO.getList().size();i++) {
+			listVO.getList().get(i).setCurrPersonnel(groundMapper.scheduleCurrPersonnel(listVO.getList().get(i).getScheduleNo()));
+		}
+		System.out.println(listVO);
 		return listVO;
 	}
 
@@ -381,6 +385,16 @@ public class GroundServiceImpl implements GroundService {
 	public List<PostVO> groundPicture(GroundVO groundVO) {		
 		return groundMapper.groundPicture(groundVO);
 	}
+
+	@Override
+	public int ParticipationBoolean(MemberVO memberVO, String scheduleNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberVO",memberVO);
+		map.put("scheduleNo",scheduleNo);
+		return groundMapper.ParticipationBoolean(map);
+	}
+
+	
 
 	
 
