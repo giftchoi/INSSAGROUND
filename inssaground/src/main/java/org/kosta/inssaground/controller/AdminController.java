@@ -67,9 +67,9 @@ public class AdminController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("reportAnswer.do")
-	public String reportAnswer(EmailVO email) {
-		adminService.reportAnswer(email);
-		return "redirect:report-list.do";
+	public String reportAnswer(EmailVO email,String reportNo) {
+		adminService.reportAnswer(email,reportNo);
+		return "redirect:reportList.do";
 	}
 }
 
