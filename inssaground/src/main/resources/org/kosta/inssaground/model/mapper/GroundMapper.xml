@@ -288,8 +288,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="newNotice" parameterType="groundVO" resultType="noticeVO">
 		select * from notice where ground_no=#{groundNo} and notice_no=(select max(notice_no) from notice)
 	</select>
-	
-	<select id="newPost" resultType="postVO">
+	<select id="newPost" resultMap="postVORM">
 		select post_no,title,content,id,timePosted,ground_no
 		from (
 		select row_number() over(order by post_no desc) as

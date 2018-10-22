@@ -22,7 +22,7 @@ public interface GroundService {
 	public GroundVO groundDetail(GroundVO groundVO); // 모임 상세보기
 	public void groundParticipation(); // 모임참여
 	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
-	public void registerGroundSchedule(ScheduleVO scheduleVO); //모임 일정 등록
+	/*public void registerGroundSchedule(ScheduleVO scheduleVO); //모임 일정 등록 삭제*/	
 	public void deleteGroundSchedule(ScheduleVO scheduleVO); // 모임 일정 삭제
 	public void groundParticipantPermission(GroundVO groundVO);//	 모임 참여 허가
 	//public void masterGroundManagement(GroundVO groundVO);// 모임장 모임 관리

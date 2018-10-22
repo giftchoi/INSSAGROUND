@@ -54,6 +54,7 @@
 </table>
 <sec:authentication property="principal" var="principal"/>
 <c:if test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
+<div class="col-sm-12" align="center">
 <table>
 	<tr>
 		<td>
@@ -71,6 +72,7 @@
 		</td>
 </tr>
 </table>
+</div>
 </c:if>
 <c:if test="${scheduleDetail.insiderVO.memberVO.id != principal.id}">
 <button>참가</button>
