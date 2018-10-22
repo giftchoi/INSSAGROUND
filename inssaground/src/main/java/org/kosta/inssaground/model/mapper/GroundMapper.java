@@ -79,6 +79,7 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
+	void deletePostByPostNo(String postNo);
 
 
 	

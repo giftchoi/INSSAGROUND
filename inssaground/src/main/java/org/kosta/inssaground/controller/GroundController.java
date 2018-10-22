@@ -380,7 +380,12 @@ public class GroundController {
 		return "ground/home/ground-post-detail.tiles";
 	}
 	
-	
+	@Transactional
+	@PostMapping("groundPostDelete.do")
+	public String deleteGroundPost(PostVO postVO) {
+		groundService.deleteGroundPost(postVO);
+		return "redirect:groundPost.do?groundNo="+postVO.getInsiderVO().getGroundNo();
+	}
 	
 	
 	@RequestMapping("groundScheduleForm.do")

@@ -161,8 +161,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotalGroundPostCount" resultType="int">
 		select count(*) from ground_post where ground_no=#{value}
 	</select>
-	<select id="getAllGroundPostList" parameterType="map" resultType="postVO">
-		select p.post_no,p.title,p.hits,p.id,p.time_posted
+	<select id="getAllGroundPostList" parameterType="map" resultMap="postVORM">
+		select p.post_no,p.title,p.hits,p.id,to_char(p.time_posted,'yyyy-mm-dd hh24:mi') as time_posted
 		from 	(select row_number() over(order by post_no desc) as rnum, p.*
 					from ground_post p
 					where p.ground_no=#{groundNo}) p
@@ -180,7 +180,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteAllPostImg" >
 		delete from post_img where post_no=#{postNo}
 	</delete>
-	
+	<delete id="deletePostByPostNo">
+		delete from ground_post where post_no=#{postNo}
+	</delete>
 	
 	
 	
@@ -327,7 +329,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select post_no,title,content,id,timePosted,ground_no
 		from (
 		select row_number() over(order by post_no desc) as
-		rnum,post_no,title,content,id,time_posted as timePosted,ground_no
+		rnum,post_no,title,content,id,to_char(time_posted,'yyyy-mm-dd hh24:mi') as timePosted,ground_no
 		from ground_post )
 		where ground_no=#{value} and rnum between
 		1 and 2 order by

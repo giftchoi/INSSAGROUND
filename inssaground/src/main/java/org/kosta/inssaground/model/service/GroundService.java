@@ -61,7 +61,12 @@ public interface GroundService {
 	public InsiderVO groundHomeInsider(String id,String groundNo);
 	public GroundVO groundHashtag2(GroundVO groundVO);
 	public void scheduleParticipation(String scheduleNo,MemberVO memberVO,GroundVO groundVO);
-
+	public void registerGroundPost(PostVO postVO);
+	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage);
+	public PostVO findPostByPostNo(String postNo);
+	public void updateGroundPost(PostVO postVO);
+	public void deleteGroundPost(PostVO postVO);
+	
 	
 	
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
@@ -75,11 +80,7 @@ public interface GroundService {
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
-	public void registerGroundPost(PostVO postVO);
-	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage);
-	public PostVO findPostByPostNo(String postNo);
-	public void updateGroundPost(PostVO postVO);
-	
+
 	
 	
 

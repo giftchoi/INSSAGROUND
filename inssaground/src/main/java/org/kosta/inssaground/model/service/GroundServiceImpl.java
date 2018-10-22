@@ -459,6 +459,14 @@ public class GroundServiceImpl implements GroundService {
 		
 	}
 
+	@Override
+	public void deleteGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		
+		groundMapper.deleteAllPostImg(postVO.getPostNo());
+		groundMapper.deletePostByPostNo(postVO.getPostNo());
+	}
+
 
 	
 

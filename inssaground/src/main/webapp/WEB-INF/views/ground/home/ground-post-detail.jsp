@@ -5,7 +5,10 @@
 <script>
 	$(document).ready(function(){
 		$("#deleteBtn").click(function(){
-		
+			if(confirm("해당 게시물을 삭제하시겠습니까?")){
+				//location.href="groundPostDelete.do?postNo=${postVO.postNo}";
+				$("#deleteForm").submit();
+			}
 		});//click
 		$("#editBtn").click(function(){
 			alert();
@@ -20,6 +23,7 @@
 	});
 </script>
 <sec:authentication var="principal" property="principal" />
+<a class="btn btn-grey"href="groundPost.do?groundNo=${sessionScope.ground.groundNo}">목록</a>
 <table class="table">
 <tbody>
 <tr>
@@ -39,5 +43,9 @@
 </tr>
 </c:if>
 </tbody>
-
 </table>
+<form id="deleteForm" action="groundPostDelete.do" method="post">
+<sec:csrfInput/>
+	<input type="hidden" name="postNo" value="${postVO.postNo }">
+	<input type="hidden" name="insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
+</form>

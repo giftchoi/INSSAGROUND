@@ -51,7 +51,7 @@
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">							
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">				
-			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+			<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"> --%>
   
 <style type="text/css">
 
