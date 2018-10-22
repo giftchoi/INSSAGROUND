@@ -279,8 +279,11 @@
 							</div> -->
 							
 							<table>
-								<c:forEach items="${picture}" var="list">
-								<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${list.pictureList}"></td>
+								<c:forEach items="${picture}" var="post">
+								<c:forEach items="${post.pictureList }" var="pic">
+									<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${pic}"></td>
+								</c:forEach>
+								
 								</c:forEach>
 							</table>
 							
