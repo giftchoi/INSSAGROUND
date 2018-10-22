@@ -2,6 +2,7 @@ package org.kosta.inssaground.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -333,6 +334,15 @@ public class GroundController {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
 		System.out.println(mvo);
 		InsiderVO insiderVO = groundService.groundHomeInsider(mvo.getId(),groundVO.getGroundNo());// 출석수
+		List<String> attendance = null;
+		if(session.getAttribute("attendance")==null) {
+			attendance = new ArrayList<String>();	
+		}else {
+			attendance=(List<String>)session.getAttribute("attendance");			
+		}
+		groundService.addAttendance(gvo.getGroundNo(),mvo.getId(),attendance);
+		session.setAttribute("attendance",attendance);
+		model.addAttribute("picture",groundService.groundPicture(groundVO));
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
 		model.addAttribute("notice",groundService.newNotice(groundVO));
 		session.setAttribute("mvo",mvo);

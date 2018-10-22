@@ -334,7 +334,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select i.img_name as pictureList,p.id,to_char(time_posted,'yyyy-mm-dd') as timePosted,p.post_no
 		from ground_post p,post_img i
 		where p.post_no=i.post_no
-		and ground_no=#{groundNo};
+		and ground_no=#{groundNo}
 	</select>
 	
 	<select id="ParticipationBoolean" parameterType="map" resultType="int"> 
@@ -344,6 +344,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="scheduleCurrPersonnel" resultType="int">
 		select count(*) from PARTICIPANT where schedule_no=#{value}
 	</select>
+	
+	<update id="addAttendance" parameterType="map">
+		update insider set attendance=attendance+1 where ground_no=${groundNo} and id=#{id}
+	</update>
 	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">

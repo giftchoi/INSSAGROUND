@@ -70,6 +70,7 @@ public interface GroundMapper {
 	List<PostVO> groundPicture(GroundVO groundVO);
 	int ParticipationBoolean(Map<String,Object> map);
 	int scheduleCurrPersonnel(String scheduleNo);
+	void addAttendance(Map<String,Object> map);
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);

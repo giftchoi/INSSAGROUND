@@ -1,10 +1,12 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
@@ -423,6 +425,22 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public PostVO findPostByPostNo(String postNo) {
 		return groundMapper.findPostByPostNo(postNo);
+	}
+
+	@Override
+	public void addAttendance(String groundNo,String id,List<String> attendance) {
+		if(attendance.contains(groundNo)) {
+			
+		}else {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("groundNo",groundNo);
+			map.put("id",id);
+			attendance.add(groundNo);		
+			groundMapper.addAttendance(map);					
+		}
+		
+		
+		
 	}
 
 	
