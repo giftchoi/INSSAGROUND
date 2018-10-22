@@ -45,8 +45,8 @@ li.dropdown {
    <li class="dropdown"><a href="${pageContext.request.contextPath}/myGround.do">MYPAGE</a>
    <div class="dropdown-content">
    <a  href="myGround.do">내 모임</a>
-      <a href="registerForm.do">내 일정</a>
-      <a href="registerForm.do">내 프로그램</a>
+      <a href="mySchedule.do">내 일정</a>
+      <a href="myProgram.do">내 프로그램</a>
       <a href="viewMemberInfo.do">나의 정보</a>
       <a href="withdrawForm.do">탈퇴</a>
       </div>
