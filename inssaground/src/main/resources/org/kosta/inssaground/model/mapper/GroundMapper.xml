@@ -169,10 +169,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where p.rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 	</select>
 	<select id="findPostByPostNo" resultMap="postVORM">
-		select title,content,id,hits,to_char(time_posted,'yyyy.mm.dd hh24:mi') as time_posted from ground_post where post_no=#{value}
+		select post_no,title,content,id,hits,to_char(time_posted,'yyyy.mm.dd hh24:mi') as time_posted from ground_post where post_no=#{value}
 	</select>
-	
-	
+	<select id="getPicListByPostNo"  parameterType="string" resultType="string">
+		select * from ground_post where post_no=#{value}
+	</select>
+	<update id="updateGroundPost" parameterType="postVO">
+		update ground_post set title=#{title},content=#{content} where post_no=#{postNo}
+	</update>
+	<delete id="deleteAllPostImg" >
+		delete from post_img where post_no=#{postNo}
+	</delete>
 	
 	
 	

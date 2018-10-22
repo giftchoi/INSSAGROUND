@@ -60,6 +60,8 @@ public interface GroundService {
 	public GroundVO groundHashtag2(GroundVO groundVO);
 	public void scheduleParticipation(String scheduleNo,MemberVO memberVO,GroundVO groundVO);
 
+	
+	
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
 	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO,String scheduleNo);
@@ -71,6 +73,7 @@ public interface GroundService {
 	public void registerGroundPost(PostVO postVO);
 	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage);
 	public PostVO findPostByPostNo(String postNo);
+	public void updateGroundPost(PostVO postVO);
 	
 	
 	

@@ -408,8 +408,25 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public PostVO findPostByPostNo(String postNo) {
-		return groundMapper.findPostByPostNo(postNo);
+		PostVO postVO = groundMapper.findPostByPostNo(postNo);
+		postVO.setPictureList(groundMapper.getPicListByPostNo(postNo));
+		return postVO;
 	}
+
+	@Override
+	public void updateGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		groundMapper.updateGroundPost(postVO);
+		groundMapper.deleteAllPostImg(postVO.getPostNo());
+		List<String> picList = postVO.getPictureList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("postNo", postVO.getPostNo());
+		for(int i=0;i<picList.size();i++) {			
+			map.put("imgName", picList.get(i));
+			groundMapper.insertPostImg(map);
+		}
+	}
+
 
 	
 
