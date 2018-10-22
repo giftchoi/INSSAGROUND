@@ -19,18 +19,19 @@ import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
+import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class GroundController {
@@ -284,6 +285,39 @@ public class GroundController {
 	public String groundPostRegisterForm() {
 		
 		return "ground/home/ground-post-register-form.tiles";
+	}
+	
+	@ResponseBody
+	@PostMapping("groundPostImgUpload.do")
+	public String uploadGroundImg(MultipartFile picture) {
+		//String uploadPath=request.getSession().getServletContext().getRealPath("/resources/uploadImage/");
+		String uploadPath = System.getProperty("user.home")+"\\git\\INSSAGROUND\\inssaground\\src\\main\\webapp\\resources\\uploadImage\\";
+		File uploadDir=new File(uploadPath);
+		if(uploadDir.exists()==false)
+			uploadDir.mkdirs();
+		
+		System.out.println(picture+"<==");
+		//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+		if(picture!=null&&picture.isEmpty()==false){
+			System.out.println("파일명:"+picture.getOriginalFilename());
+			File uploadFile=new File(uploadPath+picture.getOriginalFilename());
+			try {
+				picture.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+				System.out.println(uploadPath+picture.getOriginalFilename()+" 파일업로드");				
+			} catch (IllegalStateException | IOException e) {				
+				e.printStackTrace();
+			}
+		}		
+		return picture.getOriginalFilename();
+	}
+	
+	@Transactional
+	@PostMapping("groundPostRegister.do")
+	public String registerGroundPost(PostVO postVO) {
+
+		//groundService.registerGroundPost(postVO);
+		System.out.println(postVO);
+		return "home.tiles";
 	}
 	
 	@Secured("ROLE_MEMBER")
