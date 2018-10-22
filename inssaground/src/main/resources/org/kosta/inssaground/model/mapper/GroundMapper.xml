@@ -246,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="registergroundschedule" parameterType="scheduleVO">
 		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel,position)
-		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel},#{position})
+		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
 	</insert>
 
 	<resultMap type="scheduleVO" id="scheduleVORM">
