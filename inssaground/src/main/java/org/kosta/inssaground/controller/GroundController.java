@@ -319,8 +319,22 @@ public class GroundController {
 		postVO.getInsiderVO().setMemberVO(mvo);
 		groundService.registerGroundPost(postVO);
 		
+		//System.out.println(postVO);
+		return "redirect:groundPostDetail.do?postNo="+postVO.getPostNo();
+	}
+	
+	@RequestMapping("groundPostUpdateForm.do")
+	public String groundPostUpdateForm(String postNo,Model model) {
+		PostVO postVO = groundService.findPostByPostNo(postNo); 
+		model.addAttribute("postVO",postVO);
 		System.out.println(postVO);
-		return "home.tiles";
+		return "ground/home/ground-post-update-form.tiles";
+	}
+	@Transactional
+	@PostMapping("groundPostUpdate.do")
+	public String groundPostUpdate(PostVO postVO) {	
+		groundService.updateGroundPost(postVO);
+		return "redirect:groundPostDetail.do?postNo="+postVO.getPostNo();
 	}
 	
 	@Secured("ROLE_MEMBER")
