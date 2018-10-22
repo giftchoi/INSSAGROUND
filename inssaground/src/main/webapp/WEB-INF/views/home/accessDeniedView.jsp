@@ -9,7 +9,7 @@
 <body>
 <script>
 	alert("[권한확인] : 권한이 없습니다. ");
-	location.href="${pageContext.request.contextPath}/login.do";
+	location.href="${pageContext.request.contextPath}/loginForm.do";
 </script>
 </body>
 </html>

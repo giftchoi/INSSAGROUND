@@ -280,7 +280,11 @@ public class GroundController {
 		return "redirect:groundNoticeDetail.do?noticeNo="+noticeVO.getNoticeNo();
 	}
 	
-	
+	@RequestMapping("groundPostRegisterForm.do")
+	public String groundPostRegisterForm() {
+		
+		return "ground/home/ground-post-register-form.tiles";
+	}
 	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
