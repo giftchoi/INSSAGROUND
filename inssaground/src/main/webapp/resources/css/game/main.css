@@ -1,3 +1,19 @@
+.rowgamefooter{
+    position : absolute;
+    width: inherit;
+    bottom: 0;
+    margin-left: 0;
+}
+
+.programcard{
+	width: 200px !important;
+    margin: 5px;
+}
+
+/*윗부분: 손수 제작 ------------------------------- */
+
+
+
 ::-moz-selection {
 	background-color: #f42f2c;
 	color: #fff

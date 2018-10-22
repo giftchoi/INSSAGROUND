@@ -10,6 +10,7 @@ import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
+import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
@@ -49,12 +50,15 @@ public interface GroundMapper {
 	void deleteGroundSchedule(ScheduleVO scheduleVO);
 	void updateGroundSchedule(ScheduleVO scheduleVO);
 	List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
-
-
 	int groundScheduleTotalCount(GroundVO groundVO);
-
-
 	
+	MemberVO groundHomeMember(String id);
+	String groundHomeProfile(String id);
+	InsiderVO groundHomeInsider(InsiderVO insiderVO);
+	void scheduleParticipation(Map<String,Object> map);
+	List<MemberVO> scheduleParticipationMember(Map<String,Object> map);
+	NoticeVO newNotice(GroundVO groundVO);
+	List<PostVO> newPost(String groundNo);
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);

@@ -34,13 +34,25 @@
 					<textarea rows="10" cols="70" name="content" readonly="readonly">${scheduleDetail.content}</textarea> 
 					
 				</div>
-				<div id="map" style="width:100%;height:350px;"></div>
+				
 
 
 <div id="map" style="width:100%;height:350px;"></div>
+<table>
+	<thead>
+		<tr>참여 인원 아이디</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+		<c:forEach items="${scheduleParticipationMember}" var="list" varStatus="info">
+			${info.count}. ${list.id}<br>
+		</c:forEach>
+		</td>
+		</tr>	
+	</tbody>
+</table>
 <sec:authentication property="principal" var="principal"/>
-deleteGroundSchedule.do
-updateGroundSchedule.do
 <c:if test="${scheduleDetail.insiderVO.memberVO.id == principal.id}">
 <table>
 	<tr>

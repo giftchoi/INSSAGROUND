@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-lg-12 sidebar-widgets">
 
 
@@ -13,18 +14,12 @@
 
 		<div class="single-sidebar-widget user-info-widget">
 			<img
-				src="${pageContext.request.contextPath}/resources/image/testImg3.jpg"
-				alt=""> <a href="#"><h4>이름</h4></a>
-			<p>출석,게시글 수</p>
-			<!-- 	<ul class="social-links">
-										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa fa-github"></i></a></li>
-										<li><a href="#"><i class="fa fa-behance"></i></a></li>
-									</ul> -->
-			<p>Boot camps have its supporters andit sdetractors. Some people
-				do not understand why you should have to spend money on boot camp
-				when you can get. Boot camps have itssuppor ters andits detractors.</p>
+				src="${pageContext.request.contextPath}/resources/uploadImage/${mvo.profile}"
+				alt="" width="300" height=""> <a href="#"><h4>${mvo.name}</h4></a>
+			<p>출석:${insiderVO.attendance}</p>
+			<p>아이디:${mvo.id}</p>
+			
+			<!-- <p>하고싶은 말</p> -->
 			<!--	</div>
 								<div class="single-sidebar-widget popular-post-widget">
 									 <h4 class="popular-title">Popular Posts</h4>
@@ -129,9 +124,9 @@
 			<div class="single-sidebar-widget tag-cloud-widget">
 				<h4 class="tagcloud-title">Tag Clouds</h4>
 				<ul>
-					<li><a href="#">Technology</a></li>
-					<li><a href="#">Fashion</a></li>
-					<li><a href="#">Architecture</a></li>
+					<c:forEach items="${gvo.tagList}" var="list">
+					<li><a href="#">${list}</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

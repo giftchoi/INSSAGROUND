@@ -72,7 +72,7 @@ li.dropdown {
    <li class="dropdown"><a href="${pageContext.request.contextPath}/readyApplyGround.do">ADMIN PAGE</a>
    <div class="dropdown-content">
    <a  href="readyApplyGround.do">모임 신청 접수</a>
-      <a href="registerForm.do">문의 접수</a>
+      <a href="reportList.do">문의 접수</a>
       <a href="registerForm.do">게임 등업</a>
       <a href="viewMemberInfo.do">나의 정보</a> 
       </div>
@@ -116,7 +116,7 @@ li.dropdown {
 		    <div class="dropdown-content">
       <a href="gameHome.do">공식 게임</a>
       <a href="gameCustom.do">사용자 정의 게임</a>
-      <a href="#">프로그램 만들기</a>
+      <a href="makeGameProgramForm.do">프로그램 만들기</a>
     </div>
 	</li>
 	<li class="dropdown"><a href="${pageContext.request.contextPath}/aboutus.do">ABOUT US</a>

@@ -11,7 +11,7 @@
 							<div class="single-post row">
 								<div class="col-lg-12">
 								
-									<div class="feature-img">
+									<div class="">
 										<h3 class="mt-20 mb-20">일정 리스트</h3>	
 						<table>
 										<c:forEach items="${sList.list}" var="list">
@@ -32,7 +32,7 @@
 												</div>
 										</div>
 										<div class="col-sm-6 ground-info">
-										<form>
+										<form action="scheduleParticipation.do">
 											<input type="submit" value="참여"><br>
 											<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 										</form>
@@ -63,12 +63,12 @@
 
 				<ul class="pagination pagination-lg pagination-centered">
 					<c:if test="${pb.previousPageGroup}">
-						<li><a class="page" href="">&laquo;</a></li>
+						<li><a class="page" href="groundScheduleList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 						<c:choose>
 							<c:when test="${pb.nowPage!=i}">
-								<li><a class="page">${i}</a></li>
+								<li><a class="page" href="groundScheduleList.do?pageNo=${i}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="active"><a href="#">${i}</a></li>
@@ -77,7 +77,7 @@
 	&nbsp;
 	</c:forEach>
 					<c:if test="${pb.nextPageGroup}">
-						<li><a class="page" href="">&raquo;</a></li>
+						<li><a class="page" href="groundScheduleList.do?pageNo=${pb.startPageOfPageGroup+1}">&raquo;</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -120,7 +120,7 @@
 								</div>
 							</div>
 							<div>
-								<div class="row">
+							<!-- 	<div class="row">
 									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 										<div class="thumb">
 											<a href="#"><img class="img-fluid" src="img/blog/prev.jpg" alt=""></a>
@@ -128,16 +128,16 @@
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
 										</div>
-									<!-- 	<div class="detials">
+										<div class="detials">
 											<p>Prev Post</p>
 											<a href="#"><h4>Space The Final Frontier</h4></a>
-										</div> -->
+										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-										<!-- <div class="detials">
+										<div class="detials">
 											<p>Next Post</p>
 											<a href="#"><h4>Telescopes 101</h4></a>
-										</div> -->
+										</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
 										</div>
@@ -145,7 +145,7 @@
 											<a href="#"><img class="img-fluid" src="img/blog/next.jpg" alt=""></a>
 										</div>										
 									</div>									
-								</div>
+								</div> -->
 							</div>							
 						</div>
 											

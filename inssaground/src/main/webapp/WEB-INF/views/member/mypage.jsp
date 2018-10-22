@@ -22,6 +22,10 @@
       <c:when test="${ground.STATUS==0}">
       <td>${ground.groundName}</td>
       <td>참여 대기중</td></c:when>
+      <c:when test="${ground.STATUS==3}">
+      <td>${ground.groundName}</td>
+      <td>탈퇴함</td> 
+      </c:when>
       <c:otherwise> <td><a href="applyGroundDetail.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
       <td>참여 중</td></c:otherwise>
       </c:choose>

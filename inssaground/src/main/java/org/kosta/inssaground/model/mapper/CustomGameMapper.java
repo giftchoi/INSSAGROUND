@@ -14,5 +14,6 @@ public interface CustomGameMapper {
 	public void writeCustomGame(CustomGameVO customGameVO);
 	public void deleteCustomGame(String cGameNo);
 	public void updateCustomGame(CustomGameVO customGameVO);
+	public List<CustomGameVO> getCustomGameOrderByRecommendation();
 }
 

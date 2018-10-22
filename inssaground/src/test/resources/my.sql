@@ -2,7 +2,37 @@ select * from hobby where hobby_category_no=1;
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
 alter table insider add(status number default 0);
+-------------------------------------------------추가(10/21 이전)
+alter table OFFICIAL_GAME rename column max_parsonnel to max_personnel;
 
+alter table CUSTOM_GAME drop column recommendation;
+alter table custom_game alter modify column c_game_no number;
+alter table custom_game rename column id to writer_id;
+----위의 alter문 수행 안됬을경우 CUSTOM_GAME 테이블 drop하고 다시 create 해야함
+drop table CUSTOM_GAME;
+create table CUSTOM_GAME(
+   c_game_no number primary key,
+   title varchar2(50) not null,
+   min_personnel number default 0,
+   max_personnel number default 1000,
+   game_time number not null,
+   materials varchar2(100) not null,
+   content clob not null,
+   writer_id varchar2(100) not null,
+   cg_no number not null,
+   constraint fk_INSSA_MEMBER_CUSTOM foreign key(writer_id) references INSSA_MEMBER(id),
+   constraint fk_GAME_CATEGORY_CUSTOM foreign key(cg_no) references GAME_CATEGORY(cg_no)
+);
+
+drop table recommendation
+create table recommendation(
+ 	id varchar2(100) not null,
+ 	c_game_no number not null,
+ 	constraint fk_recommendation_id foreign key(id) references INSSA_MEMBER(id),
+ 	constraint fk_recommendation_c_game_no foreign key(c_game_no) references CUSTOM_GAME(c_game_no),
+ 	constraint pk_recommendation primary key(id,c_game_no)
+)
+----------------------------------------------------------------------추가(10/21)
 select count(*) from ground
 
 create table sigungu(
@@ -244,17 +274,16 @@ create sequence CUSTOM_GAME_Seq nocache;
 
 drop table CUSTOM_GAME;
 create table CUSTOM_GAME(
-   c_game_no varchar2(100) primary key,
+   c_game_no number primary key,
    title varchar2(50) not null,
    min_personnel number default 0,
    max_personnel number default 1000,
    game_time number not null,
    materials varchar2(100) not null,
    content clob not null,
-   recommendation number default 0,
-   id varchar2(100) not null,
+   writer_id varchar2(100) not null,
    cg_no number not null,
-   constraint fk_INSSA_MEMBER_CUSTOM foreign key(id) references INSSA_MEMBER(id),
+   constraint fk_INSSA_MEMBER_CUSTOM foreign key(writer_id) references INSSA_MEMBER(id),
    constraint fk_GAME_CATEGORY_CUSTOM foreign key(cg_no) references GAME_CATEGORY(cg_no)
 );
 
@@ -467,7 +496,7 @@ create table PROGRAM_OFFICIAL_GAME(
 );
 --15
 create table CUSTOM_GAME(
-   c_game_no varchar2(100) primary key,
+   c_game_no number primary key,
    title varchar2(50) not null,
    min_personnel number default 0,
    max_personnel number default 1000,

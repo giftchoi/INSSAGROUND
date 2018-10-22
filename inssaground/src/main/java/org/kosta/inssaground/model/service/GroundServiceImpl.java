@@ -179,6 +179,11 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void updateGroundSchedule(ScheduleVO scheduleVO) {
+		String date = scheduleVO.getStartDate().replace("T"," ");
+		String date2 = scheduleVO.getEndDate().replace("T"," ");
+		scheduleVO.setStartDate(date);
+		scheduleVO.setEndDate(date2);
+		System.out.println("*********"+scheduleVO+"*****************");
 		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
@@ -288,7 +293,7 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {		
+	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {
 		return groundMapper.findGroundScheduleByScheduleNo(scheduleVO);
 	}
 
@@ -319,6 +324,60 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO) {		
 		return groundMapper.findGroundMemberListByGroundNo(groundVO);
+	}
+
+	@Override
+	public MemberVO groundHomeMember(String id) {		
+		return groundMapper.groundHomeMember(id);
+	}
+
+	@Override
+	public String groundHomeProfile(String id) {		
+		return groundMapper.groundHomeProfile(id);
+	}
+
+	@Override
+	public InsiderVO groundHomeInsider(String id,String groundNo) {	
+		InsiderVO insiderVO = new InsiderVO();
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		insiderVO.setMemberVO(vo);
+		insiderVO.setGroundNo(groundNo);
+		return groundMapper.groundHomeInsider(insiderVO);
+	}
+
+	@Override
+	public GroundVO groundHashtag2(GroundVO groundVO) {		
+		List<String> list = groundMapper.getHashtagList(groundVO.getGroundNo());
+		groundVO.setTagList(list);
+		return groundVO;
+	}
+
+	@Override
+	public void scheduleParticipation(String scheduleNo, MemberVO memberVO, GroundVO groundVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberVO",memberVO);
+		map.put("scheduleNo",scheduleNo);
+		map.put("groundVO",groundVO);		
+		groundMapper.scheduleParticipation(map);
+	}
+
+	@Override
+	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO, String scheduleNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groundVO",groundVO);
+		map.put("scheduleNo",scheduleNo);		
+		return groundMapper.scheduleParticipationMember(map);
+	}
+
+	@Override
+	public NoticeVO newNotice(GroundVO groundVO) {		
+		return groundMapper.newNotice(groundVO);
+	}
+
+	@Override
+	public List<PostVO> newPost(String groundNo) {		
+		return groundMapper.newPost(groundNo);
 	}
 
 	

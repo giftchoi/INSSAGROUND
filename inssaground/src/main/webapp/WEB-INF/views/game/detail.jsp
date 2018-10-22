@@ -3,171 +3,204 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style type="text/css">
+ form{
+ display:inline
+ }
 
-
-<!-- Start post-content Area -->
-<!-- <section class="post-content-area single-post-area"> -->
-<div class="container">
-
-
+ pre {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+</style>
 	<c:choose>
 		<c:when test="${requestScope.gameType eq 'custom'}">
-			<!-- 사용자 정의 게임 : 갖고온거 -->
-			<!-- 	c.c_game_no,c.title,c.max_Personnel,c.min_Personnel,c.game_Time,
-			c.materials,c.content,c.recommendation,c.cg_no,m.id,m.name
-	-->
 
-			<div class="col-lg-12" style="font-size: 100">
-				<div class="single-post row">
-					<div class="col-lg-3  col-md-3 meta-details">
-						<div class="user-details row" style="font-size: 2.2rem;">
-							<p class="user-name col-lg-12 col-md-12 col-6">
-								<a href="#">${requestScope.gvo.memberVO.id }</a> <span
-									class="lnr lnr-user"></span>
-							</p>
-							<p class="date col-lg-12 col-md-12 col-6">
-								<a href="#">${requestScope.gvo.memberVO.email }</a> <span
-									class="lnr lnr-calendar-full"></span>
-							</p>
-						</div>
-					</div>
+<!-- 사용자게임 폼 -->
+<table class="myTable">
+  <thead>
+    <tr>
+      <th colspan="3">${requestScope.gvo.title }</th>
+    </tr>
+   <tr>
+      <th  style="font-weight: bolder;">${requestScope.gvo.memberVO.id }</th>
+      <th>　　　　　　　　　　　　　　</th>
+      <th align="right"><i class="material-icons button">${requestScope.gvo.memberVO.email }</i></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>인원</td>
+      <td colspan="2">${requestScope.gvo.minPersonnel } ~
+							${requestScope.gvo.maxPersonnel } 명</td>
+    </tr>
+    <tr>
+      <td>게임시간</td>
+      <td colspan="2">${requestScope.gvo.gameTime } 분</td>
+    </tr>
+    <tr>
+      <td>준비물</td>
+      <td colspan="2">${requestScope.gvo.materials }</td>
+    </tr>
 
-					<div class="col-lg-9 col-md-9" style="font-size: 1.7rem;">
-						<h1>${requestScope.gvo.title }</h1>
-						<br>
-						<p>인원 : ${requestScope.gvo.minPersonnel } ~
-							${requestScope.gvo.maxPersonnel }</p>
-						<br>
-						<p>게임시간 : ${requestScope.gvo.gameTime }분</p>
-						<br>
-						<p>준비물 : ${requestScope.gvo.materials }</p>
-						<br>
-						<c:choose>
-							<c:when test="${requestScope.gvo.cgNo eq 1 }">
-								<p>분류: 실내 게임</p>
-							</c:when>
-							<c:otherwise>
-								<p>분류: 실외 게임</p>
-							</c:otherwise>
-						</c:choose>
-						<br>
-						<p>추천수 : ${requestScope.gvo.recommendation }</p>
-						<br>
-						<pre>${requestScope.gvo.content}</pre>
-					</div>
-				</div>
-					<div class="row" style="align: right">
-					<form action="deleteCustomGame.do" id="deleteCustomGameForm"
-						method="post">
-						<sec:csrfInput />
-						<input type="hidden" name="cGameNo"
-							value="${requestScope.gvo.cGameNo}">
-					</form>
-					<form action="customGameUpdateForm.do" id="customGameUpdateForm"
-						method="post">
-						<sec:csrfInput />
-						<input type="hidden" name="cGameNo"
-							value="${requestScope.gvo.cGameNo}">
-					</form>
-					<button class="btn btn-danger" form="customGameUpdateForm"
-						type="submit">수정</button>
-					&nbsp;
-					<button class="btn btn-danger" form="deleteCustomGameForm"
-						type="submit">삭제</button>
+				<c:choose>
+					<c:when test="${requestScope.gvo.cgNo eq 1 }">
+						<tr>
+							<td>분류</td>
+							<td colspan="2">실내 게임</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td>분류</td>
+							<td colspan="2">실외 게임</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 
-					<script type="text/javascript">
-						$(document).ready(function() {
-							$("#deleteCustomGameForm").submit(function() {
-								return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
-							});
-							$("#customGameUpdateForm").submit(function() {
-								return confirm("사용자 정의 게임을 수정하시겠습니까?")
-							});
-						});
-					</script>
-				</div>
-			</div>
+    <tr>
+	<td colspan="3">
+		<pre>${requestScope.gvo.content}</pre>
+    </td>
+	</tr>
+    <tr>
+      <td>
+      <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-thumbs-up"></span> ${requestScope.gvo.recommendation }
+       </button>
+      </td>
+      <td></td>
+      <td>
+						
+				<form action="customGameUpdateForm.do" id="customGameUpdateForm"
+					method="post">
+					<sec:csrfInput />
+					<input type="hidden" name="cGameNo"
+						value="${requestScope.gvo.cGameNo}">
+						<i class="material-icons button edit">
+						<input type="submit" value="edit"  style="background-color:transparent;  border:0px transparent solid;">
+						</i>
+				</form>
+				<form action="deleteCustomGame.do" id="deleteCustomGameForm"
+					method="post">
+					<sec:csrfInput />
+					<input type="hidden" name="cGameNo"
+						value="${requestScope.gvo.cGameNo}">
+						
+						<i class="material-icons button delete">
+						<input type="submit" value="delete"  style="background-color:transparent;  border:0px transparent solid;">
+						</i>
+				</form>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#deleteCustomGameForm").submit(function() {
+					return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
+				});
+				$("#customGameUpdateForm").submit(function() {
+					return confirm("사용자 정의 게임을 수정하시겠습니까?")
+				});
+			});
+		</script>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 		</c:when>
 		<c:otherwise>
-			<!-- 공식게임 : 갖고온거 -->
-			<!-- 	o_game_no, title, min_personnel, max_personnel,
-			game_time, materials, content, cg_no -->
-			<div class="col-lg-12" style="font-size: 100">
-				<div class="single-post row">
-					<div class="col-lg-3  col-md-3 meta-details">
-						<div class="user-details row" style="font-size: 2.2rem;">
-							<p class="user-name col-lg-12 col-md-12 col-6">
-								<a href="#">관리자</a> <span class="lnr lnr-user"></span>
-							</p>
-							<p class="date col-lg-12 col-md-12 col-6">
-								<a href="#">자리</a> <span class="lnr lnr-calendar-full"></span>
-							</p>
-						</div>
-					</div>
-
-					<div class="col-lg-9 col-md-9" style="font-size: 1.7rem;">
-						<h1>${requestScope.gvo.title }</h1>
-						<br>
-						<p>인원 : ${requestScope.gvo.minPersonnel } ~
-							${requestScope.gvo.maxPersonnel }</p>
-						<br>
-						<p>게임시간 : ${requestScope.gvo.gameTime }분</p>
-						<br>
-						<p>준비물 : ${requestScope.gvo.materials }</p>
-						<br>
-						<c:choose>
-							<c:when test="${requestScope.gvo.cgNo eq 1}">
-								<p>분류: 실내 게임</p>
-							</c:when>
-							<c:otherwise>
-								<p>분류: 실외 게임</p>
-							</c:otherwise>
-						</c:choose>
-						<br>
-						<pre>${requestScope.gvo.content}</pre>
-					</div>
-
-				</div>
-				<div class="row" style="align: right">
-									
-					<form action="officialGameUpdateForm.do"
-						id="officialGameUpdateForm" method="post">
-						<sec:csrfInput />
-						<input type="hidden" name="oGameNo"
-							value="${requestScope.gvo.oGameNo }">
-					</form>
-					
-					<form action="deleteOfficialGame.do" id="deleteOfficialGameForm"
-						method="post">
-						<sec:csrfInput />
-						<input type="hidden" name="oGameNo"
-							value="${requestScope.gvo.oGameNo }">
-					</form>
-
-					<button class="btn btn-danger" form="officialGameUpdateForm"
-						type="submit">수정</button>
-					&nbsp;
-					<button class="btn btn-danger" form="deleteOfficialGameForm"
-						type="submit">삭제</button>
 
 
-					<script type="text/javascript">
-						$(document).ready(function() {
-							$("#deleteOfficialGameForm").submit(function() {
-								return confirm("공식 게임을 삭제하시겠습니까?");
-							});
-					    	$("#officialGameUpdateForm").submit(function(){  
-					    		return confirm("게시물을 수정하시겠습니까?");
-					    	});
-						});
-					</script>
-				</div>
+<!-- 공식게임 폼 -->
+<table class="myTable">
+  <thead>
+    <tr>
+      <th colspan="3">${requestScope.gvo.title }</th>
+    </tr>
+   <tr>
+      <th  style="font-weight: bolder;">관리자</th>
+      <th>　　　　　　　　　　　　　　</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>인원</td>
+      <td colspan="2">${requestScope.gvo.minPersonnel } ~
+							${requestScope.gvo.maxPersonnel } 명</td>
+    </tr>
+    <tr>
+      <td>게임시간</td>
+      <td colspan="2">${requestScope.gvo.gameTime } 분</td>
+    </tr>
+    <tr>
+      <td>준비물</td>
+      <td colspan="2">${requestScope.gvo.materials }</td>
+    </tr>
+<c:choose>
+	<c:when test="${requestScope.gvo.cgNo eq 1}">
+	<tr>
+      <td>분류</td>
+      <td colspan="2">실내 게임</td>
+    </tr>
+	</c:when>
+	<c:otherwise>
+	<tr>
+      <td>분류</td>
+      <td colspan="2">실외 게임</td>
+    </tr>
+    </c:otherwise>
+</c:choose>
+    
 
-			</div>
+    <tr>
+	<td colspan="3">
+		<pre>${requestScope.gvo.content}</pre>
+    </td>
+	</tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+						
+				<form action="officialGameUpdateForm.do" id="officialGameUpdateForm"
+					method="post">
+					<sec:csrfInput />
+					<input type="hidden" name="oGameNo"
+						value="${requestScope.gvo.oGameNo}">
+						<i class="material-icons button edit">
+						<input type="submit" value="edit"  style="background-color:transparent;  border:0px transparent solid;">
+						</i>
+				</form>
+				<form action="deleteOfficialGame.do" id="deleteOfficialGameForm"
+					method="post">
+					<sec:csrfInput />
+					<input type="hidden" name="oGameNo"
+						value="${requestScope.gvo.oGameNo}">
+						<i class="material-icons button delete">
+						<input type="submit" value="delete"  style="background-color:transparent;  border:0px transparent solid;">
+						</i>
+				</form>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#deleteOfficialGameForm").submit(function() {
+					return confirm("공식 게임을 삭제하시겠습니까?")	
+				});
+				$("#officialGameUpdateForm").submit(function() {
+					return confirm("공식 게임을 수정하시겠습니까?")
+				});
+			});
+		</script>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 		</c:otherwise>
 	</c:choose>
-
-</div>
-
-
-

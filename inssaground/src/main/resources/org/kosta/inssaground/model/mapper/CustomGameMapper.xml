@@ -18,9 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="pagingBean">
 		SELECT c.*, m.id,m.name FROM(
 		SELECT
-		row_number() over(order by c_game_no desc) as rnum, c_game_no, title,
-		min_Personnel, max_Personnel, game_time, materials, recommendation, id, cg_no FROM CUSTOM_GAME) c, INSSA_MEMBER m
-		where c.id=m.id and rnum between
+		row_number()
+		over(order by c_game_no desc) as rnum, c_game_no, title,
+		min_Personnel, max_Personnel, game_time, materials,
+		writer_id, cg_no
+		FROM CUSTOM_GAME) c, INSSA_MEMBER m
+		where c.writer_id=m.id and rnum
+		between
 		#{startRowNumber} and #{endRowNumber}
 		order
 		by c_game_no desc
@@ -28,29 +32,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCustomGameDetail" resultMap="CustomGameRM">
 		select
 		c.c_game_no,c.title,c.max_Personnel,c.min_Personnel,c.game_Time,
-		c.materials,c.content,c.recommendation,c.cg_no,m.id,m.name
-		from CUSTOM_GAME c,
+		c.materials,c.content,c.cg_no,m.id,m.name
+		from
+		CUSTOM_GAME c,
 		INSSA_MEMBER m
-		where c.id=m.id and c_game_no=#{value}
+		where c.writer_id=m.id and c_game_no=#{value}
 	</select>
 	<insert id="writeCustomGame" parameterType="CustomGameVO">
-		<selectKey keyProperty="cGameNo" resultType="string" order="BEFORE">
+		<selectKey keyProperty="cGameNo" resultType="string"
+			order="BEFORE">
 			select
 			CUSTOM_GAME_Seq.nextval from dual
 		</selectKey>
 		insert into CUSTOM_GAME(c_game_no,title,min_personnel,max_personnel,
-		game_time,materials,content,recommendation,id,cg_no)
+		game_time,materials,content,writer_id,cg_no)
 		values(#{cGameNo},#{title},#{minPersonnel},#{maxPersonnel},
-		#{gameTime},#{materials},#{content},#{recommendation},#{memberVO.id},#{cgNo})
+		#{gameTime},#{materials},#{content},#{memberVO.id},#{cgNo})
 	</insert>
- 	<update id="updateCustomGame" parameterType="customGameVO">
+	<update id="updateCustomGame" parameterType="customGameVO">
 		update CUSTOM_GAME
 		set
-		title=#{title},min_personnel=#{minPersonnel}, max_personnel=#{maxPersonnel}, game_time=#{gameTime},
+		title=#{title},min_personnel=#{minPersonnel},
+		max_personnel=#{maxPersonnel}, game_time=#{gameTime},
 		materials=#{materials}, content=#{content}, cg_no=#{cgNo}
-		where c_game_no=#{cGameNo}
+		where
+		c_game_no=#{cGameNo}
 	</update>
 	<delete id="deleteCustomGame" parameterType="string">
-		delete from CUSTOM_GAME where c_game_no=#{value}
+		delete from
+		CUSTOM_GAME where c_game_no=#{value}
 	</delete>
+	<select id="getCustomGameOrderByRecommendation"
+		resultType="customGameVO">
+		select c.*
+		from (
+		select *
+		from(
+		select c_game_no,
+		count(*) recommendation
+		from recommendation group by c_game_no
+		order by
+		recommendation desc
+		)
+      <![CDATA[
+      where rownum<=4
+      ]]>
+		) r, CUSTOM_GAME c
+		where
+		c.c_game_no=r.c_game_no
+	</select>
 </mapper>

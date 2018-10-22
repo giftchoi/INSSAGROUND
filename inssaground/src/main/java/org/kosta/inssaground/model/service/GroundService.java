@@ -49,16 +49,22 @@ public interface GroundService {
 	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
 	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
 	public NoticeVO getNoticeDetailByNo(String noticeNo);	//인싸 - 모임 공지 상세보기
-	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage);
-	
+	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage);	
 	public void groundHashtag(String tags[],GroundVO groundVO);
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
 	public void registergroundschedule(ScheduleVO scheduleVO);
-	
+	public MemberVO groundHomeMember(String id);
+	public String groundHomeProfile(String id);
+	public InsiderVO groundHomeInsider(String id,String groundNo);
+	public GroundVO groundHashtag2(GroundVO groundVO);
+	public void scheduleParticipation(String scheduleNo,MemberVO memberVO,GroundVO groundVO);
 
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
+	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO,String scheduleNo);
+	public NoticeVO newNotice(GroundVO groundVO);
+	public List<PostVO> newPost(String groundNo);
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 	

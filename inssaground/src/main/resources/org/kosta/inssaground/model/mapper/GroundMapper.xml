@@ -251,8 +251,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from schedule where schedule_no=#{scheduleNo}
 	</delete>
 	
-	<update id="updateGroundSchedule" parameterType="scheduleVO">
-		update schedule set title=#{title},max_personnel=#{maxPersonnel},start_date=#{startDate},end_date=#{endDate},content=#{content} where schedule_no=#{scheduleNo}
+	<update id="updateGroundSchedule" parameterType="scheduleVO">		
+		update schedule set title=#{title},max_personnel=#{maxPersonnel},start_date=to_date(#{startDate},'yyyy-mm-dd hh24:mi'),end_date=to_Date(#{endDate},'yyyy-mm-dd hh24:mi'),content=#{content},loc=#{loc} where schedule_no=#{scheduleNo}
 	</update>
 	
 	<resultMap type="insiderVO" id="insiderRM">
@@ -264,8 +264,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.id,m.email,m.name,i.attendance
 		from insider i,inssa_member m
 		where i.id=m.id and i.status=1 and i.ground_no=#{groundNo}
+	</select>	
+	
+	<select id="groundHomeInsider"  parameterType="insiderVO" resultType="insiderVO">
+		select attendance from insider where id=#{memberVO.id} and ground_no=#{groundNo}
 	</select>
 	
+	<insert id="scheduleParticipation" parameterType="map">
+		insert into participant(id,schedule_no,ground_no) values(#{memberVO.id},#{scheduleNo},#{groundVO.groundNo})
+	</insert>
+	
+	<select id="scheduleParticipationMember" parameterType="map" resultType="memberVO">
+		select id from participant where ground_no=#{groundVO.groundNo} and schedule_no=#{scheduleNo}
+	</select>
+	
+	<select id="newNotice" parameterType="groundVO" resultType="noticeVO">
+		select * from notice where ground_no=#{groundNo} and notice_no=(select max(notice_no) from notice)
+	</select>
+	
+	<select id="newPost" resultType="postVO">
+		select post_no,title,content,id,timePosted,ground_no
+		from (
+		select row_number() over(order by post_no desc) as
+		rnum,post_no,title,content,id,time_posted as timePosted,ground_no
+		from ground_post )
+		where ground_no=#{value} and rnum between
+		1 and 2 order by
+		post_no desc
+	</select>
 	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">

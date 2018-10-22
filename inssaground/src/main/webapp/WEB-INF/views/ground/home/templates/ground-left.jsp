@@ -16,7 +16,7 @@
 			<span class="lnr lnr-user"></span>
 		</p>
 		<p class="user-name col-lg-12 col-md-12 col-6">
-			<a href="groundScheduleList.do?groundNo=${sessionScope.ground.groundNo}">내 모임 달력</a>
+			<a href="groundScheduleList.do?groundNo=${sessionScope.ground.groundNo}">일정 리스트</a>
 			<span class="lnr lnr-user"></span>
 		</p>
 		<p class="user-name col-lg-12 col-md-12 col-6">

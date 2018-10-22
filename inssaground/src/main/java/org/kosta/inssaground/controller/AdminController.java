@@ -1,8 +1,10 @@
 package org.kosta.inssaground.controller;
 
 import org.kosta.inssaground.model.service.AdminService;
+import org.kosta.inssaground.model.vo.EmailVO;
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.ListVO;
+import org.kosta.inssaground.model.vo.ReportVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -49,4 +51,25 @@ public class AdminController {
 		adminService.rejectGround(groundNo);
 		return "redirect:readyApplyGround.do";
 	}
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("reportList.do")
+	public String reportList(Model model,String pageNo) {
+		ListVO<ReportVO> reportList=adminService.getReportList(pageNo);
+		model.addAttribute("reportList",reportList);
+		return "admin/report-list.tiles";
+	}
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("reportDetail.do")
+	public String reportDetail(Model model,String reportNo) {
+		ReportVO report=adminService.getReportDetail(reportNo);
+		model.addAttribute("report", report);
+		return "admin/report-detail.tiles";
+	}
+	@Secured("ROLE_ADMIN")
+	@PostMapping("reportAnswer.do")
+	public String reportAnswer(EmailVO email) {
+		adminService.reportAnswer(email);
+		return "redirect:report-list.do";
+	}
 }
+
