@@ -410,6 +410,21 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 
+	@Override
+	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage) {
+		int postCount = groundMapper.getTotalGroundPostCount(groundNo);
+		PagingBean pagingBean = new PagingBean(postCount,Integer.parseInt(nowPage));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingBean", pagingBean);
+		map.put("groundNo", groundNo);
+		return new ListVO<PostVO>(pagingBean,groundMapper.getAllGroundPostList(map));
+	}
+
+	@Override
+	public PostVO findPostByPostNo(String postNo) {
+		return groundMapper.findPostByPostNo(postNo);
+	}
+
 	
 
 
