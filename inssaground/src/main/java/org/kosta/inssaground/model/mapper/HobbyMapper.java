@@ -3,6 +3,7 @@ package org.kosta.inssaground.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.kosta.inssaground.model.vo.FeatureVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
 
@@ -14,4 +15,6 @@ public interface HobbyMapper {
 	List<HobbyCategoryVO> getHobbyCategory();
 
 	HobbyVO findHobbyByHobbyNo(String hobbyNo);
+	
+	List<FeatureVO> getHobbyFeatureAndHobbyFeatureNoList();
 }
