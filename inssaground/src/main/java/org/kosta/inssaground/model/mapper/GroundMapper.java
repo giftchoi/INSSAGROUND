@@ -32,6 +32,14 @@ public interface GroundMapper {
 	void deleteGroundNotice(String noticeNo);	//공지 삭제
 	void updateGroundNotice(NoticeVO noticeVO);	//공지 수정
 	
+	void insertPostImg(Map<String,String> map);
+	void insertGroundPost(PostVO postVO);
+	int getTotalGroundPostCount(String groundNo);
+	List<PostVO> getAllGroundPostList(Map<String,Object> map);
+	PostVO findPostByPostNo(String postNo);	//게시글 상세
+	
+	
+	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
 	List<SigunguVO> getSigungu(String sidoNo);
@@ -67,8 +75,9 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-	void insertPostImg(Map<String,String> map);
-	void insertGroundPost(PostVO postVO);
+
+
+
 
 
 

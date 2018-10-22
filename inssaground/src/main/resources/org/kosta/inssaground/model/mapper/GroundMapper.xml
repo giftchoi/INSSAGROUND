@@ -158,7 +158,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertPostImg" parameterType="map">
 		insert into post_img(img_no,img_name,post_no) values(post_img_seq.nextVal,#{imgName},#{postNo})
 	</insert>
-
+	<select id="getTotalGroundPostCount" resultType="int">
+		select count(*) from ground_post where ground_no=#{value}
+	</select>
+	<select id="getAllGroundPostList" parameterType="map" resultType="postVO">
+		select p.post_no,p.title,p.hits,p.id,p.time_posted
+		from 	(select row_number() over(order by post_no desc) as rnum, p.*
+					from ground_post p
+					where p.ground_no=#{groundNo}) p
+		where p.rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+	</select>
+	<select id="findPostByPostNo" resultMap="postVORM">
+		select title,content,id,hits,to_char(time_posted,'yyyy.mm.dd hh24:mi') as time_posted from ground_post where post_no=#{value}
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	<!--DOHYEONG -->
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido

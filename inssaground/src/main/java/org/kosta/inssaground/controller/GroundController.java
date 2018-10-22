@@ -346,9 +346,21 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundPost.do")
-	public String groundPost() {
+	public String groundPost(Model model,String groundNo,String nowPage) {
+		if(nowPage==null) nowPage="1";
+		model.addAttribute("listVO",groundService.getAllGroundPostList(groundNo,nowPage));
 		return "ground/home/ground-board.tiles";
 	}
+	@RequestMapping("groundPostDetail.do")
+	public String groundPost(String postNo, Model model) {
+		PostVO postVO = groundService.findPostByPostNo(postNo); 
+		model.addAttribute("postVO",postVO);
+		System.out.println(postVO);
+		return "ground/home/ground-post-detail.tiles";
+	}
+	
+	
+	
 	
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
