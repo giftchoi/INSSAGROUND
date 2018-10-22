@@ -7,12 +7,53 @@
 			<section>
 				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-lg-8 posts-list">
+						<div class="col-lg-12 posts-list">
 							<div class="single-post row">
 								<div class="col-lg-12">
 								
 									<div class="">
-										<h3 class="mt-20 mb-20">일정 리스트</h3>	
+										<!-- <h3 class="mt-20 mb-20">일정 리스트</h3>	 -->
+										
+										<table class="myTable">
+										  <thead>
+										    <tr>
+										      <th colspan="6">SCHEDULE  LIST</th>
+										    </tr>
+										    <tr>
+										      <th>No</th>
+										      <th>제목</th>
+										      <th>아이디</th>
+										      <th>정원</th>
+										      <th></th>
+										      <th></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										  <c:forEach items="${sList.list}" var="list">
+										      <tr>
+										      <td>${list.scheduleNo}</td>
+										      <td><a href="">${list.title}</a></td>
+										      <td>${list.insiderVO.memberVO.id}</td>
+										      <td>${list.currPersonnel}/${list.maxPersonnel}</td>
+										      
+										      <td>
+										      		<form action="groundScheduleDetail.do">
+															<input type="submit" value="상세보기" >
+															<input type="hidden" name="scheduleNo" value="${list.scheduleNo}">
+													</form>
+										      </td>
+										      
+										    </tr>
+										  </c:forEach>
+										  </tbody>
+										</table>
+										
+										
+										
+										
+										
+										
+						<%-- 				
 						<table>
 										<c:forEach items="${sList.list}" var="list">
 							<td>
@@ -55,8 +96,8 @@
 						</c:if>
 						</c:forEach>
 					</tr>
-				</table>
-				<a href="groundScheduleForm.do">모임 등록 하기</a>
+				</table> --%>
+				<a href="groundScheduleForm.do">스케줄 등록 하기</a>
 				<!-- 페이징 -->
 							<div class="pagingInfo">
 				<c:set var="pb" value="${requestScope.sList.pagingBean}" />

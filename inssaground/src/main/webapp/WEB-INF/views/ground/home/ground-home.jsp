@@ -69,20 +69,53 @@
 											<img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
 										</div>	
 										<div class="col-lg-12 mt-30">
-											<table class="myTable">
+											<%-- <table class="myTable">
 												<thead>
 													<tr>
-														<td>NOTICE</td>
+														<td align="center" colspan="2">NOTICE</td>
+													</tr>
+													<tr>
+														<td>
+															No
+														</td>
+														<td>
+															CONTENT
+														</td>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
 														<td>
-															${notice.noticeNo}        ${notice.content} 
+															${notice.noticeNo}        
+														</td>
+														<td>
+															${notice.content} 
 														</td>
 													</tr>
 												</tbody>
-											</table>
+											</table> --%>
+											
+											<table class="myTable">
+											  <thead>
+											    <tr>
+											      <th colspan="2">NOTICE</th>
+											    </tr>
+											    <tr>
+											      <th>No</th>
+											      <th>CONTENT</th>										      
+											    </tr>
+											  </thead>
+											  <tbody>
+											 
+											      <tr>
+											      <td>${notice.noticeNo}</td>
+											      <td><a href="#">${notice.content}</a></td>
+											     
+											    </tr>
+											 
+											  </tbody>
+											</table>										
+											
 											
 											<table class="myTable">
 											  <thead>
@@ -92,7 +125,7 @@
 											    <tr>
 											      <th>No</th>
 											      <th>TITLE</th>
-											      <th>id</th>
+											      <th>ID</th>
 											      <th>TIME</th>
 											    </tr>
 											  </thead>
@@ -100,8 +133,8 @@
 											  <c:forEach items="${post}" var="post">
 											      <tr>
 											      <td>${post.postNo}</td>
-											      <td><a href="#">${report.title}</a></td>
-											      <td>${post.id}</td>
+											      <td><a href="#">${post.title}</a></td>
+											      <td>${post.insiderVO.memberVO.id}</td>
 											      <td>${post.timePosted}</td>
 											    </tr>
 											  </c:forEach>

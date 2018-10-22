@@ -149,7 +149,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateGroundNotice" parameterType="noticeVO">
 		update notice set content=#{content} where notice_no=#{noticeNo}
 	</update>
-
+	<insert id="insertGroundPost" parameterType="postVO" >
+	<selectKey keyProperty="postNo" resultType="string" order="BEFORE">
+		select ground_post_seq.nextval from dual
+	</selectKey>
+		insert into ground_post(post_no,title,content,id,ground_no) values(#{postNo},#{title},#{content},#{insiderVO.memberVO.id},#{insiderVO.groundNo})
+	</insert>
+	<insert id="insertPostImg" parameterType="map">
+		insert into post_img(img_no,img_name,post_no) values(post_img_seq.nextVal,#{imgName},#{postNo})
+	</insert>
+	<select id="getTotalGroundPostCount" resultType="int">
+		select count(*) from ground_post where ground_no=#{value}
+	</select>
+	<select id="getAllGroundPostList" parameterType="map" resultType="postVO">
+		select p.post_no,p.title,p.hits,p.id,p.time_posted
+		from 	(select row_number() over(order by post_no desc) as rnum, p.*
+					from ground_post p
+					where p.ground_no=#{groundNo}) p
+		where p.rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+	</select>
+	<select id="findPostByPostNo" resultMap="postVORM">
+		select title,content,id,hits,to_char(time_posted,'yyyy.mm.dd hh24:mi') as time_posted from ground_post where post_no=#{value}
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	<!--DOHYEONG -->
 	<select id="getAllSido" resultType="sidoVO">
 		select * from sido
@@ -252,7 +280,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<update id="updateGroundSchedule" parameterType="scheduleVO">		
-		update schedule set title=#{title},max_personnel=#{maxPersonnel},start_date=to_date(#{startDate},'yyyy-mm-dd hh24:mi'),end_date=to_Date(#{endDate},'yyyy-mm-dd hh24:mi'),content=#{content},loc=#{loc} where schedule_no=#{scheduleNo}
+		update schedule 
+		set title=#{title},
+		max_personnel=#{maxPersonnel},
+		start_date=to_date(#{startDate},'yyyy-mm-dd hh24:mi'),
+		end_date=to_date(#{endDate},'yyyy-mm-dd hh24:mi'),
+		content=#{content},
+		loc=#{loc} 
+		where schedule_no=#{scheduleNo}
 	</update>
 	
 	<resultMap type="insiderVO" id="insiderRM">
@@ -281,8 +316,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="newNotice" parameterType="groundVO" resultType="noticeVO">
 		select * from notice where ground_no=#{groundNo} and notice_no=(select max(notice_no) from notice)
 	</select>
-	
-	<select id="newPost" resultType="postVO">
+	<select id="newPost" resultMap="postVORM">
 		select post_no,title,content,id,timePosted,ground_no
 		from (
 		select row_number() over(order by post_no desc) as
@@ -291,6 +325,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ground_no=#{value} and rnum between
 		1 and 2 order by
 		post_no desc
+	</select>
+	
+	<resultMap type="postVO" id="postVORM">
+		<result column="id" property="insiderVO.memberVO.id"/>
+	</resultMap>
+	<select id="groundPicture" parameterType="groundVO" resultMap="postVORM">
+		select i.img_name as pictureList,p.id,to_char(time_posted,'yyyy-mm-dd') as timePosted,p.post_no
+		from ground_post p,post_img i
+		where p.post_no=i.post_no
+		and ground_no=#{groundNo};
+	</select>
+	
+	<select id="ParticipationBoolean" parameterType="map" resultType="int"> 
+		select count(*) from participant where id=#{memberVO.id} and schedule_no=#{scheduleNo}
+	</select>
+	
+	<select id="scheduleCurrPersonnel" resultType="int">
+		select count(*) from PARTICIPANT where schedule_no=#{value}
 	</select>
 	
 	<!-- JISUN -->

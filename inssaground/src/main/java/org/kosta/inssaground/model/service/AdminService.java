@@ -22,5 +22,5 @@ public interface AdminService {
 
 	public ReportVO getReportDetail(String reportNo);
 
-	public void reportAnswer(EmailVO email);
+	public void reportAnswer(EmailVO email,String reportNo);
 }

@@ -7,6 +7,7 @@ public class ReportVO {
 	private String timePosted;
 	private String groundNo;
 	private String id;
+	private int status;
 	public ReportVO() {
 		super();
 	}
@@ -17,7 +18,9 @@ public class ReportVO {
 		this.groundNo = groundNo;
 		this.id = id;
 	}
-	public ReportVO(String reportNo, String title, String content, String timePosted, String groundNo, String id) {
+	
+	public ReportVO(String reportNo, String title, String content, String timePosted, String groundNo, String id,
+			int status) {
 		super();
 		this.reportNo = reportNo;
 		this.title = title;
@@ -25,6 +28,7 @@ public class ReportVO {
 		this.timePosted = timePosted;
 		this.groundNo = groundNo;
 		this.id = id;
+		this.status = status;
 	}
 	public String getReportNo() {
 		return reportNo;
@@ -62,11 +66,16 @@ public class ReportVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
 		return "ReportVO [reportNo=" + reportNo + ", title=" + title + ", content=" + content + ", timePosted="
-				+ timePosted + ", groundNo=" + groundNo + ", id=" + id + "]";
+				+ timePosted + ", groundNo=" + groundNo + ", id=" + id + ", status=" + status + "]";
 	}
-	
-	
 }

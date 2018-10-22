@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <form action="reportAnswer.do" method="post">
 <sec:csrfInput/>		
+<input type="hidden" name="reportNo" value="${report.reportNo}">
 <input type="hidden" name="subject" value="${report.title}">
 <input type="hidden" name="receiver" value="${report.id}">
 <table class="myTable">

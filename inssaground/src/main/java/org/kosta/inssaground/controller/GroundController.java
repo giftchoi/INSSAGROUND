@@ -19,18 +19,19 @@ import org.kosta.inssaground.model.vo.InsiderVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.NoticeVO;
+import org.kosta.inssaground.model.vo.PostVO;
 import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.kosta.inssaground.model.vo.SidoVO;
 import org.kosta.inssaground.model.vo.SigunguVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class GroundController {
@@ -167,7 +168,7 @@ public class GroundController {
 					}
 				}		
 		
-		return "redirect:home.do";
+		return "ground/ground-apply-result.tiles";
 	}
 	/**
 	 * 	싸장 - 모임 관리 페이지로 이동
@@ -280,7 +281,46 @@ public class GroundController {
 		return "redirect:groundNoticeDetail.do?noticeNo="+noticeVO.getNoticeNo();
 	}
 	
+	@RequestMapping("groundPostRegisterForm.do")
+	public String groundPostRegisterForm() {
+		
+		return "ground/home/ground-post-register-form.tiles";
+	}
 	
+	@ResponseBody
+	@PostMapping("groundPostImgUpload.do")
+	public String uploadGroundImg(MultipartFile picture) {
+		//String uploadPath=request.getSession().getServletContext().getRealPath("/resources/uploadImage/");
+		String uploadPath = System.getProperty("user.home")+"\\git\\INSSAGROUND\\inssaground\\src\\main\\webapp\\resources\\uploadImage\\";
+		File uploadDir=new File(uploadPath);
+		if(uploadDir.exists()==false)
+			uploadDir.mkdirs();
+		
+		System.out.println(picture+"<==");
+		//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
+		if(picture!=null&&picture.isEmpty()==false){
+			System.out.println("파일명:"+picture.getOriginalFilename());
+			File uploadFile=new File(uploadPath+picture.getOriginalFilename());
+			try {
+				picture.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
+				System.out.println(uploadPath+picture.getOriginalFilename()+" 파일업로드");				
+			} catch (IllegalStateException | IOException e) {				
+				e.printStackTrace();
+			}
+		}		
+		return picture.getOriginalFilename();
+	}
+	
+	@Transactional
+	@PostMapping("groundPostRegister.do")
+	public String registerGroundPost(PostVO postVO) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		postVO.getInsiderVO().setMemberVO(mvo);
+		groundService.registerGroundPost(postVO);
+		
+		System.out.println(postVO);
+		return "home.tiles";
+	}
 	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
@@ -288,9 +328,6 @@ public class GroundController {
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
 		GroundVO vo = groundService.groundHashtag2(gvo);
-		for(int i=0;i<vo.getTagList().size();i++) {
-			System.out.println(vo.getTagList().get(i));
-		}
 		gvo.setTagList(vo.getTagList());
 		System.out.println(gvo);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
@@ -298,7 +335,7 @@ public class GroundController {
 		InsiderVO insiderVO = groundService.groundHomeInsider(mvo.getId(),groundVO.getGroundNo());// 출석수
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
 		model.addAttribute("notice",groundService.newNotice(groundVO));
-		model.addAttribute("mvo",mvo);
+		session.setAttribute("mvo",mvo);
 		model.addAttribute("insiderVO",insiderVO);
 		session.setAttribute("ground",gvo);
 		model.addAttribute("gvo",gvo);
@@ -306,9 +343,21 @@ public class GroundController {
 	}
 	
 	@RequestMapping("groundPost.do")
-	public String groundPost() {
+	public String groundPost(Model model,String groundNo,String nowPage) {
+		if(nowPage==null) nowPage="1";
+		model.addAttribute("listVO",groundService.getAllGroundPostList(groundNo,nowPage));
 		return "ground/home/ground-board.tiles";
 	}
+	@RequestMapping("groundPostDetail.do")
+	public String groundPost(String postNo, Model model) {
+		PostVO postVO = groundService.findPostByPostNo(postNo); 
+		model.addAttribute("postVO",postVO);
+		System.out.println(postVO);
+		return "ground/home/ground-post-detail.tiles";
+	}
+	
+	
+	
 	
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
@@ -345,6 +394,7 @@ public class GroundController {
 		System.out.println("controller1");
 		System.out.println("controller2");
 		ListVO<ScheduleVO> listVO = groundService.groundSchedulePagingBean(groundVO, pageNo);	
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		System.out.println("controller3");
 		System.out.println(listVO);
 		System.out.println("controller4");		
@@ -355,11 +405,11 @@ public class GroundController {
 	@RequestMapping("groundScheduleDetail.do")
 	public String groundScheduleDetail(String scheduleNo,Model model,HttpSession session) {
 		System.out.println(scheduleNo);
-		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");		
 		ScheduleVO scheduleVO = new ScheduleVO();
 		scheduleVO.setScheduleNo(scheduleNo);
-		ScheduleVO svo = groundService.findGroundScheduleByScheduleNo(scheduleVO);
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		model.addAttribute("participation",groundService.ParticipationBoolean(memberVO, scheduleNo));
 		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));	
 		model.addAttribute("scheduleParticipationMember",groundService.scheduleParticipationMember(groundVO,scheduleNo));
 		return "ground/home/ground-schedule-detail.tiles";
@@ -371,9 +421,10 @@ public class GroundController {
 	}
 	@PostMapping("updateGroundSchedule.do")
 	public String updateGroundSchedule(ScheduleVO scheduleVO) {
-		System.out.println("************"+scheduleVO);
+		System.out.println("ct1.************"+scheduleVO);
 		groundService.updateGroundSchedule(scheduleVO);
-		return "redirect:groundScheduleDetail.do";
+		System.out.println("ct2.********");
+		return "redirect:groundScheduleList.do";
 	}
 	
 	@PostMapping("deleteGroundSchedule.do")
@@ -398,6 +449,14 @@ public class GroundController {
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		groundService.scheduleParticipation(scheduleNo, memberVO, groundVO);
 		return "redirect:groundScheduleList.do";
+	}
+	
+	@RequestMapping("groundPicture.do")
+	public String groundPicture(HttpSession session,Model model) {
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
+		List<PostVO> postList = groundService.groundPicture(groundVO);
+		model.addAttribute("postList",postList);
+		return "ground/home/ground-picture.tiles";
 	}
  
 }
