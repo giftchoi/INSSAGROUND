@@ -149,6 +149,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateGroundNotice" parameterType="noticeVO">
 		update notice set content=#{content} where notice_no=#{noticeNo}
 	</update>
+	<insert id="insertGroundPost" parameterType="postVO" >
+	<selectKey keyProperty="postNo" resultType="string" order="BEFORE">
+		select ground_post_seq.nextval from dual
+	</selectKey>
+		insert into ground_post(post_no,title,content,id,ground_no) values(#{postNo},#{title},#{content},#{insiderVO.memberVO.id},#{insiderVO.groundNo})
+	</insert>
+	<insert id="insertPostImg" parameterType="map">
+		insert into post_img(img_no,img_name,post_no) values(post_img_seq.nextVal,#{imgName},#{postNo})
+	</insert>
 
 	<!--DOHYEONG -->
 	<select id="getAllSido" resultType="sidoVO">

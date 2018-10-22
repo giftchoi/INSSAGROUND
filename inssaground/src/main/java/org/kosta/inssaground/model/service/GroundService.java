@@ -68,6 +68,7 @@ public interface GroundService {
 	public List<PostVO> groundPicture(GroundVO groundVO);
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
+	public void registerGroundPost(PostVO postVO);
 	
 	
 	
