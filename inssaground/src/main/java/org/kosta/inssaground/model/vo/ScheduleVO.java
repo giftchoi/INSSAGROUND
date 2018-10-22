@@ -9,6 +9,7 @@ public class ScheduleVO {
 	private String content;
 	private int maxPersonnel;
 	private String position;
+	private int currPersonnel;
 	private InsiderVO insiderVO;
 	private GroundVO groundVO;
 	public ScheduleVO() {
@@ -59,6 +60,22 @@ public class ScheduleVO {
 		this.content = content;
 		this.maxPersonnel = maxPersonnel;
 		this.position = position;
+		this.insiderVO = insiderVO;
+		this.groundVO = groundVO;
+	}
+	
+	public ScheduleVO(String scheduleNo, String startDate, String endDate, String title, String loc, String content,
+			int maxPersonnel, String position, int currPersonnel, InsiderVO insiderVO, GroundVO groundVO) {
+		super();
+		this.scheduleNo = scheduleNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.title = title;
+		this.loc = loc;
+		this.content = content;
+		this.maxPersonnel = maxPersonnel;
+		this.position = position;
+		this.currPersonnel = currPersonnel;
 		this.insiderVO = insiderVO;
 		this.groundVO = groundVO;
 	}
@@ -124,12 +141,21 @@ public class ScheduleVO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
+	public int getCurrPersonnel() {
+		return currPersonnel;
+	}
+	public void setCurrPersonnel(int currPersonnel) {
+		this.currPersonnel = currPersonnel;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleVO [scheduleNo=" + scheduleNo + ", startDate=" + startDate + ", endDate=" + endDate + ", title="
 				+ title + ", loc=" + loc + ", content=" + content + ", maxPersonnel=" + maxPersonnel + ", position="
-				+ position + ", insiderVO=" + insiderVO + ", groundVO=" + groundVO + "]";
+				+ position + ", currPersonnel=" + currPersonnel + ", insiderVO=" + insiderVO + ", groundVO=" + groundVO
+				+ "]";
 	}
+	
 	
 	
 }

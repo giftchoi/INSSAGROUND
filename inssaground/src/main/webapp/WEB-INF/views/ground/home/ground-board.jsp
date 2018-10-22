@@ -13,9 +13,12 @@
 	<tr>
 		<td colspan="3" style="text-align:right"><i id="postBtn"class="material-icons button edit">글쓰기</i></td>
 	</tr>
-<%-- 	<c:forEach items="${}" var="">
-		<tr>
-			<th>#</th><th></th><th>등록일시</th>
+			<tr>
+			<th>글 제목</th><th>등록일시</th>
 		</tr>
-	</c:forEach> --%>
+	<c:forEach items="${requestScope.listVO.list}" var="post" >
+	<tr>
+		<td><a href="groundPostDetail.do?postNo=${post.postNo }">${post.title }</a></td><td>${post.timePosted }</td>
+	</tr>
+	</c:forEach>
 </table>

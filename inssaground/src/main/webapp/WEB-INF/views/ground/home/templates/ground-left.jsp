@@ -24,7 +24,7 @@
 			<span class="lnr lnr-user"></span>
 		</p>
 		<p class="date col-lg-12 col-md-12 col-6">
-			<a href="groundPost.do">자유게시판</a> <span class="lnr lnr-calendar-full"></span>
+			<a href="groundPost.do?groundNo=${sessionScope.ground.groundNo}">자유게시판</a> <span class="lnr lnr-calendar-full"></span>
 		</p>
 		<p class="view col-lg-12 col-md-12 col-6">
 			<a href="groundMemberList.do">INSSA MEMBER</a> <span class="lnr lnr-eye"></span>

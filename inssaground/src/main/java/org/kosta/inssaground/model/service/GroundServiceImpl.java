@@ -116,11 +116,7 @@ public class GroundServiceImpl implements GroundService {
 		return null;
 	}
 
-	@Override
-	public void registerGroundSchedule(ScheduleVO scheduleVO) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public void deleteGroundSchedule(ScheduleVO scheduleVO) {
@@ -319,6 +315,10 @@ public class GroundServiceImpl implements GroundService {
 		map.put("pagingBean",pagingBean);
 		List<ScheduleVO> list = groundMapper.grouondScheduleList(map);
 		ListVO<ScheduleVO> listVO = new ListVO<ScheduleVO>(pagingBean,list);
+		for(int i=0;i<listVO.getList().size();i++) {
+			listVO.getList().get(i).setCurrPersonnel(groundMapper.scheduleCurrPersonnel(listVO.getList().get(i).getScheduleNo()));
+		}
+		System.out.println(listVO);
 		return listVO;
 	}
 
@@ -384,6 +384,45 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public List<PostVO> groundPicture(GroundVO groundVO) {		
 		return groundMapper.groundPicture(groundVO);
+	}
+
+	@Override
+	public int ParticipationBoolean(MemberVO memberVO, String scheduleNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberVO",memberVO);
+		map.put("scheduleNo",scheduleNo);
+		return groundMapper.ParticipationBoolean(map);
+	}
+
+	
+
+	public void registerGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		groundMapper.insertGroundPost(postVO);
+		List<String> picList = postVO.getPictureList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("postNo", postVO.getPostNo());
+		for(int i=0;i<picList.size();i++) {			
+			map.put("imgName", picList.get(i));
+			groundMapper.insertPostImg(map);
+		}
+			
+	}
+
+
+	@Override
+	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage) {
+		int postCount = groundMapper.getTotalGroundPostCount(groundNo);
+		PagingBean pagingBean = new PagingBean(postCount,Integer.parseInt(nowPage));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingBean", pagingBean);
+		map.put("groundNo", groundNo);
+		return new ListVO<PostVO>(pagingBean,groundMapper.getAllGroundPostList(map));
+	}
+
+	@Override
+	public PostVO findPostByPostNo(String postNo) {
+		return groundMapper.findPostByPostNo(postNo);
 	}
 
 	
