@@ -298,7 +298,6 @@ $(document).ready(function() {
 						내 게임프로그램 확인폼
 						</a>
 
-
 						<script type="text/javascript">
 							$(document).ready(function() {
 								$("#registerGameProgramForm").submit(function() {
