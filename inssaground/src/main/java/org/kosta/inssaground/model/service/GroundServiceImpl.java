@@ -183,7 +183,8 @@ public class GroundServiceImpl implements GroundService {
 		String date2 = scheduleVO.getEndDate().replace("T"," ");
 		scheduleVO.setStartDate(date);
 		scheduleVO.setEndDate(date2);
-		System.out.println("*********"+scheduleVO+"*****************");
+		System.out.println("s*********"+scheduleVO+"*****************"+scheduleVO.getStartDate()+" "+scheduleVO.getEndDate()+" "
+		+scheduleVO.getStartDate().length());
 		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
@@ -378,6 +379,11 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 	public List<PostVO> newPost(String groundNo) {		
 		return groundMapper.newPost(groundNo);
+	}
+
+	@Override
+	public List<PostVO> groundPicture(GroundVO groundVO) {		
+		return groundMapper.groundPicture(groundVO);
 	}
 
 	

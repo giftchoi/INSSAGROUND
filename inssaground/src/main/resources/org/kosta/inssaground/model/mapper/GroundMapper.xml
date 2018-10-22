@@ -252,7 +252,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<update id="updateGroundSchedule" parameterType="scheduleVO">		
-		update schedule set title=#{title},max_personnel=#{maxPersonnel},start_date=to_date(#{startDate},'yyyy-mm-dd hh24:mi'),end_date=to_Date(#{endDate},'yyyy-mm-dd hh24:mi'),content=#{content},loc=#{loc} where schedule_no=#{scheduleNo}
+		update schedule 
+		set title=#{title},
+		max_personnel=#{maxPersonnel},
+		start_date=to_date(#{startDate},'yyyy-mm-dd hh24:mi'),
+		end_date=to_date(#{endDate},'yyyy-mm-dd hh24:mi'),
+		content=#{content},
+		loc=#{loc} 
+		where schedule_no=#{scheduleNo}
 	</update>
 	
 	<resultMap type="insiderVO" id="insiderRM">
@@ -291,6 +298,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ground_no=#{value} and rnum between
 		1 and 2 order by
 		post_no desc
+	</select>
+	
+	<resultMap type="postVO" id="postVORM">
+		<result column="id" property="insiderVO.memberVO.id"/>
+	</resultMap>
+	<select id="groundPicture" parameterType="groundVO" resultMap="postVORM">
+		select i.img_name as pictureList,p.id,to_char(time_posted,'yyyy-mm-dd') as timePosted,p.post_no
+		from ground_post p,post_img i
+		where p.post_no=i.post_no
+		and ground_no=#{groundNo};
 	</select>
 	
 	<!-- JISUN -->
