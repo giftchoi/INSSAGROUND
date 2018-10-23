@@ -506,6 +506,12 @@ public class GroundServiceImpl implements GroundService {
 		groundMapper.withdrawGround(map);
 	}
 
+	@Override
+	public List<GroundVO> getHotGroundList() {
+		// TODO Auto-generated method stub
+		return groundMapper.getHotGroundList();
+	}
+
 
 	
 
