@@ -414,5 +414,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into
 		insider(ground_no,id,attendance,status) values(#{groundNo},#{id},0,1)
 	</insert>
+	<select id="getTotalmyScheduleList" resultType="int">
+		select count(*) from PARTICIPANT where id=#{value}
+	</select>
+	<select id="getScheduleList" >
+		SELECT sch.* FROM(
+		SELECT row_number() over(order by p.schedule_no desc) as rnum,
+			p.ground_no, ground_name, master
+		FROM PARTICIPANT p, schedule s  where p.schedule_no = s.schedule_no and p.id=#{id}
+		) sch
+		where rnum between #{startRowNumber} and
+		#{endRowNumber}
+		order by sch.schedule_no desc
+	</select>
 </mapper>
  

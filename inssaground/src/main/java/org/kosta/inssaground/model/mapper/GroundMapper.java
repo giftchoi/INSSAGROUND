@@ -1,5 +1,6 @@
 package org.kosta.inssaground.model.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ public interface GroundMapper {
 	List<String> getPicListByPostNo(String postNo);// 게시글 이미지리스트 가져오기
 	void updateGroundPost(PostVO postVO);	// 게시글 수정
 	void deleteAllPostImg(String postNo);	// 게시물 사진 업데이트를 위해 기존 리스트 삭제
+	void deletePostByPostNo(String postNo);
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -72,30 +74,24 @@ public interface GroundMapper {
 	int ParticipationBoolean(Map<String,Object> map);
 	int scheduleCurrPersonnel(String scheduleNo);
 	void addAttendance(Map<String,Object> map);
+
 	int groundMemberPostCount(Map<String,String> map);
 	int groundMemberAttendance(Map<String,String> map);
 	int groundMemberScheduleCount(Map<String,String> map);
 	int groundMemberParticipationCount(Map<String,String> map);
 	void withdrawGround(Map<String,String> map);
 	void withdrawinsider(String id);
-	/*JISUN*/	
+
+
+
+	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
 	List<String> getHashtagList(String groundNo);
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-	void deletePostByPostNo(String postNo);
-
-
+	int getTotalmyScheduleList();
+	List<ScheduleVO> getScheduleList(Map<String,Object> map);
 	
-
-
-
-
-
-
-
-
-
 }

@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="col-sm-10 offset-1">
-
 		<div class="col-lg-12 posts-list">
 			<div class="single-post row">
 				<div class="col-lg-12">
