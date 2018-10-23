@@ -323,14 +323,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="newNotice" parameterType="groundVO" resultType="noticeVO">
-		select * from notice where ground_no=#{groundNo} and notice_no=(select max(notice_no) from notice)
+		select * from notice where notice_no=(select max(n.notice_no) from( select notice_no from notice where ground_no=#{groundNo}) n)
 	</select>
 	<select id="newPost" resultMap="postVORM">
 		select post_no,title,content,id,timePosted,ground_no
 		from (
 		select row_number() over(order by post_no desc) as
 		rnum,post_no,title,content,id,to_char(time_posted,'yyyy-mm-dd hh24:mi') as timePosted,ground_no
-		from ground_post )
+		from ground_post where ground_no=#{value})
 		where ground_no=#{value} and rnum between
 		1 and 2 order by
 		post_no desc
@@ -374,7 +374,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from participant where ground_no=#{groundNo} and id=#{id}
 	</select>
 	
-	<update id="withdrawGround.do" parameterType="map">
+	<update id="withdrawGround" parameterType="map">
 		update insider set status=3 where id=#{id} and ground_no=#{groundNo}
 	</update>
 	

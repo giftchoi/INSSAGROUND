@@ -37,12 +37,8 @@
 		</div>
 	</div>
 	<div class="row ground-detail-content">
-		<div class="col-sm-3">
-			<img
-				src="${pageContext.request.contextPath }/resources/image/testImg.jpg"
-				width="150" height="150">
-		</div>
-		<div class="col-sm-9">
+
+		<div class="col-sm-10 offset-1">
 			<div class="row ground-detail-title">
 				<div class="col-sm-12">
 					<h3>${groundVO.groundName }</h3>
