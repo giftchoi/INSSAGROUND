@@ -407,23 +407,17 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
 	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
-		System.out.println("1. "+scheduleVO);
 		String date = scheduleVO.getStartDate().replace("T"," ");
 		String date2 = scheduleVO.getEndDate().replace("T"," ");
-		System.out.println(date);
-		System.out.println(date2);
 		scheduleVO.setStartDate(date);
 		scheduleVO.setEndDate(date2);
-		System.out.println("2. "+groundVO);
-		System.out.println("3. "+insiderVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");		
 		insiderVO.setMemberVO(mvo);		
 		groundVO.setGroundNo(gvo.getGroundNo());		
 		scheduleVO.setInsiderVO(insiderVO);		
 		scheduleVO.setGroundVO(groundVO);		
-		System.out.println(scheduleVO);		
-		groundService.registergroundschedule(scheduleVO);
+		groundService.registergroundschedule(scheduleVO,gvo,mvo);
 		System.out.println("**7");
 		return "redirect:groundScheduleList.do";
 	}

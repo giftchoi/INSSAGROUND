@@ -267,8 +267,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="registergroundschedule" parameterType="scheduleVO">
+	<selectKey keyProperty="scheduleNo" resultType="string" order="BEFORE">
+		select schedule_seq.nextval from dual
+	</selectKey>
 		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
-		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
+		values(#{scheduleNo},to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
 	</insert>
 
 	<resultMap type="scheduleVO" id="scheduleVORM">
