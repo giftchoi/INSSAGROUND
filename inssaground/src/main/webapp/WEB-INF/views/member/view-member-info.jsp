@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
- <div class="row">
-  <div class="col-sm-3">
-  	<sec:authorize access="hasRole('ROLE_MEMBER')">
-	<ul>
-		<li><a  href="loginForm.do">MY GROUND</a></li>
-		<li><a href="registerForm.do">MY SCHEDULE</a></li>
-		<li><a href="registerForm.do">MY GAME PROGRAM</a></li>
-		<li><a href="modifyMemberForm.do">EDIT MY INFO</a></li>
-		</ul>
-	</sec:authorize>
-  </div>
-  <div class="col-sm-9">
   <div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">회원정보보기</h1>
@@ -40,5 +28,3 @@
 				</div>
 		</div>
 	</div>
-  </div>
-</div>

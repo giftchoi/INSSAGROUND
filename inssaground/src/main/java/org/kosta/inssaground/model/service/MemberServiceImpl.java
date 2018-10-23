@@ -78,6 +78,7 @@ public class MemberServiceImpl implements MemberService {
 		for(int i=0;i<list.size();i++) {
 			String groundNo=String.valueOf(list.get(i).get("GROUNDNO"));
 			GroundVO groundVO=groundMapper.findGroundByGroundNo(groundNo);
+			list.get(i).put("groundNo",groundNo);
 			list.get(i).put("groundName", groundVO.getGroundName());
 			HobbyVO hobby=hobbyMapper.findHobbyByHobbyNo(groundVO.getHobby());
 			list.get(i).put("hobby",hobby.getName());

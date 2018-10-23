@@ -155,6 +155,7 @@ public class MemberController {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		ListVO<ScheduleVO> myScheduleList = memberService.myScheduleList(mvo.getId(),pageNo);
 		model.addAttribute("myScheduleList",myScheduleList);
+		System.out.println(myScheduleList.getList().get(0));
 		return "member/mySchedule-list.tiles";
 	}
 }

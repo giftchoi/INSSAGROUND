@@ -447,7 +447,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from PARTICIPANT where id=#{value}
 	</select>
  	<resultMap type="scheduleVO" id="scheduleGNRM">
-		<result column="groundName" property="groundVO.groundName"/>
+		<result column="ground_name" property="groundVO.groundName"/>
 	</resultMap>
 	<select id="getScheduleList" parameterType="map" resultMap="scheduleGNRM">
 		SELECT sch.* FROM(
