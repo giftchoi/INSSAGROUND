@@ -294,7 +294,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="findGroundScheduleByScheduleNo" parameterType="scheduleVO" resultMap="scheduleRM">
-		select content,to_char(end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(start_date,'YYYY-MM-DD pm hh:mi') as startDate,ground_no,id,loc,max_personnel,schedule_no,title,position
+		select content,to_char(end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(start_date,'YYYY-MM-DD pm hh:mi') as startDate,ground_no,id,loc,max_personnel,schedule_no,title
 		from schedule where schedule_no=#{scheduleNo}
 	</select>
 
