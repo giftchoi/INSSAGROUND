@@ -270,6 +270,19 @@ pre{
 	color:#ff1a1a;
 	background-color : #f1f1f1;
 }
+
+.btn-white {
+	margin-bottom:4px !important;
+	font-size: 18px !important;
+	color:#777;
+	background-color : #fff;
+	border : 1px solid #777;
+}
+.btn-white  a{
+	color: #777;
+	text-decoration: none;
+}
+
 .ground-detail-content{
 	margin:20px;
 
@@ -349,6 +362,45 @@ li a:hover{
 .search-list-area{
 	
 }
+.table .simpleTable{
+	font-size: 1.2em !important;
+	font-family: "Poppins",sans-serif !important;
+} 
+
+.table.simpleTable a{
+	font-weight:200;
+	color: #000;
+} 
+
+.table.simpleTable a:hover{
+	color: #ff1a1a;
+} 
+.table.simpleTable thead tr th{
+	font-family: "Poppins",sans-serif !important;
+	font-size: 20px;
+	color : #777;
+	text-align:left;
+}
+
+.table.simpleTable thead tr{
+	font-family: "Poppins",sans-serif !important;
+	font-size: 20px;
+	text-align:center;
+	
+}
+.table.simpleTable tbody tr{
+		font-family: "Poppins",sans-serif !important;
+	font-size: 18px;
+	color : #777;
+	text-align:center;
+	
+}
+
+.table.simpleTable .center th,td{
+	text-align:center;
+}
+
+
 
 /* css for flat table */
 table.myTable  {
@@ -356,7 +408,7 @@ table.myTable  {
   line-height: 40px;
   border-collapse: separate;
   border-spacing: 0;
-  border: 2px solid #ff1a1a;
+  border: 2px solid #777;
   width: 700px;
   margin: 50px auto;
   padding:10px;
@@ -365,7 +417,7 @@ table.myTable  {
   color:#000;
 }
 .myTable  thead tr:first-child {
-  background: #ff1a1a;
+  background: #777;
   color: #fff ;
   border: none;
 }

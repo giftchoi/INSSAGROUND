@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <!-- include summernote css/js -->
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
@@ -10,7 +10,9 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
  
 <script>
+	
 	$(document).ready(function() {
+		
 		$('#summernote').summernote({
 			placeholder : '게시글 내용을 입력해주세요',
 			lang : 'ko-KR',
@@ -35,9 +37,11 @@
 				}
 			}
 		});
-		$('#summernote').summernote('justifyLeft');
-
-		$("#registerBtn").click(function() {
+		//$('#summernote').summernote('justifyLeft');
+		//$('#summernote').summernote('code', ${postVO.content});
+		//alert("${postVO.content}");
+		
+		$("#updateBtn").click(function() {
 			var markupStr = $('#summernote').summernote('code');
 			$("#postForm").find(":input[name=content]").val(markupStr);
 			//alert(	$("#postForm").find(":input[type=hidden]").val());
@@ -75,26 +79,29 @@
 </script>
 <h3>게시글 작성</h3>
 <br>
-<form id="postForm" action="groundPostRegister.do" method="post">
+<form id="postForm" action="groundPostUpdate.do" method="post">
 	<sec:csrfInput />
 	<table>
 		<tbody>
 			<tr>
 				<td>제목</td>
 				<td><input type="text" name="title" required="required"
-					size="50" maxlength="50"></td>
+					size="50" maxlength="50" value="${postVO.title }"></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<div id="summernote"></div>
+					<div id="summernote">${postVO.content }</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input id="registerBtn" type="button"
-					value="등록"></td>
+				<td colspan="2"><input id="updateBtn" type="button"
+					value="수정"></td>
 			</tr>
 		</tbody>
 	</table>
 	<input type="hidden" name="content" required="required">
-	<input type="hidden"	name = "insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
+	<input type="hidden"	name = "postNo" value="${postVO.postNo}">
+	<c:forEach items="${postVO.pictureList }" var="pic">
+		<input type="hidden" name="pictureList" value="${pic }">
+	</c:forEach>
 </form>

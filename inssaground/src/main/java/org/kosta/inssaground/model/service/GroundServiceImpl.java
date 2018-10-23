@@ -1,10 +1,12 @@
 package org.kosta.inssaground.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
@@ -422,8 +424,49 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public PostVO findPostByPostNo(String postNo) {
-		return groundMapper.findPostByPostNo(postNo);
+		PostVO postVO = groundMapper.findPostByPostNo(postNo);
+		postVO.setPictureList(groundMapper.getPicListByPostNo(postNo));
+		return postVO;
 	}
+
+	@Override
+	public void updateGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		groundMapper.updateGroundPost(postVO);
+		groundMapper.deleteAllPostImg(postVO.getPostNo());
+		List<String> picList = postVO.getPictureList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("postNo", postVO.getPostNo());
+		for(int i=0;i<picList.size();i++) {			
+			map.put("imgName", picList.get(i));
+			groundMapper.insertPostImg(map);
+		}
+	}
+
+
+	public void addAttendance(String groundNo,String id,List<String> attendance) {
+		if(attendance.contains(groundNo)) {
+			
+		}else {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("groundNo",groundNo);
+			map.put("id",id);
+			attendance.add(groundNo);		
+			groundMapper.addAttendance(map);					
+		}
+		
+		
+		
+	}
+
+	@Override
+	public void deleteGroundPost(PostVO postVO) {
+		// TODO Auto-generated method stub
+		
+		groundMapper.deleteAllPostImg(postVO.getPostNo());
+		groundMapper.deletePostByPostNo(postVO.getPostNo());
+	}
+
 
 	
 

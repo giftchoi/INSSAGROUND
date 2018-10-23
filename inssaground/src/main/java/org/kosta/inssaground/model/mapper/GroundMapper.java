@@ -37,8 +37,9 @@ public interface GroundMapper {
 	int getTotalGroundPostCount(String groundNo);
 	List<PostVO> getAllGroundPostList(Map<String,Object> map);
 	PostVO findPostByPostNo(String postNo);	//게시글 상세
-	
-	
+	List<String> getPicListByPostNo(String postNo);// 게시글 이미지리스트 가져오기
+	void updateGroundPost(PostVO postVO);	// 게시글 수정
+	void deleteAllPostImg(String postNo);	// 게시물 사진 업데이트를 위해 기존 리스트 삭제
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -70,6 +71,7 @@ public interface GroundMapper {
 	List<PostVO> groundPicture(GroundVO groundVO);
 	int ParticipationBoolean(Map<String,Object> map);
 	int scheduleCurrPersonnel(String scheduleNo);
+	void addAttendance(Map<String,Object> map);
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
@@ -77,6 +79,11 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
+	void deletePostByPostNo(String postNo);
+
+
+	
+
 
 
 
