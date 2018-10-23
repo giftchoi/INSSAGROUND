@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 <script>
 	$(document)
 			.ready(
@@ -152,15 +154,20 @@
 				$("#resultTable").append("</tr><tr>");
 			var elements = '<td><div class="card ground"><input type="hidden" name="groundNo"value="'+groundList[i].groundNo+'">'
 					+ '<div class="card-ground-title">'
-					+ groundList[i].groundName
-					+ '</div><div class="row card-ground-body">'
-					+ '<div class="col-sm-6 master-profile">'
+					+ groundList[i].groundName.substring(0,15);
+			if(groundList[i].groundName.length>15){
+				elements+='...';
+			}
+					
+					elements+='</div>'
+					+ '<div class="row card-ground-body">'
+					+ '<div class="col-sm-5 master-profile">'
 					+ '<img src="${pageContext.request.contextPath}/resources/uploadImage/'
 					+ imgName
 					+ '" width="100%" height="85%">'
 					+ '<div class="master-id"><i class="fa fa-flag"></i><span class="info-span"> '
 					+ groundList[i].master
-					+ '</span></div></div><div class="col-sm-6 ground-info"><i class="fa fa-map-marker fa-4x"></i>'
+					+ '</span></div></div><div class="col-sm-7 ground-info"><i class="fa fa-map-marker fa-4x"></i>'
 					+ ' <span class="info-span">'
 					+ groundList[i].area
 					+ '</span><br> <i class="fa fa-users fa-3x"></i>'
@@ -219,7 +226,7 @@
 				<hr>
 			</div>
 			<div class="search-list-area">
-				<table id="resultTable" cellpadding="10">
+				<table id="resultTable" cellpadding="20">
 					<tr>
 						<c:forEach items="${listVO.list }" var="ground" varStatus="info">
 							<c:choose>
@@ -234,9 +241,10 @@
 								<div class="card ground">
 									<input type="hidden" name="groundNo"
 										value="${ground.groundNo }">
-									<div class="card-ground-title">${ground.groundName }</div>
+									<div class="card-ground-title">${fn:substring(ground.groundName,0,20)}<c:if
+								test="${fn:length(ground.groundName)>20 }">...</c:if></div>
 									<div class="row card-ground-body">
-										<div class="col-sm-6 master-profile">
+										<div class="col-sm-5 master-profile">
 											<img
 												src="${pageContext.request.contextPath}/resources/uploadImage/${imgName}"
 												width="100%" height="85%">
@@ -245,7 +253,7 @@
 													${ground.master}</span>
 											</div>
 										</div>
-										<div class="col-sm-6 ground-info">
+										<div class="col-sm-7 ground-info">
 											<i class="fa fa-map-marker fa-4x"></i> <span
 												class="info-span"> ${ground.area }</span><br> <i
 												class="fa fa-users fa-3x"></i> <span class="info-span">${ground.participants}/${ground.maxPersonnel }</span>

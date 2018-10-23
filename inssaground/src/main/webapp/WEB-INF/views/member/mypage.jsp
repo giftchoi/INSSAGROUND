@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
  <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-  <table class="myTable">
+<div class="col-sm-8 offset-2">
+  <table class="table simpleTable">
   <thead>
     <tr>
-      <th colspan="4">MY GROUND</th>
+      <th style="font-size:25px;"colspan="4">MY GROUND</th>
     </tr>
-    <tr>
+    <tr class="center">
       <th>HOBBY</th>
       <th>GROUND NAME</th>
       <th>STATUS</th>
@@ -33,3 +34,4 @@
   </c:forEach>
   </tbody>
 </table>
+</div>

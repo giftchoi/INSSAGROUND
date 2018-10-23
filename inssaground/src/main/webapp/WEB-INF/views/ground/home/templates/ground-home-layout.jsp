@@ -11,8 +11,7 @@
      <tiles:insertAttribute name="title" ignore="true"></tiles:insertAttribute>
  </title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  
+ 
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR" rel="stylesheet">
  
   <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resources/css/layout.css" >
@@ -52,7 +51,7 @@
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">							
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">				
-			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+			<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"> --%>
   
 <style type="text/css">
 

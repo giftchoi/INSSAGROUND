@@ -3,6 +3,8 @@ package org.kosta.inssaground.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.kosta.inssaground.model.vo.GroundVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
@@ -59,7 +61,14 @@ public interface GroundService {
 	public InsiderVO groundHomeInsider(String id,String groundNo);
 	public GroundVO groundHashtag2(GroundVO groundVO);
 	public void scheduleParticipation(String scheduleNo,MemberVO memberVO,GroundVO groundVO);
-
+	public void registerGroundPost(PostVO postVO);
+	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage);
+	public PostVO findPostByPostNo(String postNo);
+	public void updateGroundPost(PostVO postVO);
+	public void deleteGroundPost(PostVO postVO);
+	
+	
+	
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO);
 	public ListVO<ScheduleVO> groundSchedulePagingBean(GroundVO groundVO,String pageNo);
 	public List<MemberVO> scheduleParticipationMember(GroundVO groundVO,String scheduleNo);
@@ -67,13 +76,11 @@ public interface GroundService {
 	public List<PostVO> newPost(String groundNo);
 	public List<PostVO> groundPicture(GroundVO groundVO);
 	public int ParticipationBoolean(MemberVO memberVO,String scheduleNo);
+	public void addAttendance(String groundNo,String id,List<String> attendance);
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
-	public void registerGroundPost(PostVO postVO);
-	public ListVO<PostVO> getAllGroundPostList(String groundNo,String nowPage);
-	public PostVO findPostByPostNo(String postNo);
-	
+
 	
 	
 

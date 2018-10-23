@@ -8,7 +8,152 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+<script>
 
+$(document).ready(function() {
+	$("#programcard1").click(function() {
+		// alert($("#oGameNo1").text());
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo1").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 /* str+="</td><td><i class='material-icons button'>cancel</i></td>"; */
+                 str+="</td><td></td>";
+                 str+="</tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard2").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo2").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 str+="</td><td></td>";
+                 str+="</tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard3").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo3").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 str+="</td><td></td>";
+                 str+="</tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard4").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo4").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 str+="</td><td></td>";
+                 str+="</tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard5").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo5").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 str+="</td><td></td>";
+                 str+="</tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard6").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo6").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="</td><td>";
+                 str+=gvo.title;
+                 str+="</td><td>";
+                 str+="";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+});
+</script>
 
 <!-- container-fluid: 화면 너비와 상관없이 항상 100% -->
 <div class="col-sm-12">
@@ -30,20 +175,25 @@
 									style="margin-bottom: 0px;">사용자</a></li>
 							</ul>
 						</div>
-						<div class="card-body" style="overflow:scroll; height:670px;">
+						<div class="card-body" style="overflow: scroll; height: 650px;">
 							<div class="game-post-area">
 								<c:forEach items="${requestScope.officialGameLvo.list }"
-									var="ogvo">
+									var="ogvo" varStatus="no">
+									<div id="programcard${no.count }" class="card game programcard">
 
-									<div class="card game programcard"
-										onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
 										<div class="card-header">
-											<h3>${ogvo.title }</h3>
+											<h4 id="gametitle${no.count }">${ogvo.title }</h4>
 										</div>
+
 										<div class="card-body">
-											<h5 style="font-family: serif; text-align: center;">준비물:
-												${ogvo.materials }</h5>
+											<h5 id="oGameNo${no.count }"
+												style="font-family: serif; text-align: center;">${ogvo.oGameNo }</h5>
+											<i class="material-icons"> <a
+												href="${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}"
+												style="font-size: 20px; color: red">open_in_new</a>
+											</i>
 										</div>
+
 										<div class="rowgamefooter">
 											<div class="col-sm-6" align="left">
 												<h5 style="font-family: serif; text-align: left;">${ogvo.gameTime}
@@ -98,11 +248,12 @@
 					<form
 						action="${pageContext.request.contextPath}/registerGameProgram.do"
 						method="post" id="registerGameProgramForm">
-						<table class="myTable">
+
+						<table id="gameprogramlist" class="myTable gameprogramme">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>
-									<th colspan="2"><input type="text" name="programNo"
+									<th colspan="2"><input type="text" name="programName"
 										style="background-color: #ff1a1a; width: 100%;"
 										required="required"></th>
 
@@ -114,60 +265,52 @@
 								</tr>
 							</thead>
 							<tbody>
+
+								<!-- 항목 들어갈데 -->
+
+								<tr id="endgameprogram"></tr>
 								<tr>
-									<td>1</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr></tr>
-								<tr>
-								<td colspan="3">
-						<i class="material-icons button delete">
-						<input type="reset" value="delete"  style="background-color:transparent;  border:0px transparent solid;">
-						</i>
-								</td>
+									<td colspan="3"><i class="material-icons button delete">
+											<input type="reset" value="delete"
+											style="background-color: transparent; border: 0px transparent solid;">
+									</i></td>
 								</tr>
 							</tbody>
-							
-						</table>
-						
-						
-					</form>
 
+						</table>
+
+					</form>
 
 					<div class="btnArea">
 						<!-- <button form="registerGameProgramForm"
 							style="font-size: 24px; background-color: transparent; border: 0px transparent solid;">
 							<i class="fa fa-pencil"></i>
 						</button> -->
-						<button form="registerGameProgramForm" class="btn btn-danger btn-lg" style="font-size: 26px;">
-          				<span class="glyphicon glyphicon-check"></span> 등록
-        				</button>
-        				
-        				<br><br><br>
-						<button onclick="resultGameProgram()">내 게임프로그램 확인폼</button>
+						<button form="registerGameProgramForm"
+							class="btn btn-danger btn-lg" style="font-size: 26px;">
+							<span class="glyphicon glyphicon-check"></span> 등록
+						</button>
+
+						<br>
+						<br>
+						<br>
+						<a href="${pageContext.request.contextPath}/resultGameProgramTest.do">
+						내 게임프로그램 확인폼
+						</a>
 
 						<script type="text/javascript">
 							$(document).ready(function() {
 								$("#registerGameProgramForm").submit(function() {
+									JSONObject gameProgramObject = new JSONObject();
+									for(var i=0; i<10; i++){
+										gameProgramObject.put
+									}
 									return confirm("게임 프로그램을 등록하시겠습니까?")
 								});
 							});
-							function resultGameProgram(){
-								location.href="${pageContext.request.contextPath}/resultGameProgramTest.do"
-							}
+
 						</script>
-						
+
 					</div>
 				</div>
 			</div>

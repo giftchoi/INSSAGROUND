@@ -37,6 +37,11 @@
 			hashtag += $("#ht").val()+"</span><input type='hidden' name='hashtag' value='"+$("#ht").val()+"'>";
 			$("#hashtag-section").append(hashtag);			
 		});//click
+		
+		$("[type='number']").keypress(function (evt) {
+		    evt.preventDefault();
+		});
+		
 	}); //ready
 </script>
 <div class="col-sm-12 main-content">
@@ -80,7 +85,7 @@
 				</div>
 				
 				<div class="input-container">
-					최대인원 <input type="number" name="maxPersonnel" >
+					최대인원 <input  style="size:50px;width:90%;"type="number" name="maxPersonnel" min="10" max="100" step="10">
 				</div>
 
 				<div class="input-container">
@@ -89,9 +94,10 @@
 				</div>
 				
 				<div class="input-container">
-					해시태그
-					<input type="text"  name="hashtag2" id="ht">
-					<input type="button"  value="넣기" id="hashBtn">
+					해시태그<br>
+					<input style="size:50px;width:90%;"type="text"  name="hashtag2" id="ht" onkeypress="">
+					<a id="hashBtn"class="btn btn-red">넣기</a>
+					<!-- <input  class="btn btn-grey" type="button"  value="넣기" id="hashBtn"> -->
 					<div id="hashtag-section"></div>
 				</div>
 				

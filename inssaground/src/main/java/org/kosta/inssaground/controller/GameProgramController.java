@@ -3,11 +3,13 @@ package org.kosta.inssaground.controller;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.service.GameService;
+import org.kosta.inssaground.model.vo.OfficialGameVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GameProgramController {
@@ -34,5 +36,12 @@ public class GameProgramController {
 	public String resultGameProgramTest(Model model) {
 		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
 		return "game-program/result.tiles";
+	}
+	
+	@RequestMapping("getLeftGameByGameNo.do")
+	@ResponseBody
+	public OfficialGameVO getLeftGameByGameNo(String oGameNo) {
+		OfficialGameVO ovo = gameService.getOfficialGameDetail(oGameNo);
+		return ovo;
 	}
 }

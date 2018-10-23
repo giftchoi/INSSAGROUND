@@ -105,7 +105,7 @@
     }
 </script>
 <!--  -->				
-			<input type="hidden" name="position" id="address" >
+			
 	
 				<div>
 				<input type="submit" class="btn btn-red" value="등록하기" id="regBtn"><br>
