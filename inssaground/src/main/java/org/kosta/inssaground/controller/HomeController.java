@@ -3,6 +3,7 @@ package org.kosta.inssaground.controller;
 import javax.annotation.Resource;
 
 import org.kosta.inssaground.model.service.GameService;
+import org.kosta.inssaground.model.service.GroundService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController { 
 	@Resource
-	GameService gameService;
+	private GameService gameService;
+	@Resource
+	private GroundService groundService;
 	
 	@RequestMapping("home.do")
 	public String home(Model model) {
 		//System.out.println("추천별 게임 확인:" +  gameService.getCustomGameOrderByRecommendation());
 		//model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
+		//model.addAttribute("groundList",groundService.getHotGroundList());
+		
 		return "home.tiles";
 	}
 	@RequestMapping("aboutus.do")

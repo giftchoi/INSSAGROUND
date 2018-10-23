@@ -29,7 +29,7 @@
 									<tr>
 										<td>${list.scheduleNo}</td>
 										<td><a href="">${list.title}</a></td>
-										<td>${list.insiderVO.memberVO.id}</td>
+										<td>${list.insiderVO.memberVO.id}</td>	
 										<td>${list.currPersonnel}/${list.maxPersonnel}</td>
 
 										<td>

@@ -42,6 +42,8 @@ public interface GroundMapper {
 	void updateGroundPost(PostVO postVO);	// 게시글 수정
 	void deleteAllPostImg(String postNo);	// 게시물 사진 업데이트를 위해 기존 리스트 삭제
 	void deletePostByPostNo(String postNo);
+	void updatePostHits(String postNo);	//게시물 조회수 증가
+	List<GroundVO> getHotGroundList();// 홈화면 추천 모임 
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -81,7 +83,7 @@ public interface GroundMapper {
 	int groundMemberParticipationCount(Map<String,String> map);
 	void withdrawGround(Map<String,String> map);
 	void withdrawinsider(String id);
-
+	ScheduleVO newSchedule(String groundNo);
 
 
 	/*JISUN*/
@@ -91,7 +93,7 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-	int getTotalmyScheduleList();
+	int getTotalmyScheduleList(String id);
 	List<ScheduleVO> getScheduleList(Map<String,Object> map);
-	
+
 }

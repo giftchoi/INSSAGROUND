@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ListVO<ScheduleVO> myScheduleList(String id,String pageNo) {
-		int totalCount=groundMapper.getTotalmyScheduleList();
+		int totalCount=groundMapper.getTotalmyScheduleList(id);
 		PagingBean pagingBean=null;
 		if(pageNo==null) { 
 			pagingBean=new PagingBean(totalCount);

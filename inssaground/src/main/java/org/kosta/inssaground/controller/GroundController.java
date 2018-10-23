@@ -360,6 +360,7 @@ public class GroundController {
 			attendance=(List<String>)session.getAttribute("attendance");			
 		}
 		groundService.addAttendance(gvo.getGroundNo(),mvo.getId(),attendance);
+		model.addAttribute("schedule",groundService.newSchedule(gvo.getGroundNo()));
 		session.setAttribute("attendance",attendance);
 		model.addAttribute("picture",groundService.groundPicture(groundVO));
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
@@ -379,6 +380,9 @@ public class GroundController {
 		model.addAttribute("listVO",groundService.getAllGroundPostList(groundNo,nowPage));
 		return "ground/home/ground-board.tiles";
 	}
+	
+	@Transactional
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPostDetail.do")
 	public String groundPost(String postNo, Model model) {
 		PostVO postVO = groundService.findPostByPostNo(postNo); 
@@ -403,23 +407,17 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
 	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
-		System.out.println("1. "+scheduleVO);
 		String date = scheduleVO.getStartDate().replace("T"," ");
 		String date2 = scheduleVO.getEndDate().replace("T"," ");
-		System.out.println(date);
-		System.out.println(date2);
 		scheduleVO.setStartDate(date);
 		scheduleVO.setEndDate(date2);
-		System.out.println("2. "+groundVO);
-		System.out.println("3. "+insiderVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");		
 		insiderVO.setMemberVO(mvo);		
 		groundVO.setGroundNo(gvo.getGroundNo());		
 		scheduleVO.setInsiderVO(insiderVO);		
 		scheduleVO.setGroundVO(groundVO);		
-		System.out.println(scheduleVO);		
-		groundService.registergroundschedule(scheduleVO);
+		groundService.registergroundschedule(scheduleVO,gvo,mvo);
 		System.out.println("**7");
 		return "redirect:groundScheduleList.do";
 	}
@@ -516,6 +514,8 @@ public class GroundController {
 	public String withdrawGround(String groundNo) {
 		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
 		groundService.withdrawGround(memberVO.getId(), groundNo);
+		//세션의 모임정보 변경
+		memberVO.setGroundNoList(memberService.myGroundNoList(memberVO.getId()));
 		return "redirect:home.do";
 	}
  

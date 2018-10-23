@@ -264,8 +264,9 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public void registergroundschedule(ScheduleVO scheduleVO) {
+	public void registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,MemberVO memberVO) {		
 		groundMapper.registergroundschedule(scheduleVO);
+		scheduleParticipation(scheduleVO.getScheduleNo(), memberVO, groundVO);
 	}
 	public void participateGround(String groundNo) {
 		Map<String,String> map = new HashMap<String,String>();
@@ -422,6 +423,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public PostVO findPostByPostNo(String postNo) {
+		groundMapper.updatePostHits(postNo);
 		PostVO postVO = groundMapper.findPostByPostNo(postNo);
 		postVO.setPictureList(groundMapper.getPicListByPostNo(postNo));
 		return postVO;
@@ -503,6 +505,15 @@ public class GroundServiceImpl implements GroundService {
 		map.put("id",id);
 		map.put("groundNo",groundNo);
 		groundMapper.withdrawGround(map);
+	}
+
+	@Override
+	public ScheduleVO newSchedule(String groundNo) {		
+		return groundMapper.newSchedule(groundNo);
+	}
+	public List<GroundVO> getHotGroundList() {
+		// TODO Auto-generated method stub
+		return groundMapper.getHotGroundList();
 	}
 
 

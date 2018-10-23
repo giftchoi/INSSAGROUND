@@ -55,7 +55,7 @@ public interface GroundService {
 	public void groundHashtag(String tags[],GroundVO groundVO);
 	public void registergroundImg(GroundVO groundVO);
 	public GroundVO findGroundByGroundNo(GroundVO groundVO);
-	public void registergroundschedule(ScheduleVO scheduleVO);
+	public void registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,MemberVO memberVO);
 	public MemberVO groundHomeMember(String id);
 	public String groundHomeProfile(String id);
 	public InsiderVO groundHomeInsider(String id,String groundNo);
@@ -82,9 +82,11 @@ public interface GroundService {
 	public int groundMemberScheduleCount(String id,String groundNo);
 	public int groundMemberParticipationCount(String id,String groundNo);
 	public void withdrawGround(String id,String groundNo);
+	public ScheduleVO newSchedule(String groundNo);
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
+	public List<GroundVO> getHotGroundList();
 
 	
 	

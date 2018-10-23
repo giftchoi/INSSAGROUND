@@ -7,33 +7,23 @@
 	<table class="table simpleTable" style="table-layout:fixed;">
 		<thead>
 			<tr>
-				<th style="font-size:25px;"colspan="4">MY GROUND</th>
+				<th style="font-size:25px;"colspan="4">MY SCHEDULE</th>
 			</tr>
 			<tr class="center">
-				<th>HOBBY</th>
-				<th colspan="2">GROUND NAME</th>
-				<th style="width:50px;">STATUS</th>
+				<th></th>
+				<th>GROUND</th>
+				<th colspan="2">TITLE</th>
+				<th>TIME</th>
+				<th>LOCATION</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${myGround}" var="ground">
+			<c:forEach items="${myScheduleList.list}" var="mySch">
 				<tr>
-					<td>${ground.hobby}</td>
-					<c:choose>
-						<c:when test="${ground.STATUS==0}">
-							<td>${ground.groundName}</td>
-							<td>참여 대기중</td>
-						</c:when>
-						<c:when test="${ground.STATUS==3}">
-							<td>${ground.groundName}</td>
-							<td>탈퇴</td>
-						</c:when>
-						<c:otherwise>
-							<td><a
-								href="applyGroundDetail.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
-							<td>활동 중</td>
-						</c:otherwise>
-					</c:choose>
+					<td>${mySch.groundVO.groundName}</td>
+					<td><a href="groundScheduleDetail.do?scheduleNo=${mySch.scheduleNo}">${mySch.title}</a></td>
+							<td>${mySch.startDate} ~ ${mySch.endDate}</td>
+							<td>${mySch.loc}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

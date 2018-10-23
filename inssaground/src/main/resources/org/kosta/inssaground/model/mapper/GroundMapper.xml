@@ -183,6 +183,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deletePostByPostNo">
 		delete from ground_post where post_no=#{postNo}
 	</delete>
+	<update id="updatePostHits">
+		update ground_post set hits=hits+1 where post_no=#{value}
+	</update>
+	<select id="getHotGroundList" resultMap="groundRM">
+	select * from ground where ground_no in (select ground_no
+	from(
+	select ground_no, rank() over (order by score desc) as rank
+	from (
+	select a.ground_no, a.cnt+b.cnt as score
+	from (select g.ground_no,count(post_no) as cnt
+	from ground g left join ground_post p on g.ground_no=p.ground_no where
+	status=1
+	group by g.ground_no) a,
+	(select ground_no, count(id) as cnt
+	from insider
+	group by ground_no) b
+	where a.ground_no=b.ground_no
+	) ) where rank between 1 and 5)
+	</select>
+	
 	
 	
 	
@@ -247,8 +267,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="registergroundschedule" parameterType="scheduleVO">
-		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel,position)
-		values(schedule_seq.nextval,to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
+	<selectKey keyProperty="scheduleNo" resultType="string" order="BEFORE">
+		select schedule_seq.nextval from dual
+	</selectKey>
+		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
+		values(#{scheduleNo},to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
 	</insert>
 
 	<resultMap type="scheduleVO" id="scheduleVORM">
@@ -274,7 +297,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="findGroundScheduleByScheduleNo" parameterType="scheduleVO" resultMap="scheduleRM">
-		select content,to_char(end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(start_date,'YYYY-MM-DD pm hh:mi') as startDate,ground_no,id,loc,max_personnel,schedule_no,title,position
+		select content,to_char(end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(start_date,'YYYY-MM-DD pm hh:mi') as startDate,ground_no,id,loc,max_personnel,schedule_no,title
 		from schedule where schedule_no=#{scheduleNo}
 	</select>
 
@@ -382,6 +405,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		udpate insider set status=3 where id=#{value}
 	</update>
 	
+	<resultMap type="scheduleVO" id="sch">
+		<result column="id" property="insiderVO.memberVO.id"/>
+	</resultMap>
+	<select id="newSchedule" resultMap="sch">
+		select schedule_no,to_char(start_date,'yyyy-mm-dd pm hh:mi') as startDate,to_char(end_date,'yyyy-mm-dd pm hh:mi') as endDate,title,loc,content,max_personnel,id
+			from schedule where schedule_no=(select max(s.schedule_no) from( select schedule_no from schedule where ground_no=#{value}) s)
+	</select>
+	
+	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">
 		select count(*)
@@ -417,15 +449,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotalmyScheduleList" resultType="int">
 		select count(*) from PARTICIPANT where id=#{value}
 	</select>
-	<select id="getScheduleList" >
+ 	<resultMap type="scheduleVO" id="scheduleGNRM">
+		<result column="groundName" property="groundVO.groundName"/>
+	</resultMap>
+	<select id="getScheduleList" parameterType="map" resultMap="scheduleGNRM">
 		SELECT sch.* FROM(
 		SELECT row_number() over(order by p.schedule_no desc) as rnum,
-			p.ground_no, ground_name, master
-		FROM PARTICIPANT p, schedule s  where p.schedule_no = s.schedule_no and p.id=#{id}
+			to_char(s.end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(s.start_date,'YYYY-MM-DD pm hh:mi') as startDate,g.ground_name,s.loc,s.schedule_no,s.title
+		FROM PARTICIPANT p, schedule s,ground g  where p.schedule_no = s.schedule_no and p.id=#{id} and g.ground_no=p.ground_no
 		) sch
-		where rnum between #{startRowNumber} and
-		#{endRowNumber}
+		where rnum between #{pagingBean.startRowNumber} and
+		#{pagingBean.endRowNumber}
 		order by sch.schedule_no desc
-	</select>
+	</select> 
 </mapper>
  
