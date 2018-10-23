@@ -291,7 +291,7 @@
                                     </div>
                                 </div>	                                             				
 							</div> -->
-							
+						
 							<table>
 								<c:forEach items="${picture}" var="post">
 								<c:forEach items="${post.pictureList }" var="pic">
@@ -333,4 +333,5 @@
 
 				</div>	
 			<!-- End post-content Area --> --%>
+							
 </div>

@@ -66,7 +66,7 @@
 				<a href="#"><img class="img-fluid" src="img/blog/ads-banner.jpg"
 					alt=""></a>
 			</div>
-			<div class="single-sidebar-widget post-category-widget">
+			<!-- <div class="single-sidebar-widget post-category-widget">
 				<h4 class="category-title">Post Catgories</h4>
 				<ul class="cat-list">
 					<li><a href="#" class="d-flex justify-content-between">
@@ -98,7 +98,7 @@
 							<p>44</p>
 					</a></li>
 				</ul>
-			</div>
+			</div> -->
 			<!-- <div class="single-sidebar-widget newsletter-widget">
 									<h4 class="newsletter-title">Newsletter</h4>
 									<p>

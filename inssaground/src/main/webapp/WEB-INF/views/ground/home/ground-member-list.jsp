@@ -18,7 +18,7 @@
 	 <c:forEach items="${memberList}" var="list" varStatus="info">
       <tr>
       		<td>${info.count }</td>
-      		<td>${list.memberVO.name }</td>
+      		<td><a href="memberInfo.do?id=${list.memberVO.id}">${list.memberVO.name }</a></td>
       		<td>${list.memberVO.id }</td>
  			<td>${list.memberVO.email }</td>
     	</tr>

@@ -169,6 +169,11 @@ public class GroundController {
 					}
 				}		
 		
+		return "redirect:result.do";
+	}
+	
+	@RequestMapping("result.do")
+	public String groundApplyResult() {
 		return "ground/ground-apply-result.tiles";
 	}
 	/**
@@ -360,9 +365,11 @@ public class GroundController {
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
 		model.addAttribute("notice",groundService.newNotice(groundVO));
 		session.setAttribute("mvo",mvo);
-		model.addAttribute("insiderVO",insiderVO);
+		session.setAttribute("insiderVO",insiderVO);
+		//model.addAttribute("insiderVO",insiderVO);
 		session.setAttribute("ground",gvo);
-		model.addAttribute("gvo",gvo);
+		session.setAttribute("gvo",gvo);
+		//model.addAttribute("gvo",gvo);
 		return "ground/home/ground-home.tiles";
 	}
 	
@@ -486,6 +493,30 @@ public class GroundController {
 		List<PostVO> postList = groundService.groundPicture(groundVO);
 		model.addAttribute("postList",postList);
 		return "ground/home/ground-picture.tiles";
+	}
+	
+	@RequestMapping("memberInfo.do")
+	public String memberInfo(String id,HttpSession session,Model model) {
+		/* 게시물수
+		 *  출석수
+		 *  스케줄 등록수 
+		 *  스케줄 참여 횟수
+		 */
+		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		model.addAttribute("memberVO",memberVO);
+		model.addAttribute("post",groundService.groundMemberPostCount(id,groundVO.getGroundNo()));
+		model.addAttribute("schedule",groundService.groundMemberScheduleCount(id,groundVO.getGroundNo()));
+		model.addAttribute("participation",groundService.groundMemberParticipationCount(id,groundVO.getGroundNo()));
+		model.addAttribute("attendance",groundService.groundMemberAttendance(id, groundVO.getGroundNo()));
+		return "ground/home/ground-member-info.tiles";
+	}
+	
+	@PostMapping("withdrawGround.do")
+	public String withdrawGround(String groundNo) {
+		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		groundService.withdrawGround(memberVO.getId(), groundNo);
+		return "redirect:home.do";
 	}
  
 }
