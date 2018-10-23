@@ -264,8 +264,9 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public void registergroundschedule(ScheduleVO scheduleVO) {
+	public void registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,MemberVO memberVO) {		
 		groundMapper.registergroundschedule(scheduleVO);
+		scheduleParticipation(scheduleVO.getScheduleNo(), memberVO, groundVO);
 	}
 	public void participateGround(String groundNo) {
 		Map<String,String> map = new HashMap<String,String>();
