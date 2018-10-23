@@ -91,6 +91,6 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-	int getTotalmyScheduleList();
+	int getTotalmyScheduleList(String id);
 	List<ScheduleVO> getScheduleList(Map<String,Object> map);
 }
