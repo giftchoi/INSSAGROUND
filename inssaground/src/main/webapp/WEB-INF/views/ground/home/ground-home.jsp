@@ -50,7 +50,7 @@
 		<div class="col-sm-10 offset-1">
 			<img class="img-fluid"
 				src="${pageContext.request.contextPath}/resources/uploadImage/${gvo.groundImgVO.imgName}"
-				alt="">
+				height="250px" width="90%"alt="">
 		</div>
 	</div>
 	<div class="row inssaInfoArea">
