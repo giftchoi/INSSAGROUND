@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="col-lg-12 sidebar-widgets">
-
-
 	<div class="widget-wrap">
 		<!-- 	<div class="single-sidebar-widget search-widget">
 									<form class="search-form" action="#">
@@ -66,7 +65,7 @@
 				<a href="#"><img class="img-fluid" src="img/blog/ads-banner.jpg"
 					alt=""></a>
 			</div>
-			<div class="single-sidebar-widget post-category-widget">
+			<!-- <div class="single-sidebar-widget post-category-widget">
 				<h4 class="category-title">Post Catgories</h4>
 				<ul class="cat-list">
 					<li><a href="#" class="d-flex justify-content-between">
@@ -98,7 +97,7 @@
 							<p>44</p>
 					</a></li>
 				</ul>
-			</div>
+			</div> -->
 			<!-- <div class="single-sidebar-widget newsletter-widget">
 									<h4 class="newsletter-title">Newsletter</h4>
 									<p>
@@ -122,10 +121,10 @@
 									</p>								
 								</div> -->
 			<div class="single-sidebar-widget tag-cloud-widget">
-				<h4 class="tagcloud-title">Tag Clouds</h4>
+				<h4 class="tagcloud-title">해시 태그</h4>
 				<ul>
 					<c:forEach items="${gvo.tagList}" var="list">
-					<li><a href="#">${list}</a></li>
+					<li><a style="font-size:15px;" href="#">#${list}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

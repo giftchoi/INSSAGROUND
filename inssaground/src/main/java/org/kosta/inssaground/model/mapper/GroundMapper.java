@@ -75,6 +75,15 @@ public interface GroundMapper {
 	int scheduleCurrPersonnel(String scheduleNo);
 	void addAttendance(Map<String,Object> map);
 
+	int groundMemberPostCount(Map<String,String> map);
+	int groundMemberAttendance(Map<String,String> map);
+	int groundMemberScheduleCount(Map<String,String> map);
+	int groundMemberParticipationCount(Map<String,String> map);
+	void withdrawGround(Map<String,String> map);
+	void withdrawinsider(String id);
+
+
+
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);

@@ -68,7 +68,7 @@ public class MemberServiceImpl implements MemberService {
 		String id=vo.getId();
 		memberMapper.deleteProfileIMG(id);
 		memberMapper.revokeRole(id);
-		// 인싸이더에서 상태값 변경도 해줘야 댐
+		groundMapper.withdrawinsider(id);
 		memberMapper.changeMemberStatus(id);
 	}
 

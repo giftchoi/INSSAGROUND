@@ -170,11 +170,11 @@ html{
 	font-size: 24px;
 	font-weight: 100;
 }
-.input-container input[type=text],.input-container input[type=password]{
+.input-container input[type=text],.input-container input[type=password],.input-container input[type=email]{
 	border-bottom: 1px solid black;
 }
 
-.input-container input[type=text]:focus,.input-container input[type=password]:focus  {
+.input-container input[type=text]:focus,.input-container input[type=password]:focus,.input-container input[type=email]:focus  {
 	border-bottom: 1px solid #ff1a1a;
 }
 .c-footer a {
@@ -262,7 +262,7 @@ pre{
 	background-color : #ff1a1a;
 }
 .btn-red  a{
-	color: white;
+	color: white !important;
 	text-decoration: none;
 }
 .btn-grey{
