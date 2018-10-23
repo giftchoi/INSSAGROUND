@@ -1,7 +1,7 @@
 package org.kosta.inssaground.model.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -86,9 +86,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ListVO<ScheduleVO> myScheduleList(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListVO<ScheduleVO> myScheduleList(String id,String pageNo) {
+		int totalCount=groundMapper.getTotalmyScheduleList();
+		PagingBean pagingBean=null;
+		if(pageNo==null) { 
+			pagingBean=new PagingBean(totalCount);
+		}else {
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", id);
+		map.put("pagingBean", pagingBean);
+		return new ListVO<ScheduleVO>(pagingBean,groundMapper.getScheduleList(map));
 	}
 
 	@Override
@@ -157,7 +166,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public void reportGround(ReportVO reportVO) {
-		//System.out.println(reportVO);
 		memberMapper.reportGround(reportVO);
 	}
 }

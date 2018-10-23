@@ -1,5 +1,6 @@
 package org.kosta.inssaground.model.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,7 @@ public interface GroundMapper {
 	List<PostVO> groundPicture(GroundVO groundVO);
 	int ParticipationBoolean(Map<String,Object> map);
 	int scheduleCurrPersonnel(String scheduleNo);
+	
 	/*JISUN*/
 	int getTotalApplyGroundList();
 	List<GroundVO> getApplyGroundList(PagingBean pagingBean);
@@ -77,12 +79,6 @@ public interface GroundMapper {
 	void permitGround(String groundNo);
 	void rejectGround(String groundNo);
 	void insertInsider(Map<String,String> map);
-
-
-
-
-
-
-
-
+	int getTotalmyScheduleList();
+	List<ScheduleVO> getScheduleList(Map<String,Object> map);
 }
