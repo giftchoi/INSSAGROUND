@@ -84,5 +84,4 @@ public interface GroundMapper {
 	void insertInsider(Map<String,String> map);
 	int getTotalmyScheduleList();
 	List<ScheduleVO> getScheduleList(Map<String,Object> map);
-	
 }
