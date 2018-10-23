@@ -27,7 +27,7 @@
       <td>${ground.groundName}</td>
       <td>탈퇴함</td> 
       </c:when>
-      <c:otherwise> <td><a href="applyGroundDetail.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
+      <c:otherwise> <td><a href="ground-home.do?groundNo=${ground.groundNo}">${ground.groundName}</a></td>
       <td>참여 중</td></c:otherwise>
       </c:choose>
     </tr>

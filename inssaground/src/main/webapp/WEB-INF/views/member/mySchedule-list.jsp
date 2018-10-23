@@ -10,9 +10,8 @@
 				<th style="font-size:25px;"colspan="4">MY SCHEDULE</th>
 			</tr>
 			<tr class="center">
-				<th></th>
 				<th>GROUND</th>
-				<th colspan="2">TITLE</th>
+				<th>TITLE</th>
 				<th>TIME</th>
 				<th>LOCATION</th>
 			</tr>
