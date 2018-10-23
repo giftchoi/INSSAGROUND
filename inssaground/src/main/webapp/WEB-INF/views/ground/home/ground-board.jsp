@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="col-sm-10 offset-1">
+<div class="col-sm-12">
 
 	<table class="table simpleTable" style="table-layout:fixed;">
 		<thead>
@@ -17,7 +17,6 @@
 			</tr>
 		</thead>
 		<tbody>
-
 			<c:forEach items="${requestScope.listVO.list}" var="post">
 				<tr>
 					<td colspan="2"><a href="groundPostDetail.do?postNo=${post.postNo }">${post.title }</a></td>

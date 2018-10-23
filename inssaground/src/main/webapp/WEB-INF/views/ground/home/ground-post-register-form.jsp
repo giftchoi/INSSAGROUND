@@ -37,13 +37,23 @@
 		});
 		$('#summernote').summernote('justifyLeft');
 
-		$("#registerBtn").click(function() {
+		
+		$("#postForm").submit(function(){
+			var markupStr = $('#summernote').summernote('code');
+			if(markupStr.length==0){ 
+				alert("내용을 입력해주세요.");
+				return false;				
+			}
+			$("#postForm").find(":input[name=content]").val(markupStr);
+		});
+		
+		
+/* 		$("#registerBtn").click(function() {
 			var markupStr = $('#summernote').summernote('code');
 			$("#postForm").find(":input[name=content]").val(markupStr);
 			//alert(	$("#postForm").find(":input[type=hidden]").val());
 			$("#postForm").submit();
-
-		});//click
+		});//click */
 	});
 
 	function sendFiles(file, el) {
@@ -73,28 +83,29 @@
 		});
 	}
 </script>
+<div class="col-sm-10 offset-1">
 <h3>게시글 작성</h3>
 <br>
 <form id="postForm" action="groundPostRegister.do" method="post">
 	<sec:csrfInput />
-	<table>
+	<table class="table simpleTable">
 		<tbody>
-			<tr>
+			<tr class="center">
 				<td>제목</td>
 				<td><input type="text" name="title" required="required"
 					size="50" maxlength="50"></td>
 			</tr>
-			<tr>
+			<tr class="center">
 				<td colspan="2">
-					<div id="summernote"></div>
+					<div style="margin:0 auto;"id="summernote"></div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input id="registerBtn" type="button"
-					value="등록"></td>
+				<td colspan="2"><input type="submit"  value="등록"></td>
 			</tr>
 		</tbody>
 	</table>
 	<input type="hidden" name="content" required="required">
 	<input type="hidden"	name = "insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
 </form>
+</div>

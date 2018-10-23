@@ -66,7 +66,7 @@
 					<tr>
 						<th colspan="1">NOTICE</th>
 						<th style="text-align: right;"><input type="button"
-							class="btn btn-white" value="목록"></th>
+							class="btn btn-white" value="목록"  onclick="location.href='groundNoticeList.do?groundNo=${sessionScope.ground.groundNo}'"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -88,7 +88,7 @@
 					<tr>
 						<th colspan="3" >BOARD</th>
 						<th style="text-align: right;"><input type="button"
-							class="btn btn-white" value="목록"></th>
+							class="btn btn-white" value="목록" onclick="location.href='groundPost.do?groundNo=${sessionScope.ground.groundNo}'"></th>
 					</tr>
 					<tr class="center">
 						<th colspan="2" style="width:100px;">TITLE</th>
