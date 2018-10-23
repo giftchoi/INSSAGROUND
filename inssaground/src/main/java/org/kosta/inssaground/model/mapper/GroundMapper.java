@@ -83,7 +83,7 @@ public interface GroundMapper {
 	int groundMemberParticipationCount(Map<String,String> map);
 	void withdrawGround(Map<String,String> map);
 	void withdrawinsider(String id);
-
+	ScheduleVO newSchedule(String groundNo);
 
 
 	/*JISUN*/

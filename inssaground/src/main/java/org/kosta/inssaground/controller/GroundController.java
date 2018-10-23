@@ -360,6 +360,7 @@ public class GroundController {
 			attendance=(List<String>)session.getAttribute("attendance");			
 		}
 		groundService.addAttendance(gvo.getGroundNo(),mvo.getId(),attendance);
+		model.addAttribute("schedule",groundService.newSchedule(gvo.getGroundNo()));
 		session.setAttribute("attendance",attendance);
 		model.addAttribute("picture",groundService.groundPicture(groundVO));
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));

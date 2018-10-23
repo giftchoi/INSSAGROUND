@@ -506,6 +506,11 @@ public class GroundServiceImpl implements GroundService {
 		groundMapper.withdrawGround(map);
 	}
 
+	@Override
+	public ScheduleVO newSchedule(String groundNo) {		
+		return groundMapper.newSchedule(groundNo);
+	}
+
 
 	
 

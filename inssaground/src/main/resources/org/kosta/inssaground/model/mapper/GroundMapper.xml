@@ -387,6 +387,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		udpate insider set status=3 where id=#{value}
 	</update>
 	
+	<resultMap type="scheduleVO" id="sch">
+		<result column="id" property="insiderVO.memberVO.id"/>
+	</resultMap>
+	<select id="newSchedule" resultMap="sch">
+		select schedule_no,to_char(start_date,'yyyy-mm-dd pm hh:mi') as startDate,to_char(end_date,'yyyy-mm-dd pm hh:mi') as endDate,title,loc,content,max_personnel,id
+			from schedule where schedule_no=(select max(s.schedule_no) from( select schedule_no from schedule where ground_no=#{value}) s)
+	</select>
+	
+	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">
 		select count(*)

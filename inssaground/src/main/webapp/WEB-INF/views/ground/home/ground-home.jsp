@@ -81,6 +81,33 @@
 			</table>
 		</div>
 	</div>
+	
+	<div class="row boardArea">
+		<div class="col-sm-10 offset-1">
+			<table class="table simpleTable" style="table-layout:fixed;">
+				<thead>
+					<tr>
+						<th colspan="3" >SCHEDULE</th>
+						<th style="text-align: right;"><input type="button"
+							class="btn btn-white" value="목록" onclick="location.href='groundScheduleList.do'"></th>
+					</tr>
+					<tr class="center">
+						<th colspan="2" style="width:100px;">TITLE</th>
+						<th>ID</th>
+						<th>TIME</th>
+					</tr>
+				</thead>
+				<tbody>					
+						<tr>
+							<td colspan="2"><a href="#">${schedule.title}</a></td>
+							<td>${schedule.insiderVO.memberVO.id }</td>
+							<td class="right">${schedule.startDate} ~ ${schedule.endDate} </td>
+						</tr>				
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
 	<div class="row boardArea">
 		<div class="col-sm-10 offset-1">
 			<table class="table simpleTable" style="table-layout:fixed;">
