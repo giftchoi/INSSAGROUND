@@ -1,12 +1,10 @@
 package org.kosta.inssaground.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.inssaground.model.mapper.GroundMapper;
 import org.kosta.inssaground.model.mapper.HobbyMapper;
@@ -467,8 +465,45 @@ public class GroundServiceImpl implements GroundService {
 		groundMapper.deletePostByPostNo(postVO.getPostNo());
 	}
 
+	@Override
+	public int groundMemberPostCount(String id, String groundNo) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("groundNo",groundNo);
+		map.put("id",id);
+		return groundMapper.groundMemberPostCount(map);
+	}
 
-	
+	@Override
+	public int groundMemberAttendance(String id, String groundNo) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("groundNo",groundNo);
+		map.put("id",id);
+		return groundMapper.groundMemberAttendance(map);
+	}
+
+	@Override
+	public int groundMemberScheduleCount(String id, String groundNo) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("groundNo",groundNo);
+		map.put("id",id);
+		return groundMapper.groundMemberScheduleCount(map);
+	}
+
+	@Override
+	public int groundMemberParticipationCount(String id, String groundNo) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("groundNo",groundNo);
+		map.put("id",id);
+		return groundMapper.groundMemberParticipationCount(map);
+	}
+
+	@Override
+	public void withdrawGround(String id, String groundNo) {
+		Map<String,String> map =new HashMap<String,String>();
+		map.put("id",id);
+		map.put("groundNo",groundNo);
+		groundMapper.withdrawGround(map);
+	}
 
 
 	

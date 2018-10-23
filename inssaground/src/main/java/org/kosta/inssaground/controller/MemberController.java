@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.kosta.inssaground.model.service.MemberService;
+import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ReportVO;
+import org.kosta.inssaground.model.vo.ScheduleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -149,7 +151,10 @@ public class MemberController {
 	}
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("mySchedule.do")
-	public String mySchedule() {
+	public String mySchedule(String  pageNo,Model model) {
+		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ListVO<ScheduleVO> myScheduleList = memberService.myScheduleList(mvo.getId(),pageNo);
+		model.addAttribute("myScheduleList",myScheduleList);
 		return "member/mySchedule-list.tiles";
 	}
 }
