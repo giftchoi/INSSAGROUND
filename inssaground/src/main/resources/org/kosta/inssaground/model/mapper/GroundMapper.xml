@@ -183,6 +183,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deletePostByPostNo">
 		delete from ground_post where post_no=#{postNo}
 	</delete>
+	<update id="updatePostHits">
+		update ground_post set hits=hits+1 where post_no=#{value}
+	</update>
+	
+	
 	
 	
 	

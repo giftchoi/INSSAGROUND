@@ -80,8 +80,11 @@
 						<c:when test="${ground.STATUS eq 1}">
 							<a class="btn btn-red"  href="ground-home.do?groundNo=${groundVO.groundNo}">모임 홈페이지</a>
 						</c:when>
-						<c:otherwise>
+						<c:when test="${ground.STATUS eq 0} ">
 							<input class="btn btn-grey" type="button" value="참여 대기중">
+						</c:when>
+						<c:otherwise>
+							<input class="btn btn-white" type="button" value="탈퇴완료" disabled="disabled">
 						</c:otherwise>
 					</c:choose>
 						<c:set var="isInssa" value="true"/>
@@ -94,7 +97,7 @@
 						<input class="btn btn-red" id="participateBtn" type="button" value="참여신청">
 					</c:when>
 					<c:otherwise>
-						<input class="btn" id="" type="button" value="정원초과">
+						<input class="btn" id="" type="button" value="정원초과" disabled="disabled">
 					</c:otherwise>
 				</c:choose>
 

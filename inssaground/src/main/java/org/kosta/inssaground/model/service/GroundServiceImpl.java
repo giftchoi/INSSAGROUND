@@ -422,6 +422,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public PostVO findPostByPostNo(String postNo) {
+		groundMapper.updatePostHits(postNo);
 		PostVO postVO = groundMapper.findPostByPostNo(postNo);
 		postVO.setPictureList(groundMapper.getPicListByPostNo(postNo));
 		return postVO;

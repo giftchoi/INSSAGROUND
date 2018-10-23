@@ -379,6 +379,9 @@ public class GroundController {
 		model.addAttribute("listVO",groundService.getAllGroundPostList(groundNo,nowPage));
 		return "ground/home/ground-board.tiles";
 	}
+	
+	@Transactional
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPostDetail.do")
 	public String groundPost(String postNo, Model model) {
 		PostVO postVO = groundService.findPostByPostNo(postNo); 
@@ -516,6 +519,8 @@ public class GroundController {
 	public String withdrawGround(String groundNo) {
 		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
 		groundService.withdrawGround(memberVO.getId(), groundNo);
+		//세션의 모임정보 변경
+		memberVO.setGroundNoList(memberService.myGroundNoList(memberVO.getId()));
 		return "redirect:home.do";
 	}
  

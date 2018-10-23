@@ -19,6 +19,8 @@ public class HomeController {
 	public String home(Model model) {
 		//System.out.println("추천별 게임 확인:" +  gameService.getCustomGameOrderByRecommendation());
 		//model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
+		
+		
 		return "home.tiles";
 	}
 	@RequestMapping("aboutus.do")

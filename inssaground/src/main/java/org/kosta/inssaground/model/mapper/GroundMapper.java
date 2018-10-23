@@ -42,6 +42,8 @@ public interface GroundMapper {
 	void updateGroundPost(PostVO postVO);	// 게시글 수정
 	void deleteAllPostImg(String postNo);	// 게시물 사진 업데이트를 위해 기존 리스트 삭제
 	void deletePostByPostNo(String postNo);
+	void updatePostHits(String postNo);	//게시물 조회수 증가
+	
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();
@@ -93,5 +95,6 @@ public interface GroundMapper {
 	void insertInsider(Map<String,String> map);
 	int getTotalmyScheduleList();
 	List<ScheduleVO> getScheduleList(Map<String,Object> map);
+
 	
 }
