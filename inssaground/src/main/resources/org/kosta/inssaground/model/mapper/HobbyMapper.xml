@@ -3,21 +3,47 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.kosta.inssaground.model.mapper.HobbyMapper">
+<mapper
+	namespace="org.kosta.inssaground.model.mapper.HobbyMapper">
 	<select id="findHobbyByHobbyCategoryNo" resultType="hobbyVO">
-		select * from hobby where hobby_Category_No=#{value}
+		select * from
+		hobby where hobby_Category_No=#{value}
 	</select>
-	
+
 	<select id="getHobbyCategory" resultType="hobbyCategoryVO">
-		select * from hobby_category
+		select * from
+		hobby_category
 	</select>
-	
+
 	<select id="findHobbyByHobbyNo" resultType="hobbyVO">
-		select * from hobby where hobby_no=#{value}
+		select * from hobby
+		where hobby_no=#{value}
 	</select>
-	<select id="getHobbyFeatureAndHobbyFeatureNoList" resultType="FeatureVO">
+	<select id="getHobbyFeatureAndHobbyFeatureNoList"
+		resultType="FeatureVO">
 		select f.feature_no,f.name
 		from feature f
+	</select>
+	<select id="getFList" resultType="map" parameterType="map">
+		select *
+		from(
+		select h.hobby_no, rank() over(order by h.cnt desc) as rank
+		from (select hf.hobby_no, count(f.feature_no) as cnt
+		from hobby_feature hf, feature f
+		where hf.feature_no=f.feature_no and   
+		<foreach collection="ffList" item="feature" index="index" open="(" close=")" separator="or">
+			f.name=#{feature}
+		</foreach>
+		group by hf.hobby_no
+		) h
+		)
+		where rank between 1 and 3
+	</select>
+	<select id="getFListNameByResultNo" resultType="map" parameterType="map">
+		select name from hobby where
+		<foreach collection="fnlist" item="feature" index="index" open="(" close=")" separator="or">
+			hobby_no=#{feature}
+		</foreach>
 	</select>
 </mapper>
  
