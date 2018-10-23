@@ -59,11 +59,10 @@
 			</div>
 			<div class="row ground-content">
 				<div class="col-sm-12">
-					<button class="button circle">전체보기</button>
-					<button class="button circle">전체보기</button>
-					<button class="button circle">전체보기</button>
-					<button class="button circle">전체보기</button>
-					<button class="button circle">전체보기</button>
+				<c:forEach items="${groundList }" var="ground">
+						<button class="button circle">#${ground.groundNo }</button>
+				</c:forEach>
+
 				</div>
 			</div>
 		</div>

@@ -510,6 +510,10 @@ public class GroundServiceImpl implements GroundService {
 	public ScheduleVO newSchedule(String groundNo) {		
 		return groundMapper.newSchedule(groundNo);
 	}
+	public List<GroundVO> getHotGroundList() {
+		// TODO Auto-generated method stub
+		return groundMapper.getHotGroundList();
+	}
 
 
 	

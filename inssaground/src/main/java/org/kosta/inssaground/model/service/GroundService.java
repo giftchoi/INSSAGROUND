@@ -86,6 +86,7 @@ public interface GroundService {
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
+	public List<GroundVO> getHotGroundList();
 
 	
 	

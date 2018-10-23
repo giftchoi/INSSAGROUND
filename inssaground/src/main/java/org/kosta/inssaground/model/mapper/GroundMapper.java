@@ -43,7 +43,7 @@ public interface GroundMapper {
 	void deleteAllPostImg(String postNo);	// 게시물 사진 업데이트를 위해 기존 리스트 삭제
 	void deletePostByPostNo(String postNo);
 	void updatePostHits(String postNo);	//게시물 조회수 증가
-	
+	List<GroundVO> getHotGroundList();// 홈화면 추천 모임 
 	
 	/*DOHYEONG*/
 	List<SidoVO> getAllSido();

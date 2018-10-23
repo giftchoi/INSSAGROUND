@@ -186,7 +186,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatePostHits">
 		update ground_post set hits=hits+1 where post_no=#{value}
 	</update>
-	
+	<select id="getHotGroundList" resultMap="groundRM">
+	select * from ground where ground_no in (select ground_no
+	from(
+	select ground_no, rank() over (order by score desc) as rank
+	from (
+	select a.ground_no, a.cnt+b.cnt as score
+	from (select g.ground_no,count(post_no) as cnt
+	from ground g left join ground_post p on g.ground_no=p.ground_no where
+	status=1
+	group by g.ground_no) a,
+	(select ground_no, count(id) as cnt
+	from insider
+	group by ground_no) b
+	where a.ground_no=b.ground_no
+	) ) where rank between 1 and 5)
+	</select>
 	
 	
 	
