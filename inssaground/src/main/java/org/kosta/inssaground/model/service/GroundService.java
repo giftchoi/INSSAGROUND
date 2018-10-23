@@ -77,6 +77,11 @@ public interface GroundService {
 	public List<PostVO> groundPicture(GroundVO groundVO);
 	public int ParticipationBoolean(MemberVO memberVO,String scheduleNo);
 	public void addAttendance(String groundNo,String id,List<String> attendance);
+	public int groundMemberPostCount(String id,String groundNo);
+	public int groundMemberAttendance(String id,String groundNo);
+	public int groundMemberScheduleCount(String id,String groundNo);
+	public int groundMemberParticipationCount(String id,String groundNo);
+	public void withdrawGround(String id,String groundNo);
 
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);

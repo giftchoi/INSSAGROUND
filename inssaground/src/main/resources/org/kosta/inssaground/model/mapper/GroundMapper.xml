@@ -307,7 +307,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findGroundMemberListByGroundNo" parameterType="groundVO" resultMap="insiderRM">
 		select m.id,m.email,m.name,i.attendance
 		from insider i,inssa_member m
-		where i.id=m.id and i.status=1 and i.ground_no=#{groundNo}
+		where i.id=m.id and i.status=1 and i.ground_no=#{groundNo} and i.status=1
 	</select>	
 	
 	<select id="groundHomeInsider"  parameterType="insiderVO" resultType="insiderVO">
@@ -358,6 +358,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update insider set attendance=attendance+1 where ground_no=${groundNo} and id=#{id}
 	</update>
 	
+	<select id="groundMemberPostCount" resultType="int" parameterType="map">
+		select count(*) from ground_post where id=#{id} and ground_no=#{groundNo}
+	</select>
+	
+	<select id="groundMemberAttendance" resultType="int" parameterType="map">
+		select attendance from insider where id=#{id} and ground_no=#{groundNo}
+	</select>
+	
+	<select id="groundMemberScheduleCount" resultType="int" parameterType="map">
+		select count(*) from schedule where id=#{id} and ground_no=#{groundNo}
+	</select>
+	
+	<select id="groundMemberParticipationCount" resultType="int" parameterType="map">
+		select count(*) from participant where ground_no=#{groundNo} and id=#{id}
+	</select>
+	
+	<update id="withdrawGround.do" parameterType="map">
+		update insider set status=3 where id=#{id} and ground_no=#{groundNo}
+	</update>
+	
+	<update id="withdrawinsider">
+		udpate insider set status=3 where id=#{value}
+	</update>
+	
 	<!-- JISUN -->
 	<select id="getTotalApplyGroundList" resultType="int">
 		select count(*)
@@ -390,5 +414,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into
 		insider(ground_no,id,attendance,status) values(#{groundNo},#{id},0,1)
 	</insert>
+	<select id="getTotalmyScheduleList" resultType="int">
+		select count(*) from PARTICIPANT where id=#{value}
+	</select>
+	<select id="getScheduleList" >
+		SELECT sch.* FROM(
+		SELECT row_number() over(order by p.schedule_no desc) as rnum,
+			p.ground_no, ground_name, master
+		FROM PARTICIPANT p, schedule s  where p.schedule_no = s.schedule_no and p.id=#{id}
+		) sch
+		where rnum between #{startRowNumber} and
+		#{endRowNumber}
+		order by sch.schedule_no desc
+	</select>
 </mapper>
  

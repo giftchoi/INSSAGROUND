@@ -8,6 +8,7 @@ import org.kosta.inssaground.model.service.PagingBean;
 import org.kosta.inssaground.model.vo.EmailKeyVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ReportVO;
+import org.kosta.inssaground.model.vo.ScheduleVO;
 
 @Mapper
 public interface MemberMapper {

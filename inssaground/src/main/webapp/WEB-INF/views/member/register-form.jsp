@@ -81,7 +81,7 @@
 					url:"${pageContext.request.contextPath}/sendEmailAjax.do",				
 					data:"email="+email,	
 					success:function(){					
-						var input="<input type='text' name='inputKey' id='inputKey'><input type='button' class='btn-red' value='checkKey' id='checkKeyBtn'>";
+						var input="<input style='border: 1px solid #f1f1f1;'type='text' name='inputKey' id='inputKey'>&nbsp;<a id='checkKeyBtn'class='btn btn-grey'>인증번호 확인</a>";
 						$("#sendEmailKey").html(input); 
 					}//callback			
 				});
@@ -137,9 +137,10 @@
 				</div>
 				<div class="input-container">
 					이메일<br>
-					<input type="email" maxlength="30" required="required" name="email"/> 
+					<input style="size:50px;width:70%;"type="email" maxlength="30" required="required" name="email"/> 
 					<span class="right-space" id="sendEmailKey">
-						<input type="button" id="sendEmail" class="btn btn-red" value="인증번호 받기">
+					<!-- 	<input type="button" id="sendEmail" class="btn btn-grey" value="인증번호 받기"> -->
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="sendEmail" class="btn btn-grey">인증번호 받기</a>
 					</span>
 				</div>
 				<div>

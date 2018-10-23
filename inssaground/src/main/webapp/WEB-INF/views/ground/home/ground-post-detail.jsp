@@ -23,25 +23,30 @@
 	});
 </script>
 <sec:authentication var="principal" property="principal" />
-<a class="btn btn-grey"href="groundPost.do?groundNo=${sessionScope.ground.groundNo}">목록</a>
-<table class="table">
+
+<table class="table simpleTable">
+<thead>
+	<tr>
+		<th  style="text-align:left; font-size:20px;">${postVO.title }</th><th style="text-align:right;"><input type="button"
+							class="btn btn-white" value="목록" onclick="location.href='groundPost.do?groundNo=${sessionScope.ground.groundNo}'"></th>
+	</tr>
+</thead>
 <tbody>
 <tr>
-	<td style="text-align:left; font-size:20px;">${postVO.title }</td><td style="text-align:right;">${postVO.timePosted }</td>
-</tr>
-<tr>
-<td style="text-align:left;">작성자 : ${postVO.insiderVO.memberVO.id }</td><td style="text-align:right;">조회수:${postVO.hits }</td>
+<td style="text-align:left;">작성자 : ${postVO.insiderVO.memberVO.id }</td><td style="text-align:right;">${postVO.timePosted }&nbsp;&nbsp;조회수:${postVO.hits }</td>
 </tr>
 <tr>
 	<td colspan="2">${postVO.content }</td>
 </tr>
-<c:if test="${postVO.insiderVO.memberVO.id==principal.id }">
+
 <tr>
 <td colspan="2">
+<c:if test="${postVO.insiderVO.memberVO.id==principal.id }">
 	<a id="editBtn" class="btn btn-grey">수정</a>&nbsp;&nbsp;<a id="deleteBtn" class="btn btn-grey">삭제</a>
+	</c:if>
 </td>
 </tr>
-</c:if>
+
 </tbody>
 </table>
 <form id="deleteForm" action="groundPostDelete.do" method="post">

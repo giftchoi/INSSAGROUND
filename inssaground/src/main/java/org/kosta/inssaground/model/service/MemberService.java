@@ -26,7 +26,7 @@ public interface MemberService {
 	
 	public List<Map<String, String>> myGroundList(String id); // 내가 참여한 모임 보기
 
-	public ListVO<ScheduleVO> myScheduleList(String id); // 내가 참여한 모임의 일정 보기
+	public ListVO<ScheduleVO> myScheduleList(String id,String pageNo); // 내가 참여한 모임의 일정 보기
 
 	public List<String> selectAuthorityById(String id);
 

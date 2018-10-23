@@ -50,7 +50,7 @@
 		<div class="col-sm-10 offset-1">
 			<img class="img-fluid"
 				src="${pageContext.request.contextPath}/resources/uploadImage/${gvo.groundImgVO.imgName}"
-				alt="">
+				height="250px" width="90%"alt="">
 		</div>
 	</div>
 	<div class="row inssaInfoArea">
@@ -66,7 +66,7 @@
 					<tr>
 						<th colspan="1">NOTICE</th>
 						<th style="text-align: right;"><input type="button"
-							class="btn btn-white" value="목록"></th>
+							class="btn btn-white" value="목록"  onclick="location.href='groundNoticeList.do?groundNo=${sessionScope.ground.groundNo}'"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -88,7 +88,7 @@
 					<tr>
 						<th colspan="3" >BOARD</th>
 						<th style="text-align: right;"><input type="button"
-							class="btn btn-white" value="목록"></th>
+							class="btn btn-white" value="목록" onclick="location.href='groundPost.do?groundNo=${sessionScope.ground.groundNo}'"></th>
 					</tr>
 					<tr class="center">
 						<th colspan="2" style="width:100px;">TITLE</th>
@@ -291,7 +291,7 @@
                                     </div>
                                 </div>	                                             				
 							</div> -->
-							
+						
 							<table>
 								<c:forEach items="${picture}" var="post">
 								<c:forEach items="${post.pictureList }" var="pic">
@@ -333,4 +333,5 @@
 
 				</div>	
 			<!-- End post-content Area --> --%>
+							
 </div>
