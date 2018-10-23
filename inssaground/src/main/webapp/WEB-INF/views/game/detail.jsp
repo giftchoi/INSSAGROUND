@@ -19,7 +19,7 @@
 		<c:when test="${requestScope.gameType eq 'custom'}">
 
 <!-- 사용자게임 폼 -->
-<table class="myTable">
+<table class="myTable simpleTable">
   <thead>
     <tr>
       <th colspan="3">${requestScope.gvo.title }</th>

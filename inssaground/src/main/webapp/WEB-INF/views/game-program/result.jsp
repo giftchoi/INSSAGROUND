@@ -95,7 +95,7 @@
 					<form
 						action="${pageContext.request.contextPath}/updateGameProgram.do"
 						method="post" id="updateGameProgramForm">
-						<table class="myTable">
+						<table class="myTable simpleTable">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>

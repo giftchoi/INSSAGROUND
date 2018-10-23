@@ -249,7 +249,7 @@ $(document).ready(function() {
 						action="${pageContext.request.contextPath}/registerGameProgram.do"
 						method="post" id="registerGameProgramForm">
 
-						<table id="gameprogramlist" class="myTable gameprogramme">
+						<table id="gameprogramlist" class="myTable simpleTable">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>
