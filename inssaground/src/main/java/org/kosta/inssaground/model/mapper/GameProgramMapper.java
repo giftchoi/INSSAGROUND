@@ -10,6 +10,7 @@ import org.kosta.inssaground.model.vo.ProgramOfficialGameVO;
 
 @Mapper
 public interface GameProgramMapper {
+	public List<GameProgramVO> getAllGameProgram(String id);
 	public void createGameProgram(GameProgramVO gameProgramVO);
 	public void addGameInGameProgram(ProgramOfficialGameVO programOfficialGameVO);
 	public List<GameProgramVO> findGameProgramListById(String id);

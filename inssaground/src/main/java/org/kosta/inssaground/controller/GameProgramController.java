@@ -26,7 +26,15 @@ public class GameProgramController {
 	@Resource
 	private GameProgramService gameProgramService;
 
-	// 게임 프로그램
+	// 게임 프로그램	
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("myProgram.do")
+	public String myProgram(Model model) {
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("gameProgramList", gameProgramService.getAllGameProgram(mvo.getId()));
+		return "game-program/myProgram.tiles";
+	}
+	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("makeGameProgramForm.do")
 	public String makeGameProgramForm(Model model) {
