@@ -85,11 +85,11 @@ public class MemberController {
 		}
 		return "member/findpassword-result.tiles";
 	}
-	@Secured("ROLE_MEMBER")
+/*	@Secured("ROLE_MEMBER")
 	@RequestMapping("mypage.do")
 	public String mypage() {
 		return "member/mypage.tiles";
-	}
+	}*/
 	@RequestMapping("viewMemberInfo.do")
 	public String viewMemberInfo(Model model) {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -155,7 +155,6 @@ public class MemberController {
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		ListVO<ScheduleVO> myScheduleList = memberService.myScheduleList(mvo.getId(),pageNo);
 		model.addAttribute("myScheduleList",myScheduleList);
-		System.out.println(myScheduleList.getList().get(0));
 		return "member/mySchedule-list.tiles";
 	}
 }
