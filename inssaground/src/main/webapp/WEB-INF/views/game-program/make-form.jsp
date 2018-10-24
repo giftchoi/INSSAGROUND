@@ -3,157 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<script>
-
-$(document).ready(function() {
-	$("#programcard1").click(function() {
-		// alert($("#oGameNo1").text());
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo1").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 /* str+="</td><td><i class='material-icons button'>cancel</i></td>"; */
-                 str+="</td><td></td>";
-                 str+="</tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-	$("#programcard2").click(function() {
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo2").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 str+="</td><td></td>";
-                 str+="</tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-	$("#programcard3").click(function() {
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo3").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 str+="</td><td></td>";
-                 str+="</tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-	$("#programcard4").click(function() {
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo4").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 str+="</td><td></td>";
-                 str+="</tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-	$("#programcard5").click(function() {
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo5").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 str+="</td><td></td>";
-                 str+="</tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-	$("#programcard6").click(function() {
-		 $.ajax({
-             type: "get",
-             url: "getLeftGameByGameNo.do",
-             dataType:"json",
-             data: {oGameNo : $("#oGameNo6").text()},
-             success: function(gvo) {
-                 //$.trim() => 앞뒤 공백 제거
-                 //alert(gvo.title);
-                 var str="";
-                 str+="<tr><td>";
-                 str+=gvo.oGameNo;
-                 str+="</td><td>";
-                 str+=gvo.title;
-                 str+="</td><td>";
-                 str+="";
-                 str+="</td></tr>";
-                 $('#endgameprogram').before(str);
-             },
-             error: function(data) {
-                 alert("error!");
-             }
-         });
-	});
-});
-</script>
 
 <!-- container-fluid: 화면 너비와 상관없이 항상 100% -->
 <div class="col-sm-12">
@@ -248,19 +102,19 @@ $(document).ready(function() {
 					<form
 						action="${pageContext.request.contextPath}/registerGameProgram.do"
 						method="post" id="registerGameProgramForm">
-
-						<table id="gameprogramlist" class="myTable gameprogramme">
+<sec:csrfInput/>
+						<table id="gameprogramlist" class="myTable simpleTable">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>
-									<th colspan="2"><input type="text" name="programName"
+									<th colspan="2"><input type="text" name="title"
 										style="background-color: #ff1a1a; width: 100%;"
 										required="required"></th>
 
 								</tr>
 								<tr>
 									<th>설명</th>
-									<th colspan="2"><input type="text" name="title"
+									<th colspan="2"><input type="text" name="detail"
 										style="width: 100%;" required="required"></th>
 								</tr>
 							</thead>
@@ -268,16 +122,20 @@ $(document).ready(function() {
 
 								<!-- 항목 들어갈데 -->
 
+
 								<tr id="endgameprogram"></tr>
 								<tr>
-									<td colspan="3"><i class="material-icons button delete">
-											<input type="reset" value="delete"
+									<th colspan="3"><i class="material-icons button delete">
+											<input id="programReset" type="reset" value="delete"
 											style="background-color: transparent; border: 0px transparent solid;">
-									</i></td>
+									</i></th>
 								</tr>
 							</tbody>
 
 						</table>
+							<input type="hidden" id="gameNoList" name="gameNoList" value="">
+							<input type="hidden" id="gameNameList" name="gameNameList" value="">
+							
 
 					</form>
 
@@ -298,19 +156,6 @@ $(document).ready(function() {
 						내 게임프로그램 확인폼
 						</a>
 
-						<script type="text/javascript">
-							$(document).ready(function() {
-								$("#registerGameProgramForm").submit(function() {
-									JSONObject gameProgramObject = new JSONObject();
-									for(var i=0; i<10; i++){
-										gameProgramObject.put
-									}
-									return confirm("게임 프로그램을 등록하시겠습니까?")
-								});
-							});
-
-						</script>
-
 					</div>
 				</div>
 			</div>
@@ -318,3 +163,187 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
+
+
+	
+<script>
+
+$(document).ready(function() {
+	$("#programcard1").click(function() {
+		// alert($("#oGameNo1").text());
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo1").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard2").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo2").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard3").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo3").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard4").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo4").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard5").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo5").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard6").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo6").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	
+	
+	$("#registerGameProgramForm").submit(function() {
+		//alert($(".myTable td:nth-child(4n-3)").text());	//게임번호
+		//alert($(".myTable td:nth-child(4n-2)").text());	//게임이름
+		var gameNoListval = $(".myTable td:nth-child(4n-3)").text();
+		var gameNameListval = $(".myTable td:nth-child(4n-2)").text();
+		alert(gameNoListval);
+		$("#gameNoList").val(gameNoListval);
+		$("#gameNameList").val(gameNameListval);
+		alert($("#gameNameList").val());
+		return confirm("게임 프로그램을 등록하시겠습니까?");
+	});
+	
+	$("#programReset").click(function() {
+		$(".myTable td").remove();
+	});
+
+});
+
+function deleteLine(obj) {
+	//라인 삭제
+    var tr = $(obj).parent().parent().parent();
+	tr.remove();
+}
+
+</script>

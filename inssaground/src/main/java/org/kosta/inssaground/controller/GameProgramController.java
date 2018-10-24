@@ -27,17 +27,23 @@ public class GameProgramController {
 	
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registerGameProgram.do")
-	public String registerGameProgram(Model model) {
+	public String registerGameProgram(Model model,
+			String title, String detail, String gameNoList, String gameNameList) {
+		//System.out.println(title);
+		//System.out.println(detail);
+		//System.out.println(gameNoList);
+		//System.out.println(gameNameList);
 		return "game-program/result.tiles";
 	}
 	
-
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("resultGameProgramTest.do")
 	public String resultGameProgramTest(Model model) {
 		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
 		return "game-program/result.tiles";
 	}
 	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("getLeftGameByGameNo.do")
 	@ResponseBody
 	public OfficialGameVO getLeftGameByGameNo(String oGameNo) {
