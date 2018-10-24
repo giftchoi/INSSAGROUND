@@ -88,7 +88,6 @@ public class GroundController {
 		return "ground/ground-apply-form.tiles";
 	}
 	
-	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundDetail.do")
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
