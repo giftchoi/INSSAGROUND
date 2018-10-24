@@ -14,7 +14,7 @@
 }
 </style>
 <title>Insert title here</title>
-
+<div class="col-sm-12" align="center">
 	<div class="row content">
 		<div class="col-sm-8 offset-2">
 			<div class="red-outline">
@@ -28,3 +28,4 @@
 			</div>
 		</div>
 	</div>
+</div>

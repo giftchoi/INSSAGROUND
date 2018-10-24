@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.inssaground.model.service.FileUploadService;
 import org.kosta.inssaground.model.service.GroundService;
 import org.kosta.inssaground.model.service.HobbyService;
 import org.kosta.inssaground.model.service.MemberService;
@@ -39,11 +40,11 @@ public class GroundController {
 	@Resource
 	private GroundService groundService;
 	@Resource
-	private HobbyService hobbyService;
-	
+	private HobbyService hobbyService;	
 	@Resource
 	private MemberService memberService;
-	
+	@Resource
+	private FileUploadService fileUploadService;
 	/**
 	 * 전체 모임 목록을 불러오기 위한 메소드
 	 * @param model
@@ -76,7 +77,7 @@ public class GroundController {
 		if(hobby=="") hobby = null;
 		if(nowPage==null) nowPage = "1";
 		System.out.println("searchGround.... nowPage="+nowPage);
-		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);	
+		return groundService.searchGround(sido,sigungu,category,hobby,groundVO,nowPage);
 	}
 
 	@Secured("ROLE_MEMBER")
@@ -87,7 +88,7 @@ public class GroundController {
 		return "ground/ground-apply-form.tiles";
 	}
 	
-
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundDetail.do")
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
@@ -147,27 +148,18 @@ public class GroundController {
 		groundService.groundHashtag(tags,groundVO);
 		/////////////////////////////////////////////////////////////////
 		//String uploadPath=request.getSession().getServletContext().getRealPath("/resources/uploadImage/");
-				String uploadPath = System.getProperty("user.home")+"\\git\\INSSAGROUND\\inssaground\\src\\main\\webapp\\resources\\uploadImage\\";
-				File uploadDir=new File(uploadPath);
-				if(uploadDir.exists()==false)
-					uploadDir.mkdirs();
-				MultipartFile file=picture;//파일 
-				System.out.println(file+"<==");
-				//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
-				if(file!=null&&file.isEmpty()==false){
-					System.out.println("파일명:"+file.getOriginalFilename());
-					File uploadFile=new File(uploadPath+file.getOriginalFilename());
-					try {
-						file.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
-						System.out.println(uploadPath+file.getOriginalFilename()+" 파일업로드");
-						GroundImgVO givo = new GroundImgVO();
-						givo.setImgName(file.getOriginalFilename());
-						groundVO.setGroundImgVO(givo);
-						groundService.registergroundImg(groundVO);
-					} catch (IllegalStateException | IOException e) {				
-						e.printStackTrace();
-					}
-				}		
+		String fileName = null;
+		try {
+			fileName = fileUploadService.fileUpload(picture);
+		} catch (IllegalStateException | IOException e) {
+			
+			e.printStackTrace();
+		}
+		GroundImgVO givo = new GroundImgVO();
+		givo.setImgName(fileName);
+		groundVO.setGroundImgVO(givo);
+		groundService.registergroundImg(groundVO);
+			
 		
 		return "redirect:result.do";
 	}
@@ -286,37 +278,26 @@ public class GroundController {
 		groundService.updateGroundNotice(noticeVO);
 		return "redirect:groundNoticeDetail.do?noticeNo="+noticeVO.getNoticeNo();
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPostRegisterForm.do")
 	public String groundPostRegisterForm() {
 		
 		return "ground/home/ground-post-register-form.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@ResponseBody
 	@PostMapping("groundPostImgUpload.do")
 	public String uploadGroundImg(MultipartFile picture) {
-		//String uploadPath=request.getSession().getServletContext().getRealPath("/resources/uploadImage/");
-		String uploadPath = System.getProperty("user.home")+"\\git\\INSSAGROUND\\inssaground\\src\\main\\webapp\\resources\\uploadImage\\";
-		File uploadDir=new File(uploadPath);
-		if(uploadDir.exists()==false)
-			uploadDir.mkdirs();
-		
-		System.out.println(picture+"<==");
-		//System.out.println(file.isEmpty()); // 업로드할 파일이 있는 지 확인 
-		if(picture!=null&&picture.isEmpty()==false){
-			System.out.println("파일명:"+picture.getOriginalFilename());
-			File uploadFile=new File(uploadPath+picture.getOriginalFilename());
-			try {
-				picture.transferTo(uploadFile);//실제 디렉토리로 파일을 저장한다 
-				System.out.println(uploadPath+picture.getOriginalFilename()+" 파일업로드");				
-			} catch (IllegalStateException | IOException e) {				
-				e.printStackTrace();
-			}
-		}		
-		return picture.getOriginalFilename();
+		String nName = null;
+		try {
+			nName = fileUploadService.fileUpload(picture);
+		} catch (IllegalStateException | IOException e) {
+			
+			e.printStackTrace();
+		}
+		return nName;
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@Transactional
 	@PostMapping("groundPostRegister.do")
 	public String registerGroundPost(PostVO postVO) {
@@ -327,7 +308,7 @@ public class GroundController {
 		//System.out.println(postVO);
 		return "redirect:groundPostDetail.do?postNo="+postVO.getPostNo();
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPostUpdateForm.do")
 	public String groundPostUpdateForm(String postNo,Model model) {
 		PostVO postVO = groundService.findPostByPostNo(postNo); 
@@ -335,6 +316,7 @@ public class GroundController {
 		System.out.println(postVO);
 		return "ground/home/ground-post-update-form.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@Transactional
 	@PostMapping("groundPostUpdate.do")
 	public String groundPostUpdate(PostVO postVO) {	
@@ -373,7 +355,7 @@ public class GroundController {
 		//model.addAttribute("gvo",gvo);
 		return "ground/home/ground-home.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPost.do")
 	public String groundPost(Model model,String groundNo,String nowPage) {
 		if(nowPage==null) nowPage="1";
@@ -390,7 +372,7 @@ public class GroundController {
 		System.out.println(postVO);
 		return "ground/home/ground-post-detail.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@Transactional
 	@PostMapping("groundPostDelete.do")
 	public String deleteGroundPost(PostVO postVO) {
@@ -407,10 +389,6 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
 	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
-		String date = scheduleVO.getStartDate().replace("T"," ");
-		String date2 = scheduleVO.getEndDate().replace("T"," ");
-		scheduleVO.setStartDate(date);
-		scheduleVO.setEndDate(date2);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");		
 		insiderVO.setMemberVO(mvo);		
@@ -420,6 +398,7 @@ public class GroundController {
 		groundService.registergroundschedule(scheduleVO,gvo,mvo);
 		System.out.println("**7");
 		return "redirect:groundScheduleList.do";
+		
 	}
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundScheduleList.do")
@@ -438,14 +417,13 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundScheduleDetail.do")
 	public String groundScheduleDetail(String scheduleNo,Model model,HttpSession session) {
-		System.out.println(scheduleNo);
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");		
 		ScheduleVO scheduleVO = new ScheduleVO();
 		scheduleVO.setScheduleNo(scheduleNo);
 		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
 		model.addAttribute("participation",groundService.ParticipationBoolean(memberVO, scheduleNo));
 		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));	
-		model.addAttribute("scheduleParticipationMember",groundService.scheduleParticipationMember(groundVO,scheduleNo));
+		model.addAttribute("scheduleParticipationMember",groundService.scheduleParticipationMember(groundVO,scheduleNo));		
 		return "ground/home/ground-schedule-detail.tiles";
 	}
 	@Secured("ROLE_MEMBER")

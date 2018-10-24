@@ -99,7 +99,7 @@
 				</thead>
 				<tbody>					
 						<tr>
-							<td colspan="2"><a href="#">${schedule.title}</a></td>
+							<td colspan="2"><a href="groundScheduleDetail.do?scheduleNo=${schedule.scheduleNo}">${schedule.title}</a></td>
 							<td>${schedule.insiderVO.memberVO.id }</td>
 							<td class="right">${schedule.startDate} ~ ${schedule.endDate} </td>
 						</tr>				
@@ -126,7 +126,7 @@
 				<tbody>
 					<c:forEach items="${post}" var="post">
 						<tr>
-							<td colspan="2"><a href="#">${post.title}</a></td>
+							<td colspan="2"><a href="groundPostDetail.do?postNo=${post.postNo}">${post.title}</a></td>
 							<td>${post.insiderVO.memberVO.id}</td>
 							<td class="right">${post.timePosted}</td>
 						</tr>
