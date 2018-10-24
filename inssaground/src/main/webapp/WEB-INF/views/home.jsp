@@ -112,7 +112,7 @@
 
 					
 				</c:forEach>
-					<div class="overlay" style="display:none">자세히 보기</div>
+					<div class="overlay" style="display:none">상세 보기</div>
 				</div>
 			</div>
 		</div>
