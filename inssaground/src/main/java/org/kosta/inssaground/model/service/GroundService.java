@@ -49,6 +49,7 @@ public interface GroundService {
 	public void participateGround(String groundNo);	// 모임 참여하기
 	public List<MemberVO> getParticipationReadyList(String groundNo);	//모임장-모임 참여 대기 리스트 가져오기
 	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
+	public void rejectParticipation(InsiderVO insiderVO); //모임장-모임참여 거절
 	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
 	public NoticeVO getNoticeDetailByNo(String noticeNo);	//인싸 - 모임 공지 상세보기
 	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage);	

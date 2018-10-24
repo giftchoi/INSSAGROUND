@@ -183,6 +183,7 @@ public class GroundController {
 	 * @param model
 	 * @return
 	 */
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundMasterReadyList.do")
 	public String groundMasterReadyList(HttpSession session,Model model) {
 		String groundNo = ((GroundVO)session.getAttribute("ground")).getGroundNo();	//세션에 저장된 모임번호 가져오기
@@ -192,13 +193,24 @@ public class GroundController {
 		model.addAttribute("readyList",readyList);
 		return "ground/home/ground-master-ready-list.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@PostMapping("approveParticipation.do")
 	public String approveParticipation(InsiderVO insiderVO) {
 		System.out.println("groundNo:"+insiderVO.getGroundNo()+",idididid"+insiderVO.getMemberVO().getId());
 		groundService.approveParticipation(insiderVO);
-		
-		return "home.tiles";
+		return "redirect:groundMasterReadyList.do";
 	}
+	@PostMapping("rejectParticipation.do")
+	public String rejectParticipation(InsiderVO insiderVO) {
+		System.out.println(insiderVO+":참여 거절 테스트");
+		groundService.rejectParticipation(insiderVO);
+		return "redirect:groundMasterReadyList.do";
+	}
+	
+	
+	
+	
+	
 	/**
 	 *  싸장- 모임 공지 등록 폼으로 이동
 	 * @return

@@ -112,6 +112,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update insider
 		set status=1 where id=#{memberVO.id} and ground_no=#{groundNo}
 	</update>
+		<update id="rejectParticipation" parameterType="insiderVO">
+		update insider
+		set status=2 where id=#{memberVO.id} and ground_no=#{groundNo}
+	</update>
 	<insert id="registerGroundNotice" parameterType="noticeVO">
 		<selectKey keyProperty="noticeNo" resultType="string"
 			order="BEFORE">

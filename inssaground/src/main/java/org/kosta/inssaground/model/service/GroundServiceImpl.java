@@ -296,6 +296,12 @@ public class GroundServiceImpl implements GroundService {
 	public void approveParticipation(InsiderVO insiderVO) {
 		groundMapper.approveParticipation(insiderVO);
 	}
+	
+	@Override
+	public void rejectParticipation(InsiderVO insiderVO) {
+		groundMapper.rejectParticipation(insiderVO);
+		
+	}
 
 	@Override
 	public ScheduleVO findGroundScheduleByScheduleNo(ScheduleVO scheduleVO) {
@@ -533,6 +539,8 @@ public class GroundServiceImpl implements GroundService {
 		System.out.println("파일명 : "+originalName);
 		return originalName;
 	}
+
+
 
 
 	

@@ -15,15 +15,19 @@
 			form.submit();
 		});//click
 		$(".rejectBtn").click(function(){
-			
-			$("#approvalForm").attr("action","rejectParticipation.do");
-			$("#approvalForm").submit();
+			if(confirm("해당 회원의 모임 참여를 거절하시겠습니까?")){
+				var form = $("#approvalForm");
+				form.attr("action","rejectParticipation.do");
+				var id = form.find(":input[type=hidden]").eq(2);		
+				id.val($(this).parent().parent().find("#id").text());
+				form.submit();
+			}
 		});//click
 		
 	});//ready
 </script>
 
-<table class="myTable">
+<table class="table simpleTable">
 <thead>
 	<tr>
 		<th colspan="5"> 모임 참여 대기 회원 </th>
