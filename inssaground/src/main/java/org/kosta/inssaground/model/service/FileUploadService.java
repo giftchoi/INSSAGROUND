@@ -17,7 +17,6 @@ public class FileUploadService {
 		//String filename="";
 		//String uploadPath = System.getProperty("user.home")+"\\git\\INSSAGROUND\\inssaground\\src\\main\\webapp\\resources\\uploadImage\\";
 		String uploadPath = "C:\\java-kosta\\framework-workspace2\\resources\\uploadImage\\";
-		
 		File uploadDir=new File(uploadPath);
 		if(uploadDir.exists()==false)
 			uploadDir.mkdirs();

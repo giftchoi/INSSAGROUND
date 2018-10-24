@@ -22,8 +22,9 @@
 					<h1>아이디 찾기 결과</h1>
 					<span class="fa fa-check-square fa-5x"></span><br><br><br><br><br>
 					<c:forEach items="${idList}" var="id">
-						${id}
+						<h1>${id}</h1>
 					</c:forEach>
+					<br>
 					<form action="${pageContext.request.contextPath}/home.do">
 					<input class="btn btn-danger" type="submit" value="홈으로 이동">
 					</form>

@@ -3,19 +3,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-
 
 <!-- container-fluid: 화면 너비와 상관없이 항상 100% -->
 <div class="col-sm-12">
 	<div class="row main-content">
 		<div class="col-sm-12">
 			<div>
-				<h1>MY INSSA GAME PROGRAM</h1>
+				<h1>MAKE INSSA GAME PROGRAM</h1>
 			</div>
 			<br> <br>
 			<div class="row">
@@ -30,19 +29,25 @@
 									style="margin-bottom: 0px;">사용자</a></li>
 							</ul>
 						</div>
-						<div class="card-body" style="overflow:scroll; height:670px;">
+						<div class="card-body" style="overflow: scroll; height: 650px;">
 							<div class="game-post-area">
 								<c:forEach items="${requestScope.officialGameLvo.list }"
-									var="ogvo">
-									<div class="card game programcard"
-										onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
+									var="ogvo" varStatus="no">
+									<div id="programcard${no.count }" class="card game programcard">
+
 										<div class="card-header">
-											<h3>${ogvo.title }</h3>
+											<h4 id="gametitle${no.count }">${ogvo.title }</h4>
 										</div>
+
 										<div class="card-body">
-											<h5 style="font-family: serif; text-align: center;">준비물:
-												${ogvo.materials }</h5>
+											<h5 id="oGameNo${no.count }"
+												style="font-family: serif; text-align: center;">${ogvo.oGameNo }</h5>
+											<i class="material-icons"> <a
+												href="${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}"
+												style="font-size: 20px; color: red">open_in_new</a>
+											</i>
 										</div>
+
 										<div class="rowgamefooter">
 											<div class="col-sm-6" align="left">
 												<h5 style="font-family: serif; text-align: left;">${ogvo.gameTime}
@@ -76,8 +81,9 @@
 													<li class="active"><a href="#">${i}</a></li>
 												</c:otherwise>
 											</c:choose>
-										&nbsp;
-										</c:forEach>
+						&nbsp;
+						</c:forEach>
+
 										<c:if test="${pb.nextPageGroup}">
 											<li><a
 												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
@@ -87,63 +93,66 @@
 
 							</div>
 						</div>
-
 					</div>
+
+
 
 				</div>
 				<div class="col-sm-8">
 					<form
 						action="${pageContext.request.contextPath}/updateGameProgram.do"
 						method="post" id="updateGameProgramForm">
-						<table class="myTable simpleTable">
+<sec:csrfInput/>
+						<table id="gameprogramlist" class="myTable simpleTable">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>
-									<th colspan="2"><select name="programNo"
-										style="background-color: #ff1a1a; width: 100%;">
-											<option value="1">꿀잼</option>
-											<option value="2">허니잼</option>
-											<option value="3">개꿀맛잼</option>
-											<option value="4">죽을맛</option>
+									<th colspan="2">
+									<select id="programNo" name="programNo" style="background-color: #ff1a1a; width: 100%;">
+												<option value="">선택하세요--------------</option>
+											<c:forEach items="${requestScope.myGameProgramList }" var="myGameProgram">
+												<option value="${myGameProgram.programNo }">${myGameProgram.title }</option>
+											</c:forEach>
 									</select></th>
-
 								</tr>
+									
 								<tr>
 									<th>설명</th>
-									<th colspan="2">이렇게 하면 정말 재밌겠다!</th>
+									<th colspan="2"><input type="text" id="programDetail" name="detail"
+										style="width: 100%;" required="required"></th>
 								</tr>
 							</thead>
 							<tbody>
+
+								<!-- 항목 들어갈데 -->
+
+
+								<tr id="endgameprogram"></tr>
 								<tr>
-									<td>1</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Atualizar página da equipe</td>
-									<td><i class="material-icons button">cancel</i></td>
-								</tr>
-								<tr></tr>
-								<tr>
-								<td colspan="3">
-						<i class="material-icons button delete">
-						<input type="reset" value="delete"  style="background-color:transparent;  border:0px transparent solid;">
-						</i>
-								</td>
+									<th colspan="3"><i class="material-icons button delete">
+											<input id="programReset" type="reset" value="delete"
+											style="background-color: transparent; border: 0px transparent solid;">
+									</i></th>
 								</tr>
 							</tbody>
+
 						</table>
+							<input type="hidden" id="title" name="title" value="">
+							<input type="hidden" id="gameNoList" name="gameNoList" value="">
+							<input type="hidden" id="gameNameList" name="gameNameList" value="">
+							
+
 					</form>
-					<div class="row">
+					<form
+						action="${pageContext.request.contextPath}/deleteGameProgram.do"
+						method="post" id="deleteGameProgramForm">
+						<sec:csrfInput/>
+						<input type="hidden" id="deletePno" name="deletePno">
+					</form>
+				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-					
+					<%-- 
 						<table class="table">
 							<thead>
 								<tr>
@@ -165,28 +174,248 @@
 								</tr>
 							</tbody>
 						</table>
+						 --%>
 					</div>
 					<div class="col-sm-4"></div>
-					</div>
+				</div>
 
 					<div class="btnArea">
 						<button form="updateGameProgramForm" class="btn btn-light btn-lg" 
 							style="font-size: 24px;">
 							수정 <i class="fa fa-pencil"></i>
 						</button>
-
-						<script type="text/javascript">
-							$(document).ready(function() {
-								$("#updateGameProgramForm").submit(function() {
-									return confirm("게임 프로그램을 수정하시겠습니까?")
-								});
-							});
-						</script>
+						<button form="deleteGameProgramForm" class="btn btn-light btn-lg" 
+							style="font-size: 24px;">
+							삭제 <i class="material-icons">delete_sweep</i>
+						</button>
 					</div>
-					
 				</div>
 			</div>
 
 		</div>
 	</div>
 </div>
+
+
+	
+<script>
+
+$(document).ready(function() {
+	$("#programcard1").click(function() {
+		// alert($("#oGameNo1").text());
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo1").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard2").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo2").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard3").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo3").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard4").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo4").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard5").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo5").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	$("#programcard6").click(function() {
+		 $.ajax({
+             type: "get",
+             url: "getLeftGameByGameNo.do",
+             dataType:"json",
+             data: {oGameNo : $("#oGameNo6").text()},
+             success: function(gvo) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gvo.title);
+                 var str="";
+                 str+="<tr><td>";
+                 str+=gvo.oGameNo;
+                 str+="　</td><td>";
+                 str+=gvo.title;
+                 str+="　</td><td><i class='material-icons button'>";
+                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                 str+="cancel</button></i>";
+                 str+="</td></tr>";
+                 $('#endgameprogram').before(str);
+             },
+             error: function(data) {
+                 alert("error!");
+             }
+         });
+	});
+	
+	$("#programReset").click(function() {
+		$(".myTable td").remove();
+	});
+	
+	
+	$('select[name=programNo]').change(function() {
+		//alert($(this).val());
+		$(".myTable td").remove();
+		$.ajax({
+             type: "get",
+             url: "getGameProgramDetail.do",
+             dataType:"json",
+             data: {programNo : $(this).val()},
+             success: function(gameProgramList) {
+                 //$.trim() => 앞뒤 공백 제거
+                 //alert(gameProgramList);
+                 $.each(gameProgramList, function(index,value){
+                	 //alert(value.oGameNo);
+                     var str="";
+                     str+="<tr><td>";
+                     str+=value.oGameNo;
+                     str+="　</td><td>";
+                     str+=value.title;
+                     str+="　</td><td><i class='material-icons button'>";
+                     str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
+                     str+="cancel</button></i>";
+                     str+="</td></tr>";
+                     $('#endgameprogram').before(str);
+                     
+                     $("#programDetail").val(value.detail);
+                 });
+             },
+             error: function(data) {
+                 alert("불러오기error!");
+             }
+         });
+	});
+	
+	$("#updateGameProgramForm").submit(function() {
+		//alert($(".myTable td:nth-child(4n-3)").text());	//게임번호
+		//alert($(".myTable td:nth-child(4n-2)").text());	//게임이름
+		var gameNoListval = $(".myTable td:nth-child(4n-3)").text();
+		var gameNameListval = $(".myTable td:nth-child(4n-2)").text();
+		//alert(gameNoListval);
+		$("#title").val($("#programNo option:selected").text());
+		$("#gameNoList").val(gameNoListval);
+		$("#gameNameList").val(gameNameListval);
+		//alert($("#gameNameList").val());
+		return confirm("게임 프로그램을 수정하시겠습니까?");
+	});
+	$("#deleteGameProgramForm").submit(function() {
+		$("#title").val($("#programNo option:selected").text());
+		$("#deletePno").val($("#programNo").val());
+		//alert($("#deletePno").val());
+		return confirm("게임 프로그램을 삭제하시겠습니까?");
+	});
+
+});
+
+function deleteLine(obj) {
+	//라인 삭제
+    var tr = $(obj).parent().parent().parent();
+	tr.remove();
+}
+
+</script>
