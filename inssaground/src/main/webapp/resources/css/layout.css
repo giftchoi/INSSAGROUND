@@ -12,7 +12,7 @@ html{
 	box-shadow: 0 4px 5px -3px #ececec;
 	position: fixed;
 	top: 0;
-	z-index: 10;
+	z-index: 99;
 	width: 100%;
 }
 
@@ -32,14 +32,31 @@ html{
 
 .content-title {
 	padding: 30px;
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+	font-size: 25px;
+	font-weight: 400;
 }
 
 .circle {
+	display:relative !important;
+	box-shadow: none;
 	margin: 10px;
 	width: 180px;
 	height: 180px;
 	border-radius: 50%;
+	border: none;
+	font-size: 17px;
+	font-weight: 400;
 }
+.circle-red{
+	background-color :#ff1a1a;
+	color: white;
+}
+.circle-grey {
+	background-color : #e6e6e6;
+	color: black;
+}
+
 
 .card.game{
 	display: inline-block;
@@ -95,9 +112,12 @@ html{
 } 
 
 .carousel-inner img {
-	width: 100%;
+	width: 80%;
 }
-
+.carousel-control-prev,
+.carousel-control-next{
+	color: #ff1a1a;
+}
 /*register form css*/
 .card-container{
 	text-align:center;
