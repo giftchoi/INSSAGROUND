@@ -268,7 +268,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="registergroundschedule" parameterType="scheduleVO">
 	<selectKey keyProperty="scheduleNo" resultType="string" order="BEFORE">
-		select scheduledeleteGroundSchedule_seq.nextval from dual
+		select schedule_seq.nextval from dual
 	</selectKey>
 		insert into schedule(schedule_no,start_date,end_date,title,loc,content,id,ground_no,max_personnel)
 		values(#{scheduleNo},to_date(#{startDate},'YYYY-MM-DD hh24:mi'),to_date(#{endDate},'YYYY-MM-DD hh24:mi'),#{title},#{loc},#{content},#{insiderVO.memberVO.id},#{groundVO.groundNo},#{maxPersonnel})
@@ -284,8 +284,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (
 		select row_number() over(order by schedule_no desc) as
 		rnum,content,ground_no,id,loc,max_personnel,schedule_no,title
-		from schedule )
-		where ground_no=#{groundVO.groundNo} and rnum between
+		from schedule where ground_no=#{groundVO.groundNo})
+		where rnum between
 		#{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 		order by
 		schedule_no desc

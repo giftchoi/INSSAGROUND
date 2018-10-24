@@ -389,6 +389,7 @@ public class GroundController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registergroundschedule.do")
 	public String registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,InsiderVO insiderVO,HttpSession session) {
+		System.out.println(scheduleVO);
 		MemberVO mvo= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴		
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");		
 		insiderVO.setMemberVO(mvo);		
@@ -411,6 +412,9 @@ public class GroundController {
 		System.out.println("controller3");
 		System.out.println(listVO);
 		System.out.println("controller4");		
+		for(int i=0;i<listVO.getList().size();i++) {
+			System.out.println("리스트 번호 : "+listVO.getList().get(i).getScheduleNo());
+		}
 		model.addAttribute("sList",listVO);
 		return "ground/home/ground-schedule-list.tiles";
 	}
