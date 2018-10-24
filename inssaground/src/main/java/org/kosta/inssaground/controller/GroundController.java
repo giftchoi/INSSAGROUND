@@ -398,7 +398,7 @@ public class GroundController {
 		return "redirect:groundPost.do?groundNo="+postVO.getInsiderVO().getGroundNo();
 	}
 	
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundScheduleForm.do")
 	public String groundScheduleForm(String groundNo) {
 		System.out.println(groundNo);
@@ -421,7 +421,7 @@ public class GroundController {
 		System.out.println("**7");
 		return "redirect:groundScheduleList.do";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundScheduleList.do")
 	public String groundScheduleList(HttpSession session,Model model,String pageNo) {		
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
@@ -435,7 +435,7 @@ public class GroundController {
 		model.addAttribute("sList",listVO);
 		return "ground/home/ground-schedule-list.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundScheduleDetail.do")
 	public String groundScheduleDetail(String scheduleNo,Model model,HttpSession session) {
 		System.out.println(scheduleNo);
@@ -448,11 +448,13 @@ public class GroundController {
 		model.addAttribute("scheduleParticipationMember",groundService.scheduleParticipationMember(groundVO,scheduleNo));
 		return "ground/home/ground-schedule-detail.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("updateGroundScheduleForm.do")
 	public String updateGroundScheduleForm(ScheduleVO scheduleVO,Model model) {
 		model.addAttribute("scheduleDetail",groundService.findGroundScheduleByScheduleNo(scheduleVO));
 		return "ground/home/ground-schedule-update.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@PostMapping("updateGroundSchedule.do")
 	public String updateGroundSchedule(ScheduleVO scheduleVO) {
 		System.out.println("ct1.************"+scheduleVO);
@@ -460,14 +462,14 @@ public class GroundController {
 		System.out.println("ct2.********");
 		return "redirect:groundScheduleList.do";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@PostMapping("deleteGroundSchedule.do")
 	public String deleteGroundSchedule(ScheduleVO scheduleVO) {
 		System.out.println(scheduleVO);
 		groundService.deleteGroundSchedule(scheduleVO);		
 		return "redirect:groundScheduleList.do";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundMemberList.do")
 	public String groundMemberList(Model model,HttpSession session) {
 		GroundVO gvo = (GroundVO)session.getAttribute("ground");
@@ -477,6 +479,7 @@ public class GroundController {
 		model.addAttribute("memberList",groundService.findGroundMemberListByGroundNo(gvo));
 		return "ground/home/ground-member-list.tiles";
 	}
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("scheduleParticipation.do")
 	public String scheduleParticipation(HttpSession session,String scheduleNo) {
 		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
@@ -484,7 +487,7 @@ public class GroundController {
 		groundService.scheduleParticipation(scheduleNo, memberVO, groundVO);
 		return "redirect:groundScheduleList.do";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPicture.do")
 	public String groundPicture(HttpSession session,Model model) {
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
@@ -492,7 +495,7 @@ public class GroundController {
 		model.addAttribute("postList",postList);
 		return "ground/home/ground-picture.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@RequestMapping("memberInfo.do")
 	public String memberInfo(String id,HttpSession session,Model model) {
 		/* 게시물수
@@ -509,7 +512,7 @@ public class GroundController {
 		model.addAttribute("attendance",groundService.groundMemberAttendance(id, groundVO.getGroundNo()));
 		return "ground/home/ground-member-info.tiles";
 	}
-	
+	@Secured("ROLE_MEMBER")
 	@PostMapping("withdrawGround.do")
 	public String withdrawGround(String groundNo) {
 		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
