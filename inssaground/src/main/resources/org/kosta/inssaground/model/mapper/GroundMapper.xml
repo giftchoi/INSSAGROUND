@@ -198,7 +198,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	group by g.ground_no) a,
 	(select ground_no, count(id) as cnt
 	from insider
-	group by ground_no) b
+	where status=1
+	group by ground_no
+	) b
 	where a.ground_no=b.ground_no
 	) ) where rank between 1 and 5)
 	</select>
@@ -284,8 +286,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (
 		select row_number() over(order by schedule_no desc) as
 		rnum,content,ground_no,id,loc,max_personnel,schedule_no,title
-		from schedule )
-		where ground_no=#{groundVO.groundNo} and rnum between
+		from schedule where ground_no=#{groundVO.groundNo})
+		where rnum between
 		#{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 		order by
 		schedule_no desc

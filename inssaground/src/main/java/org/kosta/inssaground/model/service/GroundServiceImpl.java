@@ -271,6 +271,7 @@ public class GroundServiceImpl implements GroundService {
 		String date2 = scheduleVO.getEndDate().replace("T"," ");
 		scheduleVO.setStartDate(date);
 		scheduleVO.setEndDate(date2);
+		System.out.println(scheduleVO);
 		groundMapper.registergroundschedule(scheduleVO);
 		scheduleParticipation(scheduleVO.getScheduleNo(), memberVO, groundVO);
 	}
