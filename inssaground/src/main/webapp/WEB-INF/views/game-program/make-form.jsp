@@ -152,7 +152,7 @@
 						<br>
 						<br>
 						<br>
-						<a href="${pageContext.request.contextPath}/resultGameProgramTest.do">
+						<a href="${pageContext.request.contextPath}/resultGameProgram.do">
 						내 게임프로그램 확인폼
 						</a>
 
@@ -327,10 +327,10 @@ $(document).ready(function() {
 		//alert($(".myTable td:nth-child(4n-2)").text());	//게임이름
 		var gameNoListval = $(".myTable td:nth-child(4n-3)").text();
 		var gameNameListval = $(".myTable td:nth-child(4n-2)").text();
-		alert(gameNoListval);
+		//alert(gameNoListval);
 		$("#gameNoList").val(gameNoListval);
 		$("#gameNameList").val(gameNameListval);
-		alert($("#gameNameList").val());
+		//alert($("#gameNameList").val());
 		return confirm("게임 프로그램을 등록하시겠습니까?");
 	});
 	
