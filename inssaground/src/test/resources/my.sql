@@ -33,6 +33,20 @@ create table recommendation(
  	constraint pk_recommendation primary key(id,c_game_no)
 )
 ----------------------------------------------------------------------추가(10/21)
+alter table PROGRAM_OFFICIAL_GAME drop column total_game;
+alter table GAME_PROGRAM ADD (id VARCHAR2(100));
+ALTER TABLE GAME_PROGRAM ADD CONSTRAINT fk_GAME_PROGRAM_id FOREIGN KEY (id) REFERENCES INSSA_MEMBER(id);
+
+-- 위 alter를 쓰거나 밑의 테이블을 재생성하거나
+drop table GAME_PROGRAM;
+create table GAME_PROGRAM(
+   program_no number primary key,
+   title varchar2(100) not null,
+   detail varchar2(50) not null,
+   id varchar2(100) not null,
+   CONSTRAINT fk_GAME_PROGRAM_id FOREIGN KEY (id) REFERENCES INSSA_MEMBER(id)
+);
+----------------------------------------------------------------------추가(10/23)
 select count(*) from ground
 
 create table sigungu(

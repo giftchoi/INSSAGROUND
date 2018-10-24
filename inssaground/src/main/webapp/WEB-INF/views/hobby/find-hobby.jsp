@@ -27,6 +27,7 @@
 	var fList;
 	var width = 0;
 	$(document).ready(function() {
+		var ffList = new Array;
 		$("#startBtn").click(function() {
 			$.ajax({
 				type : "get",
