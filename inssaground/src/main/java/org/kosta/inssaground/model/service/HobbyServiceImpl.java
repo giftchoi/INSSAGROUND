@@ -61,12 +61,18 @@ public class HobbyServiceImpl implements HobbyService {
 		HashMap map = new HashMap();
 		//map.put("fnlist",hobbyNo);
 		String[] selectFNList = new String[3];
+	try {
 		for(int i=0; i<3; i++) {
 			selectFNList[i] = hobbyNo[i];
 		}
+	}catch(ArrayIndexOutOfBoundsException e){
+		System.out.println("취미를 찾을수 없습니다");
+			selectFNList=null;
+			return null;
+	}
 		map.put("fnlist",selectFNList);
 		System.out.println(map);
 		return hobbyMapper.getFListNameByResultNo(map);
+	
 	}
-
 }
