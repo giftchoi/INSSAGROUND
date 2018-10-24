@@ -1,6 +1,5 @@
 package org.kosta.inssaground.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,17 +35,36 @@ public class HobbyServiceImpl implements HobbyService {
 	public List<FeatureVO> getHobbyFeatureAndHobbyFeatureNoList(){
 		return hobbyMapper.getHobbyFeatureAndHobbyFeatureNoList();
 	}
+
+	
 	@Override
 	public List<Map> getFList(String[] ffList){
 		HashMap map = new HashMap();
 		map.put("ffList",ffList);
 		return hobbyMapper.getFList(map);
 	}
-
+	/*
+	@Override
+	public List<Map> getFList(String[] ffList){
+		HashMap map = new HashMap();
+		//map.put("ffList",ffList);
+		String[] selectFFList = new String[3];
+		for(int i=0; i<3; i++) {
+			selectFFList[i] = ffList[i];
+		}
+		map.put("ffList",selectFFList);
+		return hobbyMapper.getFList(map);
+	}
+	*/
 	@Override
 	public List<Map> getFListNameByResultNo(String[] hobbyNo) {
 		HashMap map = new HashMap();
-		map.put("fnlist",hobbyNo);
+		//map.put("fnlist",hobbyNo);
+		String[] selectFNList = new String[3];
+		for(int i=0; i<3; i++) {
+			selectFNList[i] = hobbyNo[i];
+		}
+		map.put("fnlist",selectFNList);
 		System.out.println(map);
 		return hobbyMapper.getFListNameByResultNo(map);
 	}
