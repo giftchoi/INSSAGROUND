@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="col-sm-8 offset-2">
+    <div class="col-sm-12">
+	<div class="row main-content">
+		<div class="col-sm-8 offset-2">
 <table class="table simpleTable">
   <thead>
     <tr>
@@ -23,7 +25,7 @@
   </c:forEach>
   </tbody>
 </table>
-</div>
+
 	<div class="pagingInfo">
 				<c:set var="pb" value="${groundList.pagingBean}" />
 
@@ -47,6 +49,9 @@
 						<li><a class="page" href="">&raquo;</a></li>
 					</c:if>
 				</ul>
+			</div>
+			</div>
+			</div>
 			</div>
 <!-- <i class="material-icons button edit">edit</i>
         <i class="material-icons button delete">delete</i> -->

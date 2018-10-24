@@ -4,6 +4,7 @@
 <style>
 #myProgress {
 	position:relative;
+	top:120px;
 	left:5%;
 	width: 90%;
 	background-color: #ddd;
@@ -20,112 +21,22 @@
 	color: white;
 	border-radius: 20px;
 }
-</style>
 
-<script>
-	var index = 0;
-	var fList;
-	var width = 0;
-	$(document).ready(function() {
-		var ffList = new Array;
-		$("#startBtn").click(function() {
-			$.ajax({
-				type : "get",
-				url : "getFeatureList.do",
-				success : function(result) {
-					fList = result;
-					$("#startPage").css("display", "none");
-					$("#progressPage").css("display", "block");
-					//alert(fList[index].);
-					///alert($("#feature").text());
-					$("#feature").text(fList[index].name);
-				}
-			});//ajax
-		});//button
-	});
-
-	function move() {
-		//alert(fList[++index].name);
-		if (++index < 20) {
-			$("#feature").text(fList[index].name);
-		} else {
-			$("#progressPage").css("display", "none");
-			$("#endPage").css("display", "block");
-		}
-		var elem = document.getElementById("myBar");
-		//var width=document.getElementById("progress");
-
-		if (width >= 100) {
-			//location.href="";
-		} else {
-			width += 5;
-
-			elem.style.width = width + '% ';
-			elem.innerHTML = width * 1 + '% ';
-			var id = setInterval(frame, 10);
-			function frame() {
-				if (width >= 6) {
-					clearInterval(id);
-				} else {
-					width += 5;
-					elem.style.width = width + '%';
-					elem.innerHTML = width * 1 + '%';
-				}
-			}
-
-		}
-
-	}
-</script>
-<div class="col-sm-12">
-	<div class="row content">
-		<div class="col-sm-8 offset-2">
-			<div class="red-outline">
-				<div id="startPage">
-					<h1>나만의 취미 찾기</h1>
-					<span class="fa fa-check-square fa-5x"></span><br><br><br><br><br> 
-					<input class="btn btn-red" type="button" id="startBtn" value="시작">
-				</div>
-				<div id="progressPage" style="display:none">
-					<h1>나는 <span id="feature">gg</span> 활동을 좋아한다</h1>
-					<br><br><br><br><br> 
-					<button onclick="move()" class="btn btn-red">YES</button>&nbsp;&nbsp;<button onclick="move()" class="btn btn-red">NO</button>
-					<div id="myProgress">
-						<div id="myBar">0% </div>
-					</div>
-				</div>
-				<div id="endPage" style="display:none">
-					<h1>취미 찾기 성공</h1>
-					<span class="fa fa-check-square fa-5x"></span><br><br><br><br><br> 
-					<a class="btn btn-red" href="${pageContext.request.contextPath}/findHobbyResult.do">결과 보러 가기</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<%--
-********************************************************************************************************
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-<style>
-#myProgress {
-  width: 100%;
-  background-color: #ddd;
+#progressPage{
+	display:inline-block;
+	width:100%;
 }
-
-#myBar {
-  width: 10%;
-  height: 30px;
-  background-color: #ff1a1a;
-  text-align: center;
-  line-height: 30px;
-  color: white;
+div {
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+	font-size: 25px !important;
+	font-weight: 400;
+}
+#feature{
+	
+	 text-decoration: underline;
+	 font-size: 30px;
 }
 </style>
-
 <script>
 	var index=0;
 	var fList;
@@ -176,23 +87,59 @@
 		width += 5;
 		
 		elem.style.width = width + '%';
-		elem.innerHTML = width * 1 + '%';
-		var id = setInterval(frame, 10);
-		 function frame() {
-			if (width >= 6) {
-				clearInterval(id);
-			} else {
-				width+=5;
-				elem.style.width = width + '%';
-				elem.innerHTML = width * 1 + '%';
-			}
-		} 
-		
+		elem.innerHTML = width * 1 + '%'; 
 		}
 		
 	}
 
 </script>
+<div class="col-sm-12">
+	<div class="row content">
+		<div class="col-sm-8 offset-2">
+			<div class="red-outline">
+				<div id="startPage">
+					<span style="font-size:30px;font-weight:400;">나만의 취미 찾기</span><br><br><br><br>
+					<input class="btn btn-red" type="button" id="startBtn" value="시작">
+				</div>
+				<div id="progressPage" style="display:none">
+					<h1>나는 <span id="feature"></span> 활동을 좋아한다</h1>
+					<br><br><br><br><br> 
+					<button  class="btn btn-red" id="yes">YES</button>&nbsp;&nbsp;<button onclick="move()" class="btn btn-red">NO</button>
+					<div id="myProgress">
+						<div id="myBar">0% </div>
+					</div>
+				</div>
+				<div id="endPage" style="display:none">
+					<h1>취미 찾기 성공</h1>
+					<span class="fa fa-check-square fa-4x"></span><br><br><br><br><br> 
+					<a class="btn btn-red" id=resultPage >결과확인</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%--
+********************************************************************************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #ff1a1a;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+</style>
 <div class="col-sm-12">
 <div id="startPage"class="card" style="border: 5px solid #ff1a1a;">
 <br><br>

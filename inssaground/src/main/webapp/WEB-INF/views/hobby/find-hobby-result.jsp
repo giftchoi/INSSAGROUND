@@ -24,9 +24,17 @@
 <div class="col-sm-12">
 <div class="row ground-content">
 				<div class="col-sm-12">
+				<c:choose>
+					<c:when test="${hobby!=null}">
 					<c:forEach items="${hobby}" var="hb">
-					<button class="button circle" style="background-color: white; border-width: thick; font-size: x-large;">${hb.NAME}</button>
+					<button class="button circle" style="background-color: white; border-color:crimson; border-width: thick; font-size: x-large;">${hb.NAME}</button>
 					</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<h1 style="font-weight: bolder; color: red;">취미를 찾을수 없습니다.</h1>
+					</c:otherwise>
+					</c:choose>
+				
 				</div>
 			</div>
 </div>
