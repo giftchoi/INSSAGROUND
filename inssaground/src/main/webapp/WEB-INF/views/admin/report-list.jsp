@@ -33,6 +33,7 @@
   </c:forEach>
   </tbody>
 </table>
+<hr>
 	<div class="pagingInfo">
 				<c:set var="pb" value="${reportList.pagingBean}" />
 
