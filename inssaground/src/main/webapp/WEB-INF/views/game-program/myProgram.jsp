@@ -27,7 +27,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
 <%-- 	
 	<div class="pagingInfo">
 				<c:set var="pb" value="${myProgramList.pagingBean}" />
@@ -57,4 +56,7 @@
 	 --%>		
 </div>
 </div>
+	<button class="btn btn-primary btn-lg" style="font-size: 23px"
+							 onclick="location.href='${pageContext.request.contextPath}/resultGameProgram.do' ">
+							 <i class="fa fa-list-alt"></i> 내 프로그램 보기</button>
 </div>

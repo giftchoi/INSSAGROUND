@@ -8,6 +8,7 @@ import org.kosta.inssaground.model.service.GameProgramService;
 import org.kosta.inssaground.model.service.GameService;
 import org.kosta.inssaground.model.vo.GameProgramListVO;
 import org.kosta.inssaground.model.vo.GameProgramVO;
+import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.OfficialGameVO;
 import org.springframework.security.access.annotation.Secured;
@@ -40,6 +41,13 @@ public class GameProgramController {
 	public String makeGameProgramForm(Model model) {
 		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
 		return "game-program/make-form.tiles";
+	}
+	
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("makeGameProgramFormByPageNo.do")
+	@ResponseBody
+	public ListVO<OfficialGameVO> makeGameProgramFormByPageNo(Model model, String pageNo) {
+		return gameService.getOfficialGameList(pageNo);
 	}
 
 	
@@ -83,7 +91,7 @@ public class GameProgramController {
 		MemberVO memberVO = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		GameProgramVO gameProgramVO = new GameProgramVO(programNo, null, null, memberVO.getId(), null);
 		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetail(gameProgramVO);
-		//System.out.println("게임리스트확인:"+gpList);
+		System.out.println("게임리스트확인:"+gpList);
 		return gpList;
 	}
 	@Secured("ROLE_MEMBER")
