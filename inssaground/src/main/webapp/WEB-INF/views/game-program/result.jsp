@@ -45,7 +45,7 @@
 												style="font-family: serif; text-align: center; ">${ogvo.oGameNo }</h5>
 											<i class="material-icons"> <a
 												href="${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}"
-												style="font-size: 20px; color: red">open_in_new</a>
+												style="font-size: 20px; color: red" target="_blank">open_in_new</a>
 											</i>
 										</div>
 
@@ -129,7 +129,7 @@
 										style="width: 100%;" required="required"></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="myProgramtBody">
 
 								<!-- 항목 들어갈데 -->
 
@@ -223,7 +223,7 @@ json+=					ogvo[i].oGameNo;
 json+=						"</h5><i class='material-icons'>";
 json+="						<a href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=";
 json+=					ogvo[i].oGameNo;
-json+=								"' style='font-size: 20px; color: red'>open_in_new</a></i></div>";
+json+=								"' style='font-size: 20px; color: red' target='_blank'>open_in_new</a></i></div>";
 
 json+="						<div class='rowgamefooter'>";
 json+="							<div class='col-sm-6' align='left'><h5 style='font-family: serif; text-align: left;'>";
@@ -459,7 +459,7 @@ json+="					</ul></div>";
 	});
 	
 	$("#programReset").click(function() {
-		$(".myTable td").remove();
+		$(".myProgramtBody td").remove();
 	});
 	$('select[name=programNo]').change(function() {
 		//alert($(this).val());
@@ -489,7 +489,7 @@ json+="					</ul></div>";
                      str+="</td></tr>";
                      $('#endgameprogram').before(str);
                 	gamecount++;
-                	if(parseInt(value.minPersonnel)<min)
+                	if(value.minPersonnel<min)
                 		min = value.minPersonnel;
                 	if(value.maxPersonnel>max)
                 		max = value.maxPersonnel;

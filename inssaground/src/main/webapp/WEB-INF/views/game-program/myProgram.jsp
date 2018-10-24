@@ -3,9 +3,7 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <div class="col-sm-12">
-	<div class="row main-content">
-		<div class="col-sm-8 offset-2">
+<div class="col-sm-8 offset-2">
 	<table class="table simpleTable" style="table-layout:fixed;">
 		<thead>
 			<tr>
@@ -55,8 +53,8 @@
 			
 	 --%>		
 </div>
-</div>
-	<button class="btn btn-primary btn-lg" style="font-size: 23px"
+<div class="col-sm-12">
+	<button class="btn btn-lg btn-outline-danger" style="font-size: 23px"
 							 onclick="location.href='${pageContext.request.contextPath}/resultGameProgram.do' ">
-							 <i class="fa fa-list-alt"></i> 내 프로그램 보기</button>
+							 <i class="fa fa-list-alt"></i> 내 프로그램 상세보기</button>
 </div>

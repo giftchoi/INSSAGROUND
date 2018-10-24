@@ -25,9 +25,9 @@
       <th colspan="3">${requestScope.gvo.title }</th>
     </tr>
    <tr>
-      <th  style="font-weight: bolder;">${requestScope.gvo.memberVO.id }</th>
+      <th>${requestScope.gvo.memberVO.id }</th>
       <th>　　　　　　　　　　　　　　</th>
-      <th align="right"><i class="material-icons button">${requestScope.gvo.memberVO.email }</i></th>
+      <th align="right" style="font-weight: bolder;">${requestScope.gvo.memberVO.name }</th>
     </tr>
   </thead>
   <tbody>
@@ -121,9 +121,9 @@
       <th colspan="3">${requestScope.gvo.title }</th>
     </tr>
    <tr>
-      <th  style="font-weight: bolder;">관리자</th>
-      <th>　　　　　　　　　　　　　　</th>
       <th></th>
+      <th>　　　　　　　　　　　　　　</th>
+      <th  style="font-weight: bolder;">관리자</th>
     </tr>
   </thead>
   <tbody>
