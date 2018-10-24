@@ -33,6 +33,7 @@
 				</div>
 					<input type="text" id="sample5_address" placeholder="주소" name="loc">
 					<input type="button" onclick="sample5_execDaumPostcode()" value="장소 검색"><br>
+<div align="center">
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
 
@@ -104,6 +105,7 @@
         }).open();
     }
 </script>
+</div>
 <!--  -->				
 			
 	
