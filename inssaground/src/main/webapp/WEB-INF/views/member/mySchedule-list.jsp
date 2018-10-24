@@ -3,7 +3,9 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="col-sm-8 offset-2">
+    <div class="col-sm-12">
+	<div class="row main-content">
+		<div class="col-sm-8 offset-2">
 	<table class="table simpleTable" style="table-layout:fixed;">
 		<thead>
 			<tr>
@@ -51,4 +53,6 @@
 					</c:if>
 				</ul>
 			</div>
+</div>
+</div>
 </div>
