@@ -1,19 +1,27 @@
-.rowgamefooter{
-    position : absolute;
-    width: inherit;
-    bottom: 0;
-    margin-left: 0;
+.rowgamefooter {
+	position: absolute;
+	width: inherit;
+	bottom: 0;
+	margin-left: 0;
 }
 
-.programcard{
+.programcard {
 	width: 200px !important;
-    margin: 5px;
+	margin: 5px;
 }
 
+gameWriteForm {
+	position: absolute;
+	right: 5em;
+	top: 3em;
+	height: 3em;
+	line-height: 3em;
+	font-size: 14px;
+	color: #333333;
+	background-color: #ffffff;
+	"
+}
 /*윗부분: 손수 제작 ------------------------------- */
-
-
-
 ::-moz-selection {
 	background-color: #f42f2c;
 	color: #fff
