@@ -6,10 +6,27 @@
 		style="text-align: center; font-weight: bolder; font-size: xx-large;">나의
 		맞춤 취미</h1>
 </div>
-<c:forEach items="${fvo}" var="list">
+<br><br><br><br><br><br><br>
+<%-- <c:forEach items="${fvo}" var="list">
 	${list.HOBBY_NO} ${list.RANK} <br>
-</c:forEach>
-<hr>
+</c:forEach> --%>
+
+
+<%-- <div class="col-sm-12">
+<br><br><br><br><br><br>
 <c:forEach items="${hobby}" var="hb">
+<div class="border" 
+	style="border-radius: 50%; border:3px solid #ff1a1a!important; background-color:white; font-size: xx-large; text-align: center; border-width: 20rem; font-weight: bolder;" >
 	${hb.NAME}
+</div>
 </c:forEach>
+</div> --%>
+<div class="col-sm-12">
+<div class="row ground-content">
+				<div class="col-sm-12">
+					<c:forEach items="${hobby}" var="hb">
+					<button class="button circle" style="background-color: white; border-width: thick; font-size: x-large;">${hb.NAME}</button>
+					</c:forEach>
+				</div>
+			</div>
+</div>
