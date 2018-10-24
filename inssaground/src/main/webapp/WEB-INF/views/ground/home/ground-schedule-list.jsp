@@ -13,11 +13,11 @@
 						<table class="table simpleTable">
 							<thead>
 								<tr>
-									<th colspan="5">SCHEDULE LIST</th><th style="text-align:right;"><a class="btn btn-white" href="groundScheduleForm.do">스케줄 등록하기</a></th>
+									<th colspan="5">SCHEDULE LIST</th><th style="text-align:right;" colspan="2"><a class="btn btn-white" href="groundScheduleForm.do">스케줄 등록하기</a></th>
 								</tr>
 								<tr class="center">
-									<th>#</th>
-									<th>제목</th>
+									<th colspan="2">#</th>
+									<th colspan="2">제목</th>
 									<th>아이디</th>
 									<th>인원</th>
 									<th></th>
@@ -27,8 +27,8 @@
 							<tbody>
 								<c:forEach items="${sList.list}" var="list">
 									<tr>
-										<td>${list.scheduleNo}</td>
-										<td><a href="">${list.title}</a></td>
+										<td colspan="2">${list.scheduleNo}</td>
+										<td colspan="2"><a href="">${list.title}</a></td>
 										<td>${list.insiderVO.memberVO.id}</td>	
 										<td>${list.currPersonnel}/${list.maxPersonnel}</td>
 

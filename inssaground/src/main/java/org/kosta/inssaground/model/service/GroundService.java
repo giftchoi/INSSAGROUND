@@ -83,7 +83,7 @@ public interface GroundService {
 	public int groundMemberParticipationCount(String id,String groundNo);
 	public void withdrawGround(String id,String groundNo);
 	public ScheduleVO newSchedule(String groundNo);
-
+	public String randomName(String originalName);
 
 	public List<InsiderVO> findGroundMemberListByGroundNo(GroundVO groundVO);
 	public List<GroundVO> getHotGroundList();

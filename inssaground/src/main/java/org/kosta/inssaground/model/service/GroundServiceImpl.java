@@ -3,6 +3,7 @@ package org.kosta.inssaground.model.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -120,6 +121,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void deleteGroundSchedule(ScheduleVO scheduleVO) {
+		groundMapper.deletePaticipation(scheduleVO.getScheduleNo());
 		groundMapper.deleteGroundSchedule(scheduleVO);
 	}
 
@@ -265,6 +267,10 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void registergroundschedule(ScheduleVO scheduleVO,GroundVO groundVO,MemberVO memberVO) {		
+		String date = scheduleVO.getStartDate().replace("T"," ");
+		String date2 = scheduleVO.getEndDate().replace("T"," ");
+		scheduleVO.setStartDate(date);
+		scheduleVO.setEndDate(date2);
 		groundMapper.registergroundschedule(scheduleVO);
 		scheduleParticipation(scheduleVO.getScheduleNo(), memberVO, groundVO);
 	}
@@ -514,6 +520,17 @@ public class GroundServiceImpl implements GroundService {
 	public List<GroundVO> getHotGroundList() {
 		// TODO Auto-generated method stub
 		return groundMapper.getHotGroundList();
+	}
+	/**
+	 *  파일명 랜덤 생성 메서드
+	 */
+	@Override
+	public String randomName(String originalName) {
+		UUID uuid = UUID.randomUUID();
+		String extension = originalName.substring(originalName.lastIndexOf("."));		
+		originalName = uuid.toString()+extension;
+		System.out.println("파일명 : "+originalName);
+		return originalName;
 	}
 
 
