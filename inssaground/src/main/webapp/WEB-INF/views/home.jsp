@@ -65,12 +65,12 @@
 					<div class="carousel-item">
 						<img
 							src="${pageContext.request.contextPath }/resources/image/hobbyImg_extremeSports.jpg"
-							alt="Chicago" width="800" height="550">
+							alt="익스트림스포츠" width="800" height="550">
 					</div>
 					<div class="carousel-item">
 						<img
 							src="${pageContext.request.contextPath }/resources/image/hobbyImg_volunteer.jpg"
-							alt="New York" width="800" height="550">
+							alt="봉사활동" width="800" height="550">
 					</div>
 				</div>
 				<!-- Left and right controls -->

@@ -76,17 +76,37 @@
 			<c:forEach items="${principal.groundNoList}" var="ground">
 				<c:if test="${not isInssa }">
 					<c:if test="${ground.GROUNDNO eq groundVO.groundNo }">
-					<c:choose>
-						<c:when test="${ground.STATUS eq 1}">
+						<c:choose>
+							<c:when test="${ground.STATUS eq 0}">
+								<input class="btn btn-grey" type="button" value="참여 대기중">
+							</c:when>
+							<c:when test="${ground.STATUS eq 1}">
+								<a class="btn btn-red"  href="ground-home.do?groundNo=${groundVO.groundNo}">모임 홈페이지</a>
+							</c:when>
+							<c:when test="${ground.STATUS eq 2}">
+								<input class="btn btn-white" type="button" value="참여거절" disabled="disabled">
+							</c:when>
+							<c:when test="${ground.STATUS eq 3} ">
+								<input class="btn btn-white" type="button" value="탈퇴완료" disabled="disabled">
+							</c:when>
+						</c:choose>
+						<%-- <c:if test="${ground.STATUS eq 1}">
 							<a class="btn btn-red"  href="ground-home.do?groundNo=${groundVO.groundNo}">모임 홈페이지</a>
-						</c:when>
-						<c:when test="${ground.STATUS eq 0} ">
+						</c:if>
+						< --%>
+						<%-- 
+						<c:if test="${ground.STATUS eq 0} ">
 							<input class="btn btn-grey" type="button" value="참여 대기중">
-						</c:when>
-						<c:otherwise>
+						</c:if>
+						
+						<c:if test="${ground.STATUS eq 3} ">
 							<input class="btn btn-white" type="button" value="탈퇴완료" disabled="disabled">
-						</c:otherwise>
-					</c:choose>
+						</c:if>
+						
+						<c:if test="${ground.STATUS eq 2} ">
+							<input class="btn btn-white" type="button" value="참여거절" disabled="disabled">
+						</c:if>
+ --%>
 						<c:set var="isInssa" value="true"/>
 					</c:if>
 				</c:if>
