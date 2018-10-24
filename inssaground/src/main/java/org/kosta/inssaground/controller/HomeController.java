@@ -22,7 +22,7 @@ public class HomeController {
 	public String home(Model model) {
 		//System.out.println("추천별 게임 확인:" +  gameService.getCustomGameOrderByRecommendation());
 		//model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
-		//model.addAttribute("groundList",groundService.getHotGroundList());
+		model.addAttribute("groundList",groundService.getHotGroundList());
 		
 		return "home.tiles";
 	}
