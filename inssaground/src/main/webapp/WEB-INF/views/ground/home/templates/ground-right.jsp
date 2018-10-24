@@ -14,7 +14,7 @@
 		<div class="single-sidebar-widget user-info-widget">
 			<img
 				src="${pageContext.request.contextPath}/resources/uploadImage/${mvo.profile}"
-				alt="" width="300" height=""> <a href="#"><h4>${mvo.name}</h4></a>
+				alt="" width="300px" height="250px"> <a href="#"><h4>${mvo.name}</h4></a>
 			<p>출석:${insiderVO.attendance}</p>
 			<p>아이디:${mvo.id}</p>
 			
