@@ -9,8 +9,8 @@
 	width: 200px !important;
 	margin: 5px;
 }
-
-gameWriteForm {
+/* 
+.gameWriteForm {
 	position: absolute;
 	right: 5em;
 	top: 3em;
@@ -19,8 +19,8 @@ gameWriteForm {
 	font-size: 14px;
 	color: #333333;
 	background-color: #ffffff;
-	"
 }
+ */
 /*윗부분: 손수 제작 ------------------------------- */
 ::-moz-selection {
 	background-color: #f42f2c;
