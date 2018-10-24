@@ -28,8 +28,8 @@
 			<c:choose>
 				<c:when test="${requestScope.gameType eq 'custom'}">
 					<span class="gameWriteForm"
-						style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-						<button class="btn btn-danger"
+					style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+						<button class="btn btn-danger" style="font-size: 2rem;"
 							onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">
 							사용자 게임 등록</button>
 					</span>
@@ -151,7 +151,7 @@
 
 								<span class="gameWriteForm"
 									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-									<button class="btn btn-danger"
+									<button class="btn btn-danger" style="font-size: 2rem;"
 										onclick="location.href='${pageContext.request.contextPath}/officialGameWriteForm.do'">
 										공식 게임 등록</button>
 								</span>

@@ -23,8 +23,6 @@
 						sendFiles(files[i],this);
 						
 					}
-						
-					
 				},
 				onMediaDelete : function($target, editor, $editable){
 					var src = $target.attr("src");
@@ -54,7 +52,14 @@
 			//alert(	$("#postForm").find(":input[type=hidden]").val());
 			$("#postForm").submit();
 		});//click */
-	});
+		$("#testBtn").click(function(){
+			alert($('#summernote').summernote('code'));
+		});
+		
+		
+		
+		
+	});//ready
 
 	function sendFiles(file, el) {
 		var form = new FormData();
@@ -73,8 +78,7 @@
 				var imgNode = document.createElement("IMG");
 				$(imgNode).prop(
 						"src",
-						"${pageContext.request.contextPath}/resources/image/"
-								+ data);
+						"${pageContext.request.contextPath}/resources/uploadImage/"+ data);
 				$(imgNode).css("width", "300px");
 				$(imgNode).css("height", "300px");
 				$(el).summernote('insertNode', imgNode);
@@ -109,3 +113,4 @@
 	<input type="hidden"	name = "insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
 </form>
 </div>
+<input type="button" id="testBtn" value="test">
