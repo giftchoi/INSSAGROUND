@@ -1,13 +1,13 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
-
-import org.kosta.inssaground.model.mapper.OfficialGameMapper;
 import org.kosta.inssaground.model.mapper.CustomGameMapper;
 import org.kosta.inssaground.model.mapper.MemberMapper;
+import org.kosta.inssaground.model.mapper.OfficialGameMapper;
 import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.OfficialGameVO;
@@ -101,4 +101,15 @@ public class GameServiceImpl implements GameService {
 	public List<CustomGameVO> getCustomGameOrderByRecommendation() {
 		return cgm.getCustomGameOrderByRecommendation();
 	}
+	@Override
+	public int insertRecommendation(Map<String,String> map) {
+		int count=cgm.selectRecommendataionByIdAndcGameNo(map);
+		if(count==0) {
+			cgm.insertRecommendation(map);
+		}else {
+		System.out.println("중복된 값입니다.");	
+		}
+		return count;
+	}
 }
+
