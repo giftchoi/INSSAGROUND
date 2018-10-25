@@ -3,6 +3,7 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script>
 	$(document).ready(function(){	
 		$("#participateBtn").click(function(){
@@ -58,6 +59,49 @@
 				</c:forEach>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 offset-10">
+			<a id="kakao-link-btn" href="javascript:sendLink(${groundVO.groundNo})">
+<img style="padding-bottom:10px; height:50px;" src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+</a>
+<script type='text/javascript'>
+
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('d62c1dc1956031902d088498c469f737');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    function sendLink(gno) {
+    	
+
+    	
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '${groundVO.groundName}',
+          description:'#${groundVO.hobby}',
+          imageUrl: 'http://localhost:8888/inssaground/resources/uploadImage/${requestScope.groundVO.groundImgVO.imgName}',
+          link: {
+            webUrl: 'http://localhost:8888/inssaground/shome.do?groundNo='+gno
+          }
+        },
+        social: {
+          sharedCount: ${groundVO.participants}
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              webUrl: 'http://localhost:8888/inssaground/shome.do?groundNo='+gno
+            }
+          }
+        ],
+        serverCallbackArgs: '{"groundNo":"${groundVO.groundNo}"}' // 콜백 파라미터 설정
+      });
+    }
+  //]]>
+</script>
 		</div>
 	</div>
 	<div class="row">
