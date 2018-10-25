@@ -26,10 +26,6 @@
 				alert("아이디 중복확인을 하세요");
 				return false;
 			}
-			if(${"#profile"}.val()==""){
-				alert("프로필 사진을 등록하세요");
-				return false;
-			}
 			if(checkEmailOK==false){
 				alert("이메일 인증을 완료하세요");
 				return false;
@@ -117,7 +113,7 @@
 			<form method="post" action="registerMember.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
 				<div class="input-container">
-					프로필 사진<input type="file" name="picture" id="profile" required="required">
+					프로필 사진<input type="file" name="picture" required="required">
 				</div>
 				<div class="input-container">
 					아이디<br>
