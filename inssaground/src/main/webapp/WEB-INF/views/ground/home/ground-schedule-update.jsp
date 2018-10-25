@@ -2,11 +2,24 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+      
+<script type="text/javascript">
+	function cancel(mode){
+		var theForm = document.frm;
+		alert(mode);
+		if(mode == "01"){
+			theForm.submit();
+		}else if(mode == "02"){
+			var theFrom2 = document.frm2;
+			theFrom2.submit();
+		}		
+	}
+</script>
 <div class="col-sm-12 main-content">
 	<div class="card-container wide">
 		<div class="form-card">
 			<h1 class="title">일정 상세</h1>
-			<form method="post" action="updateGroundSchedule.do" id="regForm" enctype="multipart/form-data">
+			<form method="post" action="updateGroundSchedule.do" id="regForm" enctype="multipart/form-data" name="frm">
 				<sec:csrfInput/>
 				<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo }">
 				<div class="input-container">
@@ -37,8 +50,9 @@
 
 				<input type="text" id="sample5_address" placeholder="주소" name="loc">
 				<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+				<div align="center">
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-
+</div>
 
 <!--  -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -111,12 +125,13 @@
 				<div>
 
 				</div>
-				<input type="submit" value="확인">
-			 </form>
-				 <form action="groundScheduleList.do" method="post">
+				<input class="btn btn-red"  type="button" value="확인" onclick="cancel('01')">
+				<input class="btn btn-red"  type="button" value="취소" onclick="cancel('02')">
+				</form>
+				 <form action="groundScheduleList.do" method="post" name="frm2">
 					<sec:csrfInput/>
 					<input type="hidden" name="scheduleNo" value="${scheduleDetail.scheduleNo}">
-					<input type="submit" value="취소">
+					<!-- <input class="btn btn-red" type="submit" value="취소"> -->
 				</form>
 		</div>
 	</div>
