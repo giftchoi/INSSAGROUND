@@ -42,7 +42,7 @@
 
 										<div class="card-body">
 											<h5 id="oGameNo${no.count }"
-												style="font-family: serif; text-align: center; ">${ogvo.oGameNo }</h5>
+												style="font-family: serif; text-align: center;">${ogvo.oGameNo }</h5>
 											<i class="material-icons"> <a
 												href="${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}"
 												style="font-size: 20px; color: red" target="_blank">open_in_new</a>
@@ -68,15 +68,16 @@
 										value="${requestScope.officialGameLvo.pagingBean}"></c:set>
 									<ul class="pagination">
 										<c:if test="${pb.previousPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+											<li><button class="pageBtn">${pb.startPageOfPageGroup-1}</button></li>
+											<li>&laquo;</li>
+											<!-- <li class='disabled'><a href='#'>&laquo;</a></li> -->
 										</c:if>
 										<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 											end="${pb.endPageOfPageGroup}">
 											<c:choose>
 												<c:when test="${pb.nowPage!=i}">
 													<li>
-													<li><button id="curPage">${i}</button>
+													<li><button class="pageBtn">${i}</button>
 													<%-- 
 													<a href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${i}">${i}</a>
 														 --%>
@@ -91,8 +92,9 @@
 										</c:forEach>
 
 										<c:if test="${pb.nextPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+											<li>&raquo;</li>
+											<li><button class="pageBtn">${pb.endPageOfPageGroup+1}</button></li>
+											<!-- <li class='disabled'><a href='#'>&raquo;</a></li> -->
 										</c:if>
 									</ul>
 								</div>
@@ -115,7 +117,7 @@
 								<tr>
 									<th>프로그램명 :</th>
 									<th colspan="2">
-									<select id="programNo" name="programNo" style="background-color: #ff1a1a; width: 100%; text-align-last:center;">
+									<select id="programNo" name="programNo" style="background-color: #ff1a1a; width: 100%; text-align-last:center;" required="required">
 												<option value="">***----프로그램 선택----***</option>
 											<c:forEach items="${requestScope.myGameProgramList }" var="myGameProgram">
 												<option value="${myGameProgram.programNo }">${myGameProgram.title }</option>
@@ -190,7 +192,7 @@
 <script>
 
 $(document).ready(function() {
-	$(document).on("click","#curPage",function(event){
+	$('.game-post-area').on("click",".pageBtn",function(event){
         // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
         //alert($(this).text());
         //$(".game-post-area").remove();
@@ -240,15 +242,17 @@ json+="					<div class='pagingInfo'>";
 				var pb = listVO.pagingBean;
 json+="						<ul class='pagination'>";
 
-						if(pb.previousPageGroup){
-json+="							'<li><a href='${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=";
+						if(pb.previousPageGroup){							
+json+="							<li><button class='pageBtn'>";
 json+=									pb.startPageOfPageGroup-1;
-json+="									'>&laquo;</a></li>";
+json+=									"</button></li>";
+json+=									"<li>&laquo;</li>";
+//json+=									"<li class='disabled'><a href='#'>&laquo;</a></li>";
 						}
-						for(var i=pb.startPageOfPageGroup; i<pb.endPageOfPageGroup; i++){
+						for(var i=pb.startPageOfPageGroup; i<=pb.endPageOfPageGroup; i++){
 							if(pb.nowPage!=i){
 								
-json+="							<li><button id='curPage'>";
+json+="							<li><button class='pageBtn'>";
 json+=							i;
 json+=							"</button></li>";
 							}
@@ -263,11 +267,11 @@ json+="								&nbsp;";
 
 							
 							if(pb.nextPageGroup){
-json+="								<li>";
-json+="							<a href='${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=";
+//json+=							"<li class='disabled'><a href='#'>&raquo;</a></li>";
+json+="<li>&raquo;</li>"
+json+="							<li><button class='pageBtn'>";
 json+=							pb.endPageOfPageGroup+1;
-json+="							'>&raquo;</a>";
-json+="							</li>";
+json+=							"</button></li>";
 							}
 json+="					</ul></div>";
         		
@@ -445,19 +449,6 @@ json+="					</ul></div>";
          });
 	});
 	
-	
-	$("#registerGameProgramForm").submit(function() {
-		//alert($(".myTable td:nth-child(4n-3)").text());	//게임번호
-		//alert($(".myTable td:nth-child(4n-2)").text());	//게임이름
-		var gameNoListval = $(".myTable td:nth-child(4n-3)").text();
-		var gameNameListval = $(".myTable td:nth-child(4n-2)").text();
-		//alert(gameNoListval);
-		$("#gameNoList").val(gameNoListval);
-		$("#gameNameList").val(gameNameListval);
-		//alert($("#gameNameList").val());
-		return confirm("게임 프로그램을 등록하시겠습니까?");
-	});
-	
 	$("#programReset").click(function() {
 		$(".myProgramtBody td").remove();
 	});
@@ -548,6 +539,12 @@ json+="					</ul></div>";
 		$("#gameNoList").val(gameNoListval);
 		$("#gameNameList").val(gameNameListval);
 		//alert($("#gameNameList").val());
+		
+		if( gameNoListval == "" ){
+			alert("등록된 게임이 없습니다!");
+			return false;
+		}
+			
 		return confirm("게임 프로그램을 수정하시겠습니까?");
 	});
 	$("#deleteGameProgramForm").submit(function() {

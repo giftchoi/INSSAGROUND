@@ -49,19 +49,19 @@
          
          <div class="wrap-input100 bg1">
             <span class="label-input100">게임시간</span> <input
-               class="input100" type="number" name="gameTime" required="required"
+               class="input100" type="number" name="gameTime" min="1" max="99" maxlength="2" required="required"
                value="${requestScope.customGameVO.gameTime}">
          </div>
          
          <div class="wrap-input100 bg1 rs1-wrap-input100">
             <span class="label-input100">최소인원</span> <input class="input100"
-               type="number" name="minPersonnel" required="required" 
+               type="number" name="minPersonnel" min="1" max="999" maxlength="4" required="required" 
                value="${requestScope.customGameVO.minPersonnel}">
          </div>
 
          <div class="wrap-input100 bg1 rs1-wrap-input100">
             <span class="label-input100">최대인원</span> <input class="input100"
-               type="number" name="maxPersonnel" required="required"
+               type="number" name="maxPersonnel" min="1" max="999" maxlength="4" required="required"
                value="${requestScope.customGameVO.maxPersonnel}">
          </div>
 
