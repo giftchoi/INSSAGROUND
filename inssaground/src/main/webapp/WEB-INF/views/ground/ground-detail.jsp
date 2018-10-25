@@ -75,7 +75,7 @@
 <img style="padding-bottom:10px; height:50px;" src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
 </a>&nbsp;&nbsp;&nbsp;<a style="padding-top:2px;color:black;" href="javascript:copyLink(${groundVO.groundNo})"><i class="fa fa-copy fa-3x"></i></a>
 <script type='text/javascript'>
-
+	var party = ${groundVO.participants};
   //<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('d62c1dc1956031902d088498c469f737');
@@ -93,7 +93,7 @@
           }
         },
         social: {
-          sharedCount: ${groundVO.participants}
+          sharedCount: party
         },
         buttons: [
           {
