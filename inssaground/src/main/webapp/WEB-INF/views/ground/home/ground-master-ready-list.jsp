@@ -47,7 +47,7 @@
 			</c:if>
 		<c:forEach items="${requestScope.readyList }" var="mvo" varStatus="info">	
 			<tr>
-				<td rowspan="3">${info.count }</td><td rowspan="3">프로필 이미지 넣기</td><td id="id">${mvo.id }</td>	<td><input id=""type="button" class="approveBtn btn btn-red" value="참여승인"></td>
+				<td rowspan="3">${info.count }</td><td rowspan="3"><img src="${pageContext.request.contextPath }/resources/uploadImage/${mvo.profile}" width="50px" height="75px"></td><td id="id">${mvo.id }</td>	<td><input id=""type="button" class="approveBtn btn btn-red" value="참여승인"></td>
 					<td><input id=""class="rejectBtn btn btn-grey"type="button" value="참여거절">	</td>	
 			</tr>
 			<tr>

@@ -105,8 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<select id="getParticipationReadyList" parameterType="string"
 		resultType="memberVO">
-		select m.id,m.name,m.email from inssa_member m, insider i
-		where i.ground_no=#{value} and i.status=0 and i.id=m.id
+		select m.id,m.name,m.email,p.path as profile from inssa_member m, insider i,profile_img p
+		where i.ground_no=#{value} and i.status=0 and i.id=m.id and p.id=m.id
 	</select>
 	<update id="approveParticipation" parameterType="insiderVO">
 		update insider
