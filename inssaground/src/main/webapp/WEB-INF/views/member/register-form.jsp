@@ -113,7 +113,7 @@
 			<form method="post" action="registerMember.do" id="regForm" enctype="multipart/form-data">
 				<sec:csrfInput/>
 				<div class="input-container">
-					프로필 사진<input type="file" name="picture">
+					프로필 사진<input type="file" name="picture" required="required">
 				</div>
 				<div class="input-container">
 					아이디<br>
