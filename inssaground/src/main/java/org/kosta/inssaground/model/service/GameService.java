@@ -1,6 +1,7 @@
 package org.kosta.inssaground.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.kosta.inssaground.model.vo.ListVO;
@@ -85,5 +86,10 @@ public interface GameService {
 	 * @return 
 	 */
 	List<CustomGameVO> getCustomGameOrderByRecommendation();
+	/**
+	 * 추천수 올려주기
+	 * @param map
+	 */
+	public int insertRecommendation(Map<String, String> map);
 
 }
