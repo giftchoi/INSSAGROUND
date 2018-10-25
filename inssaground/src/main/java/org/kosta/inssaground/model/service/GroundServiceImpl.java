@@ -49,11 +49,7 @@ public class GroundServiceImpl implements GroundService {
 		System.out.println(groundVO.getGroundNo());
 	}
 
-	@Override
-	public GroundVO enterGround(String groundNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 	@Override

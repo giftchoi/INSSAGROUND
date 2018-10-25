@@ -3,8 +3,11 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script>
 	$(document).ready(function(){	
+	
+		
 		$("#participateBtn").click(function(){
 			//window.close();
 			//window.open("home.do");
@@ -22,10 +25,15 @@
 			alert("로그인 후 이용가능합니다.");
 			location.href="loginForm.do";
 		});
-	});
-	
+	});	
 	function participate(){
 		$("#participateForm").submit();
+	}
+	function copyLink(gno){
+		$("#hiddenDiv").show();
+		$("#link").select();
+		document.execCommand("copy");
+		$("#hiddenDiv").hide();
 	}
 </script>
 <div>
@@ -37,7 +45,6 @@
 		</div>
 	</div>
 	<div class="row ground-detail-content">
-
 		<div class="col-sm-10 offset-1">
 			<div class="row ground-detail-title">
 				<div class="col-sm-12">
@@ -58,6 +65,50 @@
 				</c:forEach>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 offset-9">
+			<div id="hiddenDiv" style="display:none;">
+				<input type="text" id="link" value="http://localhost:8888/inssaground/shome.do?groundNo=${groundVO.groundNo }">
+			</div><br>
+			<a id="kakao-link-btn" href="javascript:sendLink(${groundVO.groundNo})">
+<img style="padding-bottom:10px; height:50px;" src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+</a>&nbsp;&nbsp;&nbsp;<a style="padding-top:2px;color:black;" href="javascript:copyLink(${groundVO.groundNo})"><i class="fa fa-copy fa-3x"></i></a>
+<script type='text/javascript'>
+
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('d62c1dc1956031902d088498c469f737');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    function sendLink(gno) {
+    	
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '${groundVO.groundName}',
+          description:'#${groundVO.hobby}',
+          imageUrl: 'http://localhost:8888/inssaground/resources/uploadImage/${requestScope.groundVO.groundImgVO.imgName}',
+          link: {
+            webUrl: 'http://localhost:8888/inssaground/shome.do?groundNo='+gno
+          }
+        },
+        social: {
+          sharedCount: ${groundVO.participants}/${groundVO.maxPersonnel}명
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              webUrl: 'http://localhost:8888/inssaground/shome.do?groundNo='+gno
+            }
+          }
+        ],
+        serverCallbackArgs: '{"groundNo":"${groundVO.groundNo}"}' // 콜백 파라미터 설정
+      });
+    }
+  //]]>
+</script>
 		</div>
 	</div>
 	<div class="row">
