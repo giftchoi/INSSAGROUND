@@ -67,9 +67,18 @@
 	</tr>
     <tr>
       <td>
-      <button type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-thumbs-up"></span> ${requestScope.gvo.recommendation }
-       </button>
+    <%--   
+      <button class="btn btn-default btn-lg" form="insertRecommendation" id="thumbBtn">
+      <span class="glyphicon glyphicon-thumbs-up"></span> ${requestScope.gvo.recommendation }
+      </button>
+       --%>
+      <form method="post" action="${pageContext.request.contextPath}/insertRecommendation.do" id="insertRecommendation">
+      <sec:csrfInput/>
+      <input type="hidden" name="cGameNo" value="${requestScope.gvo.cGameNo}">    
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+      <input type="submit" value="${requestScope.gvo.recommendation }"  style="background-color:transparent;  border:0px transparent solid;">
+      </form>
+      
       </td>
       <td></td>
       <td>
@@ -100,6 +109,12 @@
 				});
 				$("#customGameUpdateForm").submit(function() {
 					return confirm("사용자 정의 게임을 수정하시겠습니까?")
+				});
+				// 추천수 올라가는 버튼 
+				$("#insertRecommendation").submit(function() {
+					//alert("추천수를 누르시겠습니까?")
+					return confirm("추천수를 올리시겠습니까?")
+					
 				});
 			});
 		</script>
@@ -193,6 +208,7 @@
 				$("#officialGameUpdateForm").submit(function() {
 					return confirm("공식 게임을 수정하시겠습니까?")
 				});
+				
 			});
 		</script>
         

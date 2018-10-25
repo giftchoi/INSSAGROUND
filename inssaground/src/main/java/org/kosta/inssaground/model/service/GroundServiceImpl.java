@@ -101,17 +101,7 @@ public class GroundServiceImpl implements GroundService {
 		return gvo;
 	}
 
-	@Override
-	public void groundParticipation() {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public ListVO<PostVO> groundBoard(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 
@@ -123,52 +113,21 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void registerGroundNotice(NoticeVO noticeVO) {
-		// TODO Auto-generated method stub
+	
 		groundMapper.registerGroundNotice(noticeVO);
 
 	}
-
-	@Override
-	public void groundParticipantPermission(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public InsiderVO groundParticipantList(GroundVO GroundVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MemberVO groundParticipantMemberInfo(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void registerinsider(InsiderVO insiderVO) {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void updateGroundNotice(NoticeVO noticeVO) {
-		// TODO Auto-generated method stub
+
 		groundMapper.updateGroundNotice(noticeVO);
 	}
 
 
 	@Override
 	public void deleteGroundNotice(String noticeNo) {
-		// TODO Auto-generated method stub
+	
 		groundMapper.deleteGroundNotice(noticeNo);
-	}
-
-	@Override
-	public NoticeVO groundNoticeDetail(String noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -182,35 +141,10 @@ public class GroundServiceImpl implements GroundService {
 		groundMapper.updateGroundSchedule(scheduleVO);
 	}
 
-	@Override
-	public void groundScheduleParticipation(GroundVO groundVO) {
-		// TODO Auto-generated method stub
 
-	}
 
-	@Override
-	public void registerGroundMember(GroundVO groundVO) {
-		// TODO Auto-generated method stub
 
-	}
 
-	@Override
-	public PostVO GroundImg(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GroundVO GroundActivityInfo(GroundVO groundVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ScheduleVO groundScheduleDetail(ScheduleVO scheduleVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<SidoVO> getAllSido() {		
@@ -224,7 +158,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public int getGroundSearchResultCount(Map<String,Object> map) {
-		// TODO Auto-generated method stub
+
 		return groundMapper.getGroundSearchResultCount(map);
 	}
 
@@ -284,7 +218,7 @@ public class GroundServiceImpl implements GroundService {
 	
 
 	public List<MemberVO> getParticipationReadyList(String groundNo) {
-		// TODO Auto-generated method stub
+	
 		return groundMapper.getParticipationReadyList(groundNo);
 	}
 
@@ -307,7 +241,7 @@ public class GroundServiceImpl implements GroundService {
 	@Override
 
 	public NoticeVO getNoticeDetailByNo(String noticeNo) {
-		// TODO Auto-generated method stub
+
 		return groundMapper.getNoticeDetailByNo(noticeNo);
 	}
 
@@ -407,7 +341,7 @@ public class GroundServiceImpl implements GroundService {
 	
 
 	public void registerGroundPost(PostVO postVO) {
-		// TODO Auto-generated method stub
+		
 		groundMapper.insertGroundPost(postVO);
 		List<String> picList = postVO.getPictureList();
 		Map<String,String> map = new HashMap<String,String>();
@@ -440,7 +374,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void updateGroundPost(PostVO postVO) {
-		// TODO Auto-generated method stub
+	
 		groundMapper.updateGroundPost(postVO);
 		groundMapper.deleteAllPostImg(postVO.getPostNo());
 		List<String> picList = postVO.getPictureList();
@@ -470,7 +404,7 @@ public class GroundServiceImpl implements GroundService {
 
 	@Override
 	public void deleteGroundPost(PostVO postVO) {
-		// TODO Auto-generated method stub
+
 		
 		groundMapper.deleteAllPostImg(postVO.getPostNo());
 		groundMapper.deletePostByPostNo(postVO.getPostNo());
@@ -521,7 +455,7 @@ public class GroundServiceImpl implements GroundService {
 		return groundMapper.newSchedule(groundNo);
 	}
 	public List<GroundVO> getHotGroundList() {
-		// TODO Auto-generated method stub
+	
 		return groundMapper.getHotGroundList();
 	}
 	/**

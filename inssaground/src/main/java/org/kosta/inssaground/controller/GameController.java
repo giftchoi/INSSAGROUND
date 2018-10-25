@@ -1,5 +1,7 @@
 package org.kosta.inssaground.controller;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -156,6 +158,18 @@ public class GameController {
 		redirectAttributes.addAttribute("cGameNo", Integer.parseInt(customGameVO.getcGameNo()));
 		return "redirect:customGameDetail.do";
 	}
-
+	@Secured("ROLE_MEMBER")
+	@PostMapping("insertRecommendation.do")
+	public String insertRecommendation(Model model, String cGameNo,RedirectAttributes redirectAttributes) {
+		HashMap<String,String> map=new HashMap<String,String>();
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();		
+		map.put("C_GAME_NO",cGameNo);
+		map.put("ID",mvo.getId());
+		gameService.insertRecommendation(map);
+		//model.addAttribute("count",count);
+		System.out.println("추천수 증가 확인"+gameService.getCustomGameDetail(cGameNo).getRecommendation());
+		redirectAttributes.addAttribute("cGameNo",cGameNo);
+		return "redirect:customGameDetail.do";
+	}
 	// ----------------------------------------
 }
