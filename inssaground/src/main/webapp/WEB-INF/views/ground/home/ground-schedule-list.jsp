@@ -13,7 +13,7 @@
 						<table class="table simpleTable">
 							<thead>
 								<tr>
-									<th colspan="5">SCHEDULE LIST</th><th style="text-align:right;" colspan="2"><a class="btn btn-white" href="groundScheduleForm.do">스케줄 등록하기</a></th>
+									<th colspan="5">SCHEDULE LIST</th><th style="text-align:right;" colspan="2"><a class="btn btn-white" href="groundScheduleForm.do">일정 등록 하기</a></th>
 								</tr>
 								<tr class="center">
 									<th colspan="2">#</th>
@@ -28,16 +28,16 @@
 								<c:forEach items="${sList.list}" var="list">
 									<tr>
 										<td colspan="2">${list.scheduleNo}</td>
-										<td colspan="2"><a href="">${list.title}</a></td>
+										<td colspan="2"><a href="groundScheduleDetail.do?scheduleNo=${list.scheduleNo}">${list.title}</a></td>
 										<td>${list.insiderVO.memberVO.id}</td>	
 										<td>${list.currPersonnel}/${list.maxPersonnel}</td>
 
-										<td>
+										<%-- <td>
 											<form action="groundScheduleDetail.do">
 												<input type="submit" value="상세보기"> <input
 													type="hidden" name="scheduleNo" value="${list.scheduleNo}">
 											</form>
-										</td>
+										</td> --%>
 
 									</tr>
 								</c:forEach>
