@@ -6,7 +6,6 @@
 
 <script>
 	$(document).ready(function(){	
-	
 		
 		$("#participateBtn").click(function(){
 			//window.close();
@@ -94,7 +93,7 @@
           }
         },
         social: {
-          sharedCount: ${groundVO.participants}/${groundVO.maxPersonnel}명
+          sharedCount: ${groundVO.participants}
         },
         buttons: [
           {
