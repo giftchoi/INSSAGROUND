@@ -119,6 +119,28 @@
 
 	</div>
 	<div class="row">
+		<div class="col-sm-10 offset-1">
+			<table class="table simpleTable">
+				<tbody>
+					<tr class="center">
+					<c:set var="doneLoop" value="false"/> 
+					<c:forEach items="${pics}" var="pic" varStatus="info" >
+					<c:if test="${not doneLoop}"> 
+						
+							<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${pic}" width="100px" height="100px"></td>
+						<c:if test="${info.count%5==0 }"></tr><tr></c:if>
+						<c:if test="${info.count==10}">
+							<c:set var="doneLoop" value="true"/> 
+						</c:if>
+					</c:if>
+					</c:forEach>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-12 btnArea">
 			<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="principal" property="principal" />

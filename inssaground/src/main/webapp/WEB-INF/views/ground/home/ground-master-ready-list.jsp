@@ -32,7 +32,7 @@
 	<tr>
 		<th colspan="5"> 모임 참여 대기 회원 </th>
 	</tr>
-	<tr>
+	<tr class="center">
       <th>#</th>
       <th colspan="2">회원 정보</th>
       <th>승인</th>
@@ -46,8 +46,8 @@
 				</tr>
 			</c:if>
 		<c:forEach items="${requestScope.readyList }" var="mvo" varStatus="info">	
-			<tr>
-				<td rowspan="3">${info.count }</td><td rowspan="3"><img src="${pageContext.request.contextPath }/resources/uploadImage/${mvo.profile}" width="50px" height="75px"></td><td id="id">${mvo.id }</td>	<td><input id=""type="button" class="approveBtn btn btn-red" value="참여승인"></td>
+			<tr class="center">
+				<td rowspan="3">${info.count }</td><td rowspan="3"><img src="${pageContext.request.contextPath }/resources/uploadImage/${mvo.profile}" width="100px" height="120px"></td><td id="id">${mvo.id }</td><td><input id=""type="button" class="approveBtn btn btn-red" value="참여승인"></td>
 					<td><input id=""class="rejectBtn btn btn-grey"type="button" value="참여거절">	</td>	
 			</tr>
 			<tr>

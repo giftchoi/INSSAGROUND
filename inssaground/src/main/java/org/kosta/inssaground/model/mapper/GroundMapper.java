@@ -72,7 +72,7 @@ public interface GroundMapper {
 	List<MemberVO> scheduleParticipationMember(Map<String,Object> map);
 	NoticeVO newNotice(GroundVO groundVO);
 	List<PostVO> newPost(String groundNo);
-	List<PostVO> groundPicture(GroundVO groundVO);
+	List<String> groundPicture(GroundVO groundVO);
 	int ParticipationBoolean(Map<String,Object> map);
 	int scheduleCurrPersonnel(String scheduleNo);
 	void addAttendance(Map<String,Object> map);
