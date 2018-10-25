@@ -39,7 +39,7 @@ public interface GameProgramService {
 	public  List<GameProgramListVO> getGameProgramDetail(GameProgramVO gameProgramVO);	 
 	
 	/**
-	 * 게임 프로그램 수정하기 (삭제하고 만듬)
+	 * 게임 프로그램 수정하기 (삭제하고 만듦)
 	 * @param title
 	 * @param detail
 	 * @param gameNoList
