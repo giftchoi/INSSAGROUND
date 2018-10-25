@@ -6,7 +6,6 @@
 <script type="text/javascript">
 	function cancel(mode){
 		var theForm = document.frm;
-		alert(mode);
 		if(mode == "01"){
 			theForm.submit();
 		}else if(mode == "02"){
