@@ -55,13 +55,13 @@
          
          <div class="wrap-input100 bg1 rs1-wrap-input100">
             <span class="label-input100">최소인원</span> <input class="input100"
-               type="number" name="minPersonnel" min="1" max="999" maxlength="9" required="required" 
+               type="number" name="minPersonnel" min="1" max="999" maxlength="4" required="required" 
                value="${requestScope.customGameVO.minPersonnel}">
          </div>
 
          <div class="wrap-input100 bg1 rs1-wrap-input100">
             <span class="label-input100">최대인원</span> <input class="input100"
-               type="number" name="maxPersonnel" min="1" max="999" maxlength="9" required="required"
+               type="number" name="maxPersonnel" min="1" max="999" maxlength="4" required="required"
                value="${requestScope.customGameVO.maxPersonnel}">
          </div>
 
