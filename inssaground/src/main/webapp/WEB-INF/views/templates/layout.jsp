@@ -10,6 +10,10 @@
  <title>
      <tiles:insertAttribute name="title" ignore="true"></tiles:insertAttribute>
  </title>
+ 
+ <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+ 
+ 
  <!-- for using font  -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR" rel="stylesheet">
  

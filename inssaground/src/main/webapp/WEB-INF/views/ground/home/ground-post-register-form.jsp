@@ -52,10 +52,7 @@
 			//alert(	$("#postForm").find(":input[type=hidden]").val());
 			$("#postForm").submit();
 		});//click */
-		$("#testBtn").click(function(){
-			alert($('#summernote').summernote('code'));
-		});
-		
+
 		
 		
 		
@@ -113,4 +110,3 @@
 	<input type="hidden"	name = "insiderVO.groundNo" value="${sessionScope.ground.groundNo }">
 </form>
 </div>
-<input type="button" id="testBtn" value="test">

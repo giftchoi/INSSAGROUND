@@ -9,6 +9,13 @@ import org.kosta.inssaground.model.vo.MemberVO;
 
 public interface GameProgramService {
 	/**
+	 * 게임 프로그램 목록보기
+	 * @param id
+	 * @return
+	 */
+	public List<GameProgramVO> getAllGameProgram(String id);
+	
+	/**
 	 * 게임 프로그램 등록
 	 * @param title
 	 * @param detail
@@ -40,12 +47,14 @@ public interface GameProgramService {
 	 * @param pno
 	 */
 	public  void updateGameProgram(String title, String detail, String gameNoList, MemberVO mvo, String pno);	 
+	
 	/**
 	 * 게임 프로그램 삭제하기
 	 * @param pno
 	 * @param id
 	 */
 	public  void deleteGameProgram(String pno, String id);
+
 	
 	
 

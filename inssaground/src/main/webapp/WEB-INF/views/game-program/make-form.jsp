@@ -31,7 +31,8 @@
 						</div>
 						<div class="card-body" style="overflow: scroll; height: 650px;">
 							<div class="game-post-area">
-								<c:forEach items="${requestScope.officialGameLvo.list }"
+<!--카드 목록나올구문 ---------------------------------------------------------------------------------------------- -->
+					<c:forEach items="${requestScope.officialGameLvo.list }"
 									var="ogvo" varStatus="no">
 									<div id="programcard${no.count }" class="card game programcard">
 
@@ -44,7 +45,7 @@
 												style="font-family: serif; text-align: center;">${ogvo.oGameNo }</h5>
 											<i class="material-icons"> <a
 												href="${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}"
-												style="font-size: 20px; color: red">open_in_new</a>
+												style="font-size: 20px; color: red" target="_blank">open_in_new</a>
 											</i>
 										</div>
 
@@ -60,37 +61,44 @@
 										</div>
 									</div>
 
-								</c:forEach>
+					</c:forEach>
 								<div class="pagingInfo">
 									<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
 									<c:set var="pb"
 										value="${requestScope.officialGameLvo.pagingBean}"></c:set>
 									<ul class="pagination">
 										<c:if test="${pb.previousPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+											<li><button class="pageBtn">${pb.startPageOfPageGroup-1}</button></li>
+											<li>&laquo;</li>
+											<!-- <li class='disabled'><a href='#'>&laquo;</a></li> -->
 										</c:if>
 										<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 											end="${pb.endPageOfPageGroup}">
 											<c:choose>
 												<c:when test="${pb.nowPage!=i}">
-													<li><a
-														href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${i}">${i}</a></li>
+													<li>
+													<li><button class="pageBtn">${i}</button>
+													<%-- 
+													<a href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${i}">${i}</a>
+														 --%>
+														
+														</li>
 												</c:when>
 												<c:otherwise>
 													<li class="active"><a href="#">${i}</a></li>
 												</c:otherwise>
 											</c:choose>
-						&nbsp;
-						</c:forEach>
+										&nbsp;
+										</c:forEach>
 
 										<c:if test="${pb.nextPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+											<li>&raquo;</li>
+											<li><button class="pageBtn">${pb.endPageOfPageGroup+1}</button></li>
+											<!-- <li class='disabled'><a href='#'>&raquo;</a></li> -->
 										</c:if>
 									</ul>
 								</div>
-
+<!--카드 목록나올구문------------------------------------------------------------------ -->
 							</div>
 						</div>
 					</div>
@@ -152,9 +160,11 @@
 						<br>
 						<br>
 						<br>
-						<a href="${pageContext.request.contextPath}/resultGameProgram.do">
-						내 게임프로그램 확인폼
-						</a>
+						
+						<button class="btn btn-lg btn-outline-danger" style="font-size: 23px"
+							 onclick="location.href='${pageContext.request.contextPath}/resultGameProgram.do' ">
+							 <i class="fa fa-list-alt"></i> 내 프로그램 상세보기</button>
+						
 
 					</div>
 				</div>
@@ -169,7 +179,104 @@
 <script>
 
 $(document).ready(function() {
-	$("#programcard1").click(function() {
+	$('.game-post-area').on("click",".pageBtn",function(event){
+        // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
+        //alert($(this).text());
+        //$(".game-post-area").remove();
+        $.ajax({
+            type: "get",
+            url: "makeGameProgramFormByPageNo.do",
+            dataType:"json",
+            data: {pageNo : $(this).text()},
+            success: function(listVO) {
+                //$.trim() => 앞뒤 공백 제거
+                //alert(gvo.title);
+                
+                var json="";
+
+				var ogvo = listVO.list;
+				for(var i=0; i<ogvo.length; i++){
+					
+json+="						<div id='programcard";
+json+=						i+1;
+json+=						"' class='card game programcard'>";
+
+json+="							<div class='card-header'><h4 id='gametitle";
+json+=							i+1;
+json+=							"'>";
+json+=					ogvo[i].title;
+json+="						</h4></div><div class='card-body'><h5 id='oGameNo";
+json+=							i+1;
+json+=							"'style='font-family: serif; text-align: center;'>";
+json+=					ogvo[i].oGameNo;
+json+=						"</h5><i class='material-icons'>";
+json+="						<a href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=";
+json+=					ogvo[i].oGameNo;
+json+=								"' style='font-size: 20px; color: red' target='_blank'>open_in_new</a></i></div>";
+
+json+="						<div class='rowgamefooter'>";
+json+="							<div class='col-sm-6' align='left'><h5 style='font-family: serif; text-align: left;'>";
+json+=					ogvo[i].gameTime;
+json+=								" 분</h5></div>";
+json+="						<div class='col-sm-6' align='right'><h5 align='right' style='color: red;'>";
+json+=							ogvo[i].minPersonnel;
+json+=								" ~ ";
+json+=							ogvo[i].maxPersonnel;
+json+=								" 명</h5></div></div></div>";
+				}
+json+="					<div class='pagingInfo'>";
+						
+				var pb = listVO.pagingBean;
+json+="						<ul class='pagination'>";
+
+						if(pb.previousPageGroup){							
+json+="							<li><button class='pageBtn'>";
+json+=									pb.startPageOfPageGroup-1;
+json+=									"</button></li>";
+json+=									"<li>&laquo;</li>";
+//json+=									"<li class='disabled'><a href='#'>&laquo;</a></li>";
+						}
+						for(var i=pb.startPageOfPageGroup; i<=pb.endPageOfPageGroup; i++){
+							if(pb.nowPage!=i){
+								
+json+="							<li><button class='pageBtn'>";
+json+=							i;
+json+=							"</button></li>";
+							}
+							else {
+								
+json+="							<li class='active'><a href='#'>";
+json+=									i;
+json+=							"</a></li>";		
+							}
+json+="								&nbsp;";
+						}
+
+							
+							if(pb.nextPageGroup){
+//json+=							"<li class='disabled'><a href='#'>&raquo;</a></li>";
+json+="<li>&raquo;</li>"
+json+="							<li><button class='pageBtn'>";
+json+=							pb.endPageOfPageGroup+1;
+json+=							"</button></li>";
+							}
+json+="					</ul></div>";
+        		
+                $(".game-post-area").html(json);
+            },
+            error: function(data) {
+                alert("error!");
+            }
+        });
+
+        
+	});
+	
+	
+	
+	
+	//$("#programcard1").click(function() {
+	$('.game-post-area').on('click','#programcard1',function() {
 		// alert($("#oGameNo1").text());
 		 $.ajax({
              type: "get",
@@ -189,13 +296,15 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard1').remove();
              },
              error: function(data) {
                  alert("error!");
              }
          });
 	});
-	$("#programcard2").click(function() {
+	//$("#programcard2").click(function() {
+	$('.game-post-area').on('click','#programcard2',function() {
 		 $.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
@@ -214,14 +323,16 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard2').remove();
              },
              error: function(data) {
                  alert("error!");
              }
          });
 	});
-	$("#programcard3").click(function() {
-		 $.ajax({
+	//$("#programcard3").click(function() {
+	$('.game-post-area').on('click','#programcard3',function() {
+		$.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
              dataType:"json",
@@ -239,14 +350,16 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard3').remove();
              },
              error: function(data) {
                  alert("error!");
              }
          });
 	});
-	$("#programcard4").click(function() {
-		 $.ajax({
+	//$("#programcard4").click(function() {
+	$('.game-post-area').on('click','#programcard4',function() {
+		$.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
              dataType:"json",
@@ -264,13 +377,16 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard4').remove();
              },
              error: function(data) {
                  alert("error!");
              }
          });
 	});
-	$("#programcard5").click(function() {
+	
+	//$("#programcard5").click(function() {
+	$('.game-post-area').on('click','#programcard5',function() {
 		 $.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
@@ -289,13 +405,15 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard5').remove();
              },
              error: function(data) {
                  alert("error!");
              }
          });
 	});
-	$("#programcard6").click(function() {
+	//$("#programcard6").click(function() {
+	$('.game-post-area').on('click','#programcard6',function() {
 		 $.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
@@ -314,6 +432,7 @@ $(document).ready(function() {
                  str+="cancel</button></i>";
                  str+="</td></tr>";
                  $('#endgameprogram').before(str);
+                 $('#programcard6').remove();
              },
              error: function(data) {
                  alert("error!");

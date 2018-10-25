@@ -20,7 +20,6 @@ import org.kosta.inssaground.model.vo.SigunguVO;
 public interface GroundService {
 	public void applyGround(GroundVO groundVO,SidoVO sidoVO,SigunguVO sigunguVO,HobbyVO hobbyVO,HobbyCategoryVO hobbyCategoryVO); // 모임신청
 	public List<SidoVO> getAllSido();// 모든 시도
-	public GroundVO enterGround(String groundNo); // 모임 홈
 	public GroundVO groundDetail(GroundVO groundVO); // 모임 상세보기
 	public void groundParticipation(); // 모임참여
 	public ListVO<PostVO> groundBoard(GroundVO groundVO); // 모임 게시판
@@ -49,6 +48,7 @@ public interface GroundService {
 	public void participateGround(String groundNo);	// 모임 참여하기
 	public List<MemberVO> getParticipationReadyList(String groundNo);	//모임장-모임 참여 대기 리스트 가져오기
 	public void approveParticipation(InsiderVO insiderVO); //모임장-모임참여 허가
+	public void rejectParticipation(InsiderVO insiderVO); //모임장-모임참여 거절
 	public void registerGroundNotice(NoticeVO noticeVO);//모임 공지 등록
 	public NoticeVO getNoticeDetailByNo(String noticeNo);	//인싸 - 모임 공지 상세보기
 	public ListVO<NoticeVO> getAllGroundNoticeList(String groundNo,String nowPage);	

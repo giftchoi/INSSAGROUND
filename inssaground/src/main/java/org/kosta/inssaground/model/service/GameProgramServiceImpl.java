@@ -19,6 +19,11 @@ public class GameProgramServiceImpl implements GameProgramService {
 	private GameProgramMapper gpm;
 	
 	@Override
+	public List<GameProgramVO> getAllGameProgram(String id){
+		return gpm.getAllGameProgram(id);
+	}
+	
+	@Override
 	public void registerGameProgram(String title, String detail, String gameNoList, MemberVO mvo) {
 		String[] gameNo = gameNoList.split("　");
 		

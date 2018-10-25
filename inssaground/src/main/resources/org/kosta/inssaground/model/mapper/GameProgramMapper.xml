@@ -3,8 +3,11 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="org.kosta.inssaground.model.mapper.GameProgramMapper">
+<mapper namespace="org.kosta.inssaground.model.mapper.GameProgramMapper">
+	<select id="getAllGameProgram" resultType="gameProgramVO">
+		select program_no, title, detail, id from GAME_PROGRAM
+		where id=#{value} order by program_no
+	</select>
 	<insert id="createGameProgram" parameterType="gameProgramVO">
 		<selectKey keyProperty="programNo" resultType="String"
 			order="BEFORE">
@@ -31,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="gameProgramVO" resultType="gameProgramListVO">
 		select gp.detail, r_pog_og.*
 		from (
-		select pog.program_no, pog.game_order, og.o_game_no, og.title
+		select pog.program_no, pog.game_order, og.o_game_no, og.title, og.min_personnel, og.max_personnel, og.game_time
 		from PROGRAM_OFFICIAL_GAME pog, OFFICIAL_GAME og
 		where pog.o_game_no= og.o_game_no
 		) r_pog_og, GAME_PROGRAM gp

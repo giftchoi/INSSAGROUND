@@ -26,6 +26,7 @@ public interface GroundMapper {
 	void participateGround(Map<String,String> map);
 	List<MemberVO> getParticipationReadyList(String groundNo);
 	void approveParticipation(InsiderVO insiderVO);
+	void rejectParticipation(InsiderVO insiderVO);
 	void registerGroundNotice(NoticeVO noticeVO);// 공지 등록
 	int getGroundNoticeCount(String groundNo);	//공지 갯수 
 	NoticeVO getNoticeDetailByNo(String noticeNo); //공지 상세 정보 
@@ -94,5 +95,6 @@ public interface GroundMapper {
 	void insertInsider(Map<String,String> map);
 	int getTotalmyScheduleList(String id);
 	List<ScheduleVO> getScheduleList(Map<String,Object> map);
+
 
 }
