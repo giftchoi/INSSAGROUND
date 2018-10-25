@@ -29,6 +29,12 @@
 		var gno = ${requestScope.groundNo};
 		$('div.modal').modal();
 		$('.modal-content').load("groundDetail.do?groundNo="+gno);
+		
+		$(document).on('hide.bs.modal','div.modal', function () {
+          location.href="home.do";
+
+		});
+	
 		$(".gBtn").mouseenter(function(){
 			/* $(this).next().show(); */
 			//alert($(this).position().left);

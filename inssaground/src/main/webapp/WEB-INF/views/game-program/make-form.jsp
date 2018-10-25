@@ -68,15 +68,16 @@
 										value="${requestScope.officialGameLvo.pagingBean}"></c:set>
 									<ul class="pagination">
 										<c:if test="${pb.previousPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+											<li><button class="pageBtn">${pb.startPageOfPageGroup-1}</button></li>
+											<li>&laquo;</li>
+											<!-- <li class='disabled'><a href='#'>&laquo;</a></li> -->
 										</c:if>
 										<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 											end="${pb.endPageOfPageGroup}">
 											<c:choose>
 												<c:when test="${pb.nowPage!=i}">
 													<li>
-													<li><button id="curPage">${i}</button>
+													<li><button class="pageBtn">${i}</button>
 													<%-- 
 													<a href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${i}">${i}</a>
 														 --%>
@@ -91,8 +92,9 @@
 										</c:forEach>
 
 										<c:if test="${pb.nextPageGroup}">
-											<li><a
-												href="${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+											<li>&raquo;</li>
+											<li><button class="pageBtn">${pb.endPageOfPageGroup+1}</button></li>
+											<!-- <li class='disabled'><a href='#'>&raquo;</a></li> -->
 										</c:if>
 									</ul>
 								</div>
@@ -177,7 +179,7 @@
 <script>
 
 $(document).ready(function() {
-	$(document).on("click","#curPage",function(event){
+	$('.game-post-area').on("click",".pageBtn",function(event){
         // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
         //alert($(this).text());
         //$(".game-post-area").remove();
@@ -227,15 +229,17 @@ json+="					<div class='pagingInfo'>";
 				var pb = listVO.pagingBean;
 json+="						<ul class='pagination'>";
 
-						if(pb.previousPageGroup){
-json+="							'<li><a href='${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=";
+						if(pb.previousPageGroup){							
+json+="							<li><button class='pageBtn'>";
 json+=									pb.startPageOfPageGroup-1;
-json+="									'>&laquo;</a></li>";
+json+=									"</button></li>";
+json+=									"<li>&laquo;</li>";
+//json+=									"<li class='disabled'><a href='#'>&laquo;</a></li>";
 						}
-						for(var i=pb.startPageOfPageGroup; i<pb.endPageOfPageGroup; i++){
+						for(var i=pb.startPageOfPageGroup; i<=pb.endPageOfPageGroup; i++){
 							if(pb.nowPage!=i){
 								
-json+="							<li><button id='curPage'>";
+json+="							<li><button class='pageBtn'>";
 json+=							i;
 json+=							"</button></li>";
 							}
@@ -250,11 +254,11 @@ json+="								&nbsp;";
 
 							
 							if(pb.nextPageGroup){
-json+="								<li>";
-json+="							<a href='${pageContext.request.contextPath}/makeGameProgramFormByPageNo.do?pageNo=";
+//json+=							"<li class='disabled'><a href='#'>&raquo;</a></li>";
+json+="<li>&raquo;</li>"
+json+="							<li><button class='pageBtn'>";
 json+=							pb.endPageOfPageGroup+1;
-json+="							'>&raquo;</a>";
-json+="							</li>";
+json+=							"</button></li>";
 							}
 json+="					</ul></div>";
         		
@@ -267,6 +271,10 @@ json+="					</ul></div>";
 
         
 	});
+	
+	
+	
+	
 	//$("#programcard1").click(function() {
 	$('.game-post-area').on('click','#programcard1',function() {
 		// alert($("#oGameNo1").text());

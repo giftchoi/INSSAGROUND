@@ -59,9 +59,17 @@ html{
 
 
 .card.game{
+	margin:10px;
+	box-shadow: 0 5px 6px -5px #ececec;
+	border : 2px solid #f1f1f1;
+	border-radius:10px;
 	display: inline-block;
 	width: 400px;
 	height: 150px;
+}
+.card.game:hover {
+	border: 2.5px solid #ff1a1a;
+	cursor:pointer;
 }
 
 .card.ground {

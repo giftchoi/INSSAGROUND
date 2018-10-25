@@ -6,6 +6,7 @@
 
 <script>
 	$(document).ready(function(){	
+		
 		$("#participateBtn").click(function(){
 			//window.close();
 			//window.open("home.do");
@@ -23,10 +24,15 @@
 			alert("로그인 후 이용가능합니다.");
 			location.href="loginForm.do";
 		});
-	});
-	
+	});	
 	function participate(){
 		$("#participateForm").submit();
+	}
+	function copyLink(gno){
+		$("#hiddenDiv").show();
+		$("#link").select();
+		document.execCommand("copy");
+		$("#hiddenDiv").hide();
 	}
 </script>
 <div>
@@ -38,7 +44,6 @@
 		</div>
 	</div>
 	<div class="row ground-detail-content">
-
 		<div class="col-sm-10 offset-1">
 			<div class="row ground-detail-title">
 				<div class="col-sm-12">
@@ -62,10 +67,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-2 offset-10">
+		<div class="col-sm-3 offset-9">
+			<div id="hiddenDiv" style="display:none;">
+				<input type="text" id="link" value="http://localhost:8888/inssaground/shome.do?groundNo=${groundVO.groundNo }">
+			</div><br>
 			<a id="kakao-link-btn" href="javascript:sendLink(${groundVO.groundNo})">
 <img style="padding-bottom:10px; height:50px;" src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-</a>
+</a>&nbsp;&nbsp;&nbsp;<a style="padding-top:2px;color:black;" href="javascript:copyLink(${groundVO.groundNo})"><i class="fa fa-copy fa-3x"></i></a>
 <script type='text/javascript'>
 
   //<![CDATA[
@@ -73,8 +81,6 @@
     Kakao.init('d62c1dc1956031902d088498c469f737');
     // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     function sendLink(gno) {
-    	
-
     	
       Kakao.Link.sendDefault({
         objectType: 'feed',
