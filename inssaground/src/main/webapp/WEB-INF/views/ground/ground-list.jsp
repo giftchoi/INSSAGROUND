@@ -200,7 +200,7 @@
 	<div class="row main-content">
 		<div class="col-sm-8 offset-2">
 			<div>
-				<h1>GROUND</h1>
+				<h1>모임 찾기</h1>
 			</div>
 			<div class="search-filter-area">
 				<hr>

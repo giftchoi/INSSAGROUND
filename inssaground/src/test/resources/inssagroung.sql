@@ -16,15 +16,18 @@ create sequence CUSTOM_GAME_Seq nocache;
 create sequence sido_seq nocache;
 create sequence sigungu_seq nocache;
 create sequence ground_img_seq nocache;
+create sequence notice_seq nocache;
 --------------------------------------------------------------------------------
 -------------------------------CREATE TABLE--------------------------------
 --------------------------------------------------------------------------------
 -- 1
+drop table hobby_category
 create table hobby_category(
    hobby_category_no number primary key,
    category varchar2(100) not null
 )
 --2
+drop table inssa_member
 create table INSSA_MEMBER(
    id varchar2(100) primary key,
    password varchar2(100) not null,
@@ -34,6 +37,7 @@ create table INSSA_MEMBER(
    constraint fk_email foreign key(email) references email_key(email)
 )
 --3
+drop table member_authority
 create table MEMBER_AUTHORITY(
    id varchar2(100),
    role varchar2(100),
@@ -41,6 +45,7 @@ create table MEMBER_AUTHORITY(
    constraint pk_inssa_member primary key(id,role)
 );
 --4
+drop table hobby
 create table hobby(
    hobby_no number primary key,
    name varchar2(100) not null,
@@ -49,17 +54,23 @@ create table hobby(
    references hobby_category(hobby_category_no)
 )
 --5
+drop table sido
 create table sido(
    sido_no number primary key,
    sido varchar2(100) not null
 )
 --6
+select * from sigungu
+drop table sigungu 
 create table sigungu(
    sigungu_no number primary key,
+   sigungu_name varchar2(100) not null,
    sido_no number,
    constraint fk_sigungu foreign key(sido_no) references sido(sido_no)
 )
+alter table sigungu add sigungu_name varchar2(100) not null
 --7
+drop table ground
 create table ground(
    ground_no number primary key,
    max_personnel number default 0,
@@ -75,6 +86,7 @@ create table ground(
 )
 
 --8
+drop table insider
 create table insider(
    id varchar2(100),
    ground_no number,
@@ -85,11 +97,13 @@ create table insider(
    constraint pk_insider primary key(id,ground_no)
 )
 --9
+drop table game_category
 create table GAME_CATEGORY(
    cg_no number primary key,
    name varchar2(100) not null
 );
 --10
+drop table official_game
 create table OFFICIAL_GAME(
    o_game_no number primary key,
    title varchar2(50) not null,
@@ -102,6 +116,7 @@ create table OFFICIAL_GAME(
    constraint fk_GAME_CATEGORY_OFFICIAL foreign key(cg_no) references GAME_CATEGORY(cg_no)
 );
 --11
+drop table game_program
 create table GAME_PROGRAM(
    program_no number primary key,
    title varchar2(100) not null,
@@ -110,6 +125,7 @@ create table GAME_PROGRAM(
    CONSTRAINT fk_GAME_PROGRAM_id FOREIGN KEY (id) REFERENCES INSSA_MEMBER(id)
 );
 --12
+drop table ground_post
 create table ground_post(
    post_no number primary key,
    time_posted date default sysdate,
@@ -121,6 +137,7 @@ create table ground_post(
    constraint fk_ground_post_id foreign key(id,ground_no) references insider(id,ground_no)
 )
 --13
+drop table schedule
 create table schedule(
    schedule_no number primary key,
    start_date date default sysdate,
@@ -134,6 +151,7 @@ create table schedule(
    constraint fk_schedule_id foreign key(id,ground_no) references insider(id,ground_no)   
 )
 --14
+drop table program_official_game
 create table PROGRAM_OFFICIAL_GAME(
    program_no number,
    o_game_no number,
@@ -144,6 +162,7 @@ create table PROGRAM_OFFICIAL_GAME(
    constraint pk_PROGRAM_OFFICIAL_GAME1 primary key(program_no, o_game_no)
 );
 --15
+drop table custom_game
 create table CUSTOM_GAME(
    c_game_no number primary key,
    title varchar2(50) not null,
@@ -158,6 +177,7 @@ create table CUSTOM_GAME(
    constraint fk_GAME_CATEGORY_CUSTOM foreign key(cg_no) references GAME_CATEGORY(cg_no)
 );
 --16
+drop table participant
 create table participant(
    id varchar2(100),
    schedule_no number,
@@ -167,10 +187,12 @@ create table participant(
    constraint pk_participant primary key(id,schedule_no,ground_no)
 )
 --17
+drop table hashtag
 create table hashtag(
    content varchar2(100) primary key
 )
 --18
+drop table ground_hashtag
 create table ground_hashtag(
    content varchar2(100),
    ground_no number,
@@ -178,6 +200,7 @@ create table ground_hashtag(
    constraint fk_ground_hashtag_ground_no foreign key(ground_no) references ground(ground_no)
 )
 --19
+drop table badground_report
 create table badground_report(
    report_no number primary key,
    content clob not null,
@@ -189,6 +212,7 @@ create table badground_report(
    constraint fk_badground_report_ground_no foreign key(ground_no) references ground(ground_no)
 )
 --20
+drop table post_img
 create table post_img(
    img_no number primary key,
    img_name varchar2(100) not null,
@@ -196,11 +220,13 @@ create table post_img(
    constraint fk_post_img_post_no foreign key(post_no) references ground_post(post_no)
 )
 ---21
+drop table feature
 create table feature(
    feature_no number primary key,
    name varchar2(100) not null
 ) 
 --22
+drop table hobby_feature
 create table hobby_feature(
    feature_no number,
    hobby_no   number,
@@ -242,3 +268,12 @@ create table ground_img(
 	constraint fk_ground_img foreign key (GROUND_NO) REFERENCES GROUND (GROUND_NO)
 )
 
+--27
+create table notice(
+   notice_no number primary key,
+   ground_no number not null,
+   time_posted date default sysdate,
+   content clob not null,
+   
+   constraint fk_notice_ground_no foreign key(ground_no) references ground(ground_no)
+)

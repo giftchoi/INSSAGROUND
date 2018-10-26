@@ -251,7 +251,7 @@ public interface GroundService {
 	 * @param groundVO
 	 * @return
 	 */
-	public List<PostVO> groundPicture(GroundVO groundVO);
+	public List<String> groundPicture(GroundVO groundVO);
 	/**
 	 *  일정 참여 했으면 1 안했으면 0 반환
 	 * @param memberVO

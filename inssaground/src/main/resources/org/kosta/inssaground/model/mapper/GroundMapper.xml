@@ -105,8 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<select id="getParticipationReadyList" parameterType="string"
 		resultType="memberVO">
-		select m.id,m.name,m.email,p.path as profile from inssa_member m, insider i,profile_img p
-		where i.ground_no=#{value} and i.status=0 and i.id=m.id and p.id=m.id
+		select m.id,m.name,m.email,p.path as profile from inssa_member m left join profile_img p on m.id=p.id, insider i
+		where i.ground_no=#{value} and i.status=0 and i.id=m.id 
 	</select>
 	<update id="approveParticipation" parameterType="insiderVO">
 		update insider
@@ -372,11 +372,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="postVO" id="postVORM">
 		<result column="id" property="insiderVO.memberVO.id"/>
 	</resultMap>
-	<select id="groundPicture" parameterType="groundVO" resultMap="postVORM">
-		select i.img_name as pictureList,p.id,to_char(time_posted,'yyyy-mm-dd') as timePosted,p.post_no
-		from ground_post p,post_img i
-		where p.post_no=i.post_no
-		and ground_no=#{groundNo}
+	<select id="groundPicture" parameterType="groundVO" resultType="string">
+		select img_name
+		from(select p.post_no,i.img_name,rank() over(order by p.time_posted desc) as rank
+		from ground_post p, post_img i
+		where p.post_no=i.post_no and p.ground_no=#{groundNo})
+		where rank between 1 and 15
 	</select>
 	
 	<select id="ParticipationBoolean" parameterType="map" resultType="int"> 

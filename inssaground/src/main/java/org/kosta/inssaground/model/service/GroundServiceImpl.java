@@ -326,7 +326,7 @@ public class GroundServiceImpl implements GroundService {
 	}
 
 	@Override
-	public List<PostVO> groundPicture(GroundVO groundVO) {		
+	public List<String> groundPicture(GroundVO groundVO) {		
 		return groundMapper.groundPicture(groundVO);
 	}
 

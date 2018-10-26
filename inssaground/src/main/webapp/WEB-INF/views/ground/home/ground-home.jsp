@@ -135,16 +135,42 @@
 			</table>
 		</div>
 	</div>
+	<br><br><br><br>
 	<div class="row imgArea">
 		<div class="col-sm-10 offset-1">
-										<table>
-								<c:forEach items="${picture}" var="post">
+			<table class="table simpleTable">
+				<thead>
+					<tr>
+						<th colspan="2">활동 사진</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="center">
+					<c:set var="doneLoop" value="false"/> 
+					<c:forEach items="${picture}" var="pic" varStatus="info" >
+					<c:if test="${not doneLoop}"> 
+						
+							<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${pic}" width="120px" height="120px"></td>
+						<c:if test="${info.count%5==0 }"></tr><tr></c:if>
+						<c:if test="${info.count==15}">
+							<c:set var="doneLoop" value="true"/> 
+						</c:if>
+					</c:if>
+					</c:forEach>
+					</tr>
+				</tbody>
+			
+			</table>
+		 
+		
+<%-- 										<table>
+			<c:forEach items="${picture}" var="post">
 								<c:forEach items="${post.pictureList }" var="pic">
 									<td><img src="${pageContext.request.contextPath}/resources/uploadImage/${pic}"></td>
 								</c:forEach>
 								
 								</c:forEach>
-							</table>
+							</table> --%>
 		</div>
 	</div>
 

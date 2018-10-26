@@ -92,9 +92,10 @@ public class GroundController {
 	public String groundDetail(GroundVO paramVO, Model model) {
 		System.out.println(paramVO.getGroundNo());
 		GroundVO groundVO = groundService.groundDetail(paramVO);
-		System.out.println("모임 상세:"+groundVO);
+		
 		//GroundVO groundVO = groundService.findGroundByGroundNo(paramVO);
 		model.addAttribute("groundVO", groundVO);
+		model.addAttribute("pics",groundService.groundPicture(paramVO));
 		return "ground/ground-detail";
 	}
 	
@@ -355,7 +356,9 @@ public class GroundController {
 		groundService.addAttendance(gvo.getGroundNo(),mvo.getId(),attendance);
 		model.addAttribute("schedule",groundService.newSchedule(gvo.getGroundNo()));
 		session.setAttribute("attendance",attendance);
-		model.addAttribute("picture",groundService.groundPicture(groundVO));
+		List<String> pList = groundService.groundPicture(groundVO);
+		System.out.println("********"+pList);
+		model.addAttribute("picture",pList);
 		model.addAttribute("post",groundService.newPost(groundVO.getGroundNo()));
 		model.addAttribute("notice",groundService.newNotice(groundVO));
 		session.setAttribute("mvo",mvo);
@@ -380,7 +383,6 @@ public class GroundController {
 	public String groundPost(String postNo, Model model) {
 		PostVO postVO = groundService.findPostByPostNo(postNo); 
 		model.addAttribute("postVO",postVO);
-		System.out.println(postVO);
 		return "ground/home/ground-post-detail.tiles";
 	}
 	@Secured("ROLE_MEMBER")
@@ -480,14 +482,14 @@ public class GroundController {
 		groundService.scheduleParticipation(scheduleNo, memberVO, groundVO);
 		return "redirect:groundScheduleList.do";
 	}
-	@Secured("ROLE_MEMBER")
+	/*@Secured("ROLE_MEMBER")
 	@RequestMapping("groundPicture.do")
 	public String groundPicture(HttpSession session,Model model) {
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
 		List<PostVO> postList = groundService.groundPicture(groundVO);
 		model.addAttribute("postList",postList);
 		return "ground/home/ground-picture.tiles";
-	}
+	}*/
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("memberInfo.do")
 	public String memberInfo(String id,HttpSession session,Model model) {
