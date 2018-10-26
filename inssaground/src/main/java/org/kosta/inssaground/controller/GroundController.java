@@ -338,7 +338,8 @@ public class GroundController {
 	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
-	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
+	public String groundHome(GroundVO groundVO,Model model,HttpSession session,String sc) {
+
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
 		GroundVO vo = groundService.groundHashtag2(gvo);
@@ -367,6 +368,9 @@ public class GroundController {
 		session.setAttribute("ground",gvo);
 		session.setAttribute("gvo",gvo);
 		//model.addAttribute("gvo",gvo);
+		if(sc!= null) {
+			return "redirect:groundScheduleDetail.do?scheduleNo="+sc;
+		}
 		return "ground/home/ground-home.tiles";
 	}
 	@Secured("ROLE_MEMBER")
