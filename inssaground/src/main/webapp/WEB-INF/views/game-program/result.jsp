@@ -14,7 +14,7 @@
 	<div class="row main-content">
 		<div class="col-sm-12">
 			<div>
-				<h1>MAKE INSSA GAME PROGRAM</h1>
+				<h1>MY INSSA GAME PROGRAM</h1>
 			</div>
 			<br> <br>
 			<div class="row">

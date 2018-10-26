@@ -33,8 +33,9 @@
    <div class="wrap-contact100">
       <form class="contact100-form" action="${pageContext.request.contextPath}/writeCustomGame.do" method="post" id="write_form">
          <sec:csrfInput/>
-         <span class="contact100-form-title" style="font-size: x-large; font-weight: bolder;">사용자 게임 작성하기</span>
 
+         <span class="contact100-form-title" style="font-size: x-large; font-weight: bolder;">사용자 게임 작성하기</span>
+        
          <div class="wrap-input100 bg1">
             <span class="label-input100" style="font-size: medium;">제목</span> <input
                class="input100" type="text" name="title" required="required"
