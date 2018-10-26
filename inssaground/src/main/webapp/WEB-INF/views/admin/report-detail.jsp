@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<div class="col-sm-12">
+	<div class="row main-content">
+		<div class="col-sm-8 offset-2">
 <form action="reportAnswer.do" method="post">
 <sec:csrfInput/>		
 <input type="hidden" name="reportNo" value="${report.reportNo}">
@@ -25,6 +28,6 @@
   </tbody>
 </table>
 </form>
-
+</div></div></div>
 <!-- <i class="material-icons button edit">edit</i>
         <i class="material-icons button delete">delete</i> -->
