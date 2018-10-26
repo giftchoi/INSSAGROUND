@@ -54,7 +54,9 @@
 	 --%>		
 </div>
 <div class="col-sm-12">
+<c:if test="${requestScope.gameProgramList != null}">
 	<button class="btn btn-lg btn-outline-danger" style="font-size: 23px"
 							 onclick="location.href='${pageContext.request.contextPath}/resultGameProgram.do' ">
 							 <i class="fa fa-list-alt"></i> 내 프로그램 상세보기</button>
+</c:if>
 </div>
