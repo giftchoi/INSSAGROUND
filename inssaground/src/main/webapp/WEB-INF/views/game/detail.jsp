@@ -19,7 +19,8 @@
 		<c:when test="${requestScope.gameType eq 'custom'}">
 
 <!-- 사용자게임 폼 -->
-<table class="myTable simpleTable">
+<div class="col-sm-8 offset-2">
+<table class="table simpleTable">
   <thead>
     <tr>
       <th colspan="3">${requestScope.gvo.title }</th>
@@ -123,62 +124,60 @@
     </tr>
   </tbody>
 </table>
-
+	</div>
 
 		</c:when>
 		<c:otherwise>
 
 
 <!-- 공식게임 폼 -->
-<table class="myTable">
+<div class="col-sm-8 offset-2">
+<table class="table simpleTable">
   <thead>
     <tr>
-      <th colspan="3">${requestScope.gvo.title }</th>
-    </tr>
-   <tr>
-      <th></th>
-      <th>　　　　　　　　　　　　　　</th>
-      <th  style="font-weight: bolder;">관리자</th>
+      <th style="font-size:25px;"colspan="2">${requestScope.gvo.title }</th>
     </tr>
   </thead>
   <tbody>
+  <tr>
+  	<td style="text-align:left;">작성자: 관리자</td>
+  </tr>
     <tr>
       <td>인원</td>
-      <td colspan="2">${requestScope.gvo.minPersonnel } ~
+      <td style="text-align:left;" >${requestScope.gvo.minPersonnel } ~
 							${requestScope.gvo.maxPersonnel } 명</td>
     </tr>
     <tr>
       <td>게임시간</td>
-      <td colspan="2">${requestScope.gvo.gameTime } 분</td>
+      <td style="text-align:left;" >${requestScope.gvo.gameTime } 분</td>
     </tr>
     <tr>
       <td>준비물</td>
-      <td colspan="2">${requestScope.gvo.materials }</td>
+      <td style="text-align:left;">${requestScope.gvo.materials }</td>
     </tr>
 <c:choose>
 	<c:when test="${requestScope.gvo.cgNo eq 1}">
 	<tr>
       <td>분류</td>
-      <td colspan="2">실내 게임</td>
+      <td style="text-align:left;">실내 게임</td>
     </tr>
 	</c:when>
 	<c:otherwise>
 	<tr>
       <td>분류</td>
-      <td colspan="2">실외 게임</td>
+      <td style="text-align:left; colspan="2">실외 게임</td>
     </tr>
     </c:otherwise>
 </c:choose>
     
 
     <tr>
-	<td colspan="3">
-		<pre>${requestScope.gvo.content}</pre>
+	<td colspan="2">
+		<pre style="font-size:20px;">${requestScope.gvo.content}</pre>
     </td>
 	</tr>
 
     <tr>
-      <td></td>
       <td></td>
       <td>
 						
@@ -216,7 +215,7 @@
     </tr>
   </tbody>
 </table>
-
+	</div>
 
 		</c:otherwise>
 	</c:choose>

@@ -33,40 +33,40 @@
    <div class="wrap-contact100">
       <form class="contact100-form" action="${pageContext.request.contextPath}/updateCustomGame.do" method="post" id="write_form">
          <sec:csrfInput/>
-         <span class="contact100-form-title">사용자 게임 수정하기</span>
+         <span class="contact100-form-title" style="font-size: x-large; font-weight: bolder;">사용자 게임 수정하기</span>
 <input type="hidden" name="cGameNo" value="${requestScope.customGameVO.cGameNo}">
          <div class="wrap-input100 bg1">
-            <span class="label-input100">제목</span> <input
+            <span class="label-input100" style="font-size: medium;">제목</span> <input
                class="input100" type="text" name="title" required="required"
                value="${requestScope.customGameVO.title}">
          </div>
 
          <div class="wrap-input100 bg1">
-            <span class="label-input100">준비물</span> <input
+            <span class="label-input100" style="font-size: medium;">준비물</span> <input
                class="input100" type="text" name="materials" required="required"
                value="${requestScope.customGameVO.materials}">
          </div>
          
          <div class="wrap-input100 bg1">
-            <span class="label-input100">게임시간</span> <input
+            <span class="label-input100" style="font-size: medium;">게임시간</span> <input
                class="input100" type="number" name="gameTime" min="1" max="99" maxlength="2" required="required"
                value="${requestScope.customGameVO.gameTime}">
          </div>
          
          <div class="wrap-input100 bg1 rs1-wrap-input100">
-            <span class="label-input100">최소인원</span> <input class="input100"
+            <span class="label-input100" style="font-size: medium;">최소인원</span> <input class="input100"
                type="number" name="minPersonnel" min="1" max="999" maxlength="4" required="required" 
                value="${requestScope.customGameVO.minPersonnel}">
          </div>
 
          <div class="wrap-input100 bg1 rs1-wrap-input100">
-            <span class="label-input100">최대인원</span> <input class="input100"
+            <span class="label-input100" style="font-size: medium;">최대인원</span> <input class="input100"
                type="number" name="maxPersonnel" min="1" max="999" maxlength="4" required="required"
                value="${requestScope.customGameVO.maxPersonnel}">
          </div>
 
             <div class="wrap-contact100-form-radio">
-               <span class="label-input100">장소구분</span>
+               <span class="label-input100" style="font-size: large;">장소구분</span>
 
 <script>
 $(document).ready(function() {
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
 
          <div class="wrap-input100 bg0 rs1-alert-validate">
-            <span class="label-input100">게임 내용</span>
+            <span class="label-input100" style="font-size: medium;">게임 내용</span>
             <textarea class="input100" name="content" required="required"
               >${requestScope.customGameVO.content}</textarea>
          </div>

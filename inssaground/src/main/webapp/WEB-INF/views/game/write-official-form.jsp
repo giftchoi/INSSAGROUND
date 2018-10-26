@@ -33,38 +33,38 @@
    <div class="wrap-contact100">
       <form class="contact100-form" action="${pageContext.request.contextPath}/writeOfficialGame.do" method="post" id="write_form">
          <sec:csrfInput/>
-         <span class="contact100-form-title">공식 게임 작성하기</span>
+         <span class="contact100-form-title" style="font-size: x-large; font-weight: bolder;">공식 게임 작성하기</span>
 
          <div class="wrap-input100 bg1">
-            <span class="label-input100">제목</span> <input
+            <span class="label-input100" style="font-size: medium;">제목</span> <input
                class="input100" type="text" name="title" required="required"
                placeholder="제목을 입력하세요">
          </div>
 
          <div class="wrap-input100 bg1">
-            <span class="label-input100">준비물</span> <input
+            <span class="label-input100" style="font-size: medium;">준비물</span> <input
                class="input100" type="text" name="materials" required="required"
                placeholder="준비물을 입력하세요">
          </div>
          
          <div class="wrap-input100 bg1">
-            <span class="label-input100">게임시간</span> <input
+            <span class="label-input100" style="font-size: medium;">게임시간</span> <input
                class="input100" type="number" name="gameTime" required="required"
                placeholder="게임시간을 입력하세요">
          </div>
          
          <div class="wrap-input100 bg1 rs1-wrap-input100">
-            <span class="label-input100">최소인원</span> <input class="input100"
+            <span class="label-input100" style="font-size: medium;">최소인원</span> <input class="input100"
                type="number" name="minPersonnel" required="required" >
          </div>
 
          <div class="wrap-input100 bg1 rs1-wrap-input100">
-            <span class="label-input100">최대인원</span> <input class="input100"
+            <span class="label-input100" style="font-size: medium;">최대인원</span> <input class="input100"
                type="number" name="maxPersonnel" required="required">
          </div>
 
             <div class="wrap-contact100-form-radio">
-               <span class="label-input100">장소구분</span>
+               <span class="label-input100" style="font-size: large;">장소구분</span>
 
                <div class="contact100-form-radio m-t-15">
                   <input class="input-radio100" id="radio1" type="radio"
@@ -81,7 +81,7 @@
 
 
          <div class="wrap-input100 bg0 rs1-alert-validate">
-            <span class="label-input100">게임 내용</span>
+            <span class="label-input100" style="font-size: medium;">게임 내용</span>
             <textarea class="input100" name="content" required="required"
                placeholder="게임 내용을 입력해주세요"></textarea>
          </div>
