@@ -148,14 +148,14 @@
 							var="ogvo">
 
 							<sec:authorize access="isAuthenticated()">
-
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<span class="gameWriteForm"
 									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
 									<button class="btn btn-danger" style="font-size: 2rem;"
 										onclick="location.href='${pageContext.request.contextPath}/officialGameWriteForm.do'">
 										공식 게임 등록</button>
 								</span>
-
+								</sec:authorize>
 								<div class="card game"
 									onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
 									<div class="card-header">
