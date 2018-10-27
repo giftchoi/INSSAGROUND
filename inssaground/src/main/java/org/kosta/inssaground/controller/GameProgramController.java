@@ -14,7 +14,6 @@ import org.kosta.inssaground.model.vo.OfficialGameVO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,7 +103,6 @@ public class GameProgramController {
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("updateGameProgram.do")
-	@Transactional
 	public String updateGameProgram(Model model,
 			String title, String detail, String gameNoList, String gameNameList, String programNo) {
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

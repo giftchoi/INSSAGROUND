@@ -12,6 +12,7 @@ import org.kosta.inssaground.model.vo.GameProgramVO;
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.kosta.inssaground.model.vo.ProgramOfficialGameVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GameProgramServiceImpl implements GameProgramService {
@@ -52,6 +53,7 @@ public class GameProgramServiceImpl implements GameProgramService {
 	}
 
 	@Override
+	@Transactional
 	public void updateGameProgram(String title, String detail, String gameNoList, MemberVO mvo, String pno) {
 		deleteGameProgram(pno, mvo.getId() );
 		registerGameProgram(title, detail, gameNoList, mvo);
