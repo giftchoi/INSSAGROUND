@@ -25,38 +25,40 @@ public class GameProgramServiceImpl implements GameProgramService {
 	}
 	
 	@Override
-	public void registerGameProgram(String title, String detail, String gameNoList, MemberVO mvo) {
-		String[] gameNo = gameNoList.split("　");
+	@Transactional
+	public String registerGameProgram(String title, String detail, String[] oGameNoArr, MemberVO mvo) {
+		//String[] oGameNoArr = oGameNoArri.split("　");
 		
-		for(int i=0; i<gameNo.length; i++) {
-			System.out.print(gameNo[i]+"-");
+		for(int i=0; i<oGameNoArr.length; i++) {
+			System.out.print(oGameNoArr[i]+"-");
 		}
 		System.out.println("게임번호 확인완료");
 		
 		GameProgramVO gameProgramVO = new GameProgramVO(null, title, detail, mvo.getId(), null);
 		gpm.createGameProgram(gameProgramVO);
-		
-		for(int i=0; i<gameNo.length; i++) {
-			ProgramOfficialGameVO programOfficialGameVO = new ProgramOfficialGameVO(gameProgramVO.getProgramNo(), gameNo[i], i+1);
+		//System.out.println("게임프로그램 번호?"+gameProgramVO.getProgramNo());
+		for(int i=0; i<oGameNoArr.length; i++) {
+			ProgramOfficialGameVO programOfficialGameVO = new ProgramOfficialGameVO(gameProgramVO.getProgramNo(), oGameNoArr[i], i+1);
 			gpm.addGameInGameProgram(programOfficialGameVO);
 		}
+		return gameProgramVO.getProgramNo();
 	}
 	@Override
-	public List<GameProgramVO> getGameProgramList(MemberVO memberVO) {
+	public List<GameProgramVO> getGameProgramTitleList(MemberVO memberVO) {
 		return gpm.findGameProgramListById(memberVO.getId());
 	}
 
 
 	@Override
-	public List<GameProgramListVO> getGameProgramDetail(GameProgramVO gameProgramVO) {
+	public List<GameProgramListVO> getGameProgramDetailByProgramNo(GameProgramVO gameProgramVO) {
 		return gpm.findGameListByIdAndProgramNo(gameProgramVO);
 	}
 
 	@Override
 	@Transactional
-	public void updateGameProgram(String title, String detail, String gameNoList, MemberVO mvo, String pno) {
+	public void updateGameProgram(String title, String detail, String[] oGameNoArr, MemberVO mvo, String pno) {
 		deleteGameProgram(pno, mvo.getId() );
-		registerGameProgram(title, detail, gameNoList, mvo);
+		registerGameProgram(title, detail, oGameNoArr, mvo);
 	}
 
 	@Override

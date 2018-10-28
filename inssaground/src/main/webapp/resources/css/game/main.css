@@ -13,6 +13,12 @@
 	border: 2.5px solid #ff1a1a;
 	cursor:pointer;
 }
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 /* 
 .gameWriteForm {
 	position: absolute;

@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class GameProgramController {
@@ -53,26 +54,32 @@ public class GameProgramController {
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registerGameProgram.do")
 	public String registerGameProgram(Model model,
-			String title, String detail, String gameNoList, String gameNameList) {
-		//System.out.println(title);
-		//System.out.println(detail);
-		//System.out.println(gameNoList);
-		//System.out.println(gameNameList);
+			String title, String detail, String[] oGameNoArr, RedirectAttributes redirectAttributes) {
+		/*
+		for(int i=0; i<oGameNoArr.length; i++) {
+			System.out.print(oGameNoArr[i]+" ");
+		}
+		System.out.println("oGameNo 배열 확인");
+		*/
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		gameProgramService.registerGameProgram(title, detail, gameNoList, mvo);
-		
-		return "redirect:resultGameProgram.do";
+		String programNo = gameProgramService.registerGameProgram(title, detail, oGameNoArr, mvo);
+		redirectAttributes.addAttribute("oGameNo",Integer.parseInt(programNo));
+		return "redirect:editGameProgram.do";
 	}
 	
 	@Secured("ROLE_MEMBER")
-	@RequestMapping("resultGameProgram.do")
-	public String resultGameProgram(Model model) {
+	@RequestMapping("editGameProgram.do")
+	public String editGameProgram(Model model, String programNo) {
 		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		List<GameProgramVO> myGameProgramList = gameProgramService.getGameProgramList(mvo);
-		model.addAttribute("myGameProgramList", myGameProgramList);
+		/*
+		List<GameProgramVO> myGameProgramTitleList = gameProgramService.getGameProgramTitleList(mvo);
+		model.addAttribute("myGameProgramTitleList", myGameProgramTitleList);
+		*/
+		GameProgramVO gameProgramVO = new GameProgramVO(programNo, null, null, mvo.getId(), null);
+		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetailByProgramNo(gameProgramVO);
+		//System.out.println("gameTime이 없나?"+gpList.get(0));
+		model.addAttribute("gpList", gpList);
 		return "game-program/result.tiles";
 	}
 	
@@ -84,13 +91,13 @@ public class GameProgramController {
 	}
 	
 	@Secured("ROLE_MEMBER")
-	@RequestMapping("getGameProgramDetail.do")
+	@RequestMapping("getGameProgramDetailByProgramNo.do")
 	@ResponseBody
-	public List<GameProgramListVO> getGameProgramDetail(String programNo){
+	public List<GameProgramListVO> getGameProgramDetailByProgramNo(String programNo){
 		MemberVO memberVO = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		GameProgramVO gameProgramVO = new GameProgramVO(programNo, null, null, memberVO.getId(), null);
-		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetail(gameProgramVO);
-		System.out.println("게임리스트확인:"+gpList);
+		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetailByProgramNo(gameProgramVO);
+		//System.out.println("게임리스트확인:"+gpList);
 		return gpList;
 	}
 	@Secured("ROLE_MEMBER")
@@ -99,15 +106,30 @@ public class GameProgramController {
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("프로그램 삭제:GameProgram-pno"+deletePno);
 		gameProgramService.deleteGameProgram(deletePno, mvo.getId());
-		return "redirect:resultGameProgram.do";
+		return "redirect:gameProgramDetail.do";
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("updateGameProgram.do")
 	public String updateGameProgram(Model model,
-			String title, String detail, String gameNoList, String gameNameList, String programNo) {
+			String title, String detail, String gameNoList, String[] oGameNoArr, String programNo) {
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		gameProgramService.updateGameProgram(title, detail, gameNoList, mvo, programNo);
-		return "redirect:resultGameProgram.do";
+		for(int i=0; i<oGameNoArr.length; i++) {
+			System.out.print(oGameNoArr[i]+" ");
+		}
+		System.out.println("oGameNo 배열 확인");
+		gameProgramService.updateGameProgram(title, detail, oGameNoArr, mvo, programNo);
+		return "redirect:gameProgramDetail.do";
 	}
-	
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("gameProgramDetail.do")
+	public String gameProgramDetail(Model model, int programNo) {
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(programNo<-1) {
+			programNo = 0;
+		}
+		List<GameProgramVO> myGameProgramList = gameProgramService.getGameProgramTitleList(mvo);
+		model.addAttribute("myGameProgramList", myGameProgramList);
+		return "game-program/myProgramDetail.tiles";
+	}
 }
