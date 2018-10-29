@@ -82,11 +82,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		c.c_game_no=r.c_game_no
 	</select>
 	<insert id="insertRecommendation" parameterType="map">
-		insert into recommendation(id,c_game_no)
+		insert into
+		recommendation(id,c_game_no)
 		values(#{ID},#{C_GAME_NO})
 	</insert>
-	<select id="selectRecommendataionByIdAndcGameNo" parameterType="map" resultType="int">
-		select count (*) from recommendation 
-		where id=#{ID} and  c_game_no=#{C_GAME_NO}
+	<select id="selectRecommendataionByIdAndcGameNo"
+		parameterType="map" resultType="int">
+		select count (*) from recommendation
+		where id=#{ID} and c_game_no=#{C_GAME_NO}
+	</select>
+	<select id="selectCountIdBycGameNo" resultType="int" parameterType="string">
+		select count (*)
+		from Recommendation r
+		where c_game_no=#{value}
 	</select>
 </mapper>

@@ -111,6 +111,7 @@ public class GameController {
 		System.out.println("사용자 게임 게시글번호 확인:" + cGameNo);
 		model.addAttribute("gameType", "custom");
 		model.addAttribute("gvo", gameService.getCustomGameDetail(cGameNo));
+		model.addAttribute("count",gameService.selectCountIdBycGameNo(cGameNo));
 		return "game/detail.tiles";
 	}
 
@@ -162,13 +163,16 @@ public class GameController {
 	@PostMapping("insertRecommendation.do")
 	public String insertRecommendation(Model model, String cGameNo,RedirectAttributes redirectAttributes) {
 		HashMap<String,String> map=new HashMap<String,String>();
-		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();		
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
 		map.put("C_GAME_NO",cGameNo);
 		map.put("ID",mvo.getId());
 		gameService.insertRecommendation(map);
+		gameService.selectCountIdBycGameNo(cGameNo);
+		int count=gameService.selectCountIdBycGameNo(cGameNo);
 		//model.addAttribute("count",count);
 		System.out.println("추천수 증가 확인"+gameService.getCustomGameDetail(cGameNo).getRecommendation());
 		redirectAttributes.addAttribute("cGameNo",cGameNo);
+		redirectAttributes.addAttribute("count",count);
 		return "redirect:customGameDetail.do";
 	}
 	// ----------------------------------------
