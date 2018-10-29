@@ -77,8 +77,9 @@
       <sec:csrfInput/>
       <input type="hidden" name="cGameNo" value="${requestScope.gvo.cGameNo}">    
       <span class="glyphicon glyphicon-thumbs-up"></span>
-      <input type="submit" value="${requestScope.gvo.recommendation }"  style="background-color:transparent;  border:0px transparent solid;">
+      <input type="submit" value="${requestScope.count }"  style="background-color:transparent;  border:0px transparent solid;">
       </form>
+     
       
       </td>
       <td></td>
@@ -115,7 +116,6 @@
 				$("#insertRecommendation").submit(function() {
 					//alert("추천수를 누르시겠습니까?")
 					return confirm("추천수를 올리시겠습니까?")
-					
 				});
 			});
 		</script>

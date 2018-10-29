@@ -111,5 +111,10 @@ public class GameServiceImpl implements GameService {
 		}
 		return count;
 	}
+	@Override
+	public int selectCountIdBycGameNo(String cGameNo) {
+		int count=cgm.selectCountIdBycGameNo(cGameNo);
+		return count;
+	}
 }
 

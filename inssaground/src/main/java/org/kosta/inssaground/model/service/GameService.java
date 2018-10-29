@@ -91,5 +91,11 @@ public interface GameService {
 	 * @param map
 	 */
 	public int insertRecommendation(Map<String, String> map);
+	/**
+	 * 추천수 불러오기
+	 * @param cGameNo
+	 * @return
+	 */
+	public int selectCountIdBycGameNo(String cGameNo);
 
 }
