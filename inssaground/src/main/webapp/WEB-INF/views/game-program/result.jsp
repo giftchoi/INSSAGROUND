@@ -121,7 +121,7 @@
 								<c:forEach items="${requestScope.gpList }" var="gp">
 
 									<tr>
-										<td>${gp.oGameNo }</td>
+										<td><span class='setoGameNo'>${gp.oGameNo }</span></td>
 										<td data-toggle='collapse'
 											data-target='#accordion${gp.oGameNo }' class='clickable'>
 											${gp.title }</td>
@@ -165,7 +165,9 @@
 					<div class="col-sm-6">
 						<div id="gameInfo">
 <!-- 프로그램 정보 자리 ---------------------------------------------------------------------------------------------- -->
-                 
+                 		</div>
+					</div>
+					<div class="col-sm-12">
 					<div class="btnArea">
 						<button form="updateGameProgramForm" class="btn btn-light btn-lg" 
 							style="font-size: 24px;">
@@ -176,12 +178,11 @@
 							삭제 <i class="material-icons">delete_sweep</i>
 						</button>
 					</div>
-				</div>
+					</div>
 				</div>
 			</div>
-
 		</div>
-		</div>
+		
 	</div>
 	</div>
 </div>
@@ -194,24 +195,25 @@ var gamecount="${fn:length(gpList) }";
 var personnelArr = new Array();
 var oGameNoArr = new Array();
 var totalTime = 0;
-for(var i=0; i<gamecount; i++){
-	//alert("${requestScope.gpList.get(i).oGameNo }");
-	oGameNoArr.push("${requestScope.gpList.get(i).oGameNo }");
-	personnelArr.push("${requestScope.gpList.get(i).minPersonnel }");
-	personnelArr.push("${requestScope.gpList.get(i).maxPersonnel }");
-	//alert(${requestScope.gpList[i].gameTime });
-	totalTime += parseInt("${requestScope.gpList.get(i).gameTime }");
+//var load = document.getElementById('loadoGameNo').innerHTML;
+
+for(var i=0; i<parseInt(gamecount); i++){
+	//oGameNoArr.push('${requestScope.gpList.get(i).oGameNo }');
+	//personnelArr.push('${requestScope.gpList.get(i).minPersonnel }');
+	//personnelArr.push('${requestScope.gpList.get(i).maxPersonnel }');
+	//alert("${requestScope.gpList.get(i).gameTime }");
+	totalTime += parseInt('${requestScope.gpList.get(i).gameTime }');
+}
+
+for (var i = 0; i < $(".setoGameNo").length; i++) {
+	oGameNoArr.push( $(".setoGameNo").eq(i).html() );
+	//alert(oGameNoArr[i]);
 }
 var min = Math.min.apply(null, personnelArr);
 var max = Math.max.apply(null, personnelArr);
 
 $(document).ready(function() {
 	
-/* 
-    if($("select[name=programNo]").val()==0){
-    	  $(".programcard").addClass("disabledbutton");
-      }
-     */
      $(".programcard").addClass("disabledbutton");
      //$(".btnArea").hide();
 <%------------------------------------------- 카드 목록 제작  ajax --%>
@@ -219,7 +221,7 @@ $(document).ready(function() {
         // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
         //alert($(this).text());
         //$(".game-post-area").remove();
-
+		
         $.ajax({
             type: "get",
             url: "makeGameProgramFormByPageNo.do",
@@ -322,6 +324,7 @@ json+="					</ul></div>";
 	//$("#programcard1").click(function() {
 	$('.game-post-area').on('click','#programcard1',function() {
 		// alert($("#oGameNo1").text());
+		//$(".btnArea").show();
 		 $.ajax({
              type: "get",
              url: "getLeftGameByGameNo.do",
@@ -331,7 +334,16 @@ json+="					</ul></div>";
                  //$.trim() => 앞뒤 공백 제거
                  //alert(gvo.title);
 
+                   //게임정보 편집
                    oGameNoArr.push(gvo.oGameNo);
+                 	gamecount++;
+                   personnelArr.push(gvo.minPersonnel);
+                   personnelArr.push(gvo.maxPersonnel);
+               	personnelArr.sort();
+                   totalTime += parseInt(gvo.gameTime);
+                   max = Math.max.apply(null, personnelArr);
+                   min = Math.min.apply(null, personnelArr);
+               	
                  var str="";
                  str+="<tr><td>";
                  str+="<span class='setoGameNo'>";
@@ -347,7 +359,7 @@ json+="					</ul></div>";
                  str+="<span class='gameTime'>";
                  str+=gvo.gameTime;
                  str+="</span>";
-                 str+="분</td><td><i class='material-icons button'>";
+                 str+=" 분</td><td><i class='material-icons button'>";
                  str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                  str+="cancel</button></i>";
                  str+="</tr>";
@@ -374,15 +386,6 @@ json+="					</ul></div>";
                  
                  $('#endgameprogram').before(str);
                  
-                 //게임정보 편집
-              	gamecount++;
-                personnelArr.push(gvo.minPersonnel);
-                personnelArr.push(gvo.maxPersonnel);
-            	personnelArr.sort();
-                totalTime += parseInt(gvo.gameTime);
-                max = Math.max.apply(null, personnelArr);
-                min = Math.min.apply(null, personnelArr);
-            	
                  var info="";
                  info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -399,7 +402,7 @@ json+="					</ul></div>";
                 info+="</td>";
                 info+="</tr>";
                 info+="<tr>";
-                info+="		<td>인원</td>";
+                info+="		<td>예상 인원</td>";
                 info+="		<td>";
                 info+=min
                 info+=" ~ ";
@@ -410,7 +413,7 @@ json+="					</ul></div>";
                 info+="		<td>총 소요시간</td>";
                 info+="		<td>";
                 info+=totalTime;
-                info+="분</td>";
+                info+=" 분</td>";
                 info+="</tr>";
                 info+="				</tbody>";
                  info+="</table>";
@@ -438,6 +441,15 @@ json+="					</ul></div>";
                 //alert(gvo.title);
                
   				oGameNoArr.push(gvo.oGameNo);
+                //게임정보 편집
+             	gamecount++;
+               personnelArr.push(gvo.minPersonnel);
+               personnelArr.push(gvo.maxPersonnel);
+           	personnelArr.sort();
+               totalTime += parseInt(gvo.gameTime);
+               max = Math.max.apply(null, personnelArr);
+               min = Math.min.apply(null, personnelArr);
+           	
                 var str="";
                   
                 str+="<tr><td>";
@@ -454,7 +466,7 @@ json+="					</ul></div>";
                 str+="<span class='gameTime'>";
                 str+=gvo.gameTime;
                 str+="</span>";
-                str+="분</td><td><i class='material-icons button'>";
+                str+=" 분</td><td><i class='material-icons button'>";
                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                 str+="cancel</button></i>";
                 str+="</tr>";
@@ -478,18 +490,8 @@ json+="					</ul></div>";
                 str+=gvo.content;
 				 str+="</div>";
                 str+="</td></tr>";
-                
                 $('#endgameprogram').before(str);
                 
-                //게임정보 편집
-             	gamecount++;
-               personnelArr.push(gvo.minPersonnel);
-               personnelArr.push(gvo.maxPersonnel);
-           	personnelArr.sort();
-               totalTime += parseInt(gvo.gameTime);
-               max = Math.max.apply(null, personnelArr);
-               min = Math.min.apply(null, personnelArr);
-           	
                 var info="";
                 info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -506,7 +508,7 @@ json+="					</ul></div>";
                info+="</td>";
                info+="</tr>";
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
@@ -517,7 +519,7 @@ json+="					</ul></div>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
                info+=totalTime;
-               info+="분</td>";
+               info+=" 분</td>";
                info+="</tr>";
                info+="				</tbody>";
                 info+="</table>";
@@ -544,6 +546,15 @@ json+="					</ul></div>";
                 //alert(gvo.title);
                
   				oGameNoArr.push(gvo.oGameNo);
+  			//게임정보 편집
+             	gamecount++;
+               personnelArr.push(gvo.minPersonnel);
+               personnelArr.push(gvo.maxPersonnel);
+           	personnelArr.sort();
+               totalTime += parseInt(gvo.gameTime);
+               max = Math.max.apply(null, personnelArr);
+               min = Math.min.apply(null, personnelArr);
+           	
                 var str="";
                   
                 str+="<tr><td>";
@@ -560,7 +571,7 @@ json+="					</ul></div>";
                 str+="<span class='gameTime'>";
                 str+=gvo.gameTime;
                 str+="</span>";
-                str+="분</td><td><i class='material-icons button'>";
+                str+=" 분</td><td><i class='material-icons button'>";
                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                 str+="cancel</button></i>";
                 str+="</tr>";
@@ -587,15 +598,7 @@ json+="					</ul></div>";
                 
                 $('#endgameprogram').before(str);
                 
-                //게임정보 편집
-             	gamecount++;
-               personnelArr.push(gvo.minPersonnel);
-               personnelArr.push(gvo.maxPersonnel);
-           	personnelArr.sort();
-               totalTime += parseInt(gvo.gameTime);
-               max = Math.max.apply(null, personnelArr);
-               min = Math.min.apply(null, personnelArr);
-           	
+                
                 var info="";
                 info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -612,7 +615,7 @@ json+="					</ul></div>";
                info+="</td>";
                info+="</tr>";
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
@@ -623,7 +626,7 @@ json+="					</ul></div>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
                info+=totalTime;
-               info+="분</td>";
+               info+=" 분</td>";
                info+="</tr>";
                info+="				</tbody>";
                 info+="</table>";
@@ -650,6 +653,15 @@ json+="					</ul></div>";
                 //alert(gvo.title);
                
   				oGameNoArr.push(gvo.oGameNo);
+  			//게임정보 편집
+             	gamecount++;
+               personnelArr.push(gvo.minPersonnel);
+               personnelArr.push(gvo.maxPersonnel);
+           	personnelArr.sort();
+               totalTime += parseInt(gvo.gameTime);
+               max = Math.max.apply(null, personnelArr);
+               min = Math.min.apply(null, personnelArr);
+           	
                 var str="";
                   
                 str+="<tr><td>";
@@ -666,7 +678,7 @@ json+="					</ul></div>";
                 str+="<span class='gameTime'>";
                 str+=gvo.gameTime;
                 str+="</span>";
-                str+="분</td><td><i class='material-icons button'>";
+                str+=" 분</td><td><i class='material-icons button'>";
                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                 str+="cancel</button></i>";
                 str+="</tr>";
@@ -693,15 +705,7 @@ json+="					</ul></div>";
                 
                 $('#endgameprogram').before(str);
                 
-                //게임정보 편집
-             	gamecount++;
-               personnelArr.push(gvo.minPersonnel);
-               personnelArr.push(gvo.maxPersonnel);
-           	personnelArr.sort();
-               totalTime += parseInt(gvo.gameTime);
-               max = Math.max.apply(null, personnelArr);
-               min = Math.min.apply(null, personnelArr);
-           	
+                
                 var info="";
                 info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -718,7 +722,7 @@ json+="					</ul></div>";
                info+="</td>";
                info+="</tr>";
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
@@ -729,7 +733,7 @@ json+="					</ul></div>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
                info+=totalTime;
-               info+="분</td>";
+               info+=" 분</td>";
                info+="</tr>";
                info+="				</tbody>";
                 info+="</table>";
@@ -757,6 +761,15 @@ json+="					</ul></div>";
                 //alert(gvo.title);
                
   				oGameNoArr.push(gvo.oGameNo);
+  			//게임정보 편집
+             	gamecount++;
+               personnelArr.push(gvo.minPersonnel);
+               personnelArr.push(gvo.maxPersonnel);
+           	personnelArr.sort();
+               totalTime += parseInt(gvo.gameTime);
+               max = Math.max.apply(null, personnelArr);
+               min = Math.min.apply(null, personnelArr);
+           	
                 var str="";
                   
                 str+="<tr><td>";
@@ -773,7 +786,7 @@ json+="					</ul></div>";
                 str+="<span class='gameTime'>";
                 str+=gvo.gameTime;
                 str+="</span>";
-                str+="분</td><td><i class='material-icons button'>";
+                str+=" 분</td><td><i class='material-icons button'>";
                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                 str+="cancel</button></i>";
                 str+="</tr>";
@@ -800,15 +813,7 @@ json+="					</ul></div>";
                 
                 $('#endgameprogram').before(str);
                 
-                //게임정보 편집
-             	gamecount++;
-               personnelArr.push(gvo.minPersonnel);
-               personnelArr.push(gvo.maxPersonnel);
-           	personnelArr.sort();
-               totalTime += parseInt(gvo.gameTime);
-               max = Math.max.apply(null, personnelArr);
-               min = Math.min.apply(null, personnelArr);
-           	
+                
                 var info="";
                 info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -825,7 +830,7 @@ json+="					</ul></div>";
                info+="</td>";
                info+="</tr>";
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
@@ -836,7 +841,7 @@ json+="					</ul></div>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
                info+=totalTime;
-               info+="분</td>";
+               info+=" 분</td>";
                info+="</tr>";
                info+="				</tbody>";
                 info+="</table>";
@@ -863,6 +868,15 @@ json+="					</ul></div>";
                 //alert(gvo.title);
                
   				oGameNoArr.push(gvo.oGameNo);
+  				 //게임정보 편집
+             	gamecount++;
+               personnelArr.push(gvo.minPersonnel);
+               personnelArr.push(gvo.maxPersonnel);
+           	personnelArr.sort();
+               totalTime += parseInt(gvo.gameTime);
+               max = Math.max.apply(null, personnelArr);
+               min = Math.min.apply(null, personnelArr);
+           	
                 var str="";
                   
                 str+="<tr><td>";
@@ -879,7 +893,7 @@ json+="					</ul></div>";
                 str+="<span class='gameTime'>";
                 str+=gvo.gameTime;
                 str+="</span>";
-                str+="분</td><td><i class='material-icons button'>";
+                str+=" 분</td><td><i class='material-icons button'>";
                 str+="<button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                 str+="cancel</button></i>";
                 str+="</tr>";
@@ -903,20 +917,9 @@ json+="					</ul></div>";
                 str+=gvo.content;
 				 str+="</div>";
                 str+="</td></tr>";
+               $('#endgameprogram').before(str);
                 
-
-                $('#endgameprogram').before(str);
-                
-                //게임정보 편집
-             	gamecount++;
-               personnelArr.push(gvo.minPersonnel);
-               personnelArr.push(gvo.maxPersonnel);
-           	personnelArr.sort();
-               totalTime += parseInt(gvo.gameTime);
-               //alert(totalTime);
-               max = Math.max.apply(null, personnelArr);
-               min = Math.min.apply(null, personnelArr);
-           	
+               
                 var info="";
                 info+= "<table class='table' style='font-size: x-large;'>";	
 				info+="<thead>";
@@ -933,7 +936,7 @@ json+="					</ul></div>";
                info+="</td>";
                info+="</tr>";
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
@@ -944,7 +947,7 @@ json+="					</ul></div>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
                info+=totalTime;
-               info+="분</td>";
+               info+=" 분</td>";
                info+="</tr>";
                info+="				</tbody>";
                 info+="</table>";
@@ -960,26 +963,30 @@ json+="					</ul></div>";
 
 	
 	//$("programNo option[value='2']").attr("selected", true);
-	
+
 	$("#updateGameProgramForm").submit(function() {
-		$("#title").val($("#programNo option:selected").text());
-		if( oGameNoArr.length <= 0 ){
-			alert("등록된 게임이 없습니다!");
-			return false;
+		//$("#title").val($("#programNo option:selected").text());
+		//alert($(".myTable td:nth-child(15n-14)").text());
+		//alert($(".setoGameNo").text());
+        
+		//var oGameNo = '';
+		var sendoGameNoArr = new Array();
+        for (var i = 0; i < $(".setoGameNo").length; i++) {
+        	sendoGameNoArr.push( $(".setoGameNo").eq(i).html() );
+        	//alert(oGameNoArr[i]);
+        }
+		fnAppendHidden(document.updateGameProgramForm, "programNo", '${requestScope.gpList[0].programNo }');
+		for(var i=0; i<sendoGameNoArr.length; i++){
+			fnAppendHidden(document.updateGameProgramForm, "oGameNoArr", sendoGameNoArr[i]);
 		}
 		
-		for(var i=0; i<oGameNoArr.length; i++){
-			//alert(oGameNoArr[i]);
-			fnAppendHidden(document.updateGameProgramForm, "oGameNoArr", oGameNoArr[i]);
-		}
-
 		return confirm("게임 프로그램을 수정하시겠습니까?");
 	});
 	$("#deleteGameProgramForm").submit(function() {
 		//$("#title").val($("#programNo option:selected").text());
+		//alert('${requestScope.gpList[0].programNo }');
+		$("#deletePno").val('${requestScope.gpList[0].programNo }');
 		
-		$("#deletePno").val($("#programNo").val());
-		//alert($("#deletePno").val());
 		return confirm("게임 프로그램을 삭제하시겠습니까?");
 	});
 });
@@ -998,18 +1005,18 @@ function deleteLine(obj) {
 	//라인 삭제
     var tr = $(obj).parent().parent().parent();
 	var trAccordion = $(obj).parent().parent().parent().next();
-	//var tr = document.getElementById($(obj).parent().parent().parent());
-	//alert(trAccordion.html());
+
 	//alert(tr.find('span.gameTime').text());			//게임시간
 	//alert(trAccordion.find('span.minVal').text());	//최소인원
 	//alert(trAccordion.find('span.maxVal').text());	//최대인원
 	//alert("oGameNo:"+tr.find('span.oGameNo').text());	//게임번호
-	oGameNoArr.splice( $.inArray(tr.find('span.setoGameNo').text(), oGameNoArr), 1 );
+	oGameNoArr.splice( oGameNoArr.indexOf(tr.find('span.oGameNo').text()), 1 );
 	//alert("oGameNoArr:"+oGameNoArr);
 	gamecount--;
 	//최대, 최소 구현.... 잘안된다
 	//personnelArr.splice(personnelArr.indexOf(trAccordion.find('span.minVal').text()), 1);
 	//personnelArr.splice(personnelArr.indexOf(trAccordion.find('span.maxVal').text()), 1);
+	//alert(tr.find('span.gameTime').text());
 	totalTime -= parseInt(tr.find('span.gameTime').text());
     max = Math.max.apply(null, personnelArr);
     min = Math.min.apply(null, personnelArr);
@@ -1031,7 +1038,7 @@ function deleteLine(obj) {
     info+="</td>";
     info+="</tr>";
     info+="<tr>";
-    info+="		<td>인원</td>";
+    info+="		<td>예상 인원</td>";
     info+="		<td>";
     info+=min
     info+=" ~ ";
@@ -1042,7 +1049,7 @@ function deleteLine(obj) {
     info+="		<td>총 소요시간</td>";
     info+="		<td>";
     info+=totalTime;
-    info+="분</td>";
+    info+=" 분</td>";
     info+="</tr>";
     info+="				</tbody>";
      info+="</table>";

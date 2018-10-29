@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
@@ -50,6 +51,7 @@
 							<tbody class="myProgramtBody">
 
 								<!-- 항목 들어갈데 -->
+								<%-- 
 								<c:forEach items="${requestScope.gpList }" var="gp">
 
 									<tr>
@@ -74,7 +76,7 @@
 										</td>
 									</tr>
 								</c:forEach>
-
+ --%>
 								<tr id="endgameprogram"></tr>
 								<tr>
 									<th colspan="3">
@@ -106,9 +108,37 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
- 
-						<div id="gameInfo">
-						<!-- 프로그램 정보 자리 -->
+
+							<div id="gameInfo">
+								<!-- 프로그램 정보 자리 -->
+								<%-- 
+								<c:if test="${fn:length(gpList) > 0}">
+								<table class="table" style="font-size: x-large;">
+									<thead>
+										<tr>
+											<th colspan="2">프로그램 정보</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td width="150px">게임 갯수</td>
+											<td>${fn:length(gpList) }</td>
+										</tr>
+										<tr>
+											<td>인원</td>
+											<td>
+											<span id='minimumPeople'>0</span>
+											 ~ 
+											 <span id='maximumPeople'>0</span>명</td>
+										</tr>
+										<tr>
+											<td>총 소요시간</td>
+											<td><span id='totalTime'>0</span> 분</td>
+										</tr>
+									</tbody>
+								</table>
+								</c:if>
+ --%>
 						</div>
 
 					</div>
@@ -138,8 +168,32 @@
 
 		
 <script>
-
+var personnelArr = new Array();
+var oGameNoArr = new Array();
+var gamecount='${fn:length(gpList) }';
+var min=9999;
+var max=1;
+var totalTime = 0;
+//alert(gamecount);
+/* 
+if(gamecount>0){
+	
+for(var i=0; i<parseInt(gamecount); i++){
+	//alert("${requestScope.gpList.get(i).oGameNo }");
+	oGameNoArr.push("${requestScope.gpList.get(i).oGameNo }");
+	personnelArr.push("${requestScope.gpList.get(i).minPersonnel }");
+	personnelArr.push("${requestScope.gpList.get(i).maxPersonnel }");
+	//alert("${requestScope.gpList.get(i).gameTime }");
+	totalTime += parseInt("${requestScope.gpList.get(i).gameTime }");
+}
+}
+ */
 $(document).ready(function() {
+	
+	$("#minVal").text(Math.min.apply(null, personnelArr));
+	$("#maxVal").text(Math.max.apply(null, personnelArr));
+	$("#totalTime").text(totalTime);
+
 	if( parseInt("${requestScope.programNo}") < -1 ) {
 		$("#programNo option:eq(1)").attr("selected", "selected");
 	}
@@ -160,10 +214,7 @@ $(document).ready(function() {
                  //$.trim() => 앞뒤 공백 제거
                  //alert(gameProgramList);
                  
-                 var gamecount=0;
-                 var min=1000;
-                 var max=1;
-                 var totalTime = 0;
+
                  $.each(gameProgramList, function(index,value){
                 	 //alert(value.oGameNo);
                      var str="";
@@ -178,7 +229,7 @@ $(document).ready(function() {
                      //str+="<i class='material-icons button'><button style='background-color:transparent;  border:0px transparent solid;' onclick='deleteLine(this);'>";
                      //str+="cancel</button></i>";
                      str+=value.gameTime;
-                     str+="분</td></tr>";
+                     str+=" 분</td></tr>";
                      str+="<tr><td colspan='3' style='border-top-width: 0px;'>";
                      str+="<div id='accordion";
                      str+=index+1;
@@ -232,7 +283,7 @@ $(document).ready(function() {
                 info+="		<td>총 소요시간</td>";
                 info+="		<td>";
                 info+=totalTime;
-                info+="분</td>";
+                info+=" 분</td>";
                 info+="</tr>";
                 info+="				</tbody>";
                  info+="</table>";

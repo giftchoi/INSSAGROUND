@@ -58,12 +58,14 @@ public class GameProgramController {
 		if(programNo<-1) {
 			programNo = 0;
 		}
+		
 		List<GameProgramVO> myGameProgramList = gameProgramService.getGameProgramTitleList(mvo);
 		model.addAttribute("myGameProgramList", myGameProgramList);
+		/*
 		GameProgramVO gameProgramVO = new GameProgramVO(String.valueOf(programNo), null, null, mvo.getId(), null);
 		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetailByProgramNo(gameProgramVO);
 		model.addAttribute("gpList", gpList);
-		
+		*/
 		return "game-program/myProgramDetail.tiles";
 	}
 
@@ -114,22 +116,26 @@ public class GameProgramController {
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("deleteGameProgram.do")
-	public String deleteGameProgram(Model model, String deletePno) {
+	public String deleteGameProgram(Model model, String deletePno, RedirectAttributes redirectAttributes) {
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("프로그램 삭제:GameProgram-pno"+deletePno);
+		System.out.println("프로그램 삭제:GameProgram-pno:"+deletePno);
 		gameProgramService.deleteGameProgram(deletePno, mvo.getId());
+		redirectAttributes.addAttribute("programNo", "0");
 		return "redirect:gameProgramDetail.do";
 	}
 	@Secured("ROLE_MEMBER")
 	@PostMapping("updateGameProgram.do")
 	public String updateGameProgram(Model model,
-			String title, String detail, String gameNoList, String[] oGameNoArr, String programNo) {
+			String title, String detail, String[] oGameNoArr, String programNo, RedirectAttributes redirectAttributes) {
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		/*
 		for(int i=0; i<oGameNoArr.length; i++) {
 			System.out.print(oGameNoArr[i]+" ");
 		}
 		System.out.println("oGameNo 배열 확인");
+		*/
 		gameProgramService.updateGameProgram(title, detail, oGameNoArr, mvo, programNo);
+		redirectAttributes.addAttribute("programNo", "0");
 		return "redirect:gameProgramDetail.do";
 	}
 }
