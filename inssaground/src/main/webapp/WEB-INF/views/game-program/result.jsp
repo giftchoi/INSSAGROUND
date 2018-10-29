@@ -214,8 +214,16 @@ var max = Math.max.apply(null, personnelArr);
 
 $(document).ready(function() {
 	
-     $(".programcard").addClass("disabledbutton");
+     //$(".programcard").addClass("disabledbutton");
      //$(".btnArea").hide();
+     
+     //첫 로딩시 세팅된 게임 비활성화
+     for(var i=1; i<=6; i++ ){
+    	 if(oGameNoArr.indexOf($("#oGameNo"+i).text())>-1)
+    		 $("#oGameNo"+i).parent().parent().addClass("disabledbutton");
+     }
+    
+
 <%------------------------------------------- 카드 목록 제작  ajax --%>
  	$('.game-post-area').on("click",".pageBtn",function(event){
         // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
