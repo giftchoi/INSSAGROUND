@@ -49,22 +49,34 @@ public class GameProgramController {
 	public ListVO<OfficialGameVO> makeGameProgramFormByPageNo(Model model, String pageNo) {
 		return gameService.getOfficialGameList(pageNo);
 	}
+	
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("gameProgramDetail.do")
+	public String gameProgramDetail(Model model, int programNo) {
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
+		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(programNo<-1) {
+			programNo = 0;
+		}
+		List<GameProgramVO> myGameProgramList = gameProgramService.getGameProgramTitleList(mvo);
+		model.addAttribute("myGameProgramList", myGameProgramList);
+		GameProgramVO gameProgramVO = new GameProgramVO(String.valueOf(programNo), null, null, mvo.getId(), null);
+		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetailByProgramNo(gameProgramVO);
+		model.addAttribute("gpList", gpList);
+		
+		return "game-program/myProgramDetail.tiles";
+	}
 
 	
 	@Secured("ROLE_MEMBER")
 	@PostMapping("registerGameProgram.do")
 	public String registerGameProgram(Model model,
 			String title, String detail, String[] oGameNoArr, RedirectAttributes redirectAttributes) {
-		/*
-		for(int i=0; i<oGameNoArr.length; i++) {
-			System.out.print(oGameNoArr[i]+" ");
-		}
-		System.out.println("oGameNo 배열 확인");
-		*/
+
 		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String programNo = gameProgramService.registerGameProgram(title, detail, oGameNoArr, mvo);
-		redirectAttributes.addAttribute("oGameNo",Integer.parseInt(programNo));
-		return "redirect:editGameProgram.do";
+		redirectAttributes.addAttribute("programNo", programNo);
+		return "redirect:gameProgramDetail.do";
 	}
 	
 	@Secured("ROLE_MEMBER")
@@ -76,9 +88,9 @@ public class GameProgramController {
 		List<GameProgramVO> myGameProgramTitleList = gameProgramService.getGameProgramTitleList(mvo);
 		model.addAttribute("myGameProgramTitleList", myGameProgramTitleList);
 		*/
+		System.out.println("editGameProgram programNo:"+programNo);
 		GameProgramVO gameProgramVO = new GameProgramVO(programNo, null, null, mvo.getId(), null);
 		List<GameProgramListVO> gpList = gameProgramService.getGameProgramDetailByProgramNo(gameProgramVO);
-		//System.out.println("gameTime이 없나?"+gpList.get(0));
 		model.addAttribute("gpList", gpList);
 		return "game-program/result.tiles";
 	}
@@ -119,17 +131,5 @@ public class GameProgramController {
 		System.out.println("oGameNo 배열 확인");
 		gameProgramService.updateGameProgram(title, detail, oGameNoArr, mvo, programNo);
 		return "redirect:gameProgramDetail.do";
-	}
-	@Secured("ROLE_MEMBER")
-	@RequestMapping("gameProgramDetail.do")
-	public String gameProgramDetail(Model model, int programNo) {
-		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
-		MemberVO mvo = (MemberVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(programNo<-1) {
-			programNo = 0;
-		}
-		List<GameProgramVO> myGameProgramList = gameProgramService.getGameProgramTitleList(mvo);
-		model.addAttribute("myGameProgramList", myGameProgramList);
-		return "game-program/myProgramDetail.tiles";
 	}
 }

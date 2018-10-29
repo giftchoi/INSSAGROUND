@@ -33,6 +33,7 @@
 												<option value="">**---프로그램을 선택하세요---**</option>
 											<c:forEach items="${requestScope.myGameProgramList }" var="myGameProgram">
 												<option value="${myGameProgram.programNo }">${myGameProgram.title }</option>
+												
 											</c:forEach>
 									</select></th>
 								</tr>
@@ -41,7 +42,7 @@
 									<th>설명</th>
 									<th colspan="2">
 									
-									<input type="text" id="programDetail" name="detail"
+									<input type="text" id="programDetail" name="detail" value="${requestScope.gpList[0].detail }"
 										style="width: 100%;" required="required" disabled="disabled">
 									</th>
 								</tr>
@@ -49,7 +50,30 @@
 							<tbody class="myProgramtBody">
 
 								<!-- 항목 들어갈데 -->
+								<c:forEach items="${requestScope.gpList }" var="gp">
 
+									<tr>
+										<td>${gp.oGameNo }</td>
+										<td data-toggle='collapse'
+											data-target='#accordion${gp.oGameNo }' class='clickable'>
+											${gp.title }</td>
+										<td><span class='gameTime'>${gp.gameTime }</span> 분</td>
+										
+									</tr>
+									<tr>
+										<td colspan='3' style='border-top-width: 0px;'>
+											<div id='accordion${gp.oGameNo }' class='collapse'>
+												<div style='text-align: right; font-size: 17px;'>
+													인원 : <span class='minVal'>${gp.minPersonnel }</span> ~ 
+													<span class='maxVal'>${gp.maxPersonnel }</span> 명
+												</div>
+												<div style='text-align: right; font-size: 17px;'>준비물 :
+													${gp.materials }</div>
+												${gp.content }
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
 
 								<tr id="endgameprogram"></tr>
 								<tr>
@@ -65,10 +89,12 @@
 							</tbody>
 
 						</table>
+							<!-- 
+							<input type="hidden" name="programNo" value="">
 							<input type="hidden" id="title" name="title" value="">
 							<input type="hidden" id="gameNoList" name="gameNoList" value="">
 							<input type="hidden" id="gameNameList" name="gameNameList" value="">
-							
+							 -->
 
 					</form>
 					<form
@@ -114,8 +140,8 @@
 <script>
 
 $(document).ready(function() {
-	
-	
+	$("#programNo option:eq(1)").attr("selected", "selected");
+
 	$('select[name=programNo]').change(function() {
 		//alert($(this).val());
 		$(".myTable td").remove();
@@ -226,7 +252,8 @@ $(document).ready(function() {
 	//$("programNo option[value='2']").attr("selected", true);
 	
 	$("#editGameProgramForm").submit(function() {
-
+		//$("#programNo option:selected").val()
+		//$("#programNo").val($("#programNo option:selected").val());
 		return confirm("게임 프로그램을 편집하시겠습니까?");
 	});
 
