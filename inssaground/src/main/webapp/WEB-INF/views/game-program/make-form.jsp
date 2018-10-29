@@ -960,6 +960,11 @@ json+="					</ul></div>";
 		//var gameNoListval = $(".myTable td:nth-child(6n-5)").text();
 		//var gameNameListval = $(".myTable td:nth-child(5n-3)").text();
 		//alert(gameNoListval);
+		
+		if(oGameNoArr.length<1){
+			alert("하나이상의 게임을 등록하세요!");
+			return false;
+		}
 		for(var i=0; i<oGameNoArr.length; i++){
 			fnAppendHidden(document.registerGameProgramForm, "oGameNoArr", oGameNoArr[i]);
 		}

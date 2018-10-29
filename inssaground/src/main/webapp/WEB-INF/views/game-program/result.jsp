@@ -189,16 +189,18 @@
 
 		
 <script>
-var gamecount=${fn:length(gpList) };
+var gamecount="${fn:length(gpList) }";
+//alert(gamecount);
 var personnelArr = new Array();
 var oGameNoArr = new Array();
 var totalTime = 0;
 for(var i=0; i<gamecount; i++){
-	oGameNoArr.push(${requestScope.gpList[i].oGameNo });
-	personnelArr.push(${requestScope.gpList[i].minPersonnel });
-	personnelArr.push(${requestScope.gpList[i].maxPersonnel });
+	//alert("${requestScope.gpList.get(i).oGameNo }");
+	oGameNoArr.push("${requestScope.gpList.get(i).oGameNo }");
+	personnelArr.push("${requestScope.gpList.get(i).minPersonnel }");
+	personnelArr.push("${requestScope.gpList.get(i).maxPersonnel }");
 	//alert(${requestScope.gpList[i].gameTime });
-	totalTime += parseInt(${requestScope.gpList[i].gameTime });
+	totalTime += parseInt("${requestScope.gpList.get(i).gameTime }");
 }
 var min = Math.min.apply(null, personnelArr);
 var max = Math.max.apply(null, personnelArr);
@@ -212,8 +214,8 @@ $(document).ready(function() {
      */
      $(".programcard").addClass("disabledbutton");
      //$(".btnArea").hide();
+<%------------------------------------------- 카드 목록 제작  ajax --%>
  	$('.game-post-area').on("click",".pageBtn",function(event){
-<!------------------------------------------- 카드 목록 제작  ajax -->
         // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
         //alert($(this).text());
         //$(".game-post-area").remove();
@@ -312,7 +314,7 @@ json+="					</ul></div>";
         });
    
 	});
- 	<!------------------------------------------------------------------------------------------------ 카드 목록 제작  ajax -->
+ 	<%------------------------------------------------------------------------------------------------ 카드 목록 제작  ajax --%>
  	
  
  	
@@ -911,7 +913,7 @@ json+="					</ul></div>";
                personnelArr.push(gvo.maxPersonnel);
            	personnelArr.sort();
                totalTime += parseInt(gvo.gameTime);
-               alert(totalTime);
+               //alert(totalTime);
                max = Math.max.apply(null, personnelArr);
                min = Math.min.apply(null, personnelArr);
            	

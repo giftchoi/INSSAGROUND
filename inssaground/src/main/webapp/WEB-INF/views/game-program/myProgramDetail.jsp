@@ -140,7 +140,9 @@
 <script>
 
 $(document).ready(function() {
-	$("#programNo option:eq(1)").attr("selected", "selected");
+	if( parseInt("${requestScope.programNo}") < -1 ) {
+		$("#programNo option:eq(1)").attr("selected", "selected");
+	}
 
 	$('select[name=programNo]').change(function() {
 		//alert($(this).val());
