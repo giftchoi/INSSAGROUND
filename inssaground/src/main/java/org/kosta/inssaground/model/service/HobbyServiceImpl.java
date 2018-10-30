@@ -10,6 +10,7 @@ import org.kosta.inssaground.model.mapper.HobbyMapper;
 import org.kosta.inssaground.model.vo.FeatureVO;
 import org.kosta.inssaground.model.vo.HobbyCategoryVO;
 import org.kosta.inssaground.model.vo.HobbyVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 public class HobbyServiceImpl implements HobbyService {
