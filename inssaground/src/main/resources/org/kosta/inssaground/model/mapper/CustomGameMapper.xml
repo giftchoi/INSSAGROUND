@@ -96,4 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from Recommendation r
 		where c_game_no=#{value}
 	</select>
+	<delete id="deleteRecommendationBycGameNo" parameterType="string">
+		delete from recommendation where c_game_no=#{value}
+	</delete>
 </mapper>

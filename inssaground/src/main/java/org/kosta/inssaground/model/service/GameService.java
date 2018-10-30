@@ -97,5 +97,10 @@ public interface GameService {
 	 * @return
 	 */
 	public int selectCountIdBycGameNo(String cGameNo);
+	/**
+	 * 등업 하기
+	 * @param cGameNo
+	 */
+	void moveCustomGameToOfficialGame(String cGameNo);
 
 }
