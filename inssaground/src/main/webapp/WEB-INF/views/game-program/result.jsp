@@ -96,7 +96,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm-8">
+				<div class="col-sm-8" style="overflow: scroll; overflow-x: hidden; height: 650px;">
 					<form
 						action="${pageContext.request.contextPath}/updateGameProgram.do"
 						method="post" id="updateGameProgramForm" name="updateGameProgramForm">

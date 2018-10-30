@@ -27,8 +27,6 @@ public class GameProgramServiceImpl implements GameProgramService {
 	@Override
 	@Transactional
 	public String registerGameProgram(String title, String detail, String[] oGameNoArr, MemberVO mvo) {
-		//String[] oGameNoArr = oGameNoArri.split("　");
-		
 		for(int i=0; i<oGameNoArr.length; i++) {
 			System.out.print(oGameNoArr[i]+"-");
 		}
@@ -57,8 +55,13 @@ public class GameProgramServiceImpl implements GameProgramService {
 	@Override
 	@Transactional
 	public void updateGameProgram(String title, String detail, String[] oGameNoArr, MemberVO mvo, String pno) {
-		deleteGameProgram(pno, mvo.getId() );
-		registerGameProgram(title, detail, oGameNoArr, mvo);
+		//프로그램 내의 게임 삭제
+		gpm.deleteProgramOfficialGame(Integer.parseInt(pno));
+		//새로 등록
+		for(int i=0; i<oGameNoArr.length; i++) {
+			ProgramOfficialGameVO programOfficialGameVO = new ProgramOfficialGameVO(pno, oGameNoArr[i], i+1);
+			gpm.addGameInGameProgram(programOfficialGameVO);
+		}
 	}
 
 	@Override
@@ -69,7 +72,5 @@ public class GameProgramServiceImpl implements GameProgramService {
 		map.put("ID", id);
 		gpm.deleteGameProgram(map);
 	}
-
-
 
 }
