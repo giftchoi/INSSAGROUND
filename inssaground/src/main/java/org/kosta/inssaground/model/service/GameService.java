@@ -25,9 +25,10 @@ public interface GameService {
 	/**
 	 * 공식 게임 목록보기 (pageNo페이지)
 	 * @param pageNo
+	 * @param filter
 	 * @return
 	 */
-	public  ListVO<OfficialGameVO> getOfficialGameList(String pageNo);
+	public  ListVO<OfficialGameVO> getOfficialGameList(String pageNo, String filter);
 	/**
 	 * 공식 게임 상세보기
 	 * @param oGameNo
@@ -102,5 +103,6 @@ public interface GameService {
 	 * @param cGameNo
 	 */
 	void moveCustomGameToOfficialGame(String cGameNo);
+	
 
 }

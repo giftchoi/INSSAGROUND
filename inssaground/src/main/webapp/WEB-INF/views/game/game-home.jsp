@@ -9,17 +9,32 @@
 
 <div class="col-sm-12">
 	<div class="row main-content">
-		<div class="col-sm-12">
+	<div class="col-sm-1"></div>
+		<div class="col-sm-10">
 			<div>
 				<h1>INSSA GAME</h1>
 			</div>
 
 			<div class="category-menu-area">
-				<ul class="game-category-list">
-					<li data-filter=".smallscale"><h3>#소규모</h3></li>
-					<li data-filter=".largescale"><h3>#대규모</h3></li>
-					<li data-filter=".inside"><h3>#실내</h3></li>
-					<li data-filter=".outside"><h3>#실외</h3></li>
+				<ul class="game-category-list ">
+				<!-- 
+					<li data-filter=".smallscale clickable"><h3>#소규모</h3></li>
+					<li data-filter=".largescale clickable"><h3>#대규모</h3></li>
+					<li data-filter=".inside clickable"><h3>#실내</h3></li>
+					<li data-filter=".outside clickable"><h3>#실외</h3></li>
+					 -->
+					<li title="최대인원수가 20명 이하인 게임만 출력합니다">
+					<h3 onclick="location.href='${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=1'" style='cursor:pointer;'>#소규모</h3>
+					</li>
+					<li title="최소인원수가 20명 초과인 게임만 출력합니다">
+					<h3 onclick="location.href='${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=1'" style='cursor:pointer;'>#대규모</h3>
+					</li>
+					<li title="실내게임만 출력합니다">
+					<h3 onclick="location.href='${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=1'" style='cursor:pointer;'>#실내</h3>
+					</li>
+					<li title="실외게임만 출력합니다">
+					<h3 onclick="location.href='${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=1'" style='cursor:pointer;'>#실외</h3>
+					</li>
 				</ul>
 			</div>
 
@@ -109,7 +124,7 @@
 							<ul class="pagination">
 								<c:if test="${pb.previousPageGroup}">
 									<li><a
-										href="${pageContext.request.contextPath}/customGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										href="${pageContext.request.contextPath}/customGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo; </a></li>
 								</c:if>
 								<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 									end="${pb.endPageOfPageGroup}">
@@ -225,15 +240,46 @@
 	-->
 							<ul class="pagination">
 								<c:if test="${pb.previousPageGroup}">
-									<li><a
-										href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+									<c:choose>
+										<c:when test="${requestScope.filter eq 'SMALL'}">
+											<li><a href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'LARGE'}">
+											<li><a href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'INSIDE'}">
+											<li><a href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+											<li><a href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'ALL'}">
+											<li><a href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+									</c:choose>
+
 								</c:if>
 								<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 									end="${pb.endPageOfPageGroup}">
 									<c:choose>
 										<c:when test="${pb.nowPage!=i}">
-											<li><a
-												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${i}">${i}</a></li>
+											<c:choose>
+												<c:when test="${requestScope.filter eq 'SMALL'}">
+													<li><a href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'LARGE'}">
+													<li><a href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'INSIDE'}">
+													<li><a href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+													<li><a href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'ALL'}">
+													<li><a href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+											</c:choose>
 										</c:when>
 										<c:otherwise>
 											<li class="active"><a href="#">${i}</a></li>
@@ -243,8 +289,23 @@
 						</c:forEach>
 
 								<c:if test="${pb.nextPageGroup}">
-									<li><a
-										href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+									<c:choose>
+										<c:when test="${requestScope.filter eq 'SMALL'}">
+											<li><a href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'LARGE'}">
+											<li><a href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'INSIDE'}">
+											<li><a href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+											<li><a href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'ALL'}">
+											<li><a href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+									</c:choose>
 								</c:if>
 							</ul>
 						</div>
@@ -263,5 +324,6 @@
 			</c:choose>
 
 		</div>
+		<div class="col-sm-1"></div>
 	</div>
 </div>

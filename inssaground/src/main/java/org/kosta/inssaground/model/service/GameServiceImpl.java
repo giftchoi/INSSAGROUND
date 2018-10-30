@@ -29,18 +29,53 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public ListVO<OfficialGameVO> getOfficialGameList() {
-		return getOfficialGameList("1");
+		return getOfficialGameList("1", "ALL");
 	}
 
 	@Override
-	public ListVO<OfficialGameVO> getOfficialGameList(String pageNo) {
-		int totalCount = ogm.getTotalOfficialGameCount();
+	public ListVO<OfficialGameVO> getOfficialGameList(String pageNo, String filter) {
+		int totalCount = 0;
+		List<OfficialGameVO> resultOgVO = null;
 		PagingBean pagingBean=null;
-		if(pageNo==null)
-			pagingBean=new PagingBean(totalCount);
-		else
-			pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
-		return new ListVO<OfficialGameVO>(pagingBean, ogm.getOfficialGameList(pagingBean));
+		if(filter.equals("SMALL")) {
+			totalCount = ogm.getTotalOfficialGameCountBySmall();
+			if(pageNo==null)
+				pagingBean=new PagingBean(totalCount);
+			else
+				pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
+			resultOgVO = ogm.getOfficialGameListBySmall(pagingBean);
+		}else if(filter.equals("LARGE")) {
+			totalCount = ogm.getTotalOfficialGameCountByLarge();
+			if(pageNo==null)
+				pagingBean=new PagingBean(totalCount);
+			else
+				pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
+			resultOgVO = ogm.getOfficialGameListByLarge(pagingBean);
+		}else if(filter.equals("INSIDE")) {
+			totalCount = ogm.getTotalOfficialGameCountByInside();
+			System.out.println("실내 총 게임수:"+totalCount);
+			if(pageNo==null)
+				pagingBean=new PagingBean(totalCount);
+			else
+				pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
+			resultOgVO = ogm.getOfficialGameListByInside(pagingBean);
+		}else if(filter.equals("OUTSIDE")) {
+			totalCount = ogm.getTotalOfficialGameCountByOutside();
+			if(pageNo==null)
+				pagingBean=new PagingBean(totalCount);
+			else
+				pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
+			resultOgVO = ogm.getOfficialGameListByOutside(pagingBean);
+		}else {
+			totalCount = ogm.getTotalOfficialGameCount();
+			if(pageNo==null)
+				pagingBean=new PagingBean(totalCount);
+			else
+				pagingBean=new PagingBean(totalCount,Integer.parseInt(pageNo));	
+			resultOgVO = ogm.getOfficialGameList(pagingBean);
+		}
+
+		return new ListVO<OfficialGameVO>(pagingBean, resultOgVO);
 	}
 
 	@Override

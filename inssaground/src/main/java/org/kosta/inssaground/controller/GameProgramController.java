@@ -47,7 +47,7 @@ public class GameProgramController {
 	@RequestMapping("makeGameProgramFormByPageNo.do")
 	@ResponseBody
 	public ListVO<OfficialGameVO> makeGameProgramFormByPageNo(Model model, String pageNo) {
-		return gameService.getOfficialGameList(pageNo);
+		return gameService.getOfficialGameList(pageNo, "ALL");
 	}
 	
 	@Secured("ROLE_MEMBER")

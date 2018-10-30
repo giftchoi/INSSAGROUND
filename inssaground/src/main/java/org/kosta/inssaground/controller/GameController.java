@@ -25,6 +25,7 @@ public class GameController {
 	// 공식게임----------------------------------------
 	@RequestMapping("gameHome.do")
 	public String gameHome(Model model) {
+		model.addAttribute("filter", "ALL");
 		model.addAttribute("officialGameLvo", gameService.getOfficialGameList());
 		return "game/game-home.tiles";
 	}
@@ -32,10 +33,39 @@ public class GameController {
 	@RequestMapping("officialGameList.do")
 	public String officialGameList(Model model, String gameType, String pageNo) {
 		model.addAttribute("gameType", "official");
-		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo));
+		model.addAttribute("filter", "ALL");
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo, "ALL"));
 		return "game/game-home.tiles";
 	}
-
+	@RequestMapping("smallOfficialGameList.do")
+	public String smallOfficialGameList(Model model, String gameType, String pageNo) {
+		model.addAttribute("gameType", "official");
+		model.addAttribute("filter", "SMALL");
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo, "SMALL"));
+		return "game/game-home.tiles";
+	}
+	@RequestMapping("largeOfficialGameList.do")
+	public String largeOfficialGameList(Model model, String gameType, String pageNo) {
+		model.addAttribute("gameType", "official");
+		model.addAttribute("filter", "LARGE");
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo, "LARGE"));
+		return "game/game-home.tiles";
+	}
+	@RequestMapping("insideOfficialGameList.do")
+	public String insideOfficialGameList(Model model, String gameType, String pageNo) {
+		model.addAttribute("gameType", "official");
+		model.addAttribute("filter", "INSIDE");
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo, "INSIDE"));
+		return "game/game-home.tiles";
+	}
+	@RequestMapping("outsideOfficialGameList.do")
+	public String outsideOfficialGameList(Model model, String gameType, String pageNo) {
+		model.addAttribute("gameType", "official");
+		model.addAttribute("filter", "OUTSIDE");
+		model.addAttribute("officialGameLvo", gameService.getOfficialGameList(pageNo, "OUTSIDE"));
+		return "game/game-home.tiles";
+	}
+	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("officialGameDetail.do")
 	public String officialGameDetail(Model model, String oGameNo) {
