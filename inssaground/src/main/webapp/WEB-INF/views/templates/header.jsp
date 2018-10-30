@@ -73,7 +73,7 @@ li.dropdown {
    <div class="dropdown-content">
    <a  href="readyApplyGround.do">모임 신청 접수</a>
       <a href="reportList.do">문의 접수</a>
-      <a href="registerForm.do">게임 등업</a>
+      <a href="upgradeCustomGameForm.do">게임 등업</a>
       <a href="viewMemberInfo.do">나의 정보</a> 
       </div>
    </li>

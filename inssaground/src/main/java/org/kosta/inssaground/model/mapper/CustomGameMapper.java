@@ -18,5 +18,7 @@ public interface CustomGameMapper {
 	public List<CustomGameVO> getCustomGameOrderByRecommendation();
 	public void insertRecommendation(Map<String,String> map);
 	public int selectRecommendataionByIdAndcGameNo(Map<String,String>map);
+	public int selectCountIdBycGameNo(String cGameNo);
+	public void deleteRecommendationBycGameNo(String cGameNo);
 }
 

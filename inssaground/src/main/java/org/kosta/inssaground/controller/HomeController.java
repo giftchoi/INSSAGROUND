@@ -21,7 +21,7 @@ public class HomeController {
 	@RequestMapping("home.do")
 	public String home(Model model) {
 		//System.out.println("추천별 게임 확인:" +  gameService.getCustomGameOrderByRecommendation());
-		//model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
+		model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
 		model.addAttribute("groundList",groundService.getHotGroundList());
 		
 		return "home.tiles";
@@ -30,7 +30,7 @@ public class HomeController {
 	@RequestMapping("shome.do")
 	public String shome(Model model,String groundNo) {
 		//System.out.println("추천별 게임 확인:" +  gameService.getCustomGameOrderByRecommendation());
-		//model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
+		model.addAttribute("pcoList",gameService.getCustomGameOrderByRecommendation());
 		model.addAttribute("groundList",groundService.getHotGroundList());
 		model.addAttribute("groundNo",groundNo);
 		return "shome.tiles";

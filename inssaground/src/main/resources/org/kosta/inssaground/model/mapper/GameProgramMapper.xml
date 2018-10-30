@@ -32,9 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="findGameListByIdAndProgramNo"
 		parameterType="gameProgramVO" resultType="gameProgramListVO">
-		select gp.detail, r_pog_og.*
+		select gp.title as program_title, gp.detail, r_pog_og.*
 		from (
-		select pog.program_no, pog.game_order, og.o_game_no, og.title, og.min_personnel, og.max_personnel, og.game_time
+		select pog.program_no, pog.game_order, og.o_game_no, og.title, og.min_personnel, og.max_personnel, og.game_time, og.materials, og.content, og.cg_no
 		from PROGRAM_OFFICIAL_GAME pog, OFFICIAL_GAME og
 		where pog.o_game_no= og.o_game_no
 		) r_pog_og, GAME_PROGRAM gp

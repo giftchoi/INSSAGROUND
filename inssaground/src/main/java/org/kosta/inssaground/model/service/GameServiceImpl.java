@@ -12,6 +12,7 @@ import org.kosta.inssaground.model.vo.CustomGameVO;
 import org.kosta.inssaground.model.vo.ListVO;
 import org.kosta.inssaground.model.vo.OfficialGameVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class GameServiceImpl implements GameService {
 	@Resource
@@ -92,8 +93,9 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteCustomGame(String cGameNo) {
-	
+		cgm.deleteRecommendationBycGameNo(cGameNo);
 		cgm.deleteCustomGame(cGameNo);
 	}
 
@@ -110,6 +112,28 @@ public class GameServiceImpl implements GameService {
 		System.out.println("중복된 값입니다.");	
 		}
 		return count;
+	}
+	@Override
+	public int selectCountIdBycGameNo(String cGameNo) {
+		int count=cgm.selectCountIdBycGameNo(cGameNo);
+		
+		return count;
+	}
+	@Override
+	public void moveCustomGameToOfficialGame(String cGameNo) {
+		OfficialGameVO ovo=new OfficialGameVO();
+		CustomGameVO cvo = cgm.getCustomGameDetail(cGameNo);
+		ovo.setTitle(cvo.getTitle());
+		ovo.setMinPersonnel(cvo.getMinPersonnel());
+		ovo.setMaxPersonnel(cvo.getMaxPersonnel());
+		ovo.setGameTime(cvo.getGameTime());
+		ovo.setMaterials(cvo.getMaterials());
+		ovo.setContent(cvo.getContent());
+		ovo.setCgNo(cvo.getCgNo());
+		ogm.writeOfficialGame(ovo);
+		cgm.deleteRecommendationBycGameNo(cGameNo);
+		cgm.deleteCustomGame(cGameNo);
+		
 	}
 }
 

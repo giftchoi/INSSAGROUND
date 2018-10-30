@@ -9,6 +9,16 @@
 	width: 200px !important;
 	margin: 5px;
 }
+.clickable:hover {
+	border: 2.5px solid #ff1a1a;
+	cursor:pointer;
+}
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 /* 
 .gameWriteForm {
 	position: absolute;
