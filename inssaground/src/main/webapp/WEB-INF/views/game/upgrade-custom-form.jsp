@@ -42,7 +42,7 @@
 
 						<input type="hidden" name="cGameNo" value="${cgvo.cGameNo}">
 						<input type="submit" value="등업하기"
-							style="background-color: transparent; border: 0px transparent solid;"
+							style="background-color: transparent; border: 1px thin solid;"
 							id="upgradeBtn">
 					</form>
 				</div>
