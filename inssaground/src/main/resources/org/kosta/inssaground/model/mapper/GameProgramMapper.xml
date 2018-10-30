@@ -48,4 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteGameProgram" parameterType="map">
 		delete from GAME_PROGRAM where program_no = #{PROGRAM_NO} and id=#{ID}
 	</delete>
+	<update id="updateGameProgramTitleAndDetail" parameterType="map">
+		UPDATE GAME_PROGRAM SET title=#{TITLE},detail=#{DETAIL} WHERE program_no=#{PROGRAM_NO}
+	</update>
 </mapper>

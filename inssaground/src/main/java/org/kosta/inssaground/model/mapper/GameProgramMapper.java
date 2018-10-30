@@ -17,4 +17,5 @@ public interface GameProgramMapper {
 	public List<GameProgramListVO> findGameListByIdAndProgramNo(GameProgramVO gameProgramVO);
 	public void deleteProgramOfficialGame(int pno);
 	public void deleteGameProgram(Map<String, String> map);
+	public void updateGameProgramTitleAndDetail(Map<String, String> map);
 }

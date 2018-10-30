@@ -55,9 +55,15 @@ public class GameProgramServiceImpl implements GameProgramService {
 	@Override
 	@Transactional
 	public void updateGameProgram(String title, String detail, String[] oGameNoArr, MemberVO mvo, String pno) {
+		//프로그램 제목, 설명 변경
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("PROGRAM_NO", pno);
+		map.put("TITLE", title);
+		map.put("DETAIL", detail);
+		gpm.updateGameProgramTitleAndDetail(map);
 		//프로그램 내의 게임 삭제
 		gpm.deleteProgramOfficialGame(Integer.parseInt(pno));
-		//새로 등록
+		//새 게임목록들 등록
 		for(int i=0; i<oGameNoArr.length; i++) {
 			ProgramOfficialGameVO programOfficialGameVO = new ProgramOfficialGameVO(pno, oGameNoArr[i], i+1);
 			gpm.addGameInGameProgram(programOfficialGameVO);

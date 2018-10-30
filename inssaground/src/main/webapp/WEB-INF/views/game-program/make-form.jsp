@@ -390,14 +390,16 @@ json+="					</ul></div>";
                 info+=gamecount;
                 info+="</td>";
                 info+="</tr>";
+                /* 
                 info+="<tr>";
-                info+="		<td>인원</td>";
+                info+="		<td>예상 인원</td>";
                 info+="		<td>";
                 info+=min
                 info+=" ~ ";
                 info+=max
                 info+="명</td>";
                 info+="</tr>";
+                 */
                 info+="<tr>";
                 info+="		<td>총 소요시간</td>";
                 info+="		<td>";
@@ -497,14 +499,16 @@ json+="					</ul></div>";
                info+=gamecount;
                info+="</td>";
                info+="</tr>";
+              /*  
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
                info+=max
                info+="명</td>";
                info+="</tr>";
+                */
                info+="<tr>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
@@ -603,13 +607,15 @@ json+="					</ul></div>";
                info+=gamecount;
                info+="</td>";
                info+="</tr>";
+               /* 
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
                info+=max
                info+="명</td>";
+                */
                info+="</tr>";
                info+="<tr>";
                info+="		<td>총 소요시간</td>";
@@ -709,14 +715,16 @@ json+="					</ul></div>";
                info+=gamecount;
                info+="</td>";
                info+="</tr>";
+               /* 
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
                info+=max
                info+="명</td>";
                info+="</tr>";
+                */
                info+="<tr>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
@@ -816,14 +824,16 @@ json+="					</ul></div>";
                info+=gamecount;
                info+="</td>";
                info+="</tr>";
+               /* 
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
                info+=max
                info+="명</td>";
                info+="</tr>";
+                */
                info+="<tr>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
@@ -922,14 +932,16 @@ json+="					</ul></div>";
                info+=gamecount;
                info+="</td>";
                info+="</tr>";
+               /* 
                info+="<tr>";
-               info+="		<td>인원</td>";
+               info+="		<td>예상 인원</td>";
                info+="		<td>";
                info+=min
                info+=" ~ ";
                info+=max
                info+="명</td>";
                info+="</tr>";
+                */
                info+="<tr>";
                info+="		<td>총 소요시간</td>";
                info+="		<td>";
@@ -1025,13 +1037,15 @@ function deleteLine(obj) {
     info+=gamecount;
     info+="</td>";
     info+="</tr>";
+    /* 
     info+="<tr>";
-    info+="		<td>인원</td>";
+    info+="		<td>예상 인원</td>";
     info+="		<td>";
     info+=min
     info+=" ~ ";
     info+=max
     info+="명</td>";
+     */
     info+="</tr>";
     info+="<tr>";
     info+="		<td>총 소요시간</td>";
