@@ -39,7 +39,6 @@
 <div class="container">
 <h3>${sessionScope.ground.groundName} 채팅</h3>
 <div id="status"></div>
-
 <textarea name="chatMsg" rows="10" cols="40" id="chat"  autofocus></textarea>
 
 <p>
