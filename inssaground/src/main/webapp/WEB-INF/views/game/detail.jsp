@@ -15,6 +15,40 @@
     margin-bottom: 1rem;
 }
 </style>
+<script type="text/javascript">
+			$(document).ready(function() {
+				$("#deleteCustomGameForm").submit(function() {
+					return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
+				});
+				$("#customGameUpdateForm").submit(function() {
+					return confirm("사용자 정의 게임을 수정하시겠습니까?")
+				});
+			});
+			
+			function recommend(){
+
+				if(confirm("해당 게임을 추천하시겠습니까?")){
+				$.ajax({
+						url: "${pageContext.request.contextPath}/insertRecommendation.do",
+						type: "post",
+						data: $("#insertRecommendation").serialize(),
+						beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+							xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+						},
+						success: function(result){
+							var count =$("#countSpan").text();
+							if(count==result){
+								alert("이미 추천한 게임입니다");
+							}else{
+								alert("해당 게임이 추천되었습니다");
+								$("#countSpan").text(result);
+							}
+						}
+					}); 
+					
+				}
+			}
+		</script>
 	<c:choose>
 		<c:when test="${requestScope.gameType eq 'custom'}">
 
@@ -73,11 +107,11 @@
       <span class="glyphicon glyphicon-thumbs-up"></span> ${requestScope.gvo.recommendation }
       </button>
        --%>
-      <form method="post" action="${pageContext.request.contextPath}/insertRecommendation.do" id="insertRecommendation">
+      <form method="post" id="insertRecommendation">
       <sec:csrfInput/>
       <input type="hidden" name="cGameNo" value="${requestScope.gvo.cGameNo}">    
-      <span class="glyphicon glyphicon-thumbs-up"></span>
-      <input type="submit" value="${requestScope.count }"  style="background-color:transparent;  border:0px transparent solid;">
+      <a href="javascript:void(0);" onclick="recommend();"><span class="glyphicon glyphicon-thumbs-up"></span></a>&nbsp;&nbsp;<span id="countSpan">${requestScope.count }</span>
+      <%-- <input type="button" value="${requestScope.count }"  style="background-color:transparent;  border:0px transparent solid;"> --%>
       </form>
      
       
@@ -104,21 +138,7 @@
 						<input type="submit" value="delete"  style="background-color:transparent;  border:0px transparent solid;">
 						</i>
 				</form>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#deleteCustomGameForm").submit(function() {
-					return confirm("사용자 정의 게임을 삭제하시겠습니까?")	
-				});
-				$("#customGameUpdateForm").submit(function() {
-					return confirm("사용자 정의 게임을 수정하시겠습니까?")
-				});
-				// 추천수 올라가는 버튼 
-				$("#insertRecommendation").submit(function() {
-					//alert("추천수를 누르시겠습니까?")
-					return confirm("추천수를 올리시겠습니까?")
-				});
-			});
-		</script>
+		
         
       </td>
     </tr>
@@ -165,7 +185,7 @@
 	<c:otherwise>
 	<tr>
       <td>분류</td>
-      <td style="text-align:left; colspan="2">실외 게임</td>
+      <td style="text-align:left;" colspan="2">실외 게임</td>
     </tr>
     </c:otherwise>
 </c:choose>

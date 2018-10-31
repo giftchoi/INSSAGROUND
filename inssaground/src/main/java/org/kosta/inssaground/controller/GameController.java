@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -193,6 +194,7 @@ public class GameController {
 	}
 
 	@Secured("ROLE_MEMBER")
+	@ResponseBody
 	@PostMapping("insertRecommendation.do")
 	public String insertRecommendation(Model model, String cGameNo, RedirectAttributes redirectAttributes) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -206,7 +208,7 @@ public class GameController {
 		System.out.println("추천수 증가 확인" + gameService.getCustomGameDetail(cGameNo).getRecommendation());
 		redirectAttributes.addAttribute("cGameNo", cGameNo);
 		redirectAttributes.addAttribute("count", count);
-		return "redirect:customGameDetail.do";
+		return count+"";
 	}
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("upgradeCustomGameForm.do")
