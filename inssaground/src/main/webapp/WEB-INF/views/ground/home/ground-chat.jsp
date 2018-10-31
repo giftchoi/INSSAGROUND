@@ -23,9 +23,10 @@
  	 	ws.onclose = function(evt){
  	 		$("status").text("연결 X");
  	 	};//onclose
- 	 	var $textarea = $("#chat");
- 	 	$textarea.scrollTop($textarea[0].scrollHeight);
- 	 	
+ 	 	//var $textarea = $("#chat");
+ 	 	//$textarea.scrollTop($textarea[0].scrollHeight);
+ 	 	var obj = $("#chat");
+ 	 	obj.scrollTop = obj.scrollHeight;
  	});//ready
  	//document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 	

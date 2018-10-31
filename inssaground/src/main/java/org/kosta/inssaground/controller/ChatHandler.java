@@ -46,7 +46,7 @@ public class ChatHandler extends TextWebSocketHandler{
 		String user = session.getRemoteAddress().getHostName();
 		System.out.println(session.getRemoteAddress().getAddress()+" 뭔지 확인");
 		for(int i=0;i<sessionList.size();i++) {
-			sessionList.get(i).sendMessage(new TextMessage(memberName+" 입장!!"));
+			sessionList.get(i).sendMessage(new TextMessage("*********"+memberName+" 입장!!********"));
 		}
 	}
 	/*
