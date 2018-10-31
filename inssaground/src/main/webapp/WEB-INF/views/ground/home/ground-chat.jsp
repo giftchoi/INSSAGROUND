@@ -17,17 +17,15 @@
  	 		}); // keyup
  	 	};//ws.onopen
  	 	ws.onmessage = function(evt){
+ 	 		//document.getElementById("chat").eq(0).append(evt.data+"\n").style.textAlign = 'right';
  	 		$("textarea").eq(0).append(evt.data+"\n");
  	 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
- 	 		//$("textarea").scrollTop($("#textarea").prop("scrollHeight"));
+
  	 	}; // onmessage
  	 	ws.onclose = function(evt){
  	 		$("status").text("연결 X");
  	 	};//onclose
- 	 	//var $textarea = $("#chat");
- 	 	//$textarea.scrollTop($textarea[0].scrollHeight);
- 	 	var obj = $("#chat");
- 	 	obj.scrollTop = obj.scrollHeight;
+ 	 	
  	});//ready
  	
 	
