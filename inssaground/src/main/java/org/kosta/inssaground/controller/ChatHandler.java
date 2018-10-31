@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.kosta.inssaground.model.vo.MemberVO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
@@ -40,13 +38,13 @@ public class ChatHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessionList.add(session);
 		 UsernamePasswordAuthenticationToken token=(UsernamePasswordAuthenticationToken)session.getPrincipal();
-		 String memberName = ((MemberVO)token.getPrincipal()).getName();
+		 String memberName = ((MemberVO)token.getPrincipal()).getId();
 		System.out.println(memberName+" 접속 성공!!");
 		//System.out.println(session.getPrincipal().getName()); 
-		String user = session.getRemoteAddress().getHostName();
+		//String user = session.getRemoteAddress().getHostName();
 		System.out.println(session.getRemoteAddress().getAddress()+" 뭔지 확인");
 		for(int i=0;i<sessionList.size();i++) {
-			sessionList.get(i).sendMessage(new TextMessage(memberName+" 입장!!"));
+			sessionList.get(i).sendMessage(new TextMessage("*********"+memberName+" 입장!!********"));
 		}
 	}
 	/*
@@ -59,7 +57,7 @@ public class ChatHandler extends TextWebSocketHandler{
 		System.out.println("메시지 도착");
 		String payloadMessage = (String)message.getPayload();
 		UsernamePasswordAuthenticationToken token=(UsernamePasswordAuthenticationToken)session.getPrincipal();
-		 String memberName = ((MemberVO)token.getPrincipal()).getName();
+		 String memberName = ((MemberVO)token.getPrincipal()).getId();
 		
 		
 		//MemberVO memberVO =session.getPrincipal().getName();

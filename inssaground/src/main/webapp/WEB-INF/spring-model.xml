@@ -60,8 +60,8 @@ class="org.mybatis.spring.SqlSessionFactoryBean">
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	<property name="host" value="smtp.gmail.com"></property>
 	<property name="port" value="587"></property>
-	<property name="username" value="giftchoi@gmail.com"></property>
-	<property name="password" value="gift5164"></property>
+	<property name="username" value="yjym0926@gmail.com"></property>
+	<property name="password" value="@ymyj0530"></property>
 	<property name="javaMailProperties">
 		<props>
 			<prop key="mail.transport.protocol">smtp</prop>
