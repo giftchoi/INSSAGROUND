@@ -18,6 +18,7 @@
  	 	};//ws.onopen
  	 	ws.onmessage = function(evt){
  	 		$("textarea").eq(0).append(evt.data+"\n");
+ 	 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
  	 		//$("textarea").scrollTop($("#textarea").prop("scrollHeight"));
  	 	}; // onmessage
  	 	ws.onclose = function(evt){
@@ -28,7 +29,7 @@
  	 	var obj = $("#chat");
  	 	obj.scrollTop = obj.scrollHeight;
  	});//ready
- 	//document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+ 	
 	
  	
  	
