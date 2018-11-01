@@ -1,3 +1,11 @@
+ALTER TABLE PROGRAM_OFFICIAL_GAME DROP CONSTRAINT FK_OFFICIAL_GAME1 CASCADE;
+
+ALTER TABLE PROGRAM_OFFICIAL_GAME 
+ADD constraint FK_OFFICIAL_GAME1 foreign key(o_game_no) references OFFICIAL_GAME(o_game_no)
+ON DELETE CASCADE;
+
+-------------------------------------------------윗부분 추가-공식게임 삭제시 오류나서 on delete cascade옵션추가(10/31)
+
 select * from hobby where hobby_category_no=1;
 alter table sigungu add(sigungu_name varchar2(100) not null);
 alter table ground add(status number default 0);
