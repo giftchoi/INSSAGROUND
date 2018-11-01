@@ -36,7 +36,9 @@ li.dropdown {
 <sec:authorize access="!hasRole('ROLE_MEMBER')">
 <ul>
    <li><a  href="loginForm.do">LOGIN</a></li>
-   <li><a href="registerForm.do">JOIN US</a></li>
+   <li><a href="registerForm.do" style="
+    padding-right: 12px;
+">JOIN US</a></li>
 </ul>
 </sec:authorize>
 <sec:authorize access="!hasRole('ROLE_ADMIN') and hasRole('ROLE_MEMBER')">
@@ -51,7 +53,10 @@ li.dropdown {
       <a href="withdrawForm.do">탈퇴</a>
       </div>
    </li>
-   <li><a href="#" id="logoutAction">LOGOUT</a></li>
+   <li><a href="#" id="logoutAction" style="
+    padding-right: 12px;
+">LOGOUT</a></li>
+
 </ul>
    <script type="text/javascript">
       $(document).ready(function() {
@@ -128,3 +133,127 @@ li.dropdown {
 	</li>
 </ul>
 </div>
+<div class="btn2">
+</div>
+<div onclick="history.back();" class="page_cover">
+</div>
+<div id="menu" align="left">
+	<textarea name="chatMsg" rows="30" cols="49" id="chat" style="
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-top-width: 0px; font-size:2em;" ></textarea>
+
+<p>
+메시지 입력 : <input type="text" name="chatInput" placeholder="입력후 엔터치면 서버로 전송" size="25" autofocus="autofocus">
+  <div onclick="history.back();" class="close">
+  	
+  </div>
+</div>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 var ws = new WebSocket("ws://192.168.0.148:8888/inssaground/chat-ws.do");
+		//121.169.168.159
+		//192.168.0.148
+	 	ws.onopen = function(){
+	 		$("#status").text("연결 O");
+	 		$("input[name=chatInput]").keyup(function(event) {
+	 			if(event.keyCode == 13){
+	 				ws.send($("input[name=chatInput]").val());
+	 				$("input[name=chatInput]").val("");
+	 			}
+	 		}); // keyup
+	 	};//ws.onopen
+	 	ws.onmessage = function(evt){
+	 		//document.getElementById("chat").eq(0).append(evt.data+"\n").style.textAlign = 'right';
+	 		$("textarea").eq(0).append(evt.data+"\n");
+	 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+
+	 	}; // onmessage
+	 	ws.onclose = function(evt){
+	 		$("status").text("연결 X");
+	 	};//onclose
+	 
+	 
+	 
+	 
+	 
+	 /////////////////////////////
+	 $(".btn2").click(function() {
+		  $("#menu,.page_cover,html").addClass("open");
+		  window.location.hash = "#open";
+		});
+
+		window.onhashchange = function() {
+		  if (location.hash != "#open") {
+		    $("#menu,.page_cover,html").removeClass("open");
+		  }
+		};
+ });
+</script>
+<style>
+html.open {
+  overflow: hidden;
+}
+
+.btn2 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  background-image: url("http://s1.daumcdn.net/cfs.tistory/custom/blog/204/2048858/skin/images/menu.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.close {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-image: url("http://s1.daumcdn.net/cfs.tistory/custom/blog/204/2048858/skin/images/close.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+#menu {
+  width: 400px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  right: -402px;
+  z-index: 10;
+  border: 1px solid #c9c9c9;
+  background-color: white;
+  text-align: center;
+  transition: All 0.2s ease;
+  -webkit-transition: All 0.2s ease;
+  -moz-transition: All 0.2s ease;
+  -o-transition: All 0.2s ease;
+}
+
+#menu.open {
+  right: 0px;
+}
+
+.page_cover.open {
+  display: block;
+}
+
+.page_cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  display: none;
+}
+</style>

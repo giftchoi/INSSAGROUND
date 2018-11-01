@@ -520,9 +520,9 @@ public class GroundController {
 		memberVO.setGroundNoList(memberService.myGroundNoList(memberVO.getId()));
 		return "redirect:home.do";
 	}
-	@Secured("ROLE_MEMBER")
+/*	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-chat.do")
 	public String chat() {
 		return "ground/home/ground-chat.tiles";
-	}
+	}*/
 }
