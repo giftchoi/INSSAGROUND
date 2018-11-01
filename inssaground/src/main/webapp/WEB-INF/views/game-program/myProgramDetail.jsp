@@ -11,11 +11,11 @@
 	rel="stylesheet">
  
 <!-- container-fluid: 화면 너비와 상관없이 항상 100% -->
-<div class="col-sm-12">
+<div class="col-sm-6 offset-3">
 	<div class="row main-content">
 		<div class="col-sm-12">
 			<div>
-				<h1>MY GAME PROGRAM DETAIL</h1>
+				<h1>게임 프로그램 상세보기</h1>
 			</div>
 			<br> <br>
 			<div class="row">
@@ -25,7 +25,7 @@
 						action="${pageContext.request.contextPath}/editGameProgram.do"
 						method="post" id="editGameProgramForm">
 <sec:csrfInput/>
-						<table id="gameprogramlist" class="myTable simpleTable">
+						<table id="gameprogramlist" class="table simpleTable">
 							<thead>
 								<tr>
 									<th>프로그램명 :</th>

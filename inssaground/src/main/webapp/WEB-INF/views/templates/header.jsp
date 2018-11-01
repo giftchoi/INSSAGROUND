@@ -56,7 +56,8 @@ li.dropdown {
    <li><a href="#" id="logoutAction" style="
     padding-right: 12px;
 ">LOGOUT</a></li>
-
+	<li title="채팅"><div class="btn2">
+</div></li>
 </ul>
    <script type="text/javascript">
       $(document).ready(function() {
@@ -133,15 +134,13 @@ li.dropdown {
 	</li>
 </ul>
 </div>
-<div class="btn2">
-</div>
-<div onclick="history.back();" class="page_cover">
-</div>
+
+
 <div id="menu" align="left">
-	<textarea name="chatMsg" rows="30" cols="49" id="chat" style="
+	<textarea name="chatMsg" rows="30" style="font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;font-size:18px;width: 95%;height:80%;" id="chat" style="
     border-right-width: 0px;
     border-left-width: 0px;
-    border-top-width: 0px; font-size:2em;" ></textarea>
+    border-top-width: 0px; font-size:2em;" readonly="readonly"></textarea>
 
 <p>
 메시지 입력 : <input type="text" name="chatInput" placeholder="입력후 엔터치면 서버로 전송" size="25" autofocus="autofocus">
@@ -149,9 +148,11 @@ li.dropdown {
   	
   </div>
 </div>
+<div onclick="history.back();" class="page_cover">
+</div>
 <script type="text/javascript">
  $(document).ready(function(){
-	 var ws = new WebSocket("ws://192.168.0.148:8888/inssaground/chat-ws.do");
+	 var ws = new WebSocket("ws://192.168.0.118:8888/inssaground/chat-ws.do");
 		//121.169.168.159
 		//192.168.0.148
 	 	ws.onopen = function(){
@@ -221,7 +222,10 @@ html.open {
   background-position: center;
   cursor: pointer;
 }
-
+p{
+font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+font-size:17px;
+}
 #menu {
   width: 400px;
   height: 100%;
