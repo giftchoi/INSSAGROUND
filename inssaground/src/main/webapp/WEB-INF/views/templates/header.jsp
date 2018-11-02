@@ -152,7 +152,7 @@ li.dropdown {
 </div>
 <script type="text/javascript">
  $(document).ready(function(){
-	 var ws = new WebSocket("ws://192.168.0.118:8888/inssaground/chat-ws.do");
+	 var ws = new WebSocket("ws://192.168.0.148:8888/inssaground/chat-ws.do");
 		//121.169.168.159
 		//192.168.0.148
 	 	ws.onopen = function(){
