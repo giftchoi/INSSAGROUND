@@ -503,8 +503,8 @@ public class GroundController {
 		 *  스케줄 참여 횟수
 		 */
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
-		model.addAttribute("memberVO",memberVO);
+		//MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		model.addAttribute("memberVO",id);
 		model.addAttribute("post",groundService.groundMemberPostCount(id,groundVO.getGroundNo()));
 		model.addAttribute("schedule",groundService.groundMemberScheduleCount(id,groundVO.getGroundNo()));
 		model.addAttribute("participation",groundService.groundMemberParticipationCount(id,groundVO.getGroundNo()));
