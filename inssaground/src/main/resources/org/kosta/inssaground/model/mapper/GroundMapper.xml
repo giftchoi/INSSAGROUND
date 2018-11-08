@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (
 		select row_number() over (order by ground_no) as row_no,g.*
 		from ground g where g.status=1) g left join profile_img pi on
-		g.master=pi.id, sigungu s, hobby h, (select ground_no,count(*) as participants from insider group by ground_no) p
+		g.master=pi.id, sigungu s, hobby h, (select ground_no,count(*) as participants from insider where status=1 group by ground_no) p
 		where g.sigungu_no=s.sigungu_no and h.hobby_no=g.hobby_no and p.ground_no = g.ground_no and row_no
 		between #{startRowNumber} and #{endRowNumber}
 	</select>
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="sigungu!=null">
 			and gr.sigungu_no = #{sigungu}
-		</if>
+		</if> 
 		<if test="hobby==null and category!=null">
 			and gr.hobby_no in (select hobby_no from hobby where
 			hobby_category_no= #{category})
