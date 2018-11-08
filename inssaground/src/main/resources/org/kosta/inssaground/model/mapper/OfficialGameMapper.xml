@@ -4,19 +4,72 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.inssaground.model.mapper.OfficialGameMapper">
-	<select id="getTotalOfficialGameCount" resultType="int">
+	<sql id="getTotalOGCount">
 		select count(*) from
 		OFFICIAL_GAME
+	</sql>
+	<select id="getTotalOfficialGameCount" resultType="int">
+		<include refid="getTotalOGCount" />
 	</select>
-	<select id="getOfficialGameList" resultType="officialGameVO" parameterType="pagingBean">
+	<select id="getTotalOfficialGameCountBySmall" resultType="int">
+		<include refid="getTotalOGCount" />
+		where max_personnel <![CDATA[<=20]]>
+	</select>
+	<select id="getTotalOfficialGameCountByLarge" resultType="int">
+		<include refid="getTotalOGCount" />
+		where min_personnel <![CDATA[>20]]>
+	</select>
+	<select id="getTotalOfficialGameCountByInside" resultType="int">
+		<include refid="getTotalOGCount" />
+		where cg_no=1
+	</select>
+	<select id="getTotalOfficialGameCountByOutside" resultType="int">
+		<include refid="getTotalOGCount" />
+		where cg_no=2
+	</select>
+	
+	<sql id="getOGList">
 		SELECT og.* FROM(
 				SELECT row_number() over(order by o_game_no desc) as rownumber,
 				o_game_no, title, min_personnel, max_personnel, game_time, materials, cg_no
-				FROM OFFICIAL_GAME
+				
+	</sql>
+	<select id="getOfficialGameList" resultType="officialGameVO" parameterType="pagingBean">
+		<include refid="getOGList"/>
+		FROM OFFICIAL_GAME
 		) og
 		where rownumber between #{startRowNumber} and #{endRowNumber}
 		order by o_game_no desc
 	</select>
+	<select id="getOfficialGameListBySmall" resultType="officialGameVO" parameterType="pagingBean">
+		<include refid="getOGList"/>
+		FROM OFFICIAL_GAME where max_personnel <![CDATA[<=20]]>
+		) og 
+		where rownumber between #{startRowNumber} and #{endRowNumber}
+		order by o_game_no desc
+	</select>
+	<select id="getOfficialGameListByLarge" resultType="officialGameVO" parameterType="pagingBean">
+		<include refid="getOGList"/>
+		FROM OFFICIAL_GAME where min_personnel <![CDATA[>20]]>
+		) og 
+		where rownumber between #{startRowNumber} and #{endRowNumber}
+		order by o_game_no desc
+	</select>
+		<select id="getOfficialGameListByInside" resultType="officialGameVO" parameterType="pagingBean">
+		<include refid="getOGList"/>
+		FROM OFFICIAL_GAME where cg_no=1
+		) og
+		where rownumber between #{startRowNumber} and #{endRowNumber}
+		order by o_game_no desc
+	</select>
+	<select id="getOfficialGameListByOutside" resultType="officialGameVO" parameterType="pagingBean">
+		<include refid="getOGList"/>
+		FROM OFFICIAL_GAME where cg_no=2
+		) og
+		where rownumber between #{startRowNumber} and #{endRowNumber}
+		order by o_game_no desc
+	</select>
+	
 	<select id="getOfficialGameDetail" resultType="officialGameVO">
 		select
 		o_game_no, title, min_personnel, max_personnel,

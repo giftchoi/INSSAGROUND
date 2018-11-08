@@ -3,37 +3,36 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<style>
+body{
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+}
 
-<link rel="stylesheet"
+</style>
+<%-- <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/game/main.css">
-
+ --%>
 <div class="col-sm-12">
 	<div class="row main-content">
-		<div class="col-sm-12">
-			<div>
-				<h1>INSSA GAME</h1>
-			</div>
-
-			<div class="category-menu-area">
-				<ul class="game-category-list">
-					<li data-filter=".smallscale"><h3>#소규모</h3></li>
-					<li data-filter=".largescale"><h3>#대규모</h3></li>
-					<li data-filter=".inside"><h3>#실내</h3></li>
-					<li data-filter=".outside"><h3>#실외</h3></li>
-				</ul>
-			</div>
-
+	<div class="col-sm-1"></div>
+		<div class="col-sm-10">
 
 			<!-- 사용자정의 게임 화면 -->
 			<c:choose>
 				<c:when test="${requestScope.gameType eq 'custom'}">
+				<div>
+					<h1>사용자 게임 게시판</h1>
+				</div>
 					<span class="gameWriteForm"
 					style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-						<button class="btn btn-danger" style="font-size: 2rem;"
+						<button class="btn btn-white" style="font-size: 2rem;"
 							onclick="location.href='${pageContext.request.contextPath}/customGameWriteForm.do'">
-							사용자 게임 등록</button>
+							게임 등록</button>
 					</span>
+					<br><br><br><br><br>
 					<div class="game-post-area">
+					
+						<c:if test="${empty requestScope.customGameLvo.list }"><br><br><br><br><h2>등록된 사용자 게임이 없습니다. </h2> </c:if>
 						<c:forEach items="${requestScope.customGameLvo.list }" var="cgvo">
 							<%--
 <!-- 로그인 비로그인 구분 문 -->
@@ -42,8 +41,9 @@
 
 <sec:authorize access="isAuthenticated()">
 </sec:authorize>
- --%>
+ --%>						
 							<sec:authorize access="isAuthenticated()">
+							
 								<!-- 로그인 상태 -->
 								<div class="card game"
 									onclick="location.href='${pageContext.request.contextPath}/customGameDetail.do?cGameNo=${cgvo.cGameNo}'">
@@ -51,17 +51,17 @@
 										<h3>${cgvo.title }</h3>
 									</div>
 									<div class="card-body">
-										<h5 style="font-family: serif; text-align: center;">준비물:
-											${cgvo.materials }</h5>
+										<h4 style="font-family: serif; text-align: center;">준비물:
+											${cgvo.materials }</h4>
 									</div>
 									<div class="row rowgamefooter">
 										<div class="col-sm-6" align="left">
-											<h5 style="font-family: serif; text-align: left;">${cgvo.gameTime}
-												분</h5>
+											<h4 style="font-family: serif; text-align: left;">${cgvo.gameTime}
+												분</h4>
 										</div>
 										<div class="col-sm-6" align="right">
-											<h5 align="right" style="color: red;">
-												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h5>
+											<h4 align="right" style="color: red;">
+												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h4>
 										</div>
 									</div>
 								</div>
@@ -73,17 +73,17 @@
 										<h3>${cgvo.title }</h3>
 									</div>
 									<div class="card-body">
-										<h5 style="font-family: serif; text-align: center;">준비물:
-											${cgvo.materials }</h5>
+										<h4 style="font-family: serif; text-align: center;">준비물:
+											${cgvo.materials }</h4>
 									</div>
 									<div class="row rowgamefooter">
 										<div class="col-sm-6" align="left">
-											<h5 style="font-family: serif; text-align: left;">${cgvo.gameTime}
-												분</h5>
+											<h4 style="font-family: serif; text-align: left;">${cgvo.gameTime}
+												분</h4>
 										</div>
 										<div class="col-sm-6" align="right">
-											<h5 align="right" style="color: red;">
-												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h5>
+											<h4 align="right" style="color: red;">
+												${cgvo.minPersonnel} ~ ${cgvo.maxPersonnel} 명</h4>
 										</div>
 									</div>
 								</div>
@@ -109,7 +109,7 @@
 							<ul class="pagination">
 								<c:if test="${pb.previousPageGroup}">
 									<li><a
-										href="${pageContext.request.contextPath}/customGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										href="${pageContext.request.contextPath}/customGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo; </a></li>
 								</c:if>
 								<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 									end="${pb.endPageOfPageGroup}">
@@ -142,19 +142,51 @@
 				</c:when>
 				<c:otherwise>
 					<!-- 공식 게임 화면 -->
-
+				<div>
+					<h1>인싸그라운드 공식 게임</h1>
+				</div>
+					<div class="category-menu-area">
+						<ul class="game-category-list ">
+							<!-- 
+					<li data-filter=".smallscale clickable"><h3>#소규모</h3></li>
+					<li data-filter=".largescale clickable"><h3>#대규모</h3></li>
+					<li data-filter=".inside clickable"><h3>#실내</h3></li>
+					<li data-filter=".outside clickable"><h3>#실외</h3></li>
+					 -->
+							<li title="최대인원수가 20명 이하인 게임만 출력합니다">
+								<h3
+									onclick="location.href='${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=1'"
+									style='cursor: pointer;'>#소규모</h3>
+							</li>
+							<li title="최소인원수가 20명 초과인 게임만 출력합니다">
+								<h3
+									onclick="location.href='${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=1'"
+									style='cursor: pointer;'>#대규모</h3>
+							</li>
+							<li title="실내게임만 출력합니다">
+								<h3
+									onclick="location.href='${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=1'"
+									style='cursor: pointer;'>#실내</h3>
+							</li>
+							<li title="실외게임만 출력합니다">
+								<h3
+									onclick="location.href='${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=1'"
+									style='cursor: pointer;'>#실외</h3>
+							</li>
+						</ul>
+					</div>
 					<div class="game-post-area">
 						<c:forEach items="${requestScope.officialGameLvo.list }"
 							var="ogvo">
 
 							<sec:authorize access="isAuthenticated()">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<span class="gameWriteForm"
-									style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
-									<button class="btn btn-danger" style="font-size: 2rem;"
-										onclick="location.href='${pageContext.request.contextPath}/officialGameWriteForm.do'">
-										공식 게임 등록</button>
-								</span>
+									<span class="gameWriteForm"
+										style="position: absolute; right: 5em; top: 3em; height: 3em; line-height: 3em; font-size: 14px; color: #333333; background-color: #ffffff;">
+										<button class="btn btn-danger" style="font-size: 2rem;"
+											onclick="location.href='${pageContext.request.contextPath}/officialGameWriteForm.do'">
+											공식 게임 등록</button>
+									</span>
 								</sec:authorize>
 								<div class="card game"
 									onclick="location.href='${pageContext.request.contextPath}/officialGameDetail.do?oGameNo=${ogvo.oGameNo}'">
@@ -162,7 +194,8 @@
 										<h3>${ogvo.title }</h3>
 									</div>
 									<div class="card-body">
-										<h5 style="font-family: serif; text-align: center;">준비물: ${ogvo.materials }</h5>
+										<h5 style="font-family: serif; text-align: center;">준비물:
+											${ogvo.materials }</h5>
 									</div>
 									<div class="row rowgamefooter">
 										<div class="col-sm-6" align="left">
@@ -183,7 +216,8 @@
 										<h3>${ogvo.title }</h3>
 									</div>
 									<div class="card-body">
-										<h5 style="font-family: serif; text-align: center;">준비물: ${ogvo.materials }</h5>
+										<h5 style="font-family: serif; text-align: center;">준비물:
+											${ogvo.materials }</h5>
 									</div>
 									<div class="row rowgamefooter">
 										<div class="col-sm-6" align="left">
@@ -225,15 +259,56 @@
 	-->
 							<ul class="pagination">
 								<c:if test="${pb.previousPageGroup}">
-									<li><a
-										href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+									<c:choose>
+										<c:when test="${requestScope.filter eq 'SMALL'}">
+											<li><a
+												href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'LARGE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'INSIDE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'ALL'}">
+											<li><a
+												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+										</c:when>
+									</c:choose>
+
 								</c:if>
 								<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 									end="${pb.endPageOfPageGroup}">
 									<c:choose>
 										<c:when test="${pb.nowPage!=i}">
-											<li><a
-												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${i}">${i}</a></li>
+											<c:choose>
+												<c:when test="${requestScope.filter eq 'SMALL'}">
+													<li><a
+														href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'LARGE'}">
+													<li><a
+														href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'INSIDE'}">
+													<li><a
+														href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+													<li><a
+														href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+												<c:when test="${requestScope.filter eq 'ALL'}">
+													<li><a
+														href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${i}">${i}</a></li>
+												</c:when>
+											</c:choose>
 										</c:when>
 										<c:otherwise>
 											<li class="active"><a href="#">${i}</a></li>
@@ -243,8 +318,28 @@
 						</c:forEach>
 
 								<c:if test="${pb.nextPageGroup}">
-									<li><a
-										href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+									<c:choose>
+										<c:when test="${requestScope.filter eq 'SMALL'}">
+											<li><a
+												href="${pageContext.request.contextPath}/smallOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'LARGE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/largeOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'INSIDE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/insideOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'OUTSIDE'}">
+											<li><a
+												href="${pageContext.request.contextPath}/outsideOfficialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+										<c:when test="${requestScope.filter eq 'ALL'}">
+											<li><a
+												href="${pageContext.request.contextPath}/officialGameList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+										</c:when>
+									</c:choose>
 								</c:if>
 							</ul>
 						</div>
@@ -263,5 +358,6 @@
 			</c:choose>
 
 		</div>
+		<div class="col-sm-1"></div>
 	</div>
 </div>

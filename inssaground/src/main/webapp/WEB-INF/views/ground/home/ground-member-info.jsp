@@ -9,7 +9,7 @@
 					</tr>
 					<tr class="center">
 						<th style="width:100px;">아이디</th>
-						<th>${memberVO.id}</th>
+						<th>${memberVO}</th>
 					</tr>
 					<tr class="center">
 						<th>일정 등록 수</th>

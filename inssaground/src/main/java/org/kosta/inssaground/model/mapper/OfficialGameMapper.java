@@ -9,9 +9,17 @@ import org.kosta.inssaground.model.vo.OfficialGameVO;
 @Mapper
 public interface OfficialGameMapper {
 	public int getTotalOfficialGameCount();
-
+	public int getTotalOfficialGameCountBySmall();
+	public int getTotalOfficialGameCountByLarge();
+	public int getTotalOfficialGameCountByInside();
+	public int getTotalOfficialGameCountByOutside();
+	
 	public List<OfficialGameVO> getOfficialGameList(PagingBean pagingBean);
-
+	public List<OfficialGameVO> getOfficialGameListBySmall(PagingBean pagingBean);
+	public List<OfficialGameVO> getOfficialGameListByLarge(PagingBean pagingBean);
+	public List<OfficialGameVO> getOfficialGameListByInside(PagingBean pagingBean);
+	public List<OfficialGameVO> getOfficialGameListByOutside(PagingBean pagingBean);
+	
 	public OfficialGameVO getOfficialGameDetail(String oGameNo);
 
 	public void writeOfficialGame(OfficialGameVO OfficialGameVO);

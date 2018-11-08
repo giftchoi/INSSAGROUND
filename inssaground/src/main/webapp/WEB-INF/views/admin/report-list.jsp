@@ -3,14 +3,14 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="col-sm-12">
 	<div class="row main-content">
-		<div class="col-sm-8 offset-2">
+		<div class="col-sm-6 offset-3">
 
-<table class="myTable">
+<table class="table simpleTable">
   <thead>
     <tr>
-      <th colspan="5">REPORT LIST</th>
+      <th style="font-size:25px;" colspan="5">REPORT LIST</th>
     </tr>
-    <tr>
+    <tr class="center">
       <th>No</th>
       <th>REPORT TITLE</th>
       <th>REPORTER</th>

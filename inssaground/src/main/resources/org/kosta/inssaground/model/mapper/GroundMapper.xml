@@ -462,11 +462,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
  	<resultMap type="scheduleVO" id="scheduleGNRM">
 		<result column="ground_name" property="groundVO.groundName"/>
+		<result column="ground_no" property="groundVO.groundNo"/>
 	</resultMap>
 	<select id="getScheduleList" parameterType="map" resultMap="scheduleGNRM">
 		SELECT sch.* FROM(
 		SELECT row_number() over(order by p.schedule_no desc) as rnum,
-			to_char(s.end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(s.start_date,'YYYY-MM-DD pm hh:mi') as startDate,g.ground_name,s.loc,s.schedule_no,s.title
+			to_char(s.end_date,'YYYY-MM-DD pm hh:mi') as endDate,to_char(s.start_date,'YYYY-MM-DD pm hh:mi') as startDate,g.ground_name,g.ground_no,s.loc,s.schedule_no,s.title
 		FROM PARTICIPANT p, schedule s,ground g  where p.schedule_no = s.schedule_no and p.id=#{id} and g.ground_no=p.ground_no
 		) sch
 		where rnum between #{pagingBean.startRowNumber} and

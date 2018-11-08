@@ -25,9 +25,10 @@ public interface GameService {
 	/**
 	 * 공식 게임 목록보기 (pageNo페이지)
 	 * @param pageNo
+	 * @param filter
 	 * @return
 	 */
-	public  ListVO<OfficialGameVO> getOfficialGameList(String pageNo);
+	public  ListVO<OfficialGameVO> getOfficialGameList(String pageNo, String filter);
 	/**
 	 * 공식 게임 상세보기
 	 * @param oGameNo
@@ -91,5 +92,17 @@ public interface GameService {
 	 * @param map
 	 */
 	public int insertRecommendation(Map<String, String> map);
+	/**
+	 * 추천수 불러오기
+	 * @param cGameNo
+	 * @return
+	 */
+	public int selectCountIdBycGameNo(String cGameNo);
+	/**
+	 * 등업 하기
+	 * @param cGameNo
+	 */
+	void moveCustomGameToOfficialGame(String cGameNo);
+	
 
 }

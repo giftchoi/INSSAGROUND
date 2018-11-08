@@ -1,3 +1,7 @@
+body{
+	font-family: 'Noto Sans KR','Nanum Gothic', sans-serif !important;
+}
+
 .rowgamefooter {
 	position: absolute;
 	width: inherit;
@@ -9,6 +13,16 @@
 	width: 200px !important;
 	margin: 5px;
 }
+.clickable:hover {
+	border: 2.5px solid #ff1a1a;
+	cursor:pointer;
+}
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 /* 
 .gameWriteForm {
 	position: absolute;
@@ -22,7 +36,7 @@
 }
  */
 /*윗부분: 손수 제작 ------------------------------- */
-::-moz-selection {
+/* ::-moz-selection {
 	background-color: #f42f2c;
 	color: #fff
 }
@@ -4057,4 +4071,4 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .footer-text a, .footer-text i {
 	color: #f42f2c
-}
+} */

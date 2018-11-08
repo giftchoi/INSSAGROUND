@@ -338,7 +338,8 @@ public class GroundController {
 	
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("ground-home.do")
-	public String groundHome(GroundVO groundVO,Model model,HttpSession session) {
+	public String groundHome(GroundVO groundVO,Model model,HttpSession session,String sc) {
+
 		System.out.println("ground-home: "+groundVO.getGroundNo());
 		GroundVO gvo = groundService.findGroundByGroundNo(groundVO);		
 		GroundVO vo = groundService.groundHashtag2(gvo);
@@ -367,6 +368,9 @@ public class GroundController {
 		session.setAttribute("ground",gvo);
 		session.setAttribute("gvo",gvo);
 		//model.addAttribute("gvo",gvo);
+		if(sc!= null) {
+			return "redirect:groundScheduleDetail.do?scheduleNo="+sc;
+		}
 		return "ground/home/ground-home.tiles";
 	}
 	@Secured("ROLE_MEMBER")
@@ -499,8 +503,8 @@ public class GroundController {
 		 *  스케줄 참여 횟수
 		 */
 		GroundVO groundVO = (GroundVO)session.getAttribute("ground");
-		MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
-		model.addAttribute("memberVO",memberVO);
+		//MemberVO memberVO= (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //세션에서 정보받아옴
+		model.addAttribute("memberVO",id);
 		model.addAttribute("post",groundService.groundMemberPostCount(id,groundVO.getGroundNo()));
 		model.addAttribute("schedule",groundService.groundMemberScheduleCount(id,groundVO.getGroundNo()));
 		model.addAttribute("participation",groundService.groundMemberParticipationCount(id,groundVO.getGroundNo()));
@@ -516,5 +520,9 @@ public class GroundController {
 		memberVO.setGroundNoList(memberService.myGroundNoList(memberVO.getId()));
 		return "redirect:home.do";
 	}
- 
+/*	@Secured("ROLE_MEMBER")
+	@RequestMapping("ground-chat.do")
+	public String chat() {
+		return "ground/home/ground-chat.tiles";
+	}*/
 }

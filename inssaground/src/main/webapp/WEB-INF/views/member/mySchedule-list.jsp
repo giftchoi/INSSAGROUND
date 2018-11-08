@@ -22,7 +22,7 @@
 			<c:forEach items="${myScheduleList.list}" var="mySch">
 				<tr>
 					<td>${mySch.groundVO.groundName}</td>
-					<td><a href="groundScheduleDetail.do?scheduleNo=${mySch.scheduleNo}">${mySch.title}</a></td>
+					<td><a href="ground-home.do?sc=${mySch.scheduleNo}&groundNo=${mySch.groundVO.groundNo}">${mySch.title}</a></td>
 							<td>${mySch.startDate} ~ ${mySch.endDate}</td>
 							<td>${mySch.loc}</td>
 				</tr>
